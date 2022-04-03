@@ -1,6 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:google_fonts/google_fonts.dart';
 import 'package:skin_scan/LogIn.dart';
+import 'package:skin_scan/createAccount.dart';
 import 'package:skin_scan/screenSizes.dart';
 
 void main() {
@@ -246,7 +247,7 @@ class _MyHomePageState extends State<MyHomePage> {
                   )),
               ElevatedButton(
                   onPressed: () { Navigator.of(context).push(MaterialPageRoute(
-                      builder: (context) => LogInScreen())); },
+                      builder: (context) => createAccount())); },
                   child: Text("Next")
               ),
             ],

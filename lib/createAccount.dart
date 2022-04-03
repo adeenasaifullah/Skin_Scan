@@ -2,6 +2,7 @@ import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
 import 'package:google_fonts/google_fonts.dart';
 import 'screenSizes.dart';
+import 'accountCreated.dart';
 
 class createAccount extends StatefulWidget {
   const createAccount({Key? key}) : super(key: key);
@@ -97,8 +98,8 @@ class _createAccountState extends State<createAccount> {
                   Flexible(
                     child: FloatingActionButton(
                       onPressed: () {
-                        // Navigator.of(context).push(MaterialPageRoute(
-                        //     builder: (context) => accountCreated()));
+                        Navigator.of(context).push(MaterialPageRoute(
+                            builder: (context) => accountCreated()));
                       },
                       child: Text('Login',
                           style: GoogleFonts.reemKufi(
