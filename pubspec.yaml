@@ -31,6 +31,7 @@ dependencies:
     sdk: flutter
   provider: ^6.0.2
   google_fonts: ^2.3.1
+  flutter_signin_button: ^2.0.0
 
   # The following adds the Cupertino Icons font to your application.
   # Use with the CupertinoIcons class for iOS style icons.
@@ -62,6 +63,8 @@ flutter:
   assets:
      - assets/dots for app dev.png
      - assets/Favourite.png
+     - assets/dots.png
+     - assets/faces.png
 
 
   # An image asset can refer to one or more resolution-specific "variants", see

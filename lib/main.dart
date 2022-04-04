@@ -2,6 +2,8 @@ import 'package:flutter/material.dart';
 import 'package:google_fonts/google_fonts.dart';
 import 'package:skin_scan/LogIn.dart';
 import 'package:skin_scan/MyProfile.dart';
+import 'package:skin_scan/editProfile.dart';
+import 'package:skin_scan/registerAndQuiz.dart';
 import 'package:skin_scan/screenSizes.dart';
 
 void main() {
@@ -16,6 +18,7 @@ class MyApp extends StatelessWidget {
   Widget build(BuildContext context) {
     return MaterialApp(
       title: 'Flutter Demo',
+      debugShowCheckedModeBanner: false,
       theme: ThemeData(
           // This is the theme of your application.
           //
@@ -70,7 +73,10 @@ class _MyHomePageState extends State<MyHomePage> {
                   onPressed: (){},
                   child: Text("Layout 1")),
               ElevatedButton(
-                  onPressed: (){},
+                  onPressed: (){
+                    Navigator.of(context).push(MaterialPageRoute(
+                        builder: (context) => registerAndQuiz()));
+                  },
                   child: Text("Layout 2")),
               ElevatedButton(
                   onPressed: (){
@@ -91,7 +97,10 @@ class _MyHomePageState extends State<MyHomePage> {
                   },
                   child: Text("Layout 6")),
               ElevatedButton(
-                  onPressed: (){},
+                  onPressed: (){
+                    Navigator.of(context).push(MaterialPageRoute(
+                        builder: (context) => editProfile()));
+                  },
                   child: Text("Layout 7")),
               ElevatedButton(
                   onPressed: (){},
