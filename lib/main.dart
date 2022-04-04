@@ -1,7 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:google_fonts/google_fonts.dart';
 import 'package:skin_scan/LogIn.dart';
-import 'package:skin_scan/createAccount.dart';
+import 'package:skin_scan/MyProfile.dart';
 import 'package:skin_scan/screenSizes.dart';
 
 void main() {
@@ -61,204 +61,54 @@ class _MyHomePageState extends State<MyHomePage> {
     // fast, so that you can just rebuild anything that needs updating rather
     // than having to individually change instances of widgets.
     return Scaffold(
-      appBar: AppBarDetails(screenName: "My Profile"),
       body: Padding(
-        padding: EdgeInsets.fromLTRB(0, 32, 0, 32),
+        padding: EdgeInsets.fromLTRB(32, 32, 32, 32),
         child: SingleChildScrollView(
           child: Column(
-            mainAxisAlignment: MainAxisAlignment.center,
-            children: <Widget>[
-              // SizedBox(
-              //   height: displayHeight(context) * 0.05,
-              // ),
-              Row(
-                mainAxisAlignment: MainAxisAlignment.center,
-                children: [
-                  Column(
-                    mainAxisAlignment: MainAxisAlignment.spaceAround,
-                    children: [
-                      TextValue(text: "Afzal", textSize: 38 ,bold: true),
-                      Row(children: [
-                        TextValue(text: "Edit Profile", textSize: 25,bold: true),
-                        Icon(Icons.create_rounded)
-                      ])
-                    ],
-                  ),
-                  Icon(Icons.face_rounded, color: Colors.black)
-                ],
-              ),
-              SizedBox(
-                height: displayHeight(context) * 0.05,
-              ),
-              Container(
-                  alignment: Alignment.center,
-                  margin: EdgeInsets.fromLTRB(16, 0, 16, 8),
-                  //height: 200,
-                  width: double.infinity,
-                  decoration: BoxDecoration(
-                    color: const Color(0xFFDADBC6),
-                    borderRadius:
-                    BorderRadius.circular(20), //border corner radius
-                  ),
-                  child: Padding(
-                    padding: EdgeInsets.all(16),
-                    child: Column(
-                      mainAxisAlignment: MainAxisAlignment.center,
-                      children: [
-                        Row(
-                          mainAxisAlignment: MainAxisAlignment.spaceAround,
-                          children: [
-                            Icon(Icons.favorite, color: Colors.black),
-                            Expanded(
-                                child: TextValue(
-                                    text: "Favourite Products", textSize: 18,bold: true)),
-                            InkWell(
-                              child: TextValue(text: "View All", textSize: 18,bold: true),
-                              onTap: () {},
-                            )
-                          ],
-                        ),
-                        SizedBox(
-                          height: displayHeight(context) * 0.005,
-                        ),
-                        SizedBox(
-                          height: displayHeight(context) * 0.075,
-                          child: ListView.builder(
-                            scrollDirection: Axis.horizontal,
-                            itemCount: 5,
-                            itemBuilder: (context, index) {
-                              return CircleAvatar(
-                                radius: 33,
-                                backgroundColor: Color(0xFFC4C4C4),
-                                child: Text("H"),
-                              );
-                            },
-                          ),
-                        ),
-                      ],
-                    ),
-                  )),
-              Container(
-                  alignment: Alignment.center,
-                  //margin: EdgeInsets.all(16),
-                  margin: EdgeInsets.fromLTRB(16, 8, 16, 8),
-                  //height: 200,
-                  width: double.infinity,
-                  decoration: BoxDecoration(
-                    color: const Color(0xFFDADBC6),
-                    borderRadius:
-                    BorderRadius.circular(20), //border corner radius
-                  ),
-                  child: Padding(
-                    padding: EdgeInsets.all(16),
-                    child: Column(
-                      mainAxisAlignment: MainAxisAlignment.center,
-                      children: [
-                        Row(
-                          mainAxisAlignment: MainAxisAlignment.spaceAround,
-                          children: [
-                            Icon(Icons.history, color: Colors.black),
-                            Expanded(
-                                child: TextValue(
-                                    text: "Scanned Products", textSize: 18,bold: true)),
-                            InkWell(
-                              child: TextValue(text: "View All", textSize: 18,bold: true),
-                              onTap: () {},
-                            )
-                          ],
-                        ),
-                        SizedBox(
-                          height: displayHeight(context) * 0.005,
-                        ),
-                        SizedBox(
-                          height: displayHeight(context) * 0.075,
-                          child: ListView.builder(
-                            scrollDirection: Axis.horizontal,
-                            itemCount: 10,
-                            itemBuilder: (context, index) {
-                              return CircleAvatar(
-                                radius: 33,
-                                backgroundColor: Color(0xFFC4C4C4),
-                                child: Text("H"),
-                              );
-                            },
-                          ),
-                        ),
-                      ],
-                    ),
-                  )),
-              Container(
-                  alignment: Alignment.center,
-                  margin: EdgeInsets.fromLTRB(16, 8, 16, 8),
-                  //height: 200,
-                  width: double.infinity,
-                  decoration: BoxDecoration(
-                    color: const Color(0xFFDADBC6),
-                    borderRadius:
-                    BorderRadius.circular(20), //border corner radius
-                  ),
-                  child: Padding(
-                    padding: EdgeInsets.all(16),
-                    child: Column(
-                      mainAxisAlignment: MainAxisAlignment.center,
-                      children: [
-                        Row(
-                          mainAxisAlignment: MainAxisAlignment.spaceAround,
-                          children: [
-                            Icon(Icons.history, color: Colors.black),
-                            Expanded(
-                                child: TextValue(
-                                    text: "Skin Log History", textSize: 18,bold: true)),
-                            InkWell(
-                              child: TextValue(text: "View All", textSize: 18,bold: true),
-                              onTap: () {},
-                            )
-                          ],
-                        ),
-                        SizedBox(
-                          height: displayHeight(context) * 0.005,
-                        ),
-                        Row(
-                          mainAxisAlignment: MainAxisAlignment.spaceAround,
-                          children: [
-                            Icon(Icons.calendar_today_outlined,
-                                color: Colors.black),
-                            TextValue(text: "Not so good", textSize: 18,bold: true),
-                            Icon(Icons.tag_faces, color: Colors.black)
-                          ],
-                        ),
-                        SizedBox(
-                          height: displayHeight(context) * 0.005,
-                        ),
-                        Row(
-                          mainAxisAlignment: MainAxisAlignment.spaceAround,
-                          children: [
-                            Icon(Icons.calendar_today_outlined,
-                                color: Colors.black),
-                            TextValue(text: "Not so good", textSize: 18,bold: true),
-                            Icon(Icons.tag_faces, color: Colors.black)
-                          ],
-                        ),
-                        SizedBox(
-                          height: displayHeight(context) * 0.005,
-                        ),
-                      ],
-                    ),
-                  )),
+            children: [
               ElevatedButton(
-                  onPressed: () { Navigator.of(context).push(MaterialPageRoute(
-                      builder: (context) => createAccount())); },
-                  child: Text("Next")
-              ),
+                  onPressed: (){},
+                  child: Text("Layout 1")),
+              ElevatedButton(
+                  onPressed: (){},
+                  child: Text("Layout 2")),
+              ElevatedButton(
+                  onPressed: (){
+                    Navigator.of(context).push(MaterialPageRoute(
+                        builder: (context) => LogInScreen()));
+                  },
+                  child: Text("Layout 3")),
+              ElevatedButton(
+                  onPressed: (){},
+                  child: Text("Layout 4")),
+              ElevatedButton(
+                  onPressed: (){},
+                  child: Text("Layout 5")),
+              ElevatedButton(
+                  onPressed: (){
+                    Navigator.of(context).push(MaterialPageRoute(
+                        builder: (context) => MyProfile()));
+                  },
+                  child: Text("Layout 6")),
+              ElevatedButton(
+                  onPressed: (){},
+                  child: Text("Layout 7")),
+              ElevatedButton(
+                  onPressed: (){},
+                  child: Text("Layout 8")),
+              ElevatedButton(
+                  onPressed: (){},
+                  child: Text("Layout 9")),
+              ElevatedButton(
+                  onPressed: (){},
+                  child: Text("Layout 10")),
+              ElevatedButton(
+                  onPressed: (){},
+                  child: Text("Layout 11")),
             ],
-          ),
+          )
         ),
       ),
-      // floatingActionButton: FloatingActionButton(
-      //   onPressed: () { Navigator.of(context).push(MaterialPageRoute(
-      //       builder: (context) => LogInScreen())); },
-      //   child: Icon(Icons.add),
-      // ),
       // This trailing comma makes auto-formatting nicer for build methods.
     );
   }
@@ -304,10 +154,6 @@ class _AppBarDetailsState extends State<AppBarDetails> {
           elevation: 0,
           backgroundColor: const Color(0xFFFFFDF4),
           centerTitle: false,
-          leading: InkWell(
-            child: Icon(Icons.arrow_back),
-            //onTap: Navigator.pop(context),
-          ),
           title: Text(widget.screenName,
               style: GoogleFonts.reemKufi(
                   color: Color(0xFF4D4D4D),
@@ -315,7 +161,19 @@ class _AppBarDetailsState extends State<AppBarDetails> {
           iconTheme: const IconThemeData(
             color: const Color(0xFF4D4D4D), //change your color here
           ),
-
+          actions: [
+            Padding(
+              padding: EdgeInsets.only(
+                  right: displayWidth(context) * 0.05,
+                  top: displayHeight(context) * 0.005),
+              child: Image(
+                image: AssetImage('assets/dots for app dev.png'),
+                  fit: BoxFit.fill,
+                  height: displayHeight(context) * 1,
+                  width: displayWidth(context) * 0.1
+              ),
+            ),
+          ],
         ));
   }
 }
