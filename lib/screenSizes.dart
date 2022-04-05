@@ -3,6 +3,7 @@ import 'package:flutter/material.dart';
 import 'package:google_fonts/google_fonts.dart';
 import 'package:skin_scan/MyProfile.dart';
 import 'package:skin_scan/scan.dart';
+import 'package:skin_scan/viewRoutines.dart';
 
 import 'ingredientDetails.dart';
 import 'map_demo.dart';
@@ -138,7 +139,13 @@ class _BottomBarState extends State<BottomBar> {
           IconButton(
             icon: Image.asset('assets/notepadthingyicon.png'),
             iconSize: displayHeight(context) * 0.05,
-            onPressed: () {},
+            onPressed: () {
+              Navigator.push(
+                  context,
+                  MaterialPageRoute(
+                    builder: (context) => ViewRoutine(),
+                  ));
+            },
           ),
           IconButton(
             icon: Image.asset('assets/ScanIcon.png'),

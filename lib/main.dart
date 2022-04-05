@@ -1,5 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:google_fonts/google_fonts.dart';
+import 'package:provider/provider.dart';
 import 'package:skin_scan/LogIn.dart';
 import 'package:skin_scan/MyProfile.dart';
 import 'package:skin_scan/categoriesAndSearch.dart';
@@ -8,13 +9,17 @@ import 'package:skin_scan/ingredientDetails.dart';
 import 'package:skin_scan/registerAndQuiz.dart';
 import 'package:skin_scan/screenSizes.dart';
 import 'package:camera/camera.dart';
+import 'package:skin_scan/viewRoutines.dart';
 
 late List<CameraDescription> cameras;
 
 Future<void> main() async {
   WidgetsFlutterBinding.ensureInitialized();
   cameras = await availableCameras();
-  runApp(const MyApp());
+  runApp( ChangeNotifierProvider(
+    create: (_) => routine_provider(),
+    child: const MyApp(),
+  ));
 
 
 
@@ -125,7 +130,11 @@ class _MyHomePageState extends State<MyHomePage> {
                   },
                   child: Text("Layout 9")),
               ElevatedButton(
-                  onPressed: (){},
+                  onPressed: (){
+                    Navigator.of(context).push(MaterialPageRoute(
+                      builder: (context) => ViewRoutine()
+                    ));
+                  },
                   child: Text("Layout 10")),
               ElevatedButton(
                   onPressed: (){},
