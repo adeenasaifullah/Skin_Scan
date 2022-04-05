@@ -36,178 +36,183 @@ class _editProfileState extends State<editProfile> {
           ),
         ],
       ),
-      body: Center(
-        child: Container(
-          child: Padding(
-            padding: const EdgeInsets.all(4.0),
-            child: Column(
-              //mainAxisAlignment: MainAxisAlignment.center,
-              //crossAxisAlignment: CrossAxisAlignment.start,
-              children: [
-                CircleAvatar(
-                  radius: displayHeight(context) * 0.1,
-                  backgroundImage: NetworkImage(
-                      'https://media-exp1.licdn.com/dms/image/C4D03AQG8yHAYB2QZXg/profile-displayphoto-shrink_800_800/0/1604240249734?e=1652313600&v=beta&t=hqULr3Z0MtiRav1pRBW4zCPRWgIC9XPD0m5an6C1SoI'),
-                  backgroundColor: Colors.transparent,
-                ),
-                Container(
-                  width: displayHeight(context) * 0.7,
-                  child: Column(
-                    children: [
-                      Row(
-                        mainAxisAlignment: MainAxisAlignment.start,
-                        children: [
-                          textStyle(text: 'Name', heightRatio: 0.03),
-                        ],
-                      ),
-                      TextFormField(
-                        cursorColor: Colors.black,
-                        initialValue: "Afzal Ali",
-                        decoration: const InputDecoration(
-                          enabledBorder: UnderlineInputBorder(
-                            borderSide: BorderSide(color: Colors.black),
-                          ),
-                          focusedBorder: InputBorder.none,
-                          contentPadding: EdgeInsets.only(
-                              left: 15, bottom: 11, top: 11, right: 15),
-                        ),
-                      ),
-                      SizedBox(height: displayHeight(context) * 0.03),
-                      Row(
-                        mainAxisAlignment: MainAxisAlignment.start,
-                        children: [
-                          textStyle(text: 'Email', heightRatio: 0.03),
-                        ],
-                      ),
-                      TextFormField(
-                        cursorColor: Colors.black,
-                        initialValue: "afzalali@gmail.com",
-                        decoration: const InputDecoration(
-                          enabledBorder: UnderlineInputBorder(
-                            borderSide: BorderSide(color: Colors.black),
-                          ),
-                          focusedBorder: InputBorder.none,
-                          contentPadding: EdgeInsets.only(
-                              left: 15, bottom: 11, top: 11, right: 15),
-                        ),
-                      ),
-                      SizedBox(height: displayHeight(context) * 0.03),
-                      Row(
-                        mainAxisAlignment: MainAxisAlignment.start,
-                        children: [
-                          textStyle(text: 'Date of birth', heightRatio: 0.03),
-                        ],
-                      ),
-                      TextFormField(
-                        initialValue: "12/04/2004",
-                        cursorColor: Colors.black,
-                        decoration: const InputDecoration(
-                          enabledBorder: UnderlineInputBorder(
-                            borderSide: BorderSide(color: Colors.black),
-                          ),
-                          focusedBorder: InputBorder.none,
-                          contentPadding: EdgeInsets.only(
-                              left: 15, bottom: 11, top: 11, right: 15),
-                        ),
-                      ),
-                      SizedBox(height: displayHeight(context) * 0.03),
-                    ],
-                  ),
-                ),
-                Row(
-                  mainAxisAlignment: MainAxisAlignment.center,
+      body: SingleChildScrollView(
+        child: Padding(
+          padding: const EdgeInsets.all(16.0),
+          child: Center(
+            child: Container(
+              child: Padding(
+                padding: const EdgeInsets.all(4.0),
+                child: Column(
+                  //mainAxisAlignment: MainAxisAlignment.center,
+                  //crossAxisAlignment: CrossAxisAlignment.start,
                   children: [
-                    Flexible(
-                      child: ElevatedButton(
-                        onPressed: () async {
-                          showDialog(
-                            barrierDismissible: false,
-                            context: context, // user must tap button!
-                            builder: (context) {
-                              return AlertDialog(
-                                backgroundColor: const Color(0xff283618),
-                                title: Text('Changes saved!',
-                                    style: GoogleFonts.reemKufi(
-                                        color: Color(0xffFFFDF4),
-                                        fontSize:
-                                            displayHeight(context) * 0.04)),
-                                actions: <Widget>[
-                                  Padding(
-                                    padding: const EdgeInsets.all(8.0),
-                                    child: Row(
-                                      mainAxisAlignment:
-                                          MainAxisAlignment.spaceEvenly,
-                                      children: [
-                                        TextButton(
-                                          style: TextButton.styleFrom(
-                                              backgroundColor:
-                                                  Color(0xffFFFDF4)),
-                                          child: Padding(
-                                            padding: const EdgeInsets.symmetric(
-                                                horizontal: 18.0),
-                                            child: Text('OK',
-                                                style: GoogleFonts.reemKufi(
-                                                    color: Colors.black,
-                                                    fontSize:
-                                                        displayHeight(context) *
-                                                            0.03)),
-                                          ),
-                                          onPressed: () {
-                                            Navigator.of(context).pop();
-                                          },
-                                        ),
-                                      ],
-                                    ),
-                                  ),
-                                ],
-                              );
-                            },
-                          );
-                        },
-                        style: ElevatedButton.styleFrom(
-                          elevation: 20,
-                          fixedSize: Size(displayWidth(context) * 0.15,
-                              displayHeight(context) * 0.07),
-                          primary: Color(0xFF283618),
-                          shape: RoundedRectangleBorder(
-                            borderRadius: BorderRadius.circular(20.0),
+                    CircleAvatar(
+                      radius: displayHeight(context) * 0.1,
+                      backgroundImage: NetworkImage(
+                          'https://media-exp1.licdn.com/dms/image/C4D03AQG8yHAYB2QZXg/profile-displayphoto-shrink_800_800/0/1604240249734?e=1652313600&v=beta&t=hqULr3Z0MtiRav1pRBW4zCPRWgIC9XPD0m5an6C1SoI'),
+                      backgroundColor: Colors.transparent,
+                    ),
+                    Container(
+                      width: displayHeight(context) * 0.7,
+                      child: Column(
+                        children: [
+                          Row(
+                            mainAxisAlignment: MainAxisAlignment.start,
+                            children: [
+                              textStyle(text: 'Name', heightRatio: 0.03),
+                            ],
                           ),
-                        ),
-                        child: Text('Save',
-                            style: GoogleFonts.reemKufi(
-                                color: Colors.white,
-                                fontSize: displayHeight(context) * 0.03)),
+                          TextFormField(
+                            cursorColor: Colors.black,
+                            initialValue: "Afzal Ali",
+                            decoration: const InputDecoration(
+                              enabledBorder: UnderlineInputBorder(
+                                borderSide: BorderSide(color: Colors.black),
+                              ),
+                              focusedBorder: InputBorder.none,
+                              contentPadding: EdgeInsets.only(
+                                  left: 15, bottom: 11, top: 11, right: 15),
+                            ),
+                          ),
+                          SizedBox(height: displayHeight(context) * 0.03),
+                          Row(
+                            mainAxisAlignment: MainAxisAlignment.start,
+                            children: [
+                              textStyle(text: 'Email', heightRatio: 0.03),
+                            ],
+                          ),
+                          TextFormField(
+                            cursorColor: Colors.black,
+                            initialValue: "afzalali@gmail.com",
+                            decoration: const InputDecoration(
+                              enabledBorder: UnderlineInputBorder(
+                                borderSide: BorderSide(color: Colors.black),
+                              ),
+                              focusedBorder: InputBorder.none,
+                              contentPadding: EdgeInsets.only(
+                                  left: 15, bottom: 11, top: 11, right: 15),
+                            ),
+                          ),
+                          SizedBox(height: displayHeight(context) * 0.03),
+                          Row(
+                            mainAxisAlignment: MainAxisAlignment.start,
+                            children: [
+                              textStyle(text: 'Date of birth', heightRatio: 0.03),
+                            ],
+                          ),
+                          TextFormField(
+                            initialValue: "12/04/2004",
+                            cursorColor: Colors.black,
+                            decoration: const InputDecoration(
+                              enabledBorder: UnderlineInputBorder(
+                                borderSide: BorderSide(color: Colors.black),
+                              ),
+                              focusedBorder: InputBorder.none,
+                              contentPadding: EdgeInsets.only(
+                                  left: 15, bottom: 11, top: 11, right: 15),
+                            ),
+                          ),
+                          SizedBox(height: displayHeight(context) * 0.03),
+                        ],
                       ),
                     ),
-                    SizedBox(width: displayHeight(context) * 0.1),
-                    Flexible(
-                      child: ElevatedButton(
-                        onPressed: () {
-                          Navigator.of(context).push(MaterialPageRoute(
-                              builder: (context) => editProfile()));
-                        },
-                        style: ElevatedButton.styleFrom(
-                          elevation: 20,
-                          side: BorderSide(
-                            width: 1.5,
-                            color: Colors.black,
-                          ),
-                          fixedSize: Size(displayWidth(context) * 0.17,
-                              displayHeight(context) * 0.07),
-                          primary: Color(0xFFDADBC6),
-                          shape: RoundedRectangleBorder(
-                            borderRadius: BorderRadius.circular(20.0),
+                    Row(
+                      mainAxisAlignment: MainAxisAlignment.center,
+                      children: [
+                        Flexible(
+                          child: ElevatedButton(
+                            onPressed: () async {
+                              showDialog(
+                                barrierDismissible: false,
+                                context: context, // user must tap button!
+                                builder: (context) {
+                                  return AlertDialog(
+                                    backgroundColor: const Color(0xff283618),
+                                    title: Text('Changes saved!',
+                                        style: GoogleFonts.reemKufi(
+                                            color: Color(0xffFFFDF4),
+                                            fontSize:
+                                                displayHeight(context) * 0.04)),
+                                    actions: <Widget>[
+                                      Padding(
+                                        padding: const EdgeInsets.all(8.0),
+                                        child: Row(
+                                          mainAxisAlignment:
+                                              MainAxisAlignment.spaceEvenly,
+                                          children: [
+                                            TextButton(
+                                              style: TextButton.styleFrom(
+                                                  backgroundColor:
+                                                      Color(0xffFFFDF4)),
+                                              child: Padding(
+                                                padding: const EdgeInsets.symmetric(
+                                                    horizontal: 18.0),
+                                                child: Text('OK',
+                                                    style: GoogleFonts.reemKufi(
+                                                        color: Colors.black,
+                                                        fontSize:
+                                                            displayHeight(context) *
+                                                                0.03)),
+                                              ),
+                                              onPressed: () {
+                                                Navigator.of(context).pop();
+                                              },
+                                            ),
+                                          ],
+                                        ),
+                                      ),
+                                    ],
+                                  );
+                                },
+                              );
+                            },
+                            style: ElevatedButton.styleFrom(
+                              elevation: 20,
+                              fixedSize: Size(displayWidth(context) * 0.3,
+                                  displayHeight(context) * 0.07),
+                              primary: Color(0xFF283618),
+                              shape: RoundedRectangleBorder(
+                                borderRadius: BorderRadius.circular(20.0),
+                              ),
+                            ),
+                            child: Text('Save',
+                                style: GoogleFonts.reemKufi(
+                                    color: Colors.white,
+                                    fontSize: displayHeight(context) * 0.03)),
                           ),
                         ),
-                        child: Text('Cancel',
-                            style: GoogleFonts.reemKufi(
+                        SizedBox(width: displayHeight(context) * 0.1),
+                        Flexible(
+                          child: ElevatedButton(
+                            onPressed: () {
+                              Navigator.of(context).push(MaterialPageRoute(
+                                  builder: (context) => editProfile()));
+                            },
+                            style: ElevatedButton.styleFrom(
+                              elevation: 20,
+                              side: BorderSide(
+                                width: 1.5,
                                 color: Colors.black,
-                                fontSize: displayHeight(context) * 0.03)),
-                      ),
+                              ),
+                              fixedSize: Size(displayWidth(context) * 0.3,
+                                  displayHeight(context) * 0.07),
+                              primary: Color(0xFFDADBC6),
+                              shape: RoundedRectangleBorder(
+                                borderRadius: BorderRadius.circular(20.0),
+                              ),
+                            ),
+                            child: Text('Cancel',
+                                style: GoogleFonts.reemKufi(
+                                    color: Colors.black,
+                                    fontSize: displayHeight(context) * 0.03)),
+                          ),
+                        ),
+                      ],
                     ),
                   ],
                 ),
-              ],
+              ),
             ),
           ),
         ),

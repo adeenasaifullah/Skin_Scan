@@ -158,7 +158,54 @@ class _NewPasswordState extends State<NewPassword> {
                   Icon(Icons.visibility_off, color: Color(0xFF283618))),
               SizedBox(height: displayHeight(context) * 0.05),
               ElevatedButton(
-                onPressed: () {},
+                onPressed: () {
+                  showDialog(
+                    barrierDismissible: false,
+                    context: context, // user must tap button!
+                    builder: (context) {
+                      return AlertDialog(
+                        backgroundColor: const Color(0xff283618),
+                        title: Column(
+                          children: [
+                            Text('Your Password has been reset',
+                                style: GoogleFonts.reemKufi(
+                                    color: Color(0xffFFFDF4),
+                                    fontSize: displayHeight(context) * 0.04)),
+                            Icon(Icons.check_circle_outline_outlined, color: Colors.white, size: displayHeight(context) * 0.08,)
+                          ],
+                        ),
+                        actions: <Widget>[
+                          Padding(
+                            padding: const EdgeInsets.all(8.0),
+                            child: Row(
+                              mainAxisAlignment:
+                              MainAxisAlignment.spaceEvenly,
+                              children: [
+                                TextButton(
+                                  style: TextButton.styleFrom(
+                                      backgroundColor: Color(0xffFFFDF4)),
+                                  child: Padding(
+                                    padding: const EdgeInsets.symmetric(
+                                        horizontal: 18.0),
+                                    child: Text('OK',
+                                        style: GoogleFonts.reemKufi(
+                                            color: Colors.black,
+                                            fontSize:
+                                            displayHeight(context) *
+                                                0.03)),
+                                  ),
+                                  onPressed: () {
+                                    Navigator.of(context).pop();
+                                  },
+                                ),
+                              ],
+                            ),
+                          ),
+                        ],
+                      );
+                    },
+                  );
+                },
                 style: ElevatedButton.styleFrom(
                   side: BorderSide(width: displayWidth(context) * 0.7),
                   padding: EdgeInsets.symmetric(horizontal: 80, vertical: 20),

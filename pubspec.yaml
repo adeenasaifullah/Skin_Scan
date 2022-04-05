@@ -32,6 +32,7 @@ dependencies:
   provider: ^6.0.2
   google_fonts: ^2.3.1
   flutter_signin_button: ^2.0.0
+  flutter_rating_bar: ^4.0.0
 
   # The following adds the Cupertino Icons font to your application.
   # Use with the CupertinoIcons class for iOS style icons.
@@ -65,6 +66,10 @@ flutter:
      - assets/Favourite.png
      - assets/dots.png
      - assets/faces.png
+     - assets/dermatologistIcon.png
+     - assets/molecularICON.png
+     - assets/notepadthingyicon.png
+     - assets/ScanIcon.png
 
 
   # An image asset can refer to one or more resolution-specific "variants", see

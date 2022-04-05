@@ -1,7 +1,9 @@
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 import 'package:google_fonts/google_fonts.dart';
+import 'package:skin_scan/editProfile.dart';
 import 'package:skin_scan/screenSizes.dart';
+import 'package:flutter_rating_bar/flutter_rating_bar.dart';
 import 'main.dart';
 
 class MyProfile extends StatefulWidget {
@@ -37,7 +39,8 @@ class _MyProfileState extends State<MyProfile> {
                         InkWell(
                           child: Icon(Icons.create_rounded),
                           onTap: (){
-
+                            Navigator.of(context).push(MaterialPageRoute(
+                                builder: (context) => editProfile()));
                           },
                         )
                       ])
@@ -193,7 +196,10 @@ class _MyProfileState extends State<MyProfile> {
                                     text: "Skin Log History", textSize: 18,bold: true)),
                             InkWell(
                               child: TextValue(text: "View All", textSize: 18,bold: true),
-                              onTap: () {},
+                              onTap: () {
+                                Navigator.of(context).push(MaterialPageRoute(
+                                    builder: (context) => SkinLogHistory()));
+                              },
                             )
                           ],
                         ),
@@ -231,11 +237,11 @@ class _MyProfileState extends State<MyProfile> {
           ),
         ),
       ),
+      bottomNavigationBar: BottomBar(),
       // This trailing comma makes auto-formatting nicer for build methods.
     );
   }
 }
-
 
 class FavouriteProducts extends StatefulWidget {
   const FavouriteProducts({Key? key}) : super(key: key);
@@ -313,6 +319,7 @@ class _FavouriteProductsState extends State<FavouriteProducts> {
           ],
         ),
       ),
+      bottomNavigationBar: BottomBar(),
     );
   }
 }
@@ -422,11 +429,7 @@ class _FavouriteProductsCardState extends State<FavouriteProductsCard> {
                           color: Color(0xff283618),
                           fontSize: displayHeight(context) * 0.025)),
                   SizedBox(height: displayHeight(context) * 0.005),
-                  Rating((rating) {
-                    setState(() {
-                      _rating = rating;
-                    });
-                  }, widget.productRating),
+                  Rating(productRating: widget.productRating,),
                   // SizedBox(height: displayHeight(context) * 0.005),
                 ],
               )),
@@ -443,48 +446,44 @@ class _FavouriteProductsCardState extends State<FavouriteProductsCard> {
 }
 
 class Rating extends StatefulWidget {
-  final int maximumRating = 5;
-  final int ratingValue;
-  final Function(int) onRatingSelected;
-  //const Rating({Key? key, required this.onRatingSelected, this.maximumRating=5}) : super(key: key);
-  Rating(this.onRatingSelected, [this.ratingValue = 5]);
+  final int productRating;
+  const Rating({Key? key, required this.productRating}) : super(key: key);
+
   @override
   _RatingState createState() => _RatingState();
 }
 
 class _RatingState extends State<Rating> {
-  int _currentRating = 0;
-  Widget _buildRatingStar(int index) {
-    if (index < _currentRating) {
-      return Icon(Icons.star, color: Color(0xff283618));
-    } else {
-      return Icon(Icons.star_border_outlined);
-    }
-  }
-
-  Widget _buildBody() {
-    final stars = List<Widget>.generate(this.widget.maximumRating, (index) {
-      return GestureDetector(
-        child: _buildRatingStar(index),
-        onTap: () {
-          setState(() {
-            _currentRating = index + 1;
-          });
-          print(_currentRating);
-          this.widget.onRatingSelected(_currentRating);
-        },
-      );
-    });
-    return Row(
-      children: stars,
-      mainAxisAlignment: MainAxisAlignment.center,
-    );
-  }
-
   @override
   Widget build(BuildContext context) {
-    int _currentRating = widget.ratingValue;
-    return _buildBody();
+    return RatingBar(
+      itemSize: displayHeight(context) * 0.03,
+      initialRating: widget.productRating.toDouble(),
+      direction: Axis.horizontal,
+      allowHalfRating: false,
+      itemCount: 5,
+      ratingWidget: RatingWidget(
+        full: Icon(
+          Icons.star,
+
+          color: Color(0xff283618),
+        ),
+        half: Icon(
+          Icons.star_border,
+
+          color: Color(0xff283618),
+        ),
+        empty: Icon(
+          Icons.star_border,
+
+          color: Color(0xff283618),
+        ),
+      ),
+      itemPadding: EdgeInsets.symmetric(horizontal: 4.0),
+      onRatingUpdate: (rating) {
+        print(rating);
+      },
+    );
   }
 }
 
@@ -550,7 +549,62 @@ class _ScannedProductsState extends State<ScannedProducts> {
           ],
         ),
       ),
+      bottomNavigationBar: BottomBar(),
     );
   }
 }
 
+class SkinLogHistory extends StatefulWidget {
+  const SkinLogHistory({Key? key}) : super(key: key);
+
+  @override
+  _SkinLogHistoryState createState() => _SkinLogHistoryState();
+}
+
+class _SkinLogHistoryState extends State<SkinLogHistory> {
+  @override
+  Widget build(BuildContext context) {
+    return Scaffold(
+      appBar: AppBarDetails(screenName: "Skin Log History"),
+      body: Padding(
+        padding: const EdgeInsets.all(8.0),
+        child: Column(
+          mainAxisAlignment: MainAxisAlignment.start,
+          crossAxisAlignment: CrossAxisAlignment.start,
+          children: [
+            SizedBox(height: displayHeight(context) * 0.02),
+            Expanded(
+              child: ListView.builder(
+                  itemCount: 4,
+                  itemBuilder: (context, index) {
+                    return Container(
+                        alignment: Alignment.center,
+                        margin: EdgeInsets.fromLTRB(16, 8, 16, 8),
+                        width: double.infinity,
+                        decoration: BoxDecoration(
+                          color: const Color(0xFFDADBC6),
+                          borderRadius:
+                          BorderRadius.circular(20), //border corner radius
+                        ),
+                        child:Padding(
+                          padding: const EdgeInsets.all(8.0),
+                          child: Row(
+                            mainAxisAlignment: MainAxisAlignment.spaceAround,
+                            children: [
+                              TextValue(text: "14 March", textSize: 20, bold: false),
+                              Icon(Icons.tag_faces, color: Colors.black)
+                            ],
+                          ),
+                        )
+                    );
+                  }
+              ),
+            ),
+            Expanded(child: Text("Hello 1")),
+          ],
+        ),
+      ),
+      bottomNavigationBar: BottomBar(),
+    );
+  }
+}
