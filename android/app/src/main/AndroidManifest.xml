@@ -1,9 +1,14 @@
 <manifest xmlns:android="http://schemas.android.com/apk/res/android"
     package="com.example.skin_scan">
+    <uses-permission android:name="android.permission.CAMERA"></uses-permission>
+    <uses-permission android:name="android.hardware.camera"></uses-permission>
    <application
         android:label="skin_scan"
         android:name="${applicationName}"
         android:icon="@mipmap/ic_launcher">
+
+       <meta-data android:name="com.google.android.geo.API_KEY"
+                  android:value="AIzaSyBgjsoiaP1tvHTgfFr3O3e09x4GRZWU-Bw"/>
         <activity
             android:name=".MainActivity"
             android:exported="true"

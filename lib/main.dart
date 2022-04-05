@@ -2,12 +2,22 @@ import 'package:flutter/material.dart';
 import 'package:google_fonts/google_fonts.dart';
 import 'package:skin_scan/LogIn.dart';
 import 'package:skin_scan/MyProfile.dart';
+import 'package:skin_scan/categoriesAndSearch.dart';
 import 'package:skin_scan/editProfile.dart';
+import 'package:skin_scan/ingredientDetails.dart';
 import 'package:skin_scan/registerAndQuiz.dart';
 import 'package:skin_scan/screenSizes.dart';
+import 'package:camera/camera.dart';
 
-void main() {
+late List<CameraDescription> cameras;
+
+Future<void> main() async {
+  WidgetsFlutterBinding.ensureInitialized();
+  cameras = await availableCameras();
   runApp(const MyApp());
+
+
+
 }
 
 class MyApp extends StatelessWidget {
@@ -103,10 +113,16 @@ class _MyHomePageState extends State<MyHomePage> {
                   },
                   child: Text("Layout 7")),
               ElevatedButton(
-                  onPressed: (){},
+                  onPressed: (){
+                    Navigator.of(context).push(MaterialPageRoute(
+                        builder: (context) => CategoriesAndSearch()));
+                  },
                   child: Text("Layout 8")),
               ElevatedButton(
-                  onPressed: (){},
+                  onPressed: (){
+                    Navigator.of(context).push(MaterialPageRoute(
+                        builder: (context) => IngredientDetails(ingredientName: 'Hyaluronic Acid',)));
+                  },
                   child: Text("Layout 9")),
               ElevatedButton(
                   onPressed: (){},
@@ -166,7 +182,7 @@ class _AppBarDetailsState extends State<AppBarDetails> {
           title: Text(widget.screenName,
               style: GoogleFonts.reemKufi(
                   color: Color(0xFF4D4D4D),
-                  fontSize: displayHeight(context) * 0.05)),
+                  fontSize: displayHeight(context) * 0.04)),
           iconTheme: const IconThemeData(
             color: const Color(0xFF4D4D4D), //change your color here
           ),

@@ -1,4 +1,7 @@
+import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
+import 'package:skin_scan/LogIn.dart';
+import 'main.dart';
 import 'screenSizes.dart';
 import 'package:google_fonts/google_fonts.dart';
 import 'editProfile.dart';
@@ -42,73 +45,78 @@ class _registerAndQuizState extends State<registerAndQuiz> {
                     color: Color(0xff283618),
                     fontSize: displayHeight(context) * 0.08),
               ),
-              Text('Efficient and safe decisions for your skin!',
-                  style: GoogleFonts.rambla(
-                      fontStyle: FontStyle.italic,
-                      color: Color(0xff4D4D4D),
-                      fontSize: displayHeight(context) * 0.03)),
-              SizedBox(height: displayHeight(context) * 0.05),
               Padding(
-                padding: EdgeInsets.only(left: displayHeight(context) * 0.20),
-                child: Row(
-                  mainAxisAlignment: MainAxisAlignment.start,
-                  children: [
-                    Flexible(
-                      flex: 2,
-                      child: ElevatedButton(
-                        onPressed: () {
-                          Navigator.of(context).push(MaterialPageRoute(
-                              builder: (context) => createAccount()));
-                        },
-                        style: ElevatedButton.styleFrom(
-                          elevation: 20,
-                          fixedSize: Size(displayWidth(context) * 0.20,
-                              displayHeight(context) * 0.07),
-                          primary: Color(0xFF283618),
-                          shape: RoundedRectangleBorder(
-                            borderRadius: BorderRadius.circular(20.0),
-                          ),
+                padding: EdgeInsets.symmetric(
+                    horizontal: displayWidth(context) * 0.05),
+                child: Text('Efficient and safe decisions for your skin!',
+                    textAlign: TextAlign.center,
+                    style: GoogleFonts.rambla(
+                        fontStyle: FontStyle.italic,
+                        color: Color(0xff4D4D4D),
+                        fontSize: displayHeight(context) * 0.03)),
+              ),
+              SizedBox(height: displayHeight(context) * 0.05),
+              Row(
+                mainAxisAlignment: MainAxisAlignment.spaceEvenly,
+                children: [
+                  Flexible(
+                    flex: 2,
+                    child: ElevatedButton(
+                      onPressed: () {
+                        Navigator.of(context).push(MaterialPageRoute(
+                            builder: (context) => createAccount()));
+                      },
+                      style: ElevatedButton.styleFrom(
+                        elevation: 20,
+                        fixedSize: Size(displayWidth(context) * 0.30,
+                            displayHeight(context) * 0.07),
+                        primary: Color(0xFF283618),
+                        shape: RoundedRectangleBorder(
+                          borderRadius: BorderRadius.circular(20.0),
                         ),
-                        child: Text('Register',
-                            style: GoogleFonts.reemKufi(
-                                color: Colors.white,
-                                fontSize: displayHeight(context) * 0.03)),
                       ),
+                      child: Text('Register',
+                          style: GoogleFonts.reemKufi(
+                              color: Colors.white,
+                              fontSize: displayHeight(context) * 0.03)),
                     ),
-                    SizedBox(width: displayWidth(context) * 0.1),
-                    Flexible(
-                      flex: 2,
-                      child: ElevatedButton(
-                        onPressed: () {
-                          // Navigator.of(context).push(MaterialPageRoute(
-                          //     builder: (context) => editProfile()));
-                        },
-                        style: ElevatedButton.styleFrom(
-                          elevation: 20,
-                          side: BorderSide(
-                            width: 1.5,
-                            color: Colors.black,
-                          ),
-                          fixedSize: Size(displayWidth(context) * 0.20,
-                              displayHeight(context) * 0.07),
-                          primary: Color(0xFFDADBC6),
-                          shape: RoundedRectangleBorder(
-                            borderRadius: BorderRadius.circular(20.0),
-                          ),
+                  ),
+                  SizedBox(width: displayWidth(context) * 0.1),
+                  Flexible(
+                    flex: 2,
+                    child: ElevatedButton(
+                      onPressed: () {
+                        Navigator.of(context).push(MaterialPageRoute(
+                            builder: (context) => LogInScreen()));
+                      },
+                      style: ElevatedButton.styleFrom(
+                        elevation: 20,
+                        side: BorderSide(
+                          width: 1.5,
+                          color: Colors.black,
                         ),
-                        child: Text('Login',
-                            style: GoogleFonts.reemKufi(
-                                color: Colors.black,
-                                fontSize: displayHeight(context) * 0.03)),
+                        fixedSize: Size(displayWidth(context) * 0.30,
+                            displayHeight(context) * 0.07),
+                        primary: Color(0xFFDADBC6),
+                        shape: RoundedRectangleBorder(
+                          borderRadius: BorderRadius.circular(20.0),
+                        ),
                       ),
+                      child: Text('Login',
+                          style: GoogleFonts.reemKufi(
+                              color: Colors.black,
+                              fontSize: displayHeight(context) * 0.03)),
                     ),
-                  ],
-                ),
+                  ),
+                ],
               ),
               SizedBox(height: displayHeight(context) * 0.02),
               Padding(
-                padding: EdgeInsets.only(left: displayHeight(context) * 0.20),
+                padding: EdgeInsets.only(
+                    left: displayHeight(context) * 0.03,
+                    right: displayHeight(context) * 0.03),
                 child: Row(
+                  mainAxisAlignment: MainAxisAlignment.center,
                   children: [
                     blackLine(),
                     SizedBox(width: displayWidth(context) * 0.01),
@@ -123,42 +131,23 @@ class _registerAndQuizState extends State<registerAndQuiz> {
               ),
               Padding(
                 padding: EdgeInsets.only(
-                    left: displayHeight(context) * 0.20,
-                    right: displayHeight(context) * 0.20),
-                child: Row(
-                  mainAxisAlignment: MainAxisAlignment.center,
-                  children: [
-                    Flexible(
-                      flex: 2,
-                      child: SignInButton(
-                        Buttons.Google,
-                        text: "Sign up with Google",
-                        onPressed: () {},
-                      ),
-                    ),
-                  ],
+                    left: displayHeight(context) * 0.05,
+                    right: displayHeight(context) * 0.05),
+                child: SignInButton(
+                  Buttons.Google,
+                  text: "Sign up with Google",
+                  onPressed: () {},
                 ),
               ),
               SizedBox(height: displayHeight(context) * 0.02),
               Padding(
                 padding: EdgeInsets.only(
-                    left: displayHeight(context) * 0.20,
-                    right: displayHeight(context) * 0.20),
-                child: Flexible(
-                  flex: 2,
-                  child: Row(
-                    mainAxisAlignment: MainAxisAlignment.center,
-                    children: [
-                      Flexible(
-                        flex: 2,
-                        child: SignInButton(
-                          Buttons.Facebook,
-                          text: "Sign up with Facebook",
-                          onPressed: () {},
-                        ),
-                      ),
-                    ],
-                  ),
+                    left: displayHeight(context) * 0.05,
+                    right: displayHeight(context) * 0.05),
+                child: SignInButton(
+                  Buttons.Facebook,
+                  text: "Sign up with Facebook",
+                  onPressed: () {},
                 ),
               ),
             ],
@@ -169,34 +158,34 @@ class _registerAndQuizState extends State<registerAndQuiz> {
   }
 }
 
-class AppBarDetails extends StatefulWidget implements PreferredSizeWidget {
-  final String screenName;
-  const AppBarDetails({Key? key, required this.screenName}) : super(key: key);
-
-  @override
-  _AppBarDetailsState createState() => _AppBarDetailsState();
-
-  @override
-  // TODO: implement preferredSize
-  Size get preferredSize => Size.fromHeight(90);
-}
-
-class _AppBarDetailsState extends State<AppBarDetails> {
-  @override
-  Widget build(BuildContext context) {
-    return Container(
-        child: AppBar(
-      elevation: 0,
-      backgroundColor: const Color(0xFFFFFDF4),
-      centerTitle: true,
-      title: Text(widget.screenName,
-          style: GoogleFonts.reemKufi(color: Color(0xFF4D4D4D), fontSize: 30)),
-      iconTheme: const IconThemeData(
-        color: const Color(0xFF4D4D4D), //change your color here
-      ),
-    ));
-  }
-}
+// class AppBarDetails extends StatefulWidget implements PreferredSizeWidget {
+//   final String screenName;
+//   const AppBarDetails({Key? key, required this.screenName}) : super(key: key);
+//
+//   @override
+//   _AppBarDetailsState createState() => _AppBarDetailsState();
+//
+//   @override
+//   // TODO: implement preferredSize
+//   Size get preferredSize => Size.fromHeight(90);
+// }
+//
+// class _AppBarDetailsState extends State<AppBarDetails> {
+//   @override
+//   Widget build(BuildContext context) {
+//     return Container(
+//         child: AppBar(
+//       elevation: 0,
+//       backgroundColor: const Color(0xFFFFFDF4),
+//       centerTitle: true,
+//       title: Text(widget.screenName,
+//           style: GoogleFonts.reemKufi(color: Color(0xFF4D4D4D), fontSize: 30)),
+//       iconTheme: const IconThemeData(
+//         color: const Color(0xFF4D4D4D), //change your color here
+//       ),
+//     ));
+//   }
+// }
 
 class blackLine extends StatelessWidget {
   const blackLine({Key? key}) : super(key: key);
@@ -230,7 +219,6 @@ class _createAccountState extends State<createAccount> {
           child: Column(
             mainAxisAlignment: MainAxisAlignment.start,
             children: <Widget>[
-              SizedBox(height: displayHeight(context) * 0.05),
               const field(
                   labelText: 'Name',
                   hintText: 'Enter your name',
@@ -264,7 +252,10 @@ class _createAccountState extends State<createAccount> {
                       Icon(Icons.visibility_off, color: Color(0xFF283618))),
               SizedBox(height: displayHeight(context) * 0.05),
               ElevatedButton(
-                onPressed: () {},
+                onPressed: () {
+                  Navigator.of(context).push(MaterialPageRoute(
+                      builder: (context) => accountCreated()));
+                },
                 style: ElevatedButton.styleFrom(
                   side: BorderSide(width: displayWidth(context) * 0.7),
                   padding: EdgeInsets.symmetric(horizontal: 80, vertical: 20),
@@ -295,8 +286,8 @@ class _createAccountState extends State<createAccount> {
                     flex: 2,
                     child: FloatingActionButton(
                       onPressed: () {
-                        Navigator.of(context).push(MaterialPageRoute(
-                            builder: (context) => accountCreated()));
+                        // Navigator.of(context).push(MaterialPageRoute(
+                        //     builder: (context) => accountCreated()));
                       },
                       child: Text('Login',
                           style: GoogleFonts.reemKufi(
@@ -375,7 +366,8 @@ class _accountCreatedState extends State<accountCreated> {
   Widget build(BuildContext context) {
     return Scaffold(
       backgroundColor: const Color(0xFFFFFDF4),
-      appBar: const AppBarDetails(screenName: ''),
+      //appBar: const AppBarDetails(screenName: ''),
+
       body: Center(
         child: Container(
           margin: EdgeInsets.only(
@@ -386,41 +378,48 @@ class _accountCreatedState extends State<accountCreated> {
             child: Column(
               mainAxisAlignment: MainAxisAlignment.start,
               children: <Widget>[
+                SizedBox(width: displayHeight(context) * 0.5),
                 Row(
                   mainAxisAlignment: MainAxisAlignment.center,
                   children: [
                     Flexible(
                       flex: 2,
                       child: Text('Welcome!',
+                          textAlign: TextAlign.center,
                           style: GoogleFonts.reemKufi(
                               color: const Color(0XFF4D4D4D),
-                              fontSize: displayHeight(context) * 0.1)),
+                              fontSize: displayHeight(context) * 0.06)),
                     ),
                     SizedBox(width: displayWidth(context) * 0.02),
                     ImageIcon(
                       const AssetImage("assets/dots.png"),
                       color: const Color(0xffBFC2A4),
-                      size: displayHeight(context) * 0.12,
+                      size: displayHeight(context) * 0.07,
                     ),
                   ],
                 ),
                 SizedBox(height: displayHeight(context) * 0.05),
                 Text('Congrats!',
+                    textAlign: TextAlign.center,
                     style: GoogleFonts.reemKufi(
                         color: const Color(0XFF283618),
-                        fontSize: displayHeight(context) * 0.06)),
-                Text('Your account has been created.',
-                    style: GoogleFonts.reemKufi(
-                        color: const Color(0XFF283618),
-                        fontSize: displayHeight(context) * 0.06)),
+                        fontSize: displayHeight(context) * 0.04)),
                 SizedBox(height: displayHeight(context) * 0.05),
+                Text('Your account has been created.',
+                    textAlign: TextAlign.center,
+                    style: GoogleFonts.reemKufi(
+                        color: const Color(0XFF283618),
+                        fontSize: displayHeight(context) * 0.04)),
+                SizedBox(height: displayHeight(context) * 0.1),
                 Text('Continue to take a quiz to identify your skin type.',
+                    textAlign: TextAlign.center,
+                    softWrap: true,
                     style: GoogleFonts.rambla(
                         color: const Color(0XFF4D4D4D),
                         fontStyle: FontStyle.italic,
-                        fontSize: displayHeight(context) * 0.04)),
-                SizedBox(height: displayHeight(context) * 0.05),
-                SizedBox(height: displayHeight(context) * 0.02),
+                        fontSize: displayHeight(context) * 0.03)),
+                SizedBox(height: displayHeight(context) * 0.15),
+                //SizedBox(height: displayHeight(context) * 0.02),
                 Flexible(
                   flex: 2,
                   child: ElevatedButton(
@@ -429,8 +428,8 @@ class _accountCreatedState extends State<accountCreated> {
                           builder: (context) => skinTypeQuiz()));
                     },
                     style: ElevatedButton.styleFrom(
-                      fixedSize: Size(displayWidth(context) * 0.20,
-                          displayHeight(context) * 0.3),
+                      fixedSize: Size(displayWidth(context) * 0.40,
+                          displayHeight(context) * 0.09),
                       primary: const Color(0xFF283618),
                       shape: RoundedRectangleBorder(
                         borderRadius: BorderRadius.circular(20.0),
@@ -451,7 +450,7 @@ class _accountCreatedState extends State<accountCreated> {
   }
 }
 
-//SKIN TYPE QUIZ SCREEN
+//SKIN TYPE A QUIZ SCREEN
 class skinTypeQuiz extends StatefulWidget {
   const skinTypeQuiz({Key? key}) : super(key: key);
 
@@ -465,84 +464,73 @@ class _skinTypeQuizState extends State<skinTypeQuiz> {
     return Scaffold(
       backgroundColor: const Color(0xFFFFFDF4),
       appBar: const AppBarDetails(screenName: 'Skin Type Quiz'),
-      body: Center(
-        child: Container(
-          margin: EdgeInsets.only(
-              left: displayWidth(context) * 0.05,
-              right: displayWidth(context) * 0.05),
-          child: SingleChildScrollView(
-            child: Column(
-              mainAxisAlignment: MainAxisAlignment.start,
-              children: <Widget>[
-                Row(
-                  mainAxisAlignment: MainAxisAlignment.center,
+      body: SingleChildScrollView(
+        child: Padding(
+          padding: EdgeInsets.only(left: displayWidth(context)*0.03, right:displayWidth(context)*0.03 ),
+          child: Column(
+            mainAxisAlignment: MainAxisAlignment.start,
+            children: <Widget>[
+              Row(
+                mainAxisAlignment: MainAxisAlignment.spaceEvenly,
+                children: [
+                  questions(
+                      qnumber: 'Question 1',
+                      question: 'Which age range do you fall into?',
+                      description:
+                          'Depending on your age, you may have specific concerns \n that might be relevant'),
+
+                ],
+              ),
+              SizedBox(height: displayHeight(context) * 0.05),
+              Padding(
+                padding: EdgeInsets.only(
+                    left: displayWidth(context) * 0.2,
+                    right: displayWidth(context) * 0.2),
+                child: Row(
+                  mainAxisAlignment: MainAxisAlignment.start,
                   children: [
-                    questions(
-                        qnumber: 'Question 1',
-                        question: 'Which age range do you fall into?',
-                        description:
-                            'Depending on your age, you may have specific concerns \n that might be relevant'),
-                    Flexible(
-                      flex: 2,
-                      child: ImageIcon(
-                        const AssetImage("assets/dots.png"),
-                        color: const Color(0xffBFC2A4),
-                        size: displayHeight(context) * 0.08,
-                      ),
-                    ),
+                    const selectAge(ageBracket: '<=17'),
+                    SizedBox(width: displayWidth(context) * 0.1),
+                    const selectAge(ageBracket: '18-24'),
                   ],
                 ),
-                SizedBox(height: displayHeight(context) * 0.05),
-                Padding(
-                  padding: EdgeInsets.only(
-                      left: displayWidth(context) * 0.2,
-                      right: displayWidth(context) * 0.2),
-                  child: Row(
-                    mainAxisAlignment: MainAxisAlignment.start,
-                    children: [
-                      const selectAge(ageBracket: '<=17'),
-                      SizedBox(width: displayWidth(context) * 0.1),
-                      const selectAge(ageBracket: '18-24'),
-                    ],
-                  ),
+              ),
+              SizedBox(height: displayHeight(context) * 0.07),
+              Padding(
+                padding: EdgeInsets.only(
+                    left: displayWidth(context) * 0.2,
+                    right: displayWidth(context) * 0.2),
+                child: Row(
+                  mainAxisAlignment: MainAxisAlignment.start,
+                  children: [
+                    const selectAge(ageBracket: '25-34'),
+                    SizedBox(width: displayWidth(context) * 0.1),
+                    const selectAge(ageBracket: '35-44'),
+                  ],
                 ),
-                SizedBox(height: displayHeight(context) * 0.07),
-                Padding(
-                  padding: EdgeInsets.only(
-                      left: displayWidth(context) * 0.2,
-                      right: displayWidth(context) * 0.2),
-                  child: Row(
-                    mainAxisAlignment: MainAxisAlignment.start,
-                    children: [
-                      const selectAge(ageBracket: '25-34'),
-                      SizedBox(width: displayWidth(context) * 0.1),
-                      const selectAge(ageBracket: '35-44'),
-                    ],
-                  ),
+              ),
+              SizedBox(height: displayHeight(context) * 0.07),
+              Padding(
+                padding: EdgeInsets.only(
+                    left: displayWidth(context) * 0.2,
+                    right: displayWidth(context) * 0.2),
+                child: Row(
+                  mainAxisAlignment: MainAxisAlignment.start,
+                  children: [
+                    const selectAge(ageBracket: '45-54'),
+                    SizedBox(width: displayWidth(context) * 0.1),
+                    const selectAge(ageBracket: '55+'),
+                  ],
                 ),
-                SizedBox(height: displayHeight(context) * 0.07),
-                Padding(
-                  padding: EdgeInsets.only(
-                      left: displayWidth(context) * 0.2,
-                      right: displayWidth(context) * 0.2),
-                  child: Row(
-                    mainAxisAlignment: MainAxisAlignment.start,
-                    children: [
-                      const selectAge(ageBracket: '45-54'),
-                      SizedBox(width: displayWidth(context) * 0.1),
-                      const selectAge(ageBracket: '55+'),
-                    ],
-                  ),
-                ),
-                SizedBox(height: displayHeight(context) * 0.03),
-                // Row(
-                //   mainAxisAlignment: MainAxisAlignment.center,
-                //   children: const [
-                //     nextButton(nextScreen: skinTypeQuizb()),
-                //   ],
-                // )
-              ],
-            ),
+              ),
+              SizedBox(height: displayHeight(context) * 0.03),
+              // Row(
+              //   mainAxisAlignment: MainAxisAlignment.center,
+              //   children: const [
+              //     nextButton(nextScreen: skinTypeQuizb()),
+              //   ],
+              // )
+            ],
           ),
         ),
       ),
@@ -621,38 +609,30 @@ class questions extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return Column(
+      mainAxisAlignment: MainAxisAlignment.start,
       children: [
-        Row(
-          mainAxisAlignment: MainAxisAlignment.start,
-          children: [
-            Text(
-              qnumber,
-              style: GoogleFonts.reemKufi(
-                  color: const Color(0xFF4D4D4D),
-                  fontSize: displayHeight(context) * 0.06,
-                  fontWeight: FontWeight.bold),
-            ),
-          ],
+        Text(
+
+          qnumber,
+          textAlign: TextAlign.left,
+          style: GoogleFonts.reemKufi(
+              color: const Color(0xFF4D4D4D),
+              fontSize: displayHeight(context) * 0.05,
+              fontWeight: FontWeight.bold),
         ),
-        Row(
-          children: [
-            Text(question,
-                style: GoogleFonts.reemKufi(
-                    color: const Color(0xFF4D4D4D),
-                    fontSize: displayHeight(context) * 0.04,
-                    fontWeight: FontWeight.bold)),
-          ],
-        ),
-        Row(
-          children: [
-            Text(
-              description,
-              style: GoogleFonts.reemKufi(
-                  color: const Color(0xFF4D4D4D),
-                  fontSize: displayHeight(context) * 0.03,
-                  fontStyle: FontStyle.italic),
-            ),
-          ],
+        Text(question,
+            style: GoogleFonts.reemKufi(
+                color: const Color(0xFF4D4D4D),
+                fontSize: displayHeight(context) * 0.03,
+                fontWeight: FontWeight.bold)),
+        Text(
+          description,
+          softWrap: true,
+          textAlign: TextAlign.center,
+          style: GoogleFonts.reemKufi(
+              color: const Color(0xFF4D4D4D),
+              fontSize: displayHeight(context) * 0.02,
+              fontStyle: FontStyle.italic),
         ),
       ],
     );
@@ -699,44 +679,33 @@ class _skinTypeQuizbState extends State<skinTypeQuizb> {
     return Scaffold(
       backgroundColor: const Color(0xFFFFFDF4),
       appBar: const AppBarDetails(screenName: 'Skin Type Quiz'),
-      body: Center(
-        child: Container(
-          margin: EdgeInsets.only(
-              left: displayWidth(context) * 0.05,
-              right: displayWidth(context) * 0.05),
-          child: Column(
-            mainAxisAlignment: MainAxisAlignment.start,
-            children: <Widget>[
-              Row(
-                mainAxisAlignment: MainAxisAlignment.center,
-                children: [
-                  const questions(
-                      qnumber: 'Question 2',
-                      question: 'Where do you call home?',
-                      description:
-                          'Different climates and environments call for \n different approaches to skincare.'),
-                  Flexible(
-                    child: ImageIcon(
-                      const AssetImage("assets/dots.png"),
-                      color: const Color(0xffBFC2A4),
-                      size: displayHeight(context) * 0.08,
-                    ),
-                  ),
-                ],
-              ),
-              SizedBox(height: displayHeight(context) * 0.03),
-              const place(typeOfPlace: 'Sunny and Humid Place'),
-              SizedBox(height: displayHeight(context) * 0.03),
-              const place(typeOfPlace: 'Dry and Hot Desert'),
-              SizedBox(height: displayHeight(context) * 0.03),
-              const place(typeOfPlace: 'Cold and Dry'),
-              SizedBox(height: displayHeight(context) * 0.03),
-              const place(typeOfPlace: 'Cold Winters, Dry Summers'),
-              SizedBox(height: displayHeight(context) * 0.03),
-              const place(typeOfPlace: 'Rainy and Moist Weather'),
-              SizedBox(height: displayHeight(context) * 0.03),
-            ],
-          ),
+      body: SingleChildScrollView(
+        child: Column(
+          mainAxisAlignment: MainAxisAlignment.start,
+          children: <Widget>[
+            Row(
+              mainAxisAlignment: MainAxisAlignment.spaceEvenly,
+              children: [
+                const questions(
+                    qnumber: 'Question 2',
+                    question: 'Where do you call home?',
+                    description:
+                        'Different climates and environments call for \n different approaches to skincare.'),
+
+              ],
+            ),
+            SizedBox(height: displayHeight(context) * 0.03),
+            const place(typeOfPlace: 'Sunny and Humid Place'),
+            SizedBox(height: displayHeight(context) * 0.03),
+            const place(typeOfPlace: 'Dry and Hot Desert'),
+            SizedBox(height: displayHeight(context) * 0.03),
+            const place(typeOfPlace: 'Cold and Dry'),
+            SizedBox(height: displayHeight(context) * 0.03),
+            const place(typeOfPlace: 'Cold Winters, Dry Summers'),
+            SizedBox(height: displayHeight(context) * 0.03),
+            const place(typeOfPlace: 'Rainy and Moist Weather'),
+            SizedBox(height: displayHeight(context) * 0.03),
+          ],
         ),
       ),
     );
@@ -760,7 +729,7 @@ class place extends StatelessWidget {
       },
       style: ElevatedButton.styleFrom(
         fixedSize:
-            Size(displayWidth(context) * 0.50, displayHeight(context) * 0.07),
+            Size(displayWidth(context) * 0.50, displayHeight(context) * 0.09),
         elevation: 10,
         shadowColor: Colors.black,
         primary: const Color(0xFFDADBC6),
@@ -770,8 +739,9 @@ class place extends StatelessWidget {
       ),
       child: Text(
         typeOfPlace,
+        textAlign: TextAlign.center,
         style: GoogleFonts.reemKufi(
-          fontSize: displayHeight(context) * 0.03,
+          fontSize: displayHeight(context) * 0.025,
           color: Colors.black,
         ),
       ),
@@ -793,61 +763,52 @@ class _skinTypeQuizcState extends State<skinTypeQuizc> {
     return Scaffold(
       backgroundColor: const Color(0xFFFFFDF4),
       appBar: AppBarDetails(screenName: 'Skin Type Quiz'),
-      body: Center(
-        child: Container(
-          margin: EdgeInsets.only(
-              left: displayWidth(context) * 0.05,
-              right: displayWidth(context) * 0.05),
-          child: Column(
-            mainAxisAlignment: MainAxisAlignment.start,
-            children: <Widget>[
-              Row(
-                mainAxisAlignment: MainAxisAlignment.center,
-                children: [
-                  const questions(
-                      qnumber: 'Question 3',
-                      question:
-                          'On a scale of 1 - 5, how reactive \n would you consider your skin?',
-                      description: ''),
-                  Flexible(
-                    child: ImageIcon(
-                      const AssetImage("assets/dots.png"),
-                      color: const Color(0xffBFC2A4),
-                      size: displayHeight(context) * 0.08,
-                    ),
-                  ),
-                ],
-              ),
-              SizedBox(height: displayHeight(context) * 0.03),
-              Row(
-                mainAxisAlignment: MainAxisAlignment.center,
-                children: [
-                  const rating(rate: '1'),
-                  SizedBox(width: displayWidth(context) * 0.01),
-                  const rating(rate: '2'),
-                  SizedBox(width: displayWidth(context) * 0.01),
-                  const rating(rate: '3'),
-                  SizedBox(width: displayWidth(context) * 0.01),
-                  const rating(rate: '4'),
-                  SizedBox(width: displayWidth(context) * 0.01),
-                  const rating(rate: '5'),
-                  //SizedBox(height: displayHeight(context) * 0.05),
-                ],
-              ),
-              SizedBox(height: displayHeight(context) * 0.03),
-              Row(
-                mainAxisAlignment: MainAxisAlignment.start,
-                children: [
-                  SizedBox(width: displayWidth(context) * 0.18),
-                  howReactiveText(text: '1- Very low reactive skin'),
-                  SizedBox(width: displayWidth(context) * 0.06),
-                  howReactiveText(text: '3- Moderately reactive skin'),
-                  SizedBox(width: displayWidth(context) * 0.06),
-                  howReactiveText(text: '5- Very reactive skin'),
-                ],
-              ),
-            ],
-          ),
+      body: Padding(
+        padding: const EdgeInsets.all(16.0),
+        child: Column(
+          mainAxisAlignment: MainAxisAlignment.start,
+          children: <Widget>[
+            Row(
+              mainAxisAlignment: MainAxisAlignment.spaceEvenly,
+              children: [
+                const questions(
+                    qnumber: 'Question 3',
+                    question:
+                        'On a scale of 1 - 5, how reactive \n would you consider your skin?',
+                    description: ''),
+
+              ],
+            ),
+            SizedBox(height: displayHeight(context) * 0.03),
+            Row(
+              mainAxisAlignment: MainAxisAlignment.center,
+              children: [
+                const rating(rate: '1'),
+                SizedBox(width: displayWidth(context) * 0.015),
+                const rating(rate: '2'),
+                SizedBox(width: displayWidth(context) * 0.015),
+                const rating(rate: '3'),
+                SizedBox(width: displayWidth(context) * 0.015),
+                const rating(rate: '4'),
+                SizedBox(width: displayWidth(context) * 0.015),
+                const rating(rate: '5'),
+
+                //SizedBox(height: displayHeight(context) * 0.05),
+              ],
+            ),
+            SizedBox(height: displayHeight(context) * 0.07),
+            Row(
+              mainAxisAlignment: MainAxisAlignment.spaceEvenly,
+              children: [
+                SizedBox(width: displayWidth(context) * 0.1),
+                howReactiveText(text: '1- Very low reactive skin'),
+                SizedBox(width: displayWidth(context) * 0.08),
+                howReactiveText(text: '3- Moderately reactive skin'),
+                SizedBox(width: displayWidth(context) * 0.18),
+                howReactiveText(text: '5- Very reactive skin'),
+              ],
+            ),
+          ],
         ),
       ),
     );
@@ -930,8 +891,10 @@ class howReactiveText extends StatelessWidget {
   Widget build(BuildContext context) {
     return Flexible(
       child: Text(text,
+          textAlign: TextAlign.start,
+          softWrap: true,
           style: GoogleFonts.rambla(
-              fontSize: displayHeight(context) * 0.03,
+              fontSize: displayHeight(context) * 0.02,
               color: Colors.black,
               fontStyle: FontStyle.italic)),
     );

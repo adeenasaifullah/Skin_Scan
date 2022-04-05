@@ -4,6 +4,7 @@ import 'package:google_fonts/google_fonts.dart';
 import 'package:skin_scan/editProfile.dart';
 import 'package:skin_scan/screenSizes.dart';
 import 'package:flutter_rating_bar/flutter_rating_bar.dart';
+import 'categoriesAndSearch.dart';
 import 'main.dart';
 
 class MyProfile extends StatefulWidget {
@@ -33,12 +34,13 @@ class _MyProfileState extends State<MyProfile> {
                   Column(
                     mainAxisAlignment: MainAxisAlignment.spaceAround,
                     children: [
-                      TextValue(text: "Afzal     ", textSize: 38 ,bold: true),
+                      TextValue(text: "Afzal     ", textSize: 38, bold: true),
                       Row(children: [
-                        TextValue(text: "Edit Profile", textSize: 25,bold: true),
+                        TextValue(
+                            text: "Edit Profile", textSize: 25, bold: true),
                         InkWell(
                           child: Icon(Icons.create_rounded),
-                          onTap: (){
+                          onTap: () {
                             Navigator.of(context).push(MaterialPageRoute(
                                 builder: (context) => editProfile()));
                           },
@@ -47,11 +49,12 @@ class _MyProfileState extends State<MyProfile> {
                     ],
                   ),
                   SizedBox(
-                    width: displayWidth(context)* 0.1,
+                    width: displayWidth(context) * 0.1,
                   ),
                   CircleAvatar(
                     radius: displayHeight(context) * 0.075,
-                    backgroundImage: NetworkImage('https://media-exp1.licdn.com/dms/image/C4D03AQG8yHAYB2QZXg/profile-displayphoto-shrink_800_800/0/1604240249734?e=1652313600&v=beta&t=hqULr3Z0MtiRav1pRBW4zCPRWgIC9XPD0m5an6C1SoI'),
+                    backgroundImage: NetworkImage(
+                        'https://media-exp1.licdn.com/dms/image/C4D03AQG8yHAYB2QZXg/profile-displayphoto-shrink_800_800/0/1604240249734?e=1652313600&v=beta&t=hqULr3Z0MtiRav1pRBW4zCPRWgIC9XPD0m5an6C1SoI'),
                     backgroundColor: Colors.transparent,
                   )
                   //Icon(Icons.face_rounded, color: Colors.black)
@@ -68,7 +71,7 @@ class _MyProfileState extends State<MyProfile> {
                   decoration: BoxDecoration(
                     color: const Color(0xFFDADBC6),
                     borderRadius:
-                    BorderRadius.circular(20), //border corner radius
+                        BorderRadius.circular(20), //border corner radius
                   ),
                   child: Padding(
                     padding: EdgeInsets.all(16),
@@ -81,9 +84,12 @@ class _MyProfileState extends State<MyProfile> {
                             Icon(Icons.favorite, color: Colors.black),
                             Expanded(
                                 child: TextValue(
-                                    text: "Favourite Products", textSize: 18,bold: true)),
+                                    text: "Favourite Products",
+                                    textSize: 18,
+                                    bold: true)),
                             InkWell(
-                              child: TextValue(text: "View All", textSize: 18,bold: true),
+                              child: TextValue(
+                                  text: "View All", textSize: 18, bold: true),
                               onTap: () {
                                 Navigator.of(context).push(MaterialPageRoute(
                                     builder: (context) => FavouriteProducts()));
@@ -102,7 +108,7 @@ class _MyProfileState extends State<MyProfile> {
                             itemBuilder: (context, index) {
                               return CircleAvatar(
                                   radius: 33,
-                                  backgroundColor: Color(0xFFFFFDF4),
+                                  backgroundColor: Color(0xffC4C4C4),
                                   child: Image(
                                     image: AssetImage('assets/Favourite.png'),
                                     fit: BoxFit.fill,
@@ -124,7 +130,7 @@ class _MyProfileState extends State<MyProfile> {
                   decoration: BoxDecoration(
                     color: const Color(0xFFDADBC6),
                     borderRadius:
-                    BorderRadius.circular(20), //border corner radius
+                        BorderRadius.circular(20), //border corner radius
                   ),
                   child: Padding(
                     padding: EdgeInsets.all(16),
@@ -137,9 +143,12 @@ class _MyProfileState extends State<MyProfile> {
                             Icon(Icons.history, color: Colors.black),
                             Expanded(
                                 child: TextValue(
-                                    text: "Scanned Products", textSize: 18,bold: true)),
+                                    text: "Scanned Products",
+                                    textSize: 18,
+                                    bold: true)),
                             InkWell(
-                              child: TextValue(text: "View All", textSize: 18,bold: true),
+                              child: TextValue(
+                                  text: "View All", textSize: 18, bold: true),
                               onTap: () {
                                 Navigator.of(context).push(MaterialPageRoute(
                                     builder: (context) => ScannedProducts()));
@@ -158,14 +167,13 @@ class _MyProfileState extends State<MyProfile> {
                             itemBuilder: (context, index) {
                               return CircleAvatar(
                                   radius: 33,
-                                  backgroundColor: Color(0xFFFFFDF4),
+                                  backgroundColor: Color(0xffC4C4C4),
                                   child: Image(
                                     image: AssetImage('assets/Favourite.png'),
                                     fit: BoxFit.fill,
                                     height: displayHeight(context) * 0.065,
                                     width: displayWidth(context) * 0.065,
-                                  )
-                              );
+                                  ));
                             },
                           ),
                         ),
@@ -180,7 +188,7 @@ class _MyProfileState extends State<MyProfile> {
                   decoration: BoxDecoration(
                     color: const Color(0xFFDADBC6),
                     borderRadius:
-                    BorderRadius.circular(20), //border corner radius
+                        BorderRadius.circular(20), //border corner radius
                   ),
                   child: Padding(
                     padding: EdgeInsets.all(16),
@@ -193,9 +201,12 @@ class _MyProfileState extends State<MyProfile> {
                             Icon(Icons.history, color: Colors.black),
                             Expanded(
                                 child: TextValue(
-                                    text: "Skin Log History", textSize: 18,bold: true)),
+                                    text: "Skin Log History",
+                                    textSize: 18,
+                                    bold: true)),
                             InkWell(
-                              child: TextValue(text: "View All", textSize: 18,bold: true),
+                              child: TextValue(
+                                  text: "View All", textSize: 18, bold: true),
                               onTap: () {
                                 Navigator.of(context).push(MaterialPageRoute(
                                     builder: (context) => SkinLogHistory()));
@@ -211,7 +222,8 @@ class _MyProfileState extends State<MyProfile> {
                           children: [
                             Icon(Icons.calendar_today_outlined,
                                 color: Colors.black),
-                            TextValue(text: "Not so good", textSize: 18,bold: true),
+                            TextValue(
+                                text: "Not so good", textSize: 18, bold: true),
                             Icon(Icons.tag_faces, color: Colors.black)
                           ],
                         ),
@@ -223,7 +235,8 @@ class _MyProfileState extends State<MyProfile> {
                           children: [
                             Icon(Icons.calendar_today_outlined,
                                 color: Colors.black),
-                            TextValue(text: "Not so good", textSize: 18,bold: true),
+                            TextValue(
+                                text: "Not so good", textSize: 18, bold: true),
                             Icon(Icons.tag_faces, color: Colors.black)
                           ],
                         ),
@@ -309,11 +322,10 @@ class _FavouriteProductsState extends State<FavouriteProducts> {
                 children: List.generate(
                     FavouriteLists.length,
                     (index) => FavouriteProductsCard(
-                        productImage: FavouriteLists[index].productImage,
-                        productName: FavouriteLists[index].productName,
-                        productRating: FavouriteLists[index].productRating,
-                    )
-                ),
+                          productImage: FavouriteLists[index].productImage,
+                          productName: FavouriteLists[index].productName,
+                          productRating: FavouriteLists[index].productRating,
+                        )),
               ),
             ),
           ],
@@ -358,6 +370,7 @@ class _FavouriteProductsCardState extends State<FavouriteProductsCard> {
                   Padding(
                     padding:
                         EdgeInsets.only(left: displayWidth(context) * 0.25),
+
                     child: IconButton(
                         onPressed: () async {
                           return showDialog(
@@ -429,17 +442,19 @@ class _FavouriteProductsCardState extends State<FavouriteProductsCard> {
                           color: Color(0xff283618),
                           fontSize: displayHeight(context) * 0.025)),
                   SizedBox(height: displayHeight(context) * 0.005),
-                  Rating(productRating: widget.productRating,),
+                  Rating(
+                    productRating: widget.productRating,
+                  ),
                   // SizedBox(height: displayHeight(context) * 0.005),
                 ],
               )),
           onTap: () {
-            // Navigator.push(
-            //   context,
-            //   MaterialPageRoute(
-            //     builder: (context) => ProductDetail(),
-            //   ),
-            // );
+            Navigator.push(
+              context,
+              MaterialPageRoute(
+                builder: (context) => ProductDetail(productPrice: 2500, productImage: widget.productImage, productName: widget.productName,),
+              ),
+            );
           },
         ));
   }
@@ -465,17 +480,14 @@ class _RatingState extends State<Rating> {
       ratingWidget: RatingWidget(
         full: Icon(
           Icons.star,
-
           color: Color(0xff283618),
         ),
         half: Icon(
           Icons.star_border,
-
           color: Color(0xff283618),
         ),
         empty: Icon(
           Icons.star_border,
-
           color: Color(0xff283618),
         ),
       ),
@@ -517,9 +529,9 @@ class _ScannedProductsState extends State<ScannedProducts> {
                         decoration: BoxDecoration(
                           color: const Color(0xFFDADBC6),
                           borderRadius:
-                          BorderRadius.circular(20), //border corner radius
+                              BorderRadius.circular(20), //border corner radius
                         ),
-                        child:Padding(
+                        child: Padding(
                           padding: const EdgeInsets.all(8.0),
                           child: Row(
                             mainAxisAlignment: MainAxisAlignment.spaceBetween,
@@ -531,20 +543,49 @@ class _ScannedProductsState extends State<ScannedProducts> {
                                     height: displayHeight(context) * 0.085,
                                     width: displayWidth(context) * 0.085),
                                 minRadius: 35,
-                                backgroundColor: Color(0xFFFFFDF4),
+                                backgroundColor: Color(0xffC4C4C4),
                               ),
-                              TextValue(text: "Super Nova Supreme", textSize: 18, bold: false),
-                              Image(
-                                  image: AssetImage('assets/Favourite.png'),
-                                  fit: BoxFit.fill,
-                                  height: displayHeight(context) * 0.1,
-                                  width: displayWidth(context) * 0.1),
+                              TextValue(
+                                  text: "Super Nova Supreme",
+                                  textSize: 18,
+                                  bold: false),
+                              // Image(
+                              //     image: AssetImage('assets/Favourite.png'),
+                              //     fit: BoxFit.fill,
+                              //     height: displayHeight(context) * 0.1,
+                              //     width: displayWidth(context) * 0.1),
+                              Container(
+                                height: displayHeight(context)*0.07,
+                                width: displayWidth(context)*0.15,
+                                decoration: BoxDecoration(
+                                  borderRadius: BorderRadius.circular(20),
+                                  color: Color(0xffC4C4C4),
+                                  border: Border.all(
+                                    color: Color(0xffC4C4C4),  // red as border color
+                                  ),
+                                ),
+                                child: Column(
+                                    children: <Widget>[
+                                  SizedBox(child: Text("14", style:GoogleFonts.reemKufi(
+                                      color: Color(0xff283618),
+                                      fontSize:
+                                      displayHeight(context) * 0.02) ,), height: displayHeight(context)*0.03,),
+                                      Expanded(
+                                        child: Divider(
+                                          color: Colors.black,
+                                        )
+                                      ),
+
+                                      SizedBox(child: Text("Feb", style:GoogleFonts.reemKufi(
+                                          color: Color(0xff283618),
+                                          fontSize:
+                                          displayHeight(context) * 0.02) ,), height: displayHeight(context)*0.03,)
+                                ]),
+                              )
                             ],
                           ),
-                        )
-                    );
-                  }
-            ),
+                        ));
+                  }),
             ),
           ],
         ),
@@ -584,21 +625,20 @@ class _SkinLogHistoryState extends State<SkinLogHistory> {
                         decoration: BoxDecoration(
                           color: const Color(0xFFDADBC6),
                           borderRadius:
-                          BorderRadius.circular(20), //border corner radius
+                              BorderRadius.circular(20), //border corner radius
                         ),
-                        child:Padding(
+                        child: Padding(
                           padding: const EdgeInsets.all(8.0),
                           child: Row(
                             mainAxisAlignment: MainAxisAlignment.spaceAround,
                             children: [
-                              TextValue(text: "14 March", textSize: 20, bold: false),
+                              TextValue(
+                                  text: "14 March", textSize: 20, bold: false),
                               Icon(Icons.tag_faces, color: Colors.black)
                             ],
                           ),
-                        )
-                    );
-                  }
-              ),
+                        ));
+                  }),
             ),
             Expanded(child: Text("Hello 1")),
           ],

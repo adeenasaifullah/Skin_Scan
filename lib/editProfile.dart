@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'MyProfile.dart';
 import 'screenSizes.dart';
 import 'package:google_fonts/google_fonts.dart';
 
@@ -187,7 +188,7 @@ class _editProfileState extends State<editProfile> {
                           child: ElevatedButton(
                             onPressed: () {
                               Navigator.of(context).push(MaterialPageRoute(
-                                  builder: (context) => editProfile()));
+                                  builder: (context) => MyProfile()));
                             },
                             style: ElevatedButton.styleFrom(
                               elevation: 20,
