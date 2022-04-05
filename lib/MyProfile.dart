@@ -508,6 +508,7 @@ class ScannedProducts extends StatefulWidget {
 }
 
 class _ScannedProductsState extends State<ScannedProducts> {
+  List products =["Product A","Product B","Product C","Product D","Product E","Product F","Product G","Product H",];
   @override
   Widget build(BuildContext context) {
     return Scaffold(
@@ -521,7 +522,7 @@ class _ScannedProductsState extends State<ScannedProducts> {
             SizedBox(height: displayHeight(context) * 0.02),
             Expanded(
               child: ListView.builder(
-                  itemCount: 10,
+                  itemCount: products.length,
                   itemBuilder: (context, index) {
                     return Container(
                         alignment: Alignment.center,
@@ -547,7 +548,7 @@ class _ScannedProductsState extends State<ScannedProducts> {
                                 backgroundColor: Color(0xffC4C4C4),
                               ),
                               TextValue(
-                                  text: "Super Nova Supreme",
+                                  text: products[index],
                                   textSize: 18,
                                   bold: false),
                               // Image(

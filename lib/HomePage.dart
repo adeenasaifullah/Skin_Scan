@@ -56,6 +56,40 @@ class _HomePageScreenState extends State<HomePageScreen> {
                   ],
                 ),
                 Row(
+                  mainAxisAlignment: MainAxisAlignment.start,
+                  children: [
+                    SizedBox(
+                      width: displayWidth(context) * 0.75,
+                      child: Padding(
+                        padding:
+                        EdgeInsets.symmetric(horizontal: displayWidth(context) * 0.04),
+                        child: TextField(
+                            textAlign: TextAlign.start,
+                            decoration: InputDecoration(
+                              hintText: 'Search for a product',
+                              hintStyle: GoogleFonts.rambla(
+                                  color: Color(0xff283618),
+                                  fontSize: displayHeight(context) * 0.025,
+                                  fontStyle: FontStyle.italic),
+                              fillColor: Color(0xffDADBC6),
+                              border: OutlineInputBorder(
+                                  borderRadius: BorderRadius.circular(50.0),
+                                  borderSide: BorderSide(
+                                      width: displayWidth(context) * 0.03,
+                                      style: BorderStyle.solid)),
+                              filled: true,
+                              contentPadding: EdgeInsets.all(displayHeight(context) * 0.01),
+
+                              suffixIcon: Icon(Icons.search),
+                            )),
+                      ),
+                    ),
+                  ],
+                ),
+                SizedBox(
+                  height: displayHeight(context)*0.025,
+                ),
+                Row(
                   children: [
                     Container(
                       alignment: Alignment.center,
