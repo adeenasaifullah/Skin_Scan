@@ -1,6 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:google_fonts/google_fonts.dart';
 import 'package:skin_scan/LogIn.dart';
+import 'package:skin_scan/categoriesAndSearch.dart';
 import 'package:skin_scan/screenSizes.dart';
 import 'package:skin_scan/viewRoutines.dart';
 
@@ -65,25 +66,31 @@ class _HomePageScreenState extends State<HomePageScreen> {
                       child: Padding(
                         padding:
                         EdgeInsets.symmetric(horizontal: displayWidth(context) * 0.04),
-                        child: TextField(
-                            textAlign: TextAlign.start,
-                            decoration: InputDecoration(
-                              hintText: 'Search for a product',
-                              hintStyle: GoogleFonts.rambla(
-                                  color: Color(0xff283618),
-                                  fontSize: displayHeight(context) * 0.025,
-                                  fontStyle: FontStyle.italic),
-                              fillColor: Color(0xffDADBC6),
-                              border: OutlineInputBorder(
-                                  borderRadius: BorderRadius.circular(50.0),
-                                  borderSide: BorderSide(
-                                      width: displayWidth(context) * 0.03,
-                                      style: BorderStyle.solid)),
-                              filled: true,
-                              contentPadding: EdgeInsets.all(displayHeight(context) * 0.01),
+                        child: InkWell(
+                          child: TextField(
+                              textAlign: TextAlign.start,
+                              decoration: InputDecoration(
+                                hintText: 'Search for a product',
+                                hintStyle: GoogleFonts.rambla(
+                                    color: Color(0xff283618),
+                                    fontSize: displayHeight(context) * 0.025,
+                                    fontStyle: FontStyle.italic),
+                                fillColor: Color(0xffDADBC6),
+                                border: OutlineInputBorder(
+                                    borderRadius: BorderRadius.circular(50.0),
+                                    borderSide: BorderSide(
+                                        width: displayWidth(context) * 0.03,
+                                        style: BorderStyle.solid)),
+                                filled: true,
+                                contentPadding: EdgeInsets.all(displayHeight(context) * 0.01),
 
-                              suffixIcon: Icon(Icons.search),
-                            )),
+                                suffixIcon: Icon(Icons.search),
+                              )),
+                          onTap: (){
+                            Navigator.of(context).push(MaterialPageRoute(
+                                builder: (context) => CategoriesAndSearch()));
+                          },
+                        ),
                       ),
                     ),
                     SizedBox(

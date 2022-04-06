@@ -287,8 +287,8 @@ class _createAccountState extends State<createAccount> {
                     flex: 2,
                     child: FloatingActionButton(
                       onPressed: () {
-                        // Navigator.of(context).push(MaterialPageRoute(
-                        //     builder: (context) => accountCreated()));
+                        Navigator.of(context).push(MaterialPageRoute(
+                             builder: (context) => LogInScreen()));
                       },
                       child: Text('Login',
                           style: GoogleFonts.reemKufi(
