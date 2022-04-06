@@ -1,5 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:google_fonts/google_fonts.dart';
+import 'package:skin_scan/HomePage.dart';
 import 'package:skin_scan/main.dart';
 import 'package:skin_scan/screenSizes.dart';
 import 'package:flutter/services.dart';
@@ -38,7 +39,10 @@ class _LogInScreenState extends State<LogInScreen> {
                   Icon(Icons.visibility_off, color: Color(0xFF283618))),
               SizedBox(height: displayHeight(context) * 0.05),
               ElevatedButton(
-                onPressed: () {},
+                onPressed: () {
+                  Navigator.of(context).push(MaterialPageRoute(
+                      builder: (context) => HomePageScreen()));
+                },
                 style: ElevatedButton.styleFrom(
                   side: BorderSide(width: displayWidth(context) * 0.7),
                   padding: EdgeInsets.symmetric(horizontal: 80, vertical: 20),

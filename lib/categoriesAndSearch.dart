@@ -780,7 +780,7 @@ class _RatingButtonState extends State<RatingButton> {
           borderRadius: BorderRadius.circular(20.0),
         ),
         fixedSize:
-        Size(displayWidth(context) * 0.2, displayHeight(context) * 0.06),
+        Size(displayWidth(context) * 0.25, displayHeight(context) * 0.06),
         primary: const Color(0xff283618),
       ),
       onPressed: () async {
