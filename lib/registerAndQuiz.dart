@@ -1,6 +1,7 @@
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 import 'package:skin_scan/LogIn.dart';
+import 'HomePage.dart';
 import 'main.dart';
 import 'screenSizes.dart';
 import 'package:google_fonts/google_fonts.dart';
@@ -870,7 +871,8 @@ class rating extends StatelessWidget {
                                     color: Colors.black,
                                     fontSize: displayHeight(context) * 0.03)),
                             onPressed: () {
-                              Navigator.of(context).pop();
+                              Navigator.of(context).push(MaterialPageRoute(
+                                  builder: (context) => HomePageScreen()));
                             },
                           ),
                         ],

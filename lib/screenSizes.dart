@@ -1,6 +1,7 @@
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 import 'package:google_fonts/google_fonts.dart';
+import 'package:skin_scan/HomePage.dart';
 import 'package:skin_scan/MyProfile.dart';
 import 'package:skin_scan/scan.dart';
 import 'package:skin_scan/viewRoutines.dart';
@@ -62,6 +63,19 @@ class _BottomBarState extends State<BottomBar> {
       child: Row(
         mainAxisAlignment: MainAxisAlignment.spaceEvenly,
         children: <Widget>[
+          IconButton(
+            icon: Icon(Icons.home_rounded),
+            color: Color(0xffDADBC6),
+            iconSize: displayHeight(context) * 0.05,
+            onPressed: () {
+              Navigator.push(
+                  context,
+                  MaterialPageRoute(
+                      builder: (context) =>HomePageScreen()
+
+                  ));
+            },
+          ),
           IconButton(
             icon: Image.asset('assets/dermatologistIcon.png'),
             iconSize: displayHeight(context) * 0.05,

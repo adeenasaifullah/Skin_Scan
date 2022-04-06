@@ -1,6 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:google_fonts/google_fonts.dart';
 import 'package:provider/provider.dart';
+import 'package:skin_scan/HomePage.dart';
 import 'package:skin_scan/LogIn.dart';
 import 'package:skin_scan/MyProfile.dart';
 import 'package:skin_scan/categoriesAndSearch.dart';
@@ -100,7 +101,10 @@ class _MyHomePageState extends State<MyHomePage> {
                   },
                   child: Text("Layout 3")),
               ElevatedButton(
-                  onPressed: (){},
+                  onPressed: (){
+                    Navigator.of(context).push(MaterialPageRoute(
+                        builder: (context) => HomePageScreen()));
+                  },
                   child: Text("Layout 4")),
               ElevatedButton(
                   onPressed: (){},

@@ -199,7 +199,8 @@ class _NewPasswordState extends State<NewPassword> {
                                                 0.03)),
                                   ),
                                   onPressed: () {
-                                    Navigator.of(context).pop();
+                                    Navigator.of(context).push(MaterialPageRoute(
+                                        builder: (context) => LogInScreen()));
                                   },
                                 ),
                               ],

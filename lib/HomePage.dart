@@ -1,6 +1,8 @@
 import 'package:flutter/material.dart';
 import 'package:google_fonts/google_fonts.dart';
+import 'package:skin_scan/LogIn.dart';
 import 'package:skin_scan/screenSizes.dart';
+import 'package:skin_scan/viewRoutines.dart';
 
 class HomePageScreen extends StatefulWidget {
   const HomePageScreen({Key? key}) : super(key: key);
@@ -84,6 +86,74 @@ class _HomePageScreenState extends State<HomePageScreen> {
                             )),
                       ),
                     ),
+                    SizedBox(
+                      width: displayWidth(context)*0.05,
+                    ),
+                    InkWell(
+                      child: Icon(
+                        Icons.logout,
+                        color: Color(0xff283618),
+                        size: displayWidth(context) * 0.125,
+                      ),
+                      onTap : () async {
+                        return showDialog(
+                          barrierDismissible: false,
+                          context: context, // user must tap button!
+                          builder: (context) {
+                            return AlertDialog(
+                              backgroundColor: const Color(0xff283618),
+                              title: Text(
+                                  'Are you sure you want to logout?',
+                                  style: GoogleFonts.reemKufi(
+                                      color: Color(0xffFFFDF4),
+                                      fontSize:
+                                      displayHeight(context) * 0.04)),
+                              actions: <Widget>[
+                                Padding(
+                                  padding: EdgeInsets.all(
+                                      displayHeight(context) * 0.03),
+                                  child: Row(
+                                    mainAxisAlignment:
+                                    MainAxisAlignment.spaceEvenly,
+                                    children: [
+                                      TextButton(
+                                        style: TextButton.styleFrom(
+                                            backgroundColor:
+                                            Color(0xffFFFDF4)),
+                                        child: Text('Yes',
+                                            style: GoogleFonts.reemKufi(
+                                                color: Colors.black,
+                                                fontSize:
+                                                displayHeight(context) *
+                                                    0.03)),
+                                        onPressed: () {
+                                          Navigator.of(context).push(MaterialPageRoute(
+                                              builder: (context) => LogInScreen()));
+                                        },
+                                      ),
+                                      TextButton(
+                                        style: TextButton.styleFrom(
+                                            backgroundColor:
+                                            Color(0xffBBBD88)),
+                                        child: Text('No',
+                                            style: GoogleFonts.reemKufi(
+                                                color: Colors.black,
+                                                fontSize:
+                                                displayHeight(context) *
+                                                    0.03)),
+                                        onPressed: () {
+                                          Navigator.of(context).pop(false);
+                                        },
+                                      ),
+                                    ],
+                                  ),
+                                ),
+                              ],
+                            );
+                          },
+                        );
+                      },
+                    )
                   ],
                 ),
                 SizedBox(
@@ -132,7 +202,8 @@ class _HomePageScreenState extends State<HomePageScreen> {
                                   child: Icon(Icons.add_circle_outline, color: Colors.black,
                                   size: 45,),
                                   onTap: (){
-
+                                    Navigator.of(context).push(MaterialPageRoute(
+                                        builder: (context) => ViewRoutine()));
                                   },
                                 )
                               ],
