@@ -38,6 +38,8 @@ dependencies:
   dio: ^4.0.6
   flutter_polyline_points: ^1.0.0
   fl_chart: ^0.50.1
+  animated_splash_screen: ^1.2.0
+  lottie: ^1.2.2
 
 
   # The following adds the Cupertino Icons font to your application.
@@ -90,6 +92,8 @@ flutter:
      - assets/serumbottle.png
      - assets/Suncare.png
      - assets/tonerbottle.png
+     - assets/skinscanlogolight.png
+     - assets/14946-soona-blob.json
 
 
   # An image asset can refer to one or more resolution-specific "variants", see
