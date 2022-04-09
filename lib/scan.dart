@@ -175,6 +175,20 @@ class _CameraAppState extends State<CameraApp> {
                                             ));
                                       },
                                     ),
+                                    TextButton(
+                                      style: TextButton.styleFrom(
+                                          backgroundColor:
+                                          Color(0xffBBBD88)),
+                                      child: Text('Cancel',
+                                          style: GoogleFonts.reemKufi(
+                                              color: Colors.black,
+                                              fontSize:
+                                              displayHeight(context) *
+                                                  0.03)),
+                                      onPressed: () {
+                                        Navigator.of(context).pop(false);
+                                      },
+                                    ),
                                   ],
                                 ),
                               ),

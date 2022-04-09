@@ -60,7 +60,7 @@ class _DermaPopUpState extends State<DermaPopUp> {
                 TextButton(
                   style: TextButton.styleFrom(
                       backgroundColor: Color(0xffBBBD88)),
-                  child: Text('Yes',
+                  child: Text('Continue',
                       style: GoogleFonts.reemKufi(
                           color: Colors.black,
                           fontSize:

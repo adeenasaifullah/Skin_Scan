@@ -110,7 +110,7 @@ class _MyProfileState extends State<MyProfile> {
                   decoration: BoxDecoration(
                     color: const Color(0xFFDADBC6),
                     borderRadius:
-                        BorderRadius.circular(20), //border corner radius
+                        BorderRadius.circular(15), //border corner radius
                   ),
                   child: Padding(
                     padding: EdgeInsets.all(16),
@@ -169,7 +169,7 @@ class _MyProfileState extends State<MyProfile> {
                   decoration: BoxDecoration(
                     color: const Color(0xFFDADBC6),
                     borderRadius:
-                        BorderRadius.circular(20), //border corner radius
+                        BorderRadius.circular(15), //border corner radius
                   ),
                   child: Padding(
                     padding: EdgeInsets.all(16),
@@ -227,7 +227,7 @@ class _MyProfileState extends State<MyProfile> {
                   decoration: BoxDecoration(
                     color: const Color(0xFFDADBC6),
                     borderRadius:
-                        BorderRadius.circular(20), //border corner radius
+                        BorderRadius.circular(15), //border corner radius
                   ),
                   child: Padding(
                     padding: EdgeInsets.all(16),
@@ -562,69 +562,75 @@ class _ScannedProductsState extends State<ScannedProducts> {
               child: ListView.builder(
                   itemCount: products.length,
                   itemBuilder: (context, index) {
-                    return Container(
-                        alignment: Alignment.center,
-                        margin: EdgeInsets.fromLTRB(8, 8, 8, 8),
-                        width: double.infinity,
-                        decoration: BoxDecoration(
-                          color: const Color(0xFFDADBC6),
-                          borderRadius:
-                              BorderRadius.circular(20), //border corner radius
-                        ),
-                        child: Padding(
-                          padding: const EdgeInsets.all(8.0),
-                          child: Row(
-                            mainAxisAlignment: MainAxisAlignment.spaceBetween,
-                            children: [
-                              CircleAvatar(
-                                child: Image(
-                                    image: AssetImage('assets/Favourite.png'),
-                                    fit: BoxFit.fill,
-                                    height: displayHeight(context) * 0.085,
-                                    width: displayWidth(context) * 0.085),
-                                minRadius: 35,
-                                backgroundColor: Color(0xffC4C4C4),
-                              ),
-                              TextValue(
-                                  text: products[index],
-                                  textSize: 18,
-                                  bold: false),
-                              // Image(
-                              //     image: AssetImage('assets/Favourite.png'),
-                              //     fit: BoxFit.fill,
-                              //     height: displayHeight(context) * 0.1,
-                              //     width: displayWidth(context) * 0.1),
-                              Container(
-                                height: displayHeight(context)*0.07,
-                                width: displayWidth(context)*0.15,
-                                decoration: BoxDecoration(
-                                  borderRadius: BorderRadius.circular(20),
-                                  color: Color(0xffC4C4C4),
-                                  border: Border.all(
-                                    color: Color(0xffC4C4C4),  // red as border color
-                                  ),
-                                ),
-                                child: Column(
-                                    children: <Widget>[
-                                  SizedBox(child: Text("14", style:GoogleFonts.reemKufi(
-                                      color: Color(0xff283618),
-                                      fontSize:
-                                      displayHeight(context) * 0.02) ,), height: displayHeight(context)*0.03,),
-                                      Expanded(
-                                        child: Divider(
-                                          color: Colors.black,
-                                        )
-                                      ),
-
-                                      SizedBox(child: Text("Feb", style:GoogleFonts.reemKufi(
-                                          color: Color(0xff283618),
-                                          fontSize:
-                                          displayHeight(context) * 0.02) ,), height: displayHeight(context)*0.03,)
-                                ]),
-                              )
-                            ],
+                    return InkWell(
+                      onTap: (){
+                      Navigator.of(context).push(MaterialPageRoute(
+                          builder: (context) => ProductDetail(productPrice: 2000, productImage: 'assets/Favourite.png', productName: products[index],)));
+                    },
+                      child: Container(
+                          alignment: Alignment.center,
+                          margin: EdgeInsets.fromLTRB(8, 8, 8, 8),
+                          width: double.infinity,
+                          decoration: BoxDecoration(
+                            color: const Color(0xFFDADBC6),
+                            borderRadius:
+                                BorderRadius.circular(20), //border corner radius
                           ),
-                        ));
+                          child: Padding(
+                            padding: const EdgeInsets.all(8.0),
+                            child: Row(
+                              mainAxisAlignment: MainAxisAlignment.spaceBetween,
+                              children: [
+                                CircleAvatar(
+                                  child: Image(
+                                      image: AssetImage('assets/Favourite.png'),
+                                      fit: BoxFit.fill,
+                                      height: displayHeight(context) * 0.085,
+                                      width: displayWidth(context) * 0.085),
+                                  minRadius: 35,
+                                  backgroundColor: Color(0xffC4C4C4),
+                                ),
+                                TextValue(
+                                    text: products[index],
+                                    textSize: 18,
+                                    bold: false),
+                                // Image(
+                                //     image: AssetImage('assets/Favourite.png'),
+                                //     fit: BoxFit.fill,
+                                //     height: displayHeight(context) * 0.1,
+                                //     width: displayWidth(context) * 0.1),
+                                Container(
+                                  height: displayHeight(context)*0.07,
+                                  width: displayWidth(context)*0.15,
+                                  decoration: BoxDecoration(
+                                    borderRadius: BorderRadius.circular(20),
+                                    color: Color(0xffC4C4C4),
+                                    border: Border.all(
+                                      color: Color(0xffC4C4C4),  // red as border color
+                                    ),
+                                  ),
+                                  child: Column(
+                                      children: <Widget>[
+                                    SizedBox(child: Text("14", style:GoogleFonts.reemKufi(
+                                        color: Color(0xff283618),
+                                        fontSize:
+                                        displayHeight(context) * 0.02) ,), height: displayHeight(context)*0.03,),
+                                        Expanded(
+                                          child: Divider(
+                                            color: Colors.black,
+                                          )
+                                        ),
+
+                                        SizedBox(child: Text("Feb", style:GoogleFonts.reemKufi(
+                                            color: Color(0xff283618),
+                                            fontSize:
+                                            displayHeight(context) * 0.02) ,), height: displayHeight(context)*0.03,)
+                                  ]),
+                                )
+                              ],
+                            ),
+                          )),
+                    );
                   }),
             ),
           ],

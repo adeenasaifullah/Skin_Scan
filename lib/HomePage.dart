@@ -199,9 +199,9 @@ class _HomePageScreenState extends State<HomePageScreen> {
                   children: [
                     InkWell(
                       onTap: (){
-                        Navigator.of(context).push(MaterialPageRoute(
-                            builder: (context) => ViewRoutine()));
-                      },
+      Navigator.of(context).push(MaterialPageRoute(
+      builder: (context) => ViewRoutine()));
+      },
 
                       child: Container(
                         alignment: Alignment.center,
