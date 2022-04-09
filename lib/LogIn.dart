@@ -103,6 +103,7 @@ class _fieldState extends State<field> {
     return Container(
       width: displayWidth(context) * 0.8,
       child: TextFormField(
+        autofocus: false,
         decoration: InputDecoration(
             fillColor: Color(0xFFDADBC6),
             filled: true,

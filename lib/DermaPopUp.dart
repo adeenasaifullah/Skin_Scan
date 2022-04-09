@@ -31,13 +31,15 @@ class _DermaPopUpState extends State<DermaPopUp> {
     return Scaffold(
       body: AlertDialog(
         backgroundColor: const Color(0xff283618),
-        title: Text('Enter your area',
+        title: Text('Enter your area to find dermatologists',
             style: GoogleFonts.reemKufi(
                 color: Color(0xffFFFDF4),
                 fontSize: displayHeight(context) * 0.04)),
+
         content: TextField(
+          autofocus: false,
           controller: derma_controller,
-          autofocus: true,
+          //autofocus: true,
           decoration: InputDecoration(
             hintText: 'Enter your area',
             hintStyle: GoogleFonts.reemKufi(

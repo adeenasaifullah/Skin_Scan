@@ -108,7 +108,9 @@ class _CameraAppState extends State<CameraApp> {
         ],
       ),
      // bottomNavigationBar: BottomBar(),
-      body: Container(
+      body: SingleChildScrollView(
+
+      child: Container(
         color: Color(0xFFFFFDF4),
         child: Column(
           mainAxisAlignment: MainAxisAlignment.start,
@@ -195,6 +197,7 @@ class _CameraAppState extends State<CameraApp> {
           ],
         ),
       ),
+      ),
     );
   }
 
@@ -229,6 +232,7 @@ class _IngredientsListState extends State<IngredientsList> {
               padding: EdgeInsets.symmetric(
                   horizontal: displayWidth(context) * 0.04),
               child: TextField(
+                autofocus: false,
                   textAlign: TextAlign.center,
                   decoration: InputDecoration(
                     hintText: 'Enter Product Name',
@@ -254,40 +258,46 @@ class _IngredientsListState extends State<IngredientsList> {
               child: ListView.builder(
                   itemCount: ILists.length,
                   itemBuilder: (context, index) {
-                    return Container(
-                        alignment: Alignment.center,
-                        margin: EdgeInsets.fromLTRB(8, 8, 8, 8),
-                        width: double.infinity,
-                        decoration: BoxDecoration(
-                          color: const Color(0xFFDADBC6),
-                          borderRadius:
-                          BorderRadius.circular(20), //border corner radius
-                        ),
-                        child: Padding(
-                          padding: const EdgeInsets.all(8.0),
-                          child: Row(
-                            mainAxisAlignment: MainAxisAlignment.spaceBetween,
-                            children: [
-
-                              Text(
-                                  ILists[index], style:GoogleFonts.reemKufi(
-                                  color: Color(0xff283618),
-                                  fontSize:
-                                  displayHeight(context) * 0.02,
-                                  fontStyle: FontStyle.italic)
-                              ),
-
-                              IconButton(onPressed: (){
-                                Navigator.push(
-                                    context,
-                                    MaterialPageRoute(
-                                      builder: (context) => IngredientDetails(ingredientName: ILists[index]),
-                                    ));
-
-                              }, icon: Icon(Icons.arrow_forward_rounded)),
-                            ],
+                    return InkWell(
+                      onTap: (){
+                        Navigator.of(context).push(MaterialPageRoute(
+                            builder: (context) => IngredientDetails(ingredientName: ILists[index])));
+                      },
+                      child: Container(
+                          alignment: Alignment.center,
+                          margin: EdgeInsets.fromLTRB(8, 8, 8, 8),
+                          width: double.infinity,
+                          decoration: BoxDecoration(
+                            color: const Color(0xFFDADBC6),
+                            borderRadius:
+                            BorderRadius.circular(20), //border corner radius
                           ),
-                        ));
+                          child: Padding(
+                            padding: const EdgeInsets.all(8.0),
+                            child: Row(
+                              mainAxisAlignment: MainAxisAlignment.spaceBetween,
+                              children: [
+
+                                Text(
+                                    ILists[index], style:GoogleFonts.reemKufi(
+                                    color: Color(0xff283618),
+                                    fontSize:
+                                    displayHeight(context) * 0.02,
+                                    fontStyle: FontStyle.italic)
+                                ),
+
+                                IconButton(onPressed: (){
+                                  Navigator.push(
+                                      context,
+                                      MaterialPageRoute(
+                                        builder: (context) => IngredientDetails(ingredientName: ILists[index]),
+                                      ));
+
+                                }, icon: Icon(Icons.arrow_forward_rounded)),
+                              ],
+                            ),
+                          )),
+                    );
                   }),
             )
           ],

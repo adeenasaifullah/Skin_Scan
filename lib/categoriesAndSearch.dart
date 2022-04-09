@@ -376,6 +376,7 @@ class _SearchandFilterState extends State<SearchandFilter> {
             padding:
             EdgeInsets.symmetric(horizontal: displayWidth(context) * 0.04),
             child: TextField(
+              autofocus: false,
                 textAlign: TextAlign.center,
                 decoration: InputDecoration(
                   hintText: 'Search for a product',

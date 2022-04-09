@@ -65,6 +65,7 @@ class _editProfileState extends State<editProfile> {
                             ],
                           ),
                           TextFormField(
+                            autofocus: false,
                             cursorColor: Colors.black,
                             initialValue: "Afzal Ali",
                             decoration: const InputDecoration(
@@ -84,6 +85,7 @@ class _editProfileState extends State<editProfile> {
                             ],
                           ),
                           TextFormField(
+                            autofocus: false,
                             cursorColor: Colors.black,
                             initialValue: "afzalali@gmail.com",
                             decoration: const InputDecoration(
@@ -103,6 +105,7 @@ class _editProfileState extends State<editProfile> {
                             ],
                           ),
                           TextFormField(
+                            autofocus: false,
                             initialValue: "12/04/2004",
                             cursorColor: Colors.black,
                             decoration: const InputDecoration(

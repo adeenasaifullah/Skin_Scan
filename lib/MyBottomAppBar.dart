@@ -155,7 +155,7 @@ class _IngredientPopUpState extends State<IngredientPopUp> {
     fontSize: displayHeight(context) * 0.04)),
     content: TextField(
     controller: ingredient_controller,
-    autofocus: true,
+    autofocus: false,
     decoration: InputDecoration(
     hintText: 'Enter your ingredient',
     hintStyle: GoogleFonts.reemKufi(

@@ -690,7 +690,7 @@ class _skinTypeQuizbState extends State<skinTypeQuizb> {
               children: [
                 const questions(
                     qnumber: 'Question 2',
-                    question: 'Where do you call home?',
+                    question: 'What do you call home?',
                     description:
                         'Different climates and environments call for \n different approaches to skincare.'),
 

@@ -68,33 +68,60 @@ class _HomePageScreenState extends State<HomePageScreen> {
                       child: Padding(
                         padding:
                         EdgeInsets.symmetric(horizontal: displayWidth(context) * 0.04),
-                        child: InkWell(
-                          child: TextField(
-                              textAlign: TextAlign.start,
-                              decoration: InputDecoration(
-                                hintText: 'Search for a product',
-                                hintStyle: GoogleFonts.rambla(
-                                    color: Color(0xff283618),
-                                    fontSize: displayHeight(context) * 0.025,
-                                    fontStyle: FontStyle.italic),
-                                fillColor: Color(0xffDADBC6),
-                                border: OutlineInputBorder(
-                                    borderRadius: BorderRadius.circular(50.0),
-                                    borderSide: BorderSide(
-                                        width: displayWidth(context) * 0.03,
-                                        style: BorderStyle.solid)),
-                                filled: true,
-                                contentPadding: EdgeInsets.all(displayHeight(context) * 0.01),
+                          child: ElevatedButton(
+                            onPressed: () {
+                              Navigator.of(context).push(MaterialPageRoute(
+                                  builder: (context) => CategoriesAndSearch()));
+                            },
+                            style: ElevatedButton.styleFrom(
+                              side: BorderSide(width: displayWidth(context) * 0.2),
+                              padding: EdgeInsets.symmetric(horizontal: 20, vertical: 10),
+                              primary: Color(0xFF283618),
+                              shape: RoundedRectangleBorder(
+                                borderRadius: BorderRadius.circular(25.0),
+                              ),
+                            ),
+                            child: Text('Browse Categories',
+                                style: GoogleFonts.reemKufi(
+                                    color: Colors.white, fontSize: 20)),
+                          ),
 
-                                suffixIcon: Icon(Icons.search),
-                              )),
-                          onTap: (){
-                            Navigator.of(context).push(MaterialPageRoute(
-                                builder: (context) => CategoriesAndSearch()));
-                          },
-                        ),
+
                       ),
                     ),
+
+                    // SizedBox(
+                    //   width: displayWidth(context) * 0.75,
+                    //   child: Padding(
+                    //     padding:
+                    //     EdgeInsets.symmetric(horizontal: displayWidth(context) * 0.04),
+                    //     child: InkWell(
+                    //       child: TextField(
+                    //           textAlign: TextAlign.start,
+                    //           decoration: InputDecoration(
+                    //             hintText: 'Search for a product',
+                    //             hintStyle: GoogleFonts.rambla(
+                    //                 color: Color(0xff283618),
+                    //                 fontSize: displayHeight(context) * 0.025,
+                    //                 fontStyle: FontStyle.italic),
+                    //             fillColor: Color(0xffDADBC6),
+                    //             border: OutlineInputBorder(
+                    //                 borderRadius: BorderRadius.circular(50.0),
+                    //                 borderSide: BorderSide(
+                    //                     width: displayWidth(context) * 0.03,
+                    //                     style: BorderStyle.solid)),
+                    //             filled: true,
+                    //             contentPadding: EdgeInsets.all(displayHeight(context) * 0.01),
+                    //
+                    //             suffixIcon: Icon(Icons.search),
+                    //           )),
+                    //       onTap: (){
+                    //         Navigator.of(context).push(MaterialPageRoute(
+                    //             builder: (context) => CategoriesAndSearch()));
+                    //       },
+                    //     ),
+                    //   ),
+                    // ),
                     SizedBox(
                       width: displayWidth(context)*0.05,
                     ),
@@ -170,61 +197,68 @@ class _HomePageScreenState extends State<HomePageScreen> {
                 ),
                 Row(
                   children: [
-                    Container(
-                      alignment: Alignment.center,
-                      margin: EdgeInsets.fromLTRB(16, 8, 16, 8),
-                      width: displayWidth(context) * 0.6,
-                      decoration: BoxDecoration(
-                        color: const Color(0xFFDADBC6),
-                        borderRadius:
-                        BorderRadius.circular(20), //border corner radius
-                      ),
-                      child: Padding(
-                        padding: const EdgeInsets.fromLTRB(16, 16, 16, 16),
-                        child: Column(
-                          crossAxisAlignment: CrossAxisAlignment.start,
-                          children: [
-                            Row(
-                              children: [
-                                Padding(
-                                  padding: const EdgeInsets.fromLTRB(0, 0, 0, 0),
-                                  child: Column(
-                                    crossAxisAlignment: CrossAxisAlignment.start,
-                                    children: [
-                                      Text('SkinCare',
-                                          style: GoogleFonts.reemKufi(
-                                            color: Color(0xff283618),
-                                            fontSize: displayHeight(context) * 0.03,
-                                          )),
-                                      Text('Routine',
-                                          style: GoogleFonts.reemKufi(
-                                            color: Color(0xff283618),
-                                            fontSize: displayHeight(context) * 0.03,
-                                          )),
-                                    ],
-                                  ),
-                                ),
-                                SizedBox(
-                                  width: displayWidth(context)*0.15,
-                                ),
-                                InkWell(
-                                  child: Icon(Icons.add_circle_outline, color: Colors.black,
-                                  size: 45,),
-                                  onTap: (){
-                                    Navigator.of(context).push(MaterialPageRoute(
-                                        builder: (context) => ViewRoutine()));
-                                  },
-                                )
-                              ],
-                            ),
-                            Text('Maintain your schedule!',
-                                style: GoogleFonts.reemKufi(
-                                    color: Color(0xff283618),
-                                    fontSize: displayHeight(context) * 0.02,
-                                    fontStyle: FontStyle.italic)),
-                          ],
+                    InkWell(
+                      onTap: (){
+                        Navigator.of(context).push(MaterialPageRoute(
+                            builder: (context) => ViewRoutine()));
+                      },
+
+                      child: Container(
+                        alignment: Alignment.center,
+                        margin: EdgeInsets.fromLTRB(16, 8, 16, 8),
+                        width: displayWidth(context) * 0.6,
+                        decoration: BoxDecoration(
+                          color: const Color(0xFFDADBC6),
+                          borderRadius:
+                          BorderRadius.circular(20), //border corner radius
                         ),
-                      )
+                        child: Padding(
+                          padding: const EdgeInsets.fromLTRB(16, 16, 16, 16),
+                          child: Column(
+                            crossAxisAlignment: CrossAxisAlignment.start,
+                            children: [
+                              Row(
+                                children: [
+                                  Padding(
+                                    padding: const EdgeInsets.fromLTRB(0, 0, 0, 0),
+                                    child: Column(
+                                      crossAxisAlignment: CrossAxisAlignment.start,
+                                      children: [
+                                        Text('SkinCare',
+                                            style: GoogleFonts.reemKufi(
+                                              color: Color(0xff283618),
+                                              fontSize: displayHeight(context) * 0.03,
+                                            )),
+                                        Text('Routine',
+                                            style: GoogleFonts.reemKufi(
+                                              color: Color(0xff283618),
+                                              fontSize: displayHeight(context) * 0.03,
+                                            )),
+                                      ],
+                                    ),
+                                  ),
+                                  SizedBox(
+                                    width: displayWidth(context)*0.15,
+                                  ),
+                                  InkWell(
+                                    child: Icon(Icons.add_circle_outline, color: Colors.black,
+                                    size: 45,),
+                                    onTap: (){
+                                      Navigator.of(context).push(MaterialPageRoute(
+                                          builder: (context) => ViewRoutine()));
+                                    },
+                                  )
+                                ],
+                              ),
+                              Text('Maintain your schedule!',
+                                  style: GoogleFonts.reemKufi(
+                                      color: Color(0xff283618),
+                                      fontSize: displayHeight(context) * 0.02,
+                                      fontStyle: FontStyle.italic)),
+                            ],
+                          ),
+                        )
+                      ),
                     ),
                     Column(
                       crossAxisAlignment: CrossAxisAlignment.center,

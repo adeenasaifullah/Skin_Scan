@@ -354,7 +354,7 @@ class _AppBarDetailsState extends State<AppBarDetails> {
       title: Text(widget.screenName,
           style: GoogleFonts.reemKufi(
               color: Color(0xFF4D4D4D),
-              fontSize: displayHeight(context) * 0.04)),
+              fontSize: displayHeight(context) * 0.03)),
       iconTheme: const IconThemeData(
         color: const Color(0xFF4D4D4D), //change your color here
       ),
@@ -441,7 +441,7 @@ class _BottomBarState extends State<BottomBar> {
                                 fontSize: displayHeight(context) * 0.04)),
                         content: TextField(
                           controller: derma_controller,
-                          autofocus: true,
+                          autofocus: false,
                           decoration: InputDecoration(
                             hintText: 'Enter your area',
                             hintStyle: GoogleFonts.reemKufi(
@@ -537,7 +537,7 @@ class _BottomBarState extends State<BottomBar> {
                                 fontSize: displayHeight(context) * 0.04)),
                         content: TextField(
                           controller: ingredient_controller,
-                          autofocus: true,
+                          autofocus: false,
                           decoration: InputDecoration(
                             hintText: 'Enter your ingredient',
                             hintStyle: GoogleFonts.reemKufi(

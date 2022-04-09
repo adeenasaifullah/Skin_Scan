@@ -557,7 +557,7 @@ class _AddProductState extends State<AddProduct> {
                     child: StatefulBuilder(builder: (context, setState) {
                       return TextField(
                         controller: productcontroller,
-                        autofocus: true,
+                        autofocus: false,
                         decoration: InputDecoration(
                           //hintText: 'product',
                           hintStyle: GoogleFonts.reemKufi(
