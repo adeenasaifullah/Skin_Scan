@@ -1,6 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:google_fonts/google_fonts.dart';
-import 'package:skin_scan/HomePage.dart';
+import 'HomePage.dart';
+import 'package:skin_scan/MyBottomAppBar.dart';
 import 'package:skin_scan/main.dart';
 import 'package:skin_scan/screenSizes.dart';
 import 'package:flutter/services.dart';
@@ -41,7 +42,7 @@ class _LogInScreenState extends State<LogInScreen> {
               ElevatedButton(
                 onPressed: () {
                   Navigator.of(context).push(MaterialPageRoute(
-                      builder: (context) => HomePageScreen()));
+                      builder: (context) => MyBottomAppBar()));
                 },
                 style: ElevatedButton.styleFrom(
                   side: BorderSide(width: displayWidth(context) * 0.7),

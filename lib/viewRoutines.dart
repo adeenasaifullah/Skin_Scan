@@ -2,6 +2,7 @@ import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 import 'package:google_fonts/google_fonts.dart';
 import 'package:provider/provider.dart';
+import 'MyBottomAppBar.dart';
 import 'main.dart';
 import 'screenSizes.dart';
 
@@ -17,9 +18,42 @@ class _ViewRoutineState extends State<ViewRoutine> {
   @override
   Widget build(BuildContext context) {
     return Scaffold(
-        appBar: const AppBarDetails(
-          screenName: "Your Skincare Routines",
-          subtitle: "",
+        appBar: AppBar(
+          elevation: 0,
+          backgroundColor: const Color(0xFFFFFDF4),
+          centerTitle: false,
+          title: Text("Your Skincare Routines",
+              style: GoogleFonts.reemKufi(
+                  color: Color(0xFF4D4D4D),
+                  fontSize: displayWidth(context) * 0.05),),
+          iconTheme: const IconThemeData(
+            color: const Color(0xFF4D4D4D), //change your color here
+          ),
+          leading: GestureDetector(
+              child: Icon(Icons.arrow_back, color: Color(0xFF4D4D4D)),
+              onTap:() {
+                Navigator.pushAndRemoveUntil(
+                  context,
+                  MaterialPageRoute(
+                    builder: (BuildContext context) => MyBottomAppBar(),
+                  ),
+                      (route) => false,
+                );
+
+              }
+          ),
+          actions: [
+            Padding(
+              padding: EdgeInsets.only(
+                  right: displayWidth(context) * 0.05,
+                  top: displayHeight(context) * 0.005),
+              child: Image(
+                  image: AssetImage('assets/dots for app dev.png'),
+                  fit: BoxFit.fill,
+                  height: displayHeight(context) * 1,
+                  width: displayWidth(context) * 0.1),
+            ),
+          ],
         ),
         backgroundColor: const Color(0xFFFFFDF4),
         body: (context.read<routine_provider>().routine_list.isEmpty)
@@ -54,101 +88,129 @@ class _ViewRoutineState extends State<ViewRoutine> {
                             return Padding(
                               padding:
                                   const EdgeInsets.fromLTRB(80, 20, 80, 20),
-                              child: Container(
-                                height: displayHeight(context) * 0.3,
-                                width: displayWidth(context) * 0.1,
-                                padding:
-                                    const EdgeInsets.fromLTRB(5, 0.8, 5, 2),
-                                decoration: const BoxDecoration(
-                                    color: Color(0xFFDADBC6),
-                                    borderRadius: BorderRadius.only(
-                                      topLeft: Radius.circular(20.0),
-                                      topRight: Radius.circular(20.0),
-                                      bottomLeft: Radius.circular(20.0),
-                                      bottomRight: Radius.circular(20.0),
-                                    )),
-                                //color: const Color(0xFFDADBC6),
-                                child: Column(
-                                  children: [
-                                    // relevant icon
-                                    (context
-                                                .read<routine_provider>()
-                                                .routine_list[index]
-                                                .time ==
-                                            "AM")
-                                        ? const Padding(
-                                            padding: EdgeInsets.only(top: 10),
-                                            child: Align(
-                                                alignment: Alignment.topCenter,
-                                                child: Icon(
-                                                    Icons.wb_sunny_outlined,
-                                                    size: 54,
-                                                    color: Color(0xFF283618))),
-                                          )
-                                        : const Padding(
-                                            padding: EdgeInsets.only(top: 10),
-                                            child: Align(
-                                                alignment: Alignment.topCenter,
-                                                child: Icon(
-                                                    Icons.nights_stay_outlined,
-                                                    size: 54,
-                                                    color: Color(0xFF283618))),
-                                          ),
+                              child: InkWell(
+                                child: Container(
+                                  height: displayHeight(context) * 0.3,
+                                  width: displayWidth(context) * 0.1,
+                                  padding:
+                                      const EdgeInsets.fromLTRB(5, 0.8, 5, 2),
+                                  decoration: const BoxDecoration(
+                                      color: Color(0xFFDADBC6),
+                                      borderRadius: BorderRadius.only(
+                                        topLeft: Radius.circular(20.0),
+                                        topRight: Radius.circular(20.0),
+                                        bottomLeft: Radius.circular(20.0),
+                                        bottomRight: Radius.circular(20.0),
+                                      )),
+                                  //color: const Color(0xFFDADBC6),
+                                  child: Column(
+                                    children: [
+                                      // relevant icon
+                                      (context
+                                                  .read<routine_provider>()
+                                                  .routine_list[index]
+                                                  .time ==
+                                              "AM")
+                                          ? const Padding(
+                                              padding: EdgeInsets.only(top: 10),
+                                              child: Align(
+                                                  alignment:
+                                                      Alignment.topCenter,
+                                                  child: Icon(
+                                                      Icons.wb_sunny_outlined,
+                                                      size: 54,
+                                                      color:
+                                                          Color(0xFF283618))),
+                                            )
+                                          : const Padding(
+                                              padding: EdgeInsets.only(top: 10),
+                                              child: Align(
+                                                  alignment:
+                                                      Alignment.topCenter,
+                                                  child: Icon(
+                                                      Icons
+                                                          .nights_stay_outlined,
+                                                      size: 54,
+                                                      color:
+                                                          Color(0xFF283618))),
+                                            ),
 
-                                    Text(
-                                      context
-                                          .read<routine_provider>()
-                                          .routine_list[index]
-                                          .RoutineName,
-                                      style: GoogleFonts.reemKufi(
-                                        color: const Color(0xFF283618),
-                                        fontSize: displayHeight(context) * 0.04,
-                                      ),
-                                    ),
-
-                                    Text(
-                                      "Number of products: ${context.read<routine_provider>().routine_list[index].numofproducts.toString()}",
-                                      style: GoogleFonts.reemKufi(
-                                        color: const Color(0xFF283618),
-                                        fontSize: displayHeight(context) * 0.02,
-                                      ),
-                                    ),
-
-                                    Divider(
-                                        height: displayWidth(context) * 0.045),
-
-                                    InkWell(
-                                      child: Text(
-                                        "View",
+                                      Text(
+                                        context
+                                            .read<routine_provider>()
+                                            .routine_list[index]
+                                            .RoutineName,
                                         style: GoogleFonts.reemKufi(
-                                            color: const Color(0xFF283618),
-                                            fontSize:
-                                                displayHeight(context) * 0.026,
-                                            fontWeight: FontWeight.bold),
+                                          color: const Color(0xFF283618),
+                                          fontSize:
+                                              displayHeight(context) * 0.04,
+                                        ),
                                       ),
-                                      onTap: () {
-                                        Navigator.of(context).push(
-                                            MaterialPageRoute(
-                                                builder: (context) => BuildRoutine(
-                                                    selectedroutine: context
-                                                        .read<
-                                                            routine_provider>()
-                                                        .routine_list[index])));
-                                        setState(() {});
-                                      },
-                                    ),
 
-                                    // routine name
-                                    // number of products
-                                    // line
-                                    // view clickable text
-                                    // display routine information here
-                                  ],
+                                      Text(
+                                        "Number of products: ${context.read<routine_provider>().routine_list[index].numofproducts.toString()}",
+                                        style: GoogleFonts.reemKufi(
+                                          color: const Color(0xFF283618),
+                                          fontSize:
+                                              displayHeight(context) * 0.02,
+                                        ),
+                                      ),
+
+                                      Divider(
+                                          height: displayWidth(context) * 0.04),
+
+                                      InkWell(
+                                        child: Text(
+                                          "View",
+                                          style: GoogleFonts.reemKufi(
+                                              color: const Color(0xFF283618),
+                                              fontSize: displayHeight(context) *
+                                                  0.026,
+                                              fontWeight: FontWeight.bold),
+                                        ),
+                                        onTap: () {
+                                          Navigator.of(context).push(MaterialPageRoute(
+                                              builder: (context) => BuildRoutine(
+                                                  selectedroutine: context
+                                                      .read<routine_provider>()
+                                                      .routine_list[index])));
+                                          setState(() {});
+                                        },
+                                      ),
+
+                                      // routine name
+                                      // number of products
+                                      // line
+                                      // view clickable text
+                                      // display routine information here
+                                    ],
+                                  ),
                                 ),
+                                onTap: () {
+                                  Navigator.of(context).push(MaterialPageRoute(
+                                      builder: (context) => BuildRoutine(
+                                          selectedroutine: context
+                                              .read<routine_provider>()
+                                              .routine_list[index])));
+                                  setState(() {});
+                                },
                               ),
                             );
                           })),
-                  const BottomBar(),
+                  // Padding(
+                  //   padding: const EdgeInsets.fromLTRB(8, 5, 8, 24),
+                  //   child: FloatingActionButton(
+                  //     child: const Icon(
+                  //       Icons.add,
+                  //       color: Color(0xFFFFFDF4),
+                  //     ),
+                  //     onPressed: () {
+                  //       //print("adding routine");
+                  //     },
+                  //     backgroundColor: const Color(0xFF283618),
+                  //   ),
+                  // ),
+                 // const BottomBar(),
                 ],
               ));
   }
@@ -414,7 +476,7 @@ class _BuildRoutineState extends State<BuildRoutine> {
                   );
                 },
               )),
-              const BottomBar()
+              //const BottomBar()
             ]),
     );
   }
@@ -462,299 +524,339 @@ class _AddProductState extends State<AddProduct> {
 
     var boolvalues = [false, false, false, false, false, false, false];
 
-    return Scaffold(
-      appBar: AppBarDetails(screenName: "Add a product", subtitle: ""),
-      backgroundColor: const Color(0xFFFFFDF4),
-      body: Column(
-        mainAxisAlignment: MainAxisAlignment.spaceBetween,
-        crossAxisAlignment: CrossAxisAlignment.center,
-        mainAxisSize: MainAxisSize.min,
-        children: [
-          Container(
-            width: displayWidth(context) * 0.6,
-            child: Row(
-              //mainAxisAlignment: MainAxisAlignment.spaceAround,
-              mainAxisAlignment: MainAxisAlignment.spaceEvenly,
-              mainAxisSize: MainAxisSize.max,
-              children: [
-                Text(
-                  "Product name: ",
-                  style: GoogleFonts.reemKufi(
-                    color: const Color(0xFF283618),
-                    fontSize: displayWidth(context) * 0.035,
+    bool mastercheckbox = false;
+
+    return StatefulBuilder(builder: (context, setState) {
+      return Scaffold(
+        resizeToAvoidBottomInset: false,
+        appBar: AppBarDetails(screenName: "Add a product", subtitle: ""),
+        backgroundColor: const Color(0xFFFFFDF4),
+        body: Column(
+          mainAxisAlignment: MainAxisAlignment.spaceBetween,
+          crossAxisAlignment: CrossAxisAlignment.center,
+          mainAxisSize: MainAxisSize.min,
+          children: [
+            Container(
+              width: displayWidth(context) * 0.6,
+              child: Row(
+                //mainAxisAlignment: MainAxisAlignment.spaceAround,
+                mainAxisAlignment: MainAxisAlignment.spaceEvenly,
+                mainAxisSize: MainAxisSize.max,
+                children: [
+                  Text(
+                    "Product name: ",
+                    style: GoogleFonts.reemKufi(
+                      color: const Color(0xFF283618),
+                      fontSize: displayWidth(context) * 0.035,
+                    ),
                   ),
-                ),
-                SizedBox(
-                  width: displayWidth(context) * 0.05,
-                ),
-                Expanded(
-                  child: StatefulBuilder(builder: (context, setState) {
-                    return TextField(
-                      controller: productcontroller,
-                      autofocus: true,
-                      decoration: InputDecoration(
-                        //hintText: 'product',
-                        hintStyle: GoogleFonts.reemKufi(
+                  SizedBox(
+                    width: displayWidth(context) * 0.05,
+                  ),
+                  Expanded(
+                    child: StatefulBuilder(builder: (context, setState) {
+                      return TextField(
+                        controller: productcontroller,
+                        autofocus: true,
+                        decoration: InputDecoration(
+                          //hintText: 'product',
+                          hintStyle: GoogleFonts.reemKufi(
+                              color: const Color(0xFF283618),
+                              fontSize: displayWidth(context) * 0.03),
+                        ),
+                        style: GoogleFonts.reemKufi(
                             color: const Color(0xFF283618),
                             fontSize: displayWidth(context) * 0.03),
-                      ),
-                      style: GoogleFonts.reemKufi(
-                          color: const Color(0xFF283618),
-                          fontSize: displayWidth(context) * 0.03),
-                      onChanged: (text) {
-                        pname = productcontroller.text;
-                        print(pname);
-                        setState(() {});
-                      },
-                    );
-                  }),
-                )
-              ],
-            ),
-          ),
-          SizedBox(height: displayHeight(context) * 0.02),
-          Container(
-            width: displayWidth(context) * 0.6,
-            child: Row(
-              mainAxisAlignment: MainAxisAlignment.spaceEvenly,
-              mainAxisSize: MainAxisSize.max,
-              children: [
-                Text(
-                  "Category: ",
-                  style: GoogleFonts.reemKufi(
-                    color: const Color(0xFF283618),
-                    fontSize: displayWidth(context) * 0.035,
-                  ),
-                ),
-                SizedBox(
-                  width: displayWidth(context) * 0.05,
-                ),
-                StatefulBuilder(builder: (context, setState) {
-                  return DropdownButton(
-                    // Initial Value
-                    focusColor: Color(0xff283618),
-                    dropdownColor: Color(0xff283618),
-                    value: dropdownvalue,
-                    alignment: AlignmentDirectional.center,
-
-                    // Down Arrow Icon
-                    icon: const Icon(
-                      Icons.keyboard_arrow_down,
-                      color: Color(0xFF283618),
-                    ),
-
-                    // Array list of items
-                    items: items.map((String items) {
-                      return DropdownMenuItem(
-                        value: items,
-                        child: Center(
-                            child: Text(items,
-                                style: TextStyle(
-                                  color: Color(0xffBBBD88),
-                                ))),
+                        onChanged: (text) {
+                          pname = productcontroller.text;
+                          print(pname);
+                          setState(() {});
+                        },
                       );
-                    }).toList(),
-                    // After selecting the desired option,it will
-                    // change button value to selected value
-                    onChanged: (newValue) {
-                      setState(() {
-                        dropdownvalue = newValue! as String?;
-                        category = dropdownvalue!;
-                      });
-                    },
-                  );
-                }),
-              ],
-            ),
-          ),
-          Row(
-            children: [
-              Padding(
-                padding: const EdgeInsets.all(8.0),
-                child: Text(
-                  "Choose your days: ",
-                  style: GoogleFonts.reemKufi(
-                    color: const Color(0xFF283618),
-                    fontSize: displayWidth(context) * 0.04,
-                  ),
-                ),
-              )
-            ],
-          ),
-          Padding(
-            padding: const EdgeInsets.all(16.0),
-            child: SizedBox(
-              height: displayHeight(context) * 0.5,
-              child: Column(
-                children: [
-                  // SizedBox(width:10),
-
-                  Expanded(
-                    child: ListView(children: [
-                      StatefulBuilder(builder: (context, setState) {
-                        return CheckboxListTile(
-                          title: const Text('Monday'),
-                          checkColor: Colors.black,
-                          activeColor: Colors.lightGreen,
-                          value: boolvalues[0],
-                          onChanged: (value) {
-                            setState(() {
-                              boolvalues[0] = value!;
-                            });
-                          },
-                        );
-                      }),
-                      StatefulBuilder(builder: (context, setState) {
-                        return CheckboxListTile(
-                          title: const Text('Tuesday'),
-                          checkColor: Colors.black,
-                          activeColor: Colors.lightGreen,
-                          value: boolvalues[1],
-                          onChanged: (value) {
-                            setState(() {
-                              boolvalues[1] = value!;
-                            });
-                          },
-                        );
-                      }),
-                      StatefulBuilder(builder: (context, setState) {
-                        return CheckboxListTile(
-                          title: const Text('Wednesday'),
-                          checkColor: Colors.black,
-                          activeColor: Colors.lightGreen,
-                          value: boolvalues[2],
-                          onChanged: (value) {
-                            setState(() {
-                              boolvalues[2] = value!;
-                            });
-                          },
-                        );
-                      }),
-                      StatefulBuilder(builder: (context, setState) {
-                        return CheckboxListTile(
-                          title: const Text('Thursday'),
-                          checkColor: Colors.black,
-                          activeColor: Colors.lightGreen,
-                          value: boolvalues[3],
-                          onChanged: (value) {
-                            setState(() {
-                              boolvalues[3] = value!;
-                            });
-                          },
-                        );
-                      }),
-                      StatefulBuilder(builder: (context, setState) {
-                        return CheckboxListTile(
-                          title: const Text('Friday'),
-                          checkColor: Colors.black,
-                          activeColor: Colors.lightGreen,
-                          value: boolvalues[4],
-                          onChanged: (value) {
-                            setState(() {
-                              boolvalues[4] = value!;
-                            });
-                          },
-                        );
-                      }),
-                      StatefulBuilder(builder: (context, setState) {
-                        return CheckboxListTile(
-                          title: const Text('Saturday'),
-                          checkColor: Colors.black,
-                          activeColor: Colors.lightGreen,
-                          value: boolvalues[5],
-                          onChanged: (value) {
-                            setState(() {
-                              boolvalues[5] = value!;
-                            });
-                          },
-                        );
-                      }),
-                      StatefulBuilder(builder: (context, setState) {
-                        return CheckboxListTile(
-                          title: const Text('Sunday'),
-                          checkColor: Colors.black,
-                          activeColor: Colors.lightGreen,
-                          value: boolvalues[6],
-                          onChanged: (value) {
-                            setState(() {
-                              boolvalues[6] = value!;
-                            });
-                          },
-                        );
-                      })
-                    ]),
-                  ),
-                ],
-              ),
-            ),
-          ),
-          Expanded(
-            child: SizedBox(
-              width: displayWidth(context) * 0.4,
-              height: displayHeight(context) * 0.02,
-              child: Row(
-                mainAxisAlignment: MainAxisAlignment.spaceAround,
-                children: [
-                  StatefulBuilder(builder: (context, setState) {
-                    return TextButton(
-                      style: TextButton.styleFrom(
-                          backgroundColor: const Color(0xff283618)),
-                      child: Text('Save',
-                          style: GoogleFonts.reemKufi(
-                              color: Color(0xffBBBD88),
-                              fontSize: displayHeight(context) * 0.03)),
-                      onPressed: () {
-                        List<String> pdays = [];
-                        for (var i = 0; i < 7; i++) {
-                          if (boolvalues[i] == true) {
-                            pdays.add(days[i]);
-                          }
-                        }
-                        Product newproduct = Product(
-                            productname: pname,
-                            category: category,
-                            days: pdays);
-                        Provider.of<routine_provider>(context, listen: false)
-                            .addproductToRoutine(
-                                widget.currentroutine, newproduct);
-                        int j = context
-                            .read<routine_provider>()
-                            .routine_list
-                            .indexWhere((routine) =>
-                                routine.RoutineName ==
-                                widget.currentroutine.RoutineName);
-                        Navigator.of(context).pop(true);
-                        Navigator.of(context).pop(true);
-                        Navigator.of(context).push(MaterialPageRoute(
-                            builder: (context) => BuildRoutine(
-                                selectedroutine: context
-                                    .read<routine_provider>()
-                                    .routine_list[j])));
-                      },
-                    );
-                  }),
-                  TextButton(
-                    style: TextButton.styleFrom(
-                        backgroundColor: const Color(0xffBBBD88)),
-                    child: Text('Cancel',
-                        style: GoogleFonts.reemKufi(
-                            color: Colors.black,
-                            fontSize: displayHeight(context) * 0.03)),
-                    onPressed: () {
-                      Navigator.of(context).pop(true);
-                    },
+                    }),
                   )
                 ],
               ),
             ),
-          ),
-          Padding(
-            padding: const EdgeInsets.only(bottom: 0),
-            child: BottomBar(),
-          )
-        ],
-      ),
-    );
+            SizedBox(height: displayHeight(context) * 0.02),
+            Container(
+              width: displayWidth(context) * 0.6,
+              child: Row(
+                mainAxisAlignment: MainAxisAlignment.spaceEvenly,
+                mainAxisSize: MainAxisSize.max,
+                children: [
+                  Text(
+                    "Category: ",
+                    style: GoogleFonts.reemKufi(
+                      color: const Color(0xFF283618),
+                      fontSize: displayWidth(context) * 0.035,
+                    ),
+                  ),
+                  SizedBox(
+                    width: displayWidth(context) * 0.05,
+                  ),
+                  StatefulBuilder(builder: (context, setState) {
+                    return DropdownButton(
+                      // Initial Value
+                      focusColor: Color(0xff283618),
+                      dropdownColor: Color(0xff283618),
+                      value: dropdownvalue,
+                      alignment: AlignmentDirectional.center,
+
+                      // Down Arrow Icon
+                      icon: const Icon(
+                        Icons.keyboard_arrow_down,
+                        color: Color(0xFF283618),
+                      ),
+
+                      // Array list of items
+                      items: items.map((String items) {
+                        return DropdownMenuItem(
+                          value: items,
+                          child: Center(
+                              child: Text(items,
+                                  style: TextStyle(
+                                    color: Color(0xffBBBD88),
+                                  ))),
+                        );
+                      }).toList(),
+                      // After selecting the desired option,it will
+                      // change button value to selected value
+                      onChanged: (newValue) {
+                        setState(() {
+                          dropdownvalue = newValue! as String?;
+                          category = dropdownvalue!;
+                        });
+                      },
+                    );
+                  }),
+                ],
+              ),
+            ),
+            Expanded(
+              child: Row(
+                mainAxisAlignment: MainAxisAlignment.spaceBetween,
+                // mainAxisSize: MainAxisSize.,
+                children: [
+                  Padding(
+                    padding: const EdgeInsets.all(8.0),
+                    child: Text(
+                      "Choose your days: ",
+                      style: GoogleFonts.reemKufi(
+                        color: const Color(0xFF283618),
+                        fontSize: displayWidth(context) * 0.04,
+                      ),
+                    ),
+                  ),
+                ],
+              ),
+            ),
+            Padding(
+              padding: const EdgeInsets.all(16.0),
+              child: SizedBox(
+                height: displayHeight(context) * 0.5,
+                child: Column(
+                  children: [
+                    // SizedBox(width:10),
+                    Expanded(
+                      child: StatefulBuilder(builder: (context, setState) {
+                        return ListView(
+                            scrollDirection: Axis.vertical,
+                            children: [
+                              // StatefulBuilder(builder: (context, setState) {
+                              //   return CheckboxListTile(
+                              //     title: const Text('Choose all'),
+                              //     checkColor: Colors.black,
+                              //     activeColor: Colors.lightGreen,
+                              //     value: mastercheckbox,
+                              //     onChanged: (value) {
+                              //       setState(() {
+                              //         mastercheckbox = value!;
+                              //         boolvalues.forEach((boolvalue) {
+                              //           boolvalue = mastercheckbox;
+                              //         });
+                              //       });
+                              //     },
+                              //   );
+                              // }),
+                              StatefulBuilder(builder: (context, setState) {
+                                return CheckboxListTile(
+                                  title: const Text('Monday'),
+                                  checkColor: Colors.black,
+                                  activeColor: Colors.lightGreen,
+                                  value: boolvalues[0],
+                                  onChanged: (value) {
+                                    setState(() {
+                                      boolvalues[0] = value!;
+                                    });
+                                  },
+                                );
+                              }),
+                              StatefulBuilder(builder: (context, setState) {
+                                return CheckboxListTile(
+                                  title: const Text('Tuesday'),
+                                  checkColor: Colors.black,
+                                  activeColor: Colors.lightGreen,
+                                  value: boolvalues[1],
+                                  onChanged: (value) {
+                                    setState(() {
+                                      boolvalues[1] = value!;
+                                    });
+                                  },
+                                );
+                              }),
+                              StatefulBuilder(builder: (context, setState) {
+                                return CheckboxListTile(
+                                  title: const Text('Wednesday'),
+                                  checkColor: Colors.black,
+                                  activeColor: Colors.lightGreen,
+                                  value: boolvalues[2],
+                                  onChanged: (value) {
+                                    setState(() {
+                                      boolvalues[2] = value!;
+                                    });
+                                  },
+                                );
+                              }),
+                              StatefulBuilder(builder: (context, setState) {
+                                return CheckboxListTile(
+                                  title: const Text('Thursday'),
+                                  checkColor: Colors.black,
+                                  activeColor: Colors.lightGreen,
+                                  value: boolvalues[3],
+                                  onChanged: (value) {
+                                    setState(() {
+                                      boolvalues[3] = value!;
+                                    });
+                                  },
+                                );
+                              }),
+                              StatefulBuilder(builder: (context, setState) {
+                                return CheckboxListTile(
+                                  title: const Text('Friday'),
+                                  checkColor: Colors.black,
+                                  activeColor: Colors.lightGreen,
+                                  value: boolvalues[4],
+                                  onChanged: (value) {
+                                    setState(() {
+                                      boolvalues[4] = value!;
+                                    });
+                                  },
+                                );
+                              }),
+                              StatefulBuilder(builder: (context, setState) {
+                                return CheckboxListTile(
+                                  title: const Text('Saturday'),
+                                  checkColor: Colors.black,
+                                  activeColor: Colors.lightGreen,
+                                  value: boolvalues[5],
+                                  onChanged: (value) {
+                                    setState(() {
+                                      boolvalues[5] = value!;
+                                    });
+                                  },
+                                );
+                              }),
+                              StatefulBuilder(builder: (context, setState) {
+                                return CheckboxListTile(
+                                  title: const Text('Sunday'),
+                                  checkColor: Colors.black,
+                                  activeColor: Colors.lightGreen,
+                                  value: boolvalues[6],
+                                  onChanged: (value) {
+                                    setState(() {
+                                      boolvalues[6] = value!;
+                                    });
+                                  },
+                                );
+                              })
+                            ]);
+                      }),
+                    ),
+                  ],
+                ),
+              ),
+            )
+
+            // Checkbox(
+            //   activeColor: Colors.black,
+            //   checkColor: Colors.white10,
+            //   value: boolvalues[index],
+            //   onChanged: (value) {
+            //     setState(() {
+            //       boolvalues[index] = value!;
+            //     });
+            //   },
+            // ),
+            ,
+            Expanded(
+              child: SizedBox(
+                width: displayWidth(context) * 0.4,
+                height: displayHeight(context) * 0.02,
+                child: Row(
+                  mainAxisAlignment: MainAxisAlignment.spaceAround,
+                  children: [
+                    StatefulBuilder(builder: (context, setState) {
+                      return TextButton(
+                        style: TextButton.styleFrom(
+                            backgroundColor: const Color(0xff283618)),
+                        child: Text('Save',
+                            style: GoogleFonts.reemKufi(
+                                color: Color(0xffBBBD88),
+                                fontSize: displayHeight(context) * 0.03)),
+                        onPressed: () {
+                          List<String> pdays = [];
+                          for (var i = 0; i < 7; i++) {
+                            if (boolvalues[i] == true) {
+                              pdays.add(days[i]);
+                            }
+                          }
+                          Product newproduct = Product(
+                              productname: pname,
+                              category: category,
+                              days: pdays);
+                          Provider.of<routine_provider>(context, listen: false)
+                              .addproductToRoutine(
+                                  widget.currentroutine, newproduct);
+                          int j = context
+                              .read<routine_provider>()
+                              .routine_list
+                              .indexWhere((routine) =>
+                                  routine.RoutineName ==
+                                  widget.currentroutine.RoutineName);
+                          Navigator.of(context).pop(true);
+                          Navigator.of(context).pop(true);
+                          Navigator.of(context).push(MaterialPageRoute(
+                              builder: (context) => BuildRoutine(
+                                  selectedroutine: context
+                                      .read<routine_provider>()
+                                      .routine_list[j])));
+                        },
+                      );
+                    }),
+                    TextButton(
+                      style: TextButton.styleFrom(
+                          backgroundColor: const Color(0xffBBBD88)),
+                      child: Text('Cancel',
+                          style: GoogleFonts.reemKufi(
+                              color: Colors.black,
+                              fontSize: displayHeight(context) * 0.03)),
+                      onPressed: () {
+                        Navigator.of(context).pop(true);
+                      },
+                    )
+                  ],
+                ),
+              ),
+            ),
+            // Padding(
+            //   padding: const EdgeInsets.only(bottom: 0),
+            //   child: BottomBar(),
+            // )
+          ],
+        ),
+      );
+    });
   }
 }
 
@@ -942,6 +1044,3 @@ class _AppBarDetailsState extends State<AppBarDetails> {
     );
   }
 }
-
-
-

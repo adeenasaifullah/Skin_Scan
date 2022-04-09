@@ -1,9 +1,10 @@
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 import 'package:google_fonts/google_fonts.dart';
-import 'package:skin_scan/editProfile.dart';
+import 'editProfile.dart';
 import 'package:skin_scan/screenSizes.dart';
 import 'package:flutter_rating_bar/flutter_rating_bar.dart';
+import 'MyBottomAppBar.dart';
 import 'categoriesAndSearch.dart';
 import 'main.dart';
 import 'package:fl_chart/fl_chart.dart';
@@ -19,7 +20,43 @@ class _MyProfileState extends State<MyProfile> {
   @override
   Widget build(BuildContext context) {
     return Scaffold(
-      appBar: AppBarDetails(screenName: "My Profile"),
+      appBar: AppBar(
+        elevation: 0,
+        backgroundColor: const Color(0xFFFFFDF4),
+        centerTitle: false,
+        title: Text("My Profile",
+            style: GoogleFonts.reemKufi(
+                color: Color(0xFF4D4D4D),
+                fontSize: displayHeight(context) * 0.04)),
+        iconTheme: const IconThemeData(
+          color: const Color(0xFF4D4D4D), //change your color here
+        ),
+        leading: GestureDetector(
+            child: Icon(Icons.arrow_back, color: Color(0xFF4D4D4D)),
+            onTap:() {
+              Navigator.pushAndRemoveUntil(
+                context,
+                MaterialPageRoute(
+                  builder: (BuildContext context) => MyBottomAppBar(),
+                ),
+                    (route) => false,
+              );
+
+            }
+        ),
+        actions: [
+          Padding(
+            padding: EdgeInsets.only(
+                right: displayWidth(context) * 0.05,
+                top: displayHeight(context) * 0.005),
+            child: Image(
+                image: AssetImage('assets/dots for app dev.png'),
+                fit: BoxFit.fill,
+                height: displayHeight(context) * 1,
+                width: displayWidth(context) * 0.1),
+          ),
+        ],
+      ),
       body: Padding(
         padding: EdgeInsets.fromLTRB(0, 32, 0, 32),
         child: SingleChildScrollView(
@@ -251,7 +288,7 @@ class _MyProfileState extends State<MyProfile> {
           ),
         ),
       ),
-      bottomNavigationBar: BottomBar(),
+     // bottomNavigationBar: BottomBar(),
       // This trailing comma makes auto-formatting nicer for build methods.
     );
   }
@@ -332,7 +369,7 @@ class _FavouriteProductsState extends State<FavouriteProducts> {
           ],
         ),
       ),
-      bottomNavigationBar: BottomBar(),
+      //bottomNavigationBar: BottomBar(),
     );
   }
 }
@@ -592,7 +629,7 @@ class _ScannedProductsState extends State<ScannedProducts> {
           ],
         ),
       ),
-      bottomNavigationBar: BottomBar(),
+      //bottomNavigationBar: BottomBar(),
     );
   }
 }
@@ -651,7 +688,7 @@ class _SkinLogHistoryState extends State<SkinLogHistory> {
           ],
         ),
       ),
-      bottomNavigationBar: BottomBar(),
+      //bottomNavigationBar: BottomBar(),
     );
   }
 }

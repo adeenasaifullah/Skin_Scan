@@ -5,6 +5,7 @@ import 'categoriesAndSearch.dart';
 import 'main.dart';
 import 'screenSizes.dart';
 
+
 class IngredientDetails extends StatefulWidget {
   final String ingredientName;
   const IngredientDetails({Key? key, required this.ingredientName}) : super(key: key);
@@ -18,7 +19,7 @@ class _IngredientDetailsState extends State<IngredientDetails> {
   Widget build(BuildContext context) {
     return Scaffold(
       appBar: AppBarDetails( screenName: 'Ingredient'),
-      bottomNavigationBar: BottomBar(),
+      //bottomNavigationBar: BottomBar(),
       backgroundColor: const Color(0xFFFFFDF4),
       body: Padding(
         padding: EdgeInsets.all(displayHeight(context)*0.03),

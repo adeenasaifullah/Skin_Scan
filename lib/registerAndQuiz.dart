@@ -1,6 +1,7 @@
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 import 'package:skin_scan/LogIn.dart';
+import 'MyBottomAppBar.dart';
 import 'HomePage.dart';
 import 'main.dart';
 import 'screenSizes.dart';
@@ -872,7 +873,7 @@ class rating extends StatelessWidget {
                                     fontSize: displayHeight(context) * 0.03)),
                             onPressed: () {
                               Navigator.of(context).push(MaterialPageRoute(
-                                  builder: (context) => HomePageScreen()));
+                                  builder: (context) => MyBottomAppBar()));
                             },
                           ),
                         ],

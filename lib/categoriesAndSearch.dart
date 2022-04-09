@@ -2,8 +2,8 @@ import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_rating_bar/flutter_rating_bar.dart';
 import 'package:google_fonts/google_fonts.dart';
+import 'package:skin_scan/screenSizes.dart';
 import 'main.dart';
-import 'screenSizes.dart';
 
 class CategoriesAndSearch extends StatefulWidget {
   const CategoriesAndSearch({Key? key}) : super(key: key);
@@ -31,7 +31,7 @@ class _CategoriesAndSearchState extends State<CategoriesAndSearch> {
     return Scaffold(
       appBar:
       AppBarDetails(screenName: 'Categories'),
-      bottomNavigationBar: BottomBar(),
+      //bottomNavigationBar: BottomBar(),
 
       backgroundColor: const Color(0xFFFFFDF4),
 
@@ -310,7 +310,7 @@ class _CategoryProductsState extends State<CategoryProducts> {
     return Scaffold(
         appBar: AppBarDetails(screenName: widget.categoryTitle),
         backgroundColor: Color(0xFFFFFDF4),
-        bottomNavigationBar: BottomBar(),
+        //bottomNavigationBar: BottomBar(),
         //body: SingleChildScrollView(
         //child: Column(
         body: Padding(
@@ -565,7 +565,7 @@ class _ProductDetailState extends State<ProductDetail> {
   Widget build(BuildContext context) {
     return Scaffold(
         appBar: AppBarDetails(screenName: widget.productName),
-        bottomNavigationBar: BottomBar(),
+        //bottomNavigationBar: BottomBar(),
         backgroundColor: const Color(0xFFFFFDF4),
         body: SingleChildScrollView(
           child: Column(

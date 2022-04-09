@@ -6,6 +6,8 @@ part of 'locations.dart';
 // JsonSerializableGenerator
 // **************************************************************************
 
+
+
 LatLng _$LatLngFromJson(Map<String, dynamic> json) => LatLng(
       lat: (json['lat'] as num).toDouble(),
       lng: (json['lng'] as num).toDouble(),

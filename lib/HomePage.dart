@@ -1,9 +1,11 @@
 import 'package:flutter/material.dart';
 import 'package:google_fonts/google_fonts.dart';
 import 'package:skin_scan/LogIn.dart';
-import 'package:skin_scan/categoriesAndSearch.dart';
+import 'categoriesAndSearch.dart';
 import 'package:skin_scan/screenSizes.dart';
+import 'package:custom_top_navigator/custom_top_navigator.dart';
 import 'package:skin_scan/viewRoutines.dart';
+import 'main.dart';
 
 class HomePageScreen extends StatefulWidget {
   const HomePageScreen({Key? key}) : super(key: key);
@@ -516,7 +518,6 @@ class _HomePageScreenState extends State<HomePageScreen> {
           ),
         ),
       ),
-      bottomNavigationBar: BottomBar(),
     );
   }
 }

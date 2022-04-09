@@ -1,7 +1,7 @@
 import 'package:flutter/material.dart';
-import 'MyProfile.dart';
-import 'screenSizes.dart';
 import 'package:google_fonts/google_fonts.dart';
+import 'screenSizes.dart';
+import 'MyProfile.dart';
 
 class editProfile extends StatefulWidget {
   const editProfile({Key? key}) : super(key: key);
