@@ -38,15 +38,8 @@ class _HomePageScreenState extends State<HomePageScreen> {
                       padding: const EdgeInsets.fromLTRB(16, 32, 16, 32),
                       child: Column(
                         children: [
-                          Text("Hello, Afzal!",
-                              style: GoogleFonts.reemKufi(
-                                  color: Color(0xffFFFDF4),
-                                  fontSize: displayHeight(context) * 0.05)),
-                          Text(' Give your skin a little love!',
-                              style: GoogleFonts.reemKufi(
-                                  color: Color(0xffFFFDF4),
-                                  fontSize: displayHeight(context) * 0.025,
-                                  fontStyle: FontStyle.italic))
+                          ReemKufiOffwhite(textValue: "Hello, Afzal!", size: displayHeight(context) * 0.05),
+                          ReemKufiOffwhite_Italic(textValue: ' Give your skin a little love!', size: displayHeight(context) * 0.025),
                         ],
                       ),
                     ),
@@ -89,39 +82,6 @@ class _HomePageScreenState extends State<HomePageScreen> {
 
                       ),
                     ),
-
-                    // SizedBox(
-                    //   width: displayWidth(context) * 0.75,
-                    //   child: Padding(
-                    //     padding:
-                    //     EdgeInsets.symmetric(horizontal: displayWidth(context) * 0.04),
-                    //     child: InkWell(
-                    //       child: TextField(
-                    //           textAlign: TextAlign.start,
-                    //           decoration: InputDecoration(
-                    //             hintText: 'Search for a product',
-                    //             hintStyle: GoogleFonts.rambla(
-                    //                 color: Color(0xff283618),
-                    //                 fontSize: displayHeight(context) * 0.025,
-                    //                 fontStyle: FontStyle.italic),
-                    //             fillColor: Color(0xffDADBC6),
-                    //             border: OutlineInputBorder(
-                    //                 borderRadius: BorderRadius.circular(50.0),
-                    //                 borderSide: BorderSide(
-                    //                     width: displayWidth(context) * 0.03,
-                    //                     style: BorderStyle.solid)),
-                    //             filled: true,
-                    //             contentPadding: EdgeInsets.all(displayHeight(context) * 0.01),
-                    //
-                    //             suffixIcon: Icon(Icons.search),
-                    //           )),
-                    //       onTap: (){
-                    //         Navigator.of(context).push(MaterialPageRoute(
-                    //             builder: (context) => CategoriesAndSearch()));
-                    //       },
-                    //     ),
-                    //   ),
-                    // ),
                     SizedBox(
                       width: displayWidth(context)*0.05,
                     ),
@@ -138,12 +98,7 @@ class _HomePageScreenState extends State<HomePageScreen> {
                           builder: (context) {
                             return AlertDialog(
                               backgroundColor: const Color(0xff283618),
-                              title: Text(
-                                  'Are you sure you want to logout?',
-                                  style: GoogleFonts.reemKufi(
-                                      color: Color(0xffFFFDF4),
-                                      fontSize:
-                                      displayHeight(context) * 0.04)),
+                              title: ReemKufiOffwhite(textValue: 'Are you sure you want to logout?', size: displayHeight(context) * 0.04,),
                               actions: <Widget>[
                                 Padding(
                                   padding: EdgeInsets.all(
@@ -199,10 +154,9 @@ class _HomePageScreenState extends State<HomePageScreen> {
                   children: [
                     InkWell(
                       onTap: (){
-      Navigator.of(context).push(MaterialPageRoute(
-      builder: (context) => ViewRoutine()));
-      },
-
+                          Navigator.of(context).push(MaterialPageRoute(
+                            builder: (context) => ViewRoutine()));
+                      },
                       child: Container(
                         alignment: Alignment.center,
                         margin: EdgeInsets.fromLTRB(16, 8, 16, 8),
@@ -224,16 +178,8 @@ class _HomePageScreenState extends State<HomePageScreen> {
                                     child: Column(
                                       crossAxisAlignment: CrossAxisAlignment.start,
                                       children: [
-                                        Text('SkinCare',
-                                            style: GoogleFonts.reemKufi(
-                                              color: Color(0xff283618),
-                                              fontSize: displayHeight(context) * 0.03,
-                                            )),
-                                        Text('Routine',
-                                            style: GoogleFonts.reemKufi(
-                                              color: Color(0xff283618),
-                                              fontSize: displayHeight(context) * 0.03,
-                                            )),
+                                        ReemKufi_Green(textValue: 'SkinCare', size: displayHeight(context)*0.03),
+                                        ReemKufi_Green(textValue: 'Routine', size: displayHeight(context)*0.03),
                                       ],
                                     ),
                                   ),
@@ -250,11 +196,7 @@ class _HomePageScreenState extends State<HomePageScreen> {
                                   )
                                 ],
                               ),
-                              Text('Maintain your schedule!',
-                                  style: GoogleFonts.reemKufi(
-                                      color: Color(0xff283618),
-                                      fontSize: displayHeight(context) * 0.02,
-                                      fontStyle: FontStyle.italic)),
+                              ReemKufi_Green_Italic(textValue: 'Maintain your schedule!', size: displayHeight(context) * 0.02),
                             ],
                           ),
                         )
@@ -263,16 +205,8 @@ class _HomePageScreenState extends State<HomePageScreen> {
                     Column(
                       crossAxisAlignment: CrossAxisAlignment.center,
                       children: [
-                        Text('20th',
-                            style: GoogleFonts.reemKufi(
-                                color: Color(0xff283618),
-                                fontSize: displayHeight(context) * 0.025,
-                                fontWeight: FontWeight.bold)),
-                        Text('March,2022',
-                            style: GoogleFonts.reemKufi(
-                                color: Color(0xff283618),
-                                fontSize: displayHeight(context) * 0.025,
-                                fontWeight: FontWeight.bold)),
+                        ReemKufi_Green_Bold(textValue: '20th', size: displayHeight(context) * 0.025),
+                        ReemKufi_Green_Bold(textValue: 'March,2022', size: displayHeight(context) * 0.025),
                       ],
                     ),
                   ],
@@ -294,21 +228,9 @@ class _HomePageScreenState extends State<HomePageScreen> {
                     child: Column(
                       crossAxisAlignment: CrossAxisAlignment.start,
                       children: [
-                        Text('Reminder',
-                            style: GoogleFonts.reemKufi(
-                              color: Color(0xffFFFDF4),
-                              fontSize: displayHeight(context) * 0.03,
-                            )),
-                        Text('Don’t forget to follow your evening routine!',
-                            style: GoogleFonts.reemKufi(
-                                color: Color(0xff283618),
-                                fontSize: displayHeight(context) * 0.02,
-                                fontStyle: FontStyle.italic)),
-                        Text('Next step:  apply Caquina Beauty moisturizer',
-                            style: GoogleFonts.reemKufi(
-                                color: Color(0xff283618),
-                                fontSize: displayHeight(context) * 0.02,
-                                fontWeight: FontWeight.bold))
+                        ReemKufiOffwhite(textValue: 'Reminder', size: displayHeight(context) * 0.03),
+                        ReemKufi_Green_Italic(textValue: 'Don’t forget to follow your evening routine!', size: displayHeight(context) * 0.02),
+                        ReemKufi_Green_Bold(textValue: 'Next step:  apply Caquina Beauty moisturizer', size: displayHeight(context) * 0.02),
                       ],
                     ),
                   ),
@@ -330,16 +252,8 @@ class _HomePageScreenState extends State<HomePageScreen> {
                   child: Column(
                         crossAxisAlignment: CrossAxisAlignment.start,
                         children: [
-                          Text('Skin Log',
-                              style: GoogleFonts.reemKufi(
-                                color: Color(0xffFFFDF4),
-                                fontSize: displayHeight(context) * 0.03,
-                              )),
-                          Text('Tell us how has your skin been feeling today?',
-                              style: GoogleFonts.reemKufi(
-                                color: Color(0xffFFFDF4),
-                                fontSize: displayHeight(context) * 0.02,
-                              )),
+                          ReemKufiOffwhite(textValue: 'Skin Log', size: displayHeight(context) * 0.03),
+                          ReemKufiOffwhite(textValue: 'Tell us how has your skin been feeling today?', size: displayHeight(context) * 0.02),
                           Row(
                             mainAxisAlignment: MainAxisAlignment.spaceAround,
                             children: [
@@ -354,23 +268,11 @@ class _HomePageScreenState extends State<HomePageScreen> {
                                         backgroundColor: const Color(0xff283618),
                                         title: Column(
                                           children: [
-                                            Text('Skin Log',
-                                                style: GoogleFonts.reemKufi(
-                                                  color: Color(0xffFFFDF4),
-                                                  fontSize: displayHeight(context) * 0.03,
-                                                )),
-                                            Text('Thank you for filling the skin log today!',
-                                                style: GoogleFonts.reemKufi(
-                                                  color: Color(0xffFFFDF4),
-                                                  fontSize: displayHeight(context) * 0.02,
-                                                )),
+                                            ReemKufiOffwhite(textValue: 'Skin Log', size: displayHeight(context) * 0.03),
+                                            ReemKufiOffwhite(textValue: 'Thank you for filling the skin log today!', size: displayHeight(context) * 0.02),
                                             Row(
                                               children: [
-                                                Text('Skin Feeling: ',
-                                                    style: GoogleFonts.reemKufi(
-                                                      color: Color(0xffFFFDF4),
-                                                      fontSize: displayHeight(context) * 0.02,
-                                                    )),
+                                                ReemKufiOffwhite(textValue: 'Skin Feeling: ', size: displayHeight(context)*0.02),
                                                 Icon(Icons.sentiment_satisfied_outlined, color: Colors.white, size: 40,),
                                               ],
                                             )
@@ -420,23 +322,11 @@ class _HomePageScreenState extends State<HomePageScreen> {
                                           backgroundColor: const Color(0xff283618),
                                           title: Column(
                                             children: [
-                                              Text('Skin Log',
-                                                  style: GoogleFonts.reemKufi(
-                                                    color: Color(0xffFFFDF4),
-                                                    fontSize: displayHeight(context) * 0.03,
-                                                  )),
-                                              Text('Thank you for filling the skin log today!',
-                                                  style: GoogleFonts.reemKufi(
-                                                    color: Color(0xffFFFDF4),
-                                                    fontSize: displayHeight(context) * 0.02,
-                                                  )),
+                                              ReemKufiOffwhite(textValue: 'Skin Log', size: displayHeight(context) * 0.03),
+                                              ReemKufiOffwhite(textValue: 'Thank you for filling the skin log today!', size: displayHeight(context) * 0.02),
                                               Row(
                                                 children: [
-                                                  Text('Skin Feeling: ',
-                                                      style: GoogleFonts.reemKufi(
-                                                        color: Color(0xffFFFDF4),
-                                                        fontSize: displayHeight(context) * 0.02,
-                                                      )),
+                                                  ReemKufiOffwhite(textValue: 'Skin Feeling: ', size: displayHeight(context)*0.02),
                                                   Icon(Icons.sentiment_neutral_outlined, color: Colors.white, size: 40,),
                                                 ],
                                               )
@@ -486,23 +376,11 @@ class _HomePageScreenState extends State<HomePageScreen> {
                                         backgroundColor: const Color(0xff283618),
                                         title: Column(
                                           children: [
-                                            Text('Skin Log',
-                                                style: GoogleFonts.reemKufi(
-                                                  color: Color(0xffFFFDF4),
-                                                  fontSize: displayHeight(context) * 0.03,
-                                                )),
-                                            Text('Thank you for filling the skin log today!',
-                                                style: GoogleFonts.reemKufi(
-                                                  color: Color(0xffFFFDF4),
-                                                  fontSize: displayHeight(context) * 0.02,
-                                                )),
+                                            ReemKufiOffwhite(textValue: 'Skin Log', size: displayHeight(context) * 0.03),
+                                            ReemKufiOffwhite(textValue: 'Thank you for filling the skin log today!', size: displayHeight(context) * 0.02),
                                             Row(
                                               children: [
-                                                Text('Skin Feeling: ',
-                                                    style: GoogleFonts.reemKufi(
-                                                      color: Color(0xffFFFDF4),
-                                                      fontSize: displayHeight(context) * 0.02,
-                                                    )),
+                                                ReemKufiOffwhite(textValue: 'Skin Feeling: ', size: displayHeight(context)*0.02),
                                                 Icon(Icons.sentiment_dissatisfied_outlined, color: Colors.white, size: 40,),
                                               ],
                                             )

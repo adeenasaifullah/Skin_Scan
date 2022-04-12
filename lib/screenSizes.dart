@@ -24,201 +24,212 @@ double displayWidth(BuildContext context) {
   return displaySize(context).width;
 }
 
+class ReemKufiOffwhite extends StatelessWidget {
+  final String textValue;
+  final double size;
+  const ReemKufiOffwhite({Key? key, required this.textValue, required this.size}) : super(key: key);
+
+  @override
+  Widget build(BuildContext context) {
+    return Text(
+      textValue,
+      style: GoogleFonts.reemKufi(
+        color: const Color(0xFFFFFDF4),
+        fontSize: size,
+      ),
+    );
+  }
+}
+
+class ReemKufiOffwhite_Italic extends StatelessWidget {
+  final String textValue;
+  final double size;
+  const ReemKufiOffwhite_Italic({Key? key, required this.textValue, required this.size}) : super(key: key);
+
+  @override
+  Widget build(BuildContext context) {
+    return Text(
+      textValue,
+      style: GoogleFonts.reemKufi(
+        color: const Color(0xFFFFFDF4),
+        fontSize: size,
+        fontStyle: FontStyle.italic
+      ),
+    );
+  }
+}
+
+class ReemKufi_Grey extends StatelessWidget {
+  final String textValue;
+  final double size;
+  const ReemKufi_Grey({Key? key, required this.textValue, required this.size}) : super(key: key);
+
+  @override
+  Widget build(BuildContext context) {
+    return Text(
+      textValue,
+      style: GoogleFonts.reemKufi(
+        color: const Color(0xFF4D4D4D),
+        fontSize: size,
+      ),
+    );
+  }
+}
+
+class ReemKufi_Grey_Center extends StatelessWidget {
+  final String textValue;
+  final double size;
+  const ReemKufi_Grey_Center({Key? key, required this.textValue, required this.size}) : super(key: key);
+
+  @override
+  Widget build(BuildContext context) {
+    return Text(
+      textValue,
+      textAlign: TextAlign.center,
+      style: GoogleFonts.reemKufi(
+        color: const Color(0xFF4D4D4D),
+        fontSize: size,
+      ),
+    );
+  }
+}
+
+class ReemKufi_Green extends StatelessWidget {
+  final String textValue;
+  final double size;
+  const ReemKufi_Green({Key? key, required this.textValue, required this.size}) : super(key: key);
+
+  @override
+  Widget build(BuildContext context) {
+    return Text(
+      textValue,
+      style: GoogleFonts.reemKufi(
+        color: const Color(0xff283618),
+        fontSize: size,
+      ),
+    );
+  }
+}
+
+class ReemKufi_Green_Italic extends StatelessWidget {
+  final String textValue;
+  final double size;
+  const ReemKufi_Green_Italic({Key? key, required this.textValue, required this.size}) : super(key: key);
+
+  @override
+  Widget build(BuildContext context) {
+    return Text(
+      textValue,
+      style: GoogleFonts.reemKufi(
+        color: const Color(0xff283618),
+        fontSize: size,
+        fontStyle: FontStyle.italic
+      ),
+    );
+  }
+}
+
+class ReemKufi_Green_Center extends StatelessWidget {
+  final String textValue;
+  final double size;
+  const ReemKufi_Green_Center({Key? key, required this.textValue, required this.size}) : super(key: key);
+
+  @override
+  Widget build(BuildContext context) {
+    return Text(
+      textValue,
+      textAlign: TextAlign.center,
+      style: GoogleFonts.reemKufi(
+        color: const Color(0xff283618),
+        fontSize: size,
+      ),
+    );
+  }
+}
+
+class ReemKufi_Green_Bold extends StatelessWidget {
+  final String textValue;
+  final double size;
+  const ReemKufi_Green_Bold({Key? key, required this.textValue, required this.size}) : super(key: key);
+
+  @override
+  Widget build(BuildContext context) {
+    return Text(
+      textValue,
+      style: GoogleFonts.reemKufi(
+        color: const Color(0xff283618),
+        fontSize: size,
+        fontWeight: FontWeight.bold
+      ),
+    );
+  }
+}
+
+class Rambla_Grey_Center extends StatelessWidget {
+  final String textValue;
+  final double size;
+  const Rambla_Grey_Center({Key? key, required this.textValue, required this.size}) : super(key: key);
+
+  @override
+  Widget build(BuildContext context) {
+    return Text(
+      textValue,
+      textAlign: TextAlign.center,
+      style: GoogleFonts.rambla(
+        color: const Color(0xff4D4D4D),
+        fontSize: size,
+        fontStyle: FontStyle.italic
+      ),
+    );
+  }
+}
 
 
-// class BottomBar extends StatefulWidget implements PreferredSizeWidget {
-//   const BottomBar({Key? key}) : super(key: key);
-//
-//   @override
-//   _BottomBarState createState() => _BottomBarState();
-//
-//   @override
-//   // TODO: implement preferredSize
-//   Size get preferredSize => Size.fromHeight(70);
-// }
-//
-// class _BottomBarState extends State<BottomBar> {
-//   TextEditingController ingredient_controller = TextEditingController();
-//
-//   late TextEditingController derma_controller;
-//   void initState() {
-//     super.initState();
-//
-//     derma_controller = TextEditingController();
-//   }
-//
-//   void dispose() {
-//     ingredient_controller.dispose();
-//     derma_controller.dispose();
-//     super.dispose();
-//   }
-//
-//   @override
-//   Widget build(BuildContext context) {
-//     return Container(
-//       decoration: BoxDecoration(
-//         borderRadius: BorderRadius.only(
-//             topLeft: Radius.circular(10), topRight: Radius.circular(10)),
-//         color: Color(0xff4D4D4D),
-//       ),
-//       height: displayHeight(context) * 0.1,
-//       child: Row(
-//         mainAxisAlignment: MainAxisAlignment.spaceEvenly,
-//         children: <Widget>[
-//           IconButton(
-//             icon: Image.asset('assets/dermatologistIcon.png'),
-//             iconSize: displayHeight(context) * 0.05,
-//             onPressed: () async {
-//               return showDialog(
-//                   barrierDismissible: false,
-//                   context: context,
-//                   builder: (context) => AlertDialog(
-//                         backgroundColor: const Color(0xff283618),
-//                         title: Text('Enter your area',
-//                             style: GoogleFonts.reemKufi(
-//                                 color: Color(0xffFFFDF4),
-//                                 fontSize: displayHeight(context) * 0.04)),
-//                         content: TextField(
-//                           controller: derma_controller,
-//                           autofocus: true,
-//                           decoration: InputDecoration(
-//                             hintText: 'Enter your area',
-//                             hintStyle: GoogleFonts.reemKufi(
-//                                 color: Color(0xffFFFDF4),
-//                                 fontSize: displayHeight(context) * 0.03),
-//                           ),
-//                           style: GoogleFonts.reemKufi(
-//                               color: Color(0xffFFFDF4),
-//                               fontSize: displayHeight(context) * 0.03),
-//                         ),
-//                         actions: <Widget>[
-//                           Padding(
-//                             padding:
-//                                 EdgeInsets.all(displayHeight(context) * 0.03),
-//                             child: Row(
-//                               mainAxisAlignment: MainAxisAlignment.spaceEvenly,
-//                               children: [
-//                                 TextButton(
-//                                   style: TextButton.styleFrom(
-//                                       backgroundColor: Color(0xffBBBD88)),
-//                                   child: Text('Yes',
-//                                       style: GoogleFonts.reemKufi(
-//                                           color: Colors.black,
-//                                           fontSize:
-//                                               displayHeight(context) * 0.03)),
-//                                   onPressed: () {
-//                                     // Navigator.push(context, MaterialPageRoute(
-//                                     //       builder: (context) => MapDemo(),
-//                                     //     ));
-//                                   },
-//                                 ),
-//                                 TextButton(
-//                                   style: TextButton.styleFrom(
-//                                       backgroundColor: Color(0xffBBBD88)),
-//                                   child: Text('Cancel',
-//                                       style: GoogleFonts.reemKufi(
-//                                           color: Colors.black,
-//                                           fontSize:
-//                                               displayHeight(context) * 0.03)),
-//                                   onPressed: () {
-//                                     Navigator.of(context).pop(false);
-//                                   },
-//                                 ),
-//                               ],
-//                             ),
-//                           ),
-//                         ],
-//                       ));
-//             },
-//           ),
-//           IconButton(
-//             icon: Image.asset('assets/notepadthingyicon.png'),
-//             iconSize: displayHeight(context) * 0.05,
-//             onPressed: () {},
-//           ),
-//           IconButton(
-//             icon: Image.asset('assets/ScanIcon.png'),
-//             iconSize: displayHeight(context) * 0.05,
-//             onPressed: () {},
-//           ),
-//           IconButton(
-//             icon: Image.asset('assets/molecularICON.png'),
-//             iconSize: displayHeight(context) * 0.05,
-//             onPressed: () async {
-//               return showDialog(
-//                   barrierDismissible: false,
-//                   context: context,
-//                   builder: (context) => AlertDialog(
-//                         backgroundColor: const Color(0xff283618),
-//                         title: Text('Enter your ingredient',
-//                             style: GoogleFonts.reemKufi(
-//                                 color: Color(0xffFFFDF4),
-//                                 fontSize: displayHeight(context) * 0.04)),
-//                         content: TextField(
-//                           controller: ingredient_controller,
-//                           autofocus: true,
-//                           decoration: InputDecoration(
-//                             hintText: 'Enter your ingredient',
-//                             hintStyle: GoogleFonts.reemKufi(
-//                                 color: Color(0xffFFFDF4),
-//                                 fontSize: displayHeight(context) * 0.03),
-//                           ),
-//                           style: GoogleFonts.reemKufi(
-//                               color: Color(0xffFFFDF4),
-//                               fontSize: displayHeight(context) * 0.03),
-//                         ),
-//                         actions: <Widget>[
-//                           Padding(
-//                             padding:
-//                                 EdgeInsets.all(displayHeight(context) * 0.03),
-//                             child: Row(
-//                               mainAxisAlignment: MainAxisAlignment.spaceEvenly,
-//                               children: [
-//                                 TextButton(
-//                                   style: TextButton.styleFrom(
-//                                       backgroundColor: Color(0xffBBBD88)),
-//                                   child: Text('Continue',
-//                                       style: GoogleFonts.reemKufi(
-//                                           color: Colors.black,
-//                                           fontSize:
-//                                               displayHeight(context) * 0.03)),
-//                                   onPressed: () {
-//                                     // Navigator.push(context, MaterialPageRoute(
-//                                     //       builder: (context) =>
-//                                     //           IngredientDetails(
-//                                     //         ingredientName:
-//                                     //             ingredient_controller.text!,
-//                                     //       ),
-//                                     //     ));
-//                                   },
-//                                 ),
-//                                 TextButton(
-//                                   style: TextButton.styleFrom(
-//                                       backgroundColor: Color(0xffBBBD88)),
-//                                   child: Text('Cancel',
-//                                       style: GoogleFonts.reemKufi(
-//                                           color: Colors.black,
-//                                           fontSize:
-//                                               displayHeight(context) * 0.03)),
-//                                   onPressed: () {
-//                                     Navigator.of(context).pop(false);
-//                                   },
-//                                 ),
-//                               ],
-//                             ),
-//                           ),
-//                         ],
-//                       ));
-//             },
-//           ),
-//           IconButton(
-//             icon: Icon(CupertinoIcons.person),
-//             color: Color(0xffDADBC6),
-//             iconSize: displayHeight(context) * 0.05,
-//             onPressed: () {},
-//           ),
-//         ],
-//       ),
-//     );
-//   }
-// }
+
+class field extends StatefulWidget {
+  final String labelText;
+  final String hintText;
+  final Icon prefixIcon;
+  final Icon? suffixIcon;
+  const field(
+      {Key? key,
+        required this.labelText,
+        required this.hintText,
+        required this.prefixIcon,
+        this.suffixIcon})
+      : super(key: key);
+
+  @override
+  _fieldState createState() => _fieldState();
+}
+
+class _fieldState extends State<field> {
+  @override
+  Widget build(BuildContext context) {
+    return Container(
+      width: displayWidth(context) * 0.8,
+      child: TextFormField(
+        decoration: InputDecoration(
+            fillColor: Color(0xFFDADBC6),
+            filled: true,
+            border: OutlineInputBorder(
+                borderRadius: BorderRadius.circular(15.0),
+                borderSide:
+                const BorderSide(width: 6, style: BorderStyle.solid)),
+            labelText: widget.labelText,
+            labelStyle: GoogleFonts.reemKufi(
+                color: Color(0xFF283618),
+                fontSize: 18,
+                fontWeight: FontWeight.bold),
+            hintText: widget.hintText,
+            hintStyle: GoogleFonts.rambla(
+                color: Color(0xFF283618), fontStyle: FontStyle.italic),
+            prefixIcon: widget.prefixIcon,
+            //Icon(Icons.lock, color: Color(0xFF283618)),
+            suffixIcon: widget.suffixIcon
+          //Icon(Icons.visibility_off, color: Color(0xFF283618))),
+        ),
+      ),
+    );
+  }
+}

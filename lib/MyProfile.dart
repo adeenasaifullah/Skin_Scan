@@ -64,19 +64,15 @@ class _MyProfileState extends State<MyProfile> {
           child: Column(
             mainAxisAlignment: MainAxisAlignment.center,
             children: <Widget>[
-              // SizedBox(
-              //   height: displayHeight(context) * 0.05,
-              // ),
               Row(
                 mainAxisAlignment: MainAxisAlignment.center,
                 children: [
                   Column(
                     mainAxisAlignment: MainAxisAlignment.spaceAround,
                     children: [
-                      TextValue(text: "Afzal     ", textSize: 38, bold: true),
+                      ReemKufi_Green_Bold(textValue: "Afzal     ", size: displayHeight(context) * 0.05),
                       Row(children: [
-                        TextValue(
-                            text: "Edit Profile", textSize: 25, bold: true),
+                        ReemKufi_Green_Bold(textValue: "Edit Profile", size: displayHeight(context) * 0.03),
                         InkWell(
                           child: Icon(Icons.create_rounded),
                           onTap: () {
@@ -96,7 +92,6 @@ class _MyProfileState extends State<MyProfile> {
                         'https://media-exp1.licdn.com/dms/image/C4D03AQG8yHAYB2QZXg/profile-displayphoto-shrink_800_800/0/1604240249734?e=1652313600&v=beta&t=hqULr3Z0MtiRav1pRBW4zCPRWgIC9XPD0m5an6C1SoI'),
                     backgroundColor: Colors.transparent,
                   )
-                  //Icon(Icons.face_rounded, color: Colors.black)
                 ],
               ),
               SizedBox(
@@ -122,13 +117,9 @@ class _MyProfileState extends State<MyProfile> {
                           children: [
                             Icon(Icons.favorite, color: Colors.black),
                             Expanded(
-                                child: TextValue(
-                                    text: "Favourite Products",
-                                    textSize: 18,
-                                    bold: true)),
+                                child: ReemKufi_Green_Bold(textValue: "Favourite Products", size: displayHeight(context) * 0.0225)),
                             InkWell(
-                              child: TextValue(
-                                  text: "View All", textSize: 18, bold: true),
+                              child: ReemKufi_Green_Bold(textValue: "View All", size: displayHeight(context) * 0.0225),
                               onTap: () {
                                 Navigator.of(context).push(MaterialPageRoute(
                                     builder: (context) => FavouriteProducts()));
@@ -181,13 +172,9 @@ class _MyProfileState extends State<MyProfile> {
                           children: [
                             Icon(Icons.history, color: Colors.black),
                             Expanded(
-                                child: TextValue(
-                                    text: "Scanned Products",
-                                    textSize: 18,
-                                    bold: true)),
+                                child: ReemKufi_Green_Bold(textValue: "Scanned Products", size: displayHeight(context) * 0.0225)),
                             InkWell(
-                              child: TextValue(
-                                  text: "View All", textSize: 18, bold: true),
+                              child: ReemKufi_Green_Bold(textValue: "View All", size: displayHeight(context) * 0.0225),
                               onTap: () {
                                 Navigator.of(context).push(MaterialPageRoute(
                                     builder: (context) => ScannedProducts()));
@@ -239,13 +226,9 @@ class _MyProfileState extends State<MyProfile> {
                           children: [
                             Icon(Icons.history, color: Colors.black),
                             Expanded(
-                                child: TextValue(
-                                    text: "Skin Log History",
-                                    textSize: 18,
-                                    bold: true)),
+                                child: ReemKufi_Green_Bold(textValue: "Skin Log History", size: displayHeight(context) * 0.0225)),
                             InkWell(
-                              child: TextValue(
-                                  text: "View All", textSize: 18, bold: true),
+                              child: ReemKufi_Green_Bold(textValue: "View All", size: displayHeight(context) * 0.0225),
                               onTap: () {
                                 Navigator.of(context).push(MaterialPageRoute(
                                     builder: (context) => SkinLogHistory()));
@@ -261,8 +244,7 @@ class _MyProfileState extends State<MyProfile> {
                           children: [
                             Icon(Icons.calendar_today_outlined,
                                 color: Colors.black),
-                            TextValue(
-                                text: "Not so good", textSize: 18, bold: true),
+                            ReemKufi_Green_Bold(textValue: "Not so good", size: displayHeight(context) * 0.0225),
                             Icon(Icons.tag_faces, color: Colors.black)
                           ],
                         ),
@@ -274,8 +256,7 @@ class _MyProfileState extends State<MyProfile> {
                           children: [
                             Icon(Icons.calendar_today_outlined,
                                 color: Colors.black),
-                            TextValue(
-                                text: "Not so good", textSize: 18, bold: true),
+                            ReemKufi_Green_Bold(textValue: "Not so good", size: displayHeight(context) * 0.0225),
                             Icon(Icons.tag_faces, color: Colors.black)
                           ],
                         ),
@@ -289,7 +270,6 @@ class _MyProfileState extends State<MyProfile> {
           ),
         ),
       ),
-     // bottomNavigationBar: BottomBar(),
       // This trailing comma makes auto-formatting nicer for build methods.
     );
   }
@@ -418,12 +398,7 @@ class _FavouriteProductsCardState extends State<FavouriteProductsCard> {
                             builder: (context) {
                               return AlertDialog(
                                 backgroundColor: const Color(0xff283618),
-                                title: Text(
-                                    'Are you sure you want to unfavourite this product?',
-                                    style: GoogleFonts.reemKufi(
-                                        color: Color(0xffFFFDF4),
-                                        fontSize:
-                                            displayHeight(context) * 0.04)),
+                                title: ReemKufiOffwhite(textValue: 'Are you sure you want to unfavourite this product?',size: displayHeight(context) * 0.04),
                                 actions: <Widget>[
                                   Padding(
                                     padding: EdgeInsets.all(
@@ -476,15 +451,11 @@ class _FavouriteProductsCardState extends State<FavouriteProductsCard> {
                       height: displayHeight(context) * 0.1,
                       width: displayWidth(context) * 0.1),
                   SizedBox(height: displayHeight(context) * 0.005),
-                  Text(widget.productName,
-                      style: GoogleFonts.reemKufi(
-                          color: Color(0xff283618),
-                          fontSize: displayHeight(context) * 0.025)),
+                  ReemKufi_Green(textValue: widget.productName, size: displayHeight(context) * 0.025),
                   SizedBox(height: displayHeight(context) * 0.005),
                   Rating(
                     productRating: widget.productRating,
                   ),
-                  // SizedBox(height: displayHeight(context) * 0.005),
                 ],
               )),
           onTap: () {
@@ -590,15 +561,7 @@ class _ScannedProductsState extends State<ScannedProducts> {
                                   minRadius: 35,
                                   backgroundColor: Color(0xffC4C4C4),
                                 ),
-                                TextValue(
-                                    text: products[index],
-                                    textSize: 18,
-                                    bold: false),
-                                // Image(
-                                //     image: AssetImage('assets/Favourite.png'),
-                                //     fit: BoxFit.fill,
-                                //     height: displayHeight(context) * 0.1,
-                                //     width: displayWidth(context) * 0.1),
+                                ReemKufi_Green(textValue: products[index], size: displayHeight(context)*0.0225),
                                 Container(
                                   height: displayHeight(context)*0.07,
                                   width: displayWidth(context)*0.15,
@@ -611,20 +574,16 @@ class _ScannedProductsState extends State<ScannedProducts> {
                                   ),
                                   child: Column(
                                       children: <Widget>[
-                                    SizedBox(child: Text("14", style:GoogleFonts.reemKufi(
-                                        color: Color(0xff283618),
-                                        fontSize:
-                                        displayHeight(context) * 0.02) ,), height: displayHeight(context)*0.03,),
+                                    SizedBox(
+                                      child: ReemKufi_Green(textValue: "14", size: displayHeight(context) * 0.0225),
+                                      height: displayHeight(context)*0.03,),
                                         Expanded(
                                           child: Divider(
                                             color: Colors.black,
                                           )
                                         ),
-
-                                        SizedBox(child: Text("Feb", style:GoogleFonts.reemKufi(
-                                            color: Color(0xff283618),
-                                            fontSize:
-                                            displayHeight(context) * 0.02) ,), height: displayHeight(context)*0.03,)
+                                        SizedBox(child: ReemKufi_Green(textValue: "Feb", size: displayHeight(context) * 0.02),
+                                          height: displayHeight(context)*0.03,)
                                   ]),
                                 )
                               ],
@@ -678,8 +637,7 @@ class _SkinLogHistoryState extends State<SkinLogHistory> {
                           child: Row(
                             mainAxisAlignment: MainAxisAlignment.spaceAround,
                             children: [
-                              TextValue(
-                                  text: "14 March", textSize: 20, bold: false),
+                              ReemKufi_Green(textValue: "14 March", size: displayHeight(context)*0.025),
                               Icon(Icons.tag_faces, color: Colors.black)
                             ],
                           ),

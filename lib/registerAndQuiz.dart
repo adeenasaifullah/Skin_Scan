@@ -22,137 +22,126 @@ class _registerAndQuizState extends State<registerAndQuiz> {
     return Scaffold(
       backgroundColor: const Color(0xFFFFFDF4),
       appBar: AppBarDetails(screenName: ''),
-      body: Center(
-        child: Flexible(
-          flex: 2,
-          child: Column(
-            mainAxisAlignment: MainAxisAlignment.start,
-            children: <Widget>[
-              Row(
-                mainAxisAlignment: MainAxisAlignment.center,
-                children: [
-                  Flexible(
-                    flex: 2,
-                    child: ImageIcon(
-                      const AssetImage("assets/faces.png"),
-                      color: const Color(0xff283618),
-                      size: displayHeight(context) * 0.3,
-                    ),
-                  ),
-                ],
-              ),
-              Text(
-                'Skin Scan',
-                style: GoogleFonts.reemKufi(
-                    color: Color(0xff283618),
-                    fontSize: displayHeight(context) * 0.08),
-              ),
-              Padding(
-                padding: EdgeInsets.symmetric(
-                    horizontal: displayWidth(context) * 0.05),
-                child: Text('Efficient and safe decisions for your skin!',
-                    textAlign: TextAlign.center,
-                    style: GoogleFonts.rambla(
-                        fontStyle: FontStyle.italic,
-                        color: Color(0xff4D4D4D),
-                        fontSize: displayHeight(context) * 0.03)),
-              ),
-              SizedBox(height: displayHeight(context) * 0.05),
-              Row(
-                mainAxisAlignment: MainAxisAlignment.spaceEvenly,
-                children: [
-                  Flexible(
-                    flex: 2,
-                    child: ElevatedButton(
-                      onPressed: () {
-                        Navigator.of(context).push(MaterialPageRoute(
-                            builder: (context) => createAccount()));
-                      },
-                      style: ElevatedButton.styleFrom(
-                        elevation: 20,
-                        fixedSize: Size(displayWidth(context) * 0.30,
-                            displayHeight(context) * 0.07),
-                        primary: Color(0xFF283618),
-                        shape: RoundedRectangleBorder(
-                          borderRadius: BorderRadius.circular(20.0),
-                        ),
-                      ),
-                      child: Text('Register',
-                          style: GoogleFonts.reemKufi(
-                              color: Colors.white,
-                              fontSize: displayHeight(context) * 0.03)),
-                    ),
-                  ),
-                  SizedBox(width: displayWidth(context) * 0.1),
-                  Flexible(
-                    flex: 2,
-                    child: ElevatedButton(
-                      onPressed: () {
-                        Navigator.of(context).push(MaterialPageRoute(
-                            builder: (context) => LogInScreen()));
-                      },
-                      style: ElevatedButton.styleFrom(
-                        elevation: 20,
-                        side: BorderSide(
-                          width: 1.5,
-                          color: Colors.black,
-                        ),
-                        fixedSize: Size(displayWidth(context) * 0.30,
-                            displayHeight(context) * 0.07),
-                        primary: Color(0xFFDADBC6),
-                        shape: RoundedRectangleBorder(
-                          borderRadius: BorderRadius.circular(20.0),
-                        ),
-                      ),
-                      child: Text('Login',
-                          style: GoogleFonts.reemKufi(
-                              color: Colors.black,
-                              fontSize: displayHeight(context) * 0.03)),
-                    ),
-                  ),
-                ],
-              ),
-              SizedBox(height: displayHeight(context) * 0.02),
-              Padding(
-                padding: EdgeInsets.only(
-                    left: displayHeight(context) * 0.03,
-                    right: displayHeight(context) * 0.03),
-                child: Row(
+      body: SingleChildScrollView(
+        child: Center(
+          child: Flexible(
+            flex: 2,
+            child: Column(
+              mainAxisAlignment: MainAxisAlignment.start,
+              children: <Widget>[
+                Row(
                   mainAxisAlignment: MainAxisAlignment.center,
                   children: [
-                    blackLine(),
-                    SizedBox(width: displayWidth(context) * 0.01),
-                    Text(' Or continue with ',
-                        style: GoogleFonts.rambla(
-                            fontSize: displayHeight(context) * 0.03,
-                            color: Colors.black)),
-                    SizedBox(width: displayWidth(context) * 0.01),
-                    blackLine(),
+                    Flexible(
+                      flex: 2,
+                      child: ImageIcon(
+                        const AssetImage("assets/faces.png"),
+                        color: const Color(0xff283618),
+                        size: displayHeight(context) * 0.3,
+                      ),
+                    ),
                   ],
                 ),
-              ),
-              Padding(
-                padding: EdgeInsets.only(
-                    left: displayHeight(context) * 0.05,
-                    right: displayHeight(context) * 0.05),
-                child: SignInButton(
-                  Buttons.Google,
-                  text: "Sign up with Google",
-                  onPressed: () {},
+                ReemKufi_Green(textValue: 'Skin Scan', size: displayHeight(context) * 0.08),
+                Padding(
+                  padding: EdgeInsets.symmetric(
+                      horizontal: displayWidth(context) * 0.05),
+                  child: Rambla_Grey_Center(textValue: 'Efficient and safe decisions for your skin!',size: displayHeight(context) * 0.025)
                 ),
-              ),
-              SizedBox(height: displayHeight(context) * 0.02),
-              Padding(
-                padding: EdgeInsets.only(
-                    left: displayHeight(context) * 0.05,
-                    right: displayHeight(context) * 0.05),
-                child: SignInButton(
-                  Buttons.Facebook,
-                  text: "Sign up with Facebook",
-                  onPressed: () {},
+                SizedBox(height: displayHeight(context) * 0.05),
+                Row(
+                  mainAxisAlignment: MainAxisAlignment.spaceEvenly,
+                  children: [
+                    Flexible(
+                      flex: 2,
+                      child: ElevatedButton(
+                        onPressed: () {
+                          Navigator.of(context).push(MaterialPageRoute(
+                              builder: (context) => createAccount()));
+                        },
+                        style: ElevatedButton.styleFrom(
+                          elevation: 20,
+                          fixedSize: Size(displayWidth(context) * 0.30,
+                              displayHeight(context) * 0.07),
+                          primary: Color(0xFF283618),
+                          shape: RoundedRectangleBorder(
+                            borderRadius: BorderRadius.circular(20.0),
+                          ),
+                        ),
+                        child: Text('Register',
+                            style: GoogleFonts.reemKufi(
+                                color: Colors.white,
+                                fontSize: displayHeight(context) * 0.03)),
+                      ),
+                    ),
+                    SizedBox(width: displayWidth(context) * 0.1),
+                    Flexible(
+                      flex: 2,
+                      child: ElevatedButton(
+                        onPressed: () {
+                          Navigator.of(context).push(MaterialPageRoute(
+                              builder: (context) => LogInScreen()));
+                        },
+                        style: ElevatedButton.styleFrom(
+                          elevation: 20,
+                          side: BorderSide(
+                            width: 1.5,
+                            color: Colors.black,
+                          ),
+                          fixedSize: Size(displayWidth(context) * 0.30,
+                              displayHeight(context) * 0.07),
+                          primary: Color(0xFFDADBC6),
+                          shape: RoundedRectangleBorder(
+                            borderRadius: BorderRadius.circular(20.0),
+                          ),
+                        ),
+                        child: Text('Login',
+                            style: GoogleFonts.reemKufi(
+                                color: Colors.black,
+                                fontSize: displayHeight(context) * 0.03)),
+                      ),
+                    ),
+                  ],
                 ),
-              ),
-            ],
+                SizedBox(height: displayHeight(context) * 0.02),
+                Padding(
+                  padding: EdgeInsets.only(
+                      left: displayHeight(context) * 0.03,
+                      right: displayHeight(context) * 0.03),
+                  child: Row(
+                    mainAxisAlignment: MainAxisAlignment.center,
+                    children: [
+                      blackLine(),
+                      SizedBox(width: displayWidth(context) * 0.01),
+                      ReemKufi_Green(textValue: ' or continue with ', size: displayHeight(context) * 0.03),
+                      SizedBox(width: displayWidth(context) * 0.01),
+                      blackLine(),
+                    ],
+                  ),
+                ),
+                Padding(
+                  padding: EdgeInsets.only(
+                      left: displayHeight(context) * 0.05,
+                      right: displayHeight(context) * 0.05),
+                  child: SignInButton(
+                    Buttons.Google,
+                    text: "Sign up with Google",
+                    onPressed: () {},
+                  ),
+                ),
+                SizedBox(height: displayHeight(context) * 0.02),
+                Padding(
+                  padding: EdgeInsets.only(
+                      left: displayHeight(context) * 0.05,
+                      right: displayHeight(context) * 0.05),
+                  child: SignInButton(
+                    Buttons.Facebook,
+                    text: "Sign up with Facebook",
+                    onPressed: () {},
+                  ),
+                ),
+              ],
+            ),
           ),
         ),
       ),
@@ -160,34 +149,6 @@ class _registerAndQuizState extends State<registerAndQuiz> {
   }
 }
 
-// class AppBarDetails extends StatefulWidget implements PreferredSizeWidget {
-//   final String screenName;
-//   const AppBarDetails({Key? key, required this.screenName}) : super(key: key);
-//
-//   @override
-//   _AppBarDetailsState createState() => _AppBarDetailsState();
-//
-//   @override
-//   // TODO: implement preferredSize
-//   Size get preferredSize => Size.fromHeight(90);
-// }
-//
-// class _AppBarDetailsState extends State<AppBarDetails> {
-//   @override
-//   Widget build(BuildContext context) {
-//     return Container(
-//         child: AppBar(
-//       elevation: 0,
-//       backgroundColor: const Color(0xFFFFFDF4),
-//       centerTitle: true,
-//       title: Text(widget.screenName,
-//           style: GoogleFonts.reemKufi(color: Color(0xFF4D4D4D), fontSize: 30)),
-//       iconTheme: const IconThemeData(
-//         color: const Color(0xFF4D4D4D), //change your color here
-//       ),
-//     ));
-//   }
-// }
 
 class blackLine extends StatelessWidget {
   const blackLine({Key? key}) : super(key: key);
@@ -277,11 +238,7 @@ class _createAccountState extends State<createAccount> {
                 children: <Widget>[
                   Flexible(
                     flex: 2,
-                    child: Text('Already have an account?',
-                        style: GoogleFonts.reemKufi(
-                            color: Color(0xFF283618),
-                            fontSize: 20,
-                            fontWeight: FontWeight.bold)),
+                    child: ReemKufi_Green_Bold(textValue: 'Already have an account?', size: displayHeight(context) *0.025),
                   ),
                   SizedBox(width: displayWidth(context) * 0.03),
                   Flexible(
@@ -302,54 +259,6 @@ class _createAccountState extends State<createAccount> {
             ],
           ),
         ),
-      ),
-    );
-  }
-}
-
-class field extends StatefulWidget {
-  final String labelText;
-  final String hintText;
-  final Icon prefixIcon;
-  final Icon? suffixIcon;
-  const field(
-      {Key? key,
-      required this.labelText,
-      required this.hintText,
-      required this.prefixIcon,
-      this.suffixIcon})
-      : super(key: key);
-
-  @override
-  _fieldState createState() => _fieldState();
-}
-
-class _fieldState extends State<field> {
-  @override
-  Widget build(BuildContext context) {
-    return Container(
-      width: displayWidth(context) * 0.8,
-      child: TextFormField(
-        decoration: InputDecoration(
-            fillColor: Color(0xFFDADBC6),
-            filled: true,
-            border: OutlineInputBorder(
-                borderRadius: BorderRadius.circular(15.0),
-                borderSide:
-                    const BorderSide(width: 6, style: BorderStyle.solid)),
-            labelText: widget.labelText,
-            labelStyle: GoogleFonts.reemKufi(
-                color: Color(0xFF283618),
-                fontSize: 18,
-                fontWeight: FontWeight.bold),
-            hintText: widget.hintText,
-            hintStyle: GoogleFonts.rambla(
-                color: Color(0xFF283618), fontStyle: FontStyle.italic),
-            prefixIcon: widget.prefixIcon,
-            //Icon(Icons.lock, color: Color(0xFF283618)),
-            suffixIcon: widget.suffixIcon
-            //Icon(Icons.visibility_off, color: Color(0xFF283618))),
-            ),
       ),
     );
   }
@@ -386,11 +295,7 @@ class _accountCreatedState extends State<accountCreated> {
                   children: [
                     Flexible(
                       flex: 2,
-                      child: Text('Welcome!',
-                          textAlign: TextAlign.center,
-                          style: GoogleFonts.reemKufi(
-                              color: const Color(0XFF4D4D4D),
-                              fontSize: displayHeight(context) * 0.06)),
+                      child: ReemKufi_Grey_Center(textValue: 'Welcome!',size: displayWidth(context) * 0.12),
                     ),
                     SizedBox(width: displayWidth(context) * 0.02),
                     ImageIcon(
@@ -401,25 +306,11 @@ class _accountCreatedState extends State<accountCreated> {
                   ],
                 ),
                 SizedBox(height: displayHeight(context) * 0.05),
-                Text('Congrats!',
-                    textAlign: TextAlign.center,
-                    style: GoogleFonts.reemKufi(
-                        color: const Color(0XFF283618),
-                        fontSize: displayHeight(context) * 0.04)),
+                ReemKufi_Grey_Center(textValue: 'Congrats!', size: displayHeight(context) * 0.04),
                 SizedBox(height: displayHeight(context) * 0.05),
-                Text('Your account has been created.',
-                    textAlign: TextAlign.center,
-                    style: GoogleFonts.reemKufi(
-                        color: const Color(0XFF283618),
-                        fontSize: displayHeight(context) * 0.04)),
+                ReemKufi_Grey_Center(textValue: 'Your account has been created.', size: displayHeight(context) * 0.04),
                 SizedBox(height: displayHeight(context) * 0.1),
-                Text('Continue to take a quiz to identify your skin type.',
-                    textAlign: TextAlign.center,
-                    softWrap: true,
-                    style: GoogleFonts.rambla(
-                        color: const Color(0XFF4D4D4D),
-                        fontStyle: FontStyle.italic,
-                        fontSize: displayHeight(context) * 0.03)),
+                Rambla_Grey_Center(textValue: 'Continue to take a quiz to identify your skin type.', size:  displayHeight(context) * 0.03),
                 SizedBox(height: displayHeight(context) * 0.15),
                 //SizedBox(height: displayHeight(context) * 0.02),
                 Flexible(
@@ -472,17 +363,11 @@ class _skinTypeQuizState extends State<skinTypeQuiz> {
           child: Column(
             mainAxisAlignment: MainAxisAlignment.start,
             children: <Widget>[
-              Row(
-                mainAxisAlignment: MainAxisAlignment.spaceEvenly,
-                children: [
-                  questions(
-                      qnumber: 'Question 1',
-                      question: 'Which age range do you fall into?',
-                      description:
-                          'Depending on your age, you may have specific concerns \n that might be relevant'),
-
-                ],
-              ),
+              questions(
+                  qnumber: 'Question 1',
+                  question: 'Which age range do you fall into?',
+                  description:
+                      'Depending on your age, you may have specific concerns that might be relevant'),
               SizedBox(height: displayHeight(context) * 0.05),
               Padding(
                 padding: EdgeInsets.only(
@@ -526,12 +411,6 @@ class _skinTypeQuizState extends State<skinTypeQuiz> {
                 ),
               ),
               SizedBox(height: displayHeight(context) * 0.03),
-              // Row(
-              //   mainAxisAlignment: MainAxisAlignment.center,
-              //   children: const [
-              //     nextButton(nextScreen: skinTypeQuizb()),
-              //   ],
-              // )
             ],
           ),
         ),
@@ -576,26 +455,6 @@ class selectAge extends StatelessWidget {
   }
 }
 
-class customAppBar extends StatelessWidget {
-  const customAppBar({Key? key}) : super(key: key);
-
-  @override
-  Widget build(BuildContext context) {
-    return AppBar(
-      elevation: 0,
-      backgroundColor: const Color(0xFFFFFDF4),
-      centerTitle: true,
-      title: Text('Skin Type Quiz',
-          style: GoogleFonts.reemKufi(
-              color: const Color(0xFF4D4D4D),
-              fontSize: displayHeight(context) * 0.06)),
-      iconTheme: const IconThemeData(
-        color: Color(0xFF4D4D4D), //change your color here
-      ),
-    );
-  }
-}
-
 class questions extends StatelessWidget {
   final String qnumber;
   final String question;
@@ -614,7 +473,6 @@ class questions extends StatelessWidget {
       mainAxisAlignment: MainAxisAlignment.start,
       children: [
         Text(
-
           qnumber,
           textAlign: TextAlign.left,
           style: GoogleFonts.reemKufi(
@@ -633,37 +491,11 @@ class questions extends StatelessWidget {
           textAlign: TextAlign.center,
           style: GoogleFonts.reemKufi(
               color: const Color(0xFF4D4D4D),
-              fontSize: displayHeight(context) * 0.02,
+              fontSize: displayHeight(context) * 0.025,
               fontStyle: FontStyle.italic),
         ),
       ],
     );
-  }
-}
-
-class nextButton extends StatelessWidget {
-  final Widget nextScreen;
-
-  const nextButton({Key? key, required this.nextScreen}) : super(key: key);
-
-  @override
-  Widget build(BuildContext context) {
-    return ElevatedButton(
-        onPressed: () {
-          Navigator.of(context)
-              .push(MaterialPageRoute(builder: (context) => nextScreen));
-        },
-        style: ElevatedButton.styleFrom(
-          fixedSize:
-              Size(displayWidth(context) * 0.18, displayHeight(context) * 0.08),
-          primary: const Color(0xFF283618),
-          shape: RoundedRectangleBorder(
-            borderRadius: BorderRadius.circular(20.0),
-          ),
-        ),
-        child: Text('Next',
-            style: GoogleFonts.reemKufi(
-                color: Colors.white, fontSize: displayHeight(context) * 0.03)));
   }
 }
 
@@ -849,13 +681,11 @@ class rating extends StatelessWidget {
               builder: (context) {
                 return AlertDialog(
                   backgroundColor: const Color(0xff283618),
-                  title: Text(
-                      'Thank you for submitting the quiz! \n'
-                      'Your skin type is: Oily',
-                      textAlign: TextAlign.center,
-                      style: GoogleFonts.reemKufi(
-                          color: const Color(0xffFFFDF4),
-                          fontSize: displayHeight(context) * 0.04)),
+                  title: ReemKufiOffwhite(
+                    textValue: 'Thank you for submitting the quiz! \n'
+                        'Your skin type is: Oily',
+                    size: displayHeight(context) * 0.04,
+                  ),
                   actions: <Widget>[
                     Padding(
                       padding: EdgeInsets.all(displayHeight(context) * 0.03),
@@ -897,7 +727,7 @@ class howReactiveText extends StatelessWidget {
           textAlign: TextAlign.start,
           softWrap: true,
           style: GoogleFonts.rambla(
-              fontSize: displayHeight(context) * 0.02,
+              fontSize: displayHeight(context) * 0.015,
               color: Colors.black,
               fontStyle: FontStyle.italic)),
     );

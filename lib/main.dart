@@ -68,20 +68,10 @@ class _LogoScreenState extends State<LogoScreen> {
           Image.asset('assets/skinscanlogolight.png',
               width: displayWidth(context) * 0.4,
               height: displayHeight(context) * 0.3),
-          Text(
-            "Skin Scan",
-            style: GoogleFonts.reemKufi(
-              color: const Color(0xFFFFFDF4),
-              fontSize: displayHeight(context) * 0.05,
-            ),
-          ),
-          Text(
-            "Efficient and safe decisions for your skin!",
-            style: GoogleFonts.reemKufi(
-                color: const Color(0xFFFFFDF4),
-                fontSize: displayWidth(context) * 0.03,
-                fontStyle: FontStyle.italic),
-          )
+          ReemKufiOffwhite(textValue: "Skin Scan", size: displayHeight(context) * 0.05),
+          ReemKufiOffwhite_Italic(
+              textValue: "Efficient and safe decisions for your skin!",
+              size: displayWidth(context) * 0.03),
         ],
       ),
       backgroundColor: const Color(0xFF283618),
@@ -164,13 +154,7 @@ class _progressloaderState extends State<progressloader> {
                   ),
                 ),
                 SizedBox(height: 4),
-                Text(
-                  "Loading",
-                  style: GoogleFonts.reemKufi(
-                    color: const Color(0xFFFFFDF4),
-                    fontSize: displayHeight(context) * 0.04,
-                  ),
-                ),
+                ReemKufiOffwhite(textValue: "Loading...", size: displayHeight(context) * 0.04),
               ],
             ),
           ],
@@ -190,122 +174,7 @@ class _progressloaderState extends State<progressloader> {
       ..lineTo(105, 120)
       ..close();
   }
-
-  Size displaySize(BuildContext context) {
-    debugPrint('Size = ' + MediaQuery.of(context).size.toString());
-    return MediaQuery.of(context).size;
-  }
-
-  double displayHeight(BuildContext context) {
-    debugPrint('Height = ' + displaySize(context).height.toString());
-    return displaySize(context).height;
-  }
-
-  double displayWidth(BuildContext context) {
-    debugPrint('Width = ' + displaySize(context).width.toString());
-    return displaySize(context).width;
-  }
 }
-
-// class MyHomePage extends StatefulWidget {
-//   const MyHomePage({Key? key, required this.title}) : super(key: key);
-//
-//   // This widget is the home page of your application. It is stateful, meaning
-//   // that it has a State object (defined below) that contains fields that affect
-//   // how it looks.
-//
-//   // This class is the configuration for the state. It holds the values (in this
-//   // case the title) provided by the parent (in this case the App widget) and
-//   // used by the build method of the State. Fields in a Widget subclass are
-//   // always marked "final".
-//
-//   final String title;
-//
-//   @override
-//   State<MyHomePage> createState() => _MyHomePageState();
-// }
-//
-// class _MyHomePageState extends State<MyHomePage> {
-//   @override
-//   Widget build(BuildContext context) {
-//     // This method is rerun every time setState is called, for instance as done
-//     // by the _incrementCounter method above.
-//     //
-//     // The Flutter framework has been optimized to make rerunning build methods
-//     // fast, so that you can just rebuild anything that needs updating rather
-//     // than having to individually change instances of widgets.
-//     return Scaffold(
-//       body: Padding(
-//         padding: EdgeInsets.fromLTRB(32, 32, 32, 32),
-//         child: SingleChildScrollView(
-//           child: Column(
-//             children: [
-//               ElevatedButton(
-//                   onPressed: (){},
-//                   child: Text("Layout 1")),
-//               ElevatedButton(
-//                   onPressed: (){
-//                     Navigator.of(context).push(MaterialPageRoute(
-//                         builder: (context) => registerAndQuiz()));
-//                   },
-//                   child: Text("Layout 2")),
-//               ElevatedButton(
-//                   onPressed: (){
-//                     Navigator.of(context).push(MaterialPageRoute(
-//                         builder: (context) => LogInScreen()));
-//                   },
-//                   child: Text("Layout 3")),
-//               ElevatedButton(
-//                   onPressed: (){
-//                     Navigator.of(context).push(MaterialPageRoute(
-//                         builder: (context) => HomePageScreen()));
-//                   },
-//                   child: Text("Layout 4")),
-//               ElevatedButton(
-//                   onPressed: (){},
-//                   child: Text("Layout 5")),
-//               ElevatedButton(
-//                   onPressed: (){
-//                     Navigator.of(context).push(MaterialPageRoute(
-//                         builder: (context) => MyProfile()));
-//                   },
-//                   child: Text("Layout 6")),
-//               ElevatedButton(
-//                   onPressed: (){
-//                     Navigator.of(context).push(MaterialPageRoute(
-//                         builder: (context) => editProfile()));
-//                   },
-//                   child: Text("Layout 7")),
-//               ElevatedButton(
-//                   onPressed: (){
-//                     Navigator.of(context).push(MaterialPageRoute(
-//                         builder: (context) => CategoriesAndSearch()));
-//                   },
-//                   child: Text("Layout 8")),
-//               ElevatedButton(
-//                   onPressed: (){
-//                     Navigator.of(context).push(MaterialPageRoute(
-//                         builder: (context) => IngredientDetails(ingredientName: 'Hyaluronic Acid',)));
-//                   },
-//                   child: Text("Layout 9")),
-//               ElevatedButton(
-//                   onPressed: (){
-//                     Navigator.of(context).push(MaterialPageRoute(
-//                       builder: (context) => ViewRoutine()
-//                     ));
-//                   },
-//                   child: Text("Layout 10")),
-//               ElevatedButton(
-//                   onPressed: (){},
-//                   child: Text("Layout 11")),
-//             ],
-//           )
-//         ),
-//       ),
-//       // This trailing comma makes auto-formatting nicer for build methods.
-//     );
-//   }
-// }
 
 class TextValue extends StatelessWidget {
   final String text;
@@ -348,263 +217,30 @@ class _AppBarDetailsState extends State<AppBarDetails> {
   Widget build(BuildContext context) {
     return Container(
         child: AppBar(
-      elevation: 0,
-      backgroundColor: const Color(0xFFFFFDF4),
-      centerTitle: false,
-      title: Text(widget.screenName,
-          style: GoogleFonts.reemKufi(
-              color: Color(0xFF4D4D4D),
-              fontSize: displayHeight(context) * 0.03)),
-      iconTheme: const IconThemeData(
-        color: const Color(0xFF4D4D4D), //change your color here
-      ),
-      leading: GestureDetector(
-        child: Icon(Icons.arrow_back, color: Color(0xFF4D4D4D)),
-        onTap:() {Navigator.pop(context);}
-      ),
-      actions: [
-        Padding(
-          padding: EdgeInsets.only(
-              right: displayWidth(context) * 0.05,
-              top: displayHeight(context) * 0.005),
-          child: Image(
-              image: AssetImage('assets/dots for app dev.png'),
-              fit: BoxFit.fill,
-              height: displayHeight(context) * 1,
-              width: displayWidth(context) * 0.1),
-        ),
-      ],
-    ));
-  }
-}
-
-class BottomBar extends StatefulWidget implements PreferredSizeWidget {
-  const BottomBar({Key? key}) : super(key: key);
-
-  @override
-  _BottomBarState createState() => _BottomBarState();
-
-  @override
-  // TODO: implement preferredSize
-  Size get preferredSize => Size.fromHeight(70);
-}
-
-class _BottomBarState extends State<BottomBar> {
-  TextEditingController ingredient_controller = TextEditingController();
-
-  late TextEditingController derma_controller;
-  void initState() {
-    super.initState();
-
-    derma_controller = TextEditingController();
-  }
-
-  void dispose() {
-    ingredient_controller.dispose();
-    derma_controller.dispose();
-    super.dispose();
-  }
-
-  @override
-  Widget build(BuildContext context) {
-    return Container(
-      decoration: BoxDecoration(
-        borderRadius: BorderRadius.only(
-            topLeft: Radius.circular(10), topRight: Radius.circular(10)),
-        color: Color(0xff4D4D4D),
-      ),
-      height: displayHeight(context) * 0.1,
-      child: Row(
-        mainAxisAlignment: MainAxisAlignment.spaceEvenly,
-        children: <Widget>[
-          IconButton(
-            icon: Icon(Icons.home_rounded),
-            color: Color(0xffDADBC6),
-            iconSize: displayHeight(context) * 0.05,
-            onPressed: () {
-              Navigator.push(context,
-                  MaterialPageRoute(builder: (context) => HomePageScreen()));
-            },
+          elevation: 0,
+          backgroundColor: const Color(0xFFFFFDF4),
+          centerTitle: false,
+          title: ReemKufi_Grey(textValue: widget.screenName,size: displayHeight(context) * 0.03),
+          iconTheme: const IconThemeData(
+          color: const Color(0xFF4D4D4D), //change your color here
           ),
-          IconButton(
-            icon: Image.asset('assets/dermatologistIcon.png'),
-            iconSize: displayHeight(context) * 0.05,
-            onPressed: () async {
-              return showDialog(
-                  barrierDismissible: false,
-                  context: context,
-                  builder: (context) => AlertDialog(
-                        backgroundColor: const Color(0xff283618),
-                        title: Text('Enter your area',
-                            style: GoogleFonts.reemKufi(
-                                color: Color(0xffFFFDF4),
-                                fontSize: displayHeight(context) * 0.04)),
-                        content: TextField(
-                          controller: derma_controller,
-                          autofocus: false,
-                          decoration: InputDecoration(
-                            hintText: 'Enter your area',
-                            hintStyle: GoogleFonts.reemKufi(
-                                color: Color(0xffFFFDF4),
-                                fontSize: displayHeight(context) * 0.03),
-                          ),
-                          style: GoogleFonts.reemKufi(
-                              color: Color(0xffFFFDF4),
-                              fontSize: displayHeight(context) * 0.03),
-                        ),
-                        actions: <Widget>[
-                          Padding(
-                            padding:
-                                EdgeInsets.all(displayHeight(context) * 0.03),
-                            child: Row(
-                              mainAxisAlignment: MainAxisAlignment.spaceEvenly,
-                              children: [
-                                TextButton(
-                                  style: TextButton.styleFrom(
-                                      backgroundColor: Color(0xffBBBD88)),
-                                  child: Text('Yes',
-                                      style: GoogleFonts.reemKufi(
-                                          color: Colors.black,
-                                          fontSize:
-                                              displayHeight(context) * 0.03)),
-                                  onPressed: () {
-                                    Navigator.push(
-                                        context,
-                                        // MaterialPageRoute(builder: (context) =>
-                                        //     Dermatologist(
-                                        //       areaName: derma_controller.text,
-                                        //
-                                        //     ),)
-
-                                        MaterialPageRoute(
-                                          builder: (context) => MapDemo(),
-                                        ));
-                                  },
-                                ),
-                                TextButton(
-                                  style: TextButton.styleFrom(
-                                      backgroundColor: Color(0xffBBBD88)),
-                                  child: Text('Cancel',
-                                      style: GoogleFonts.reemKufi(
-                                          color: Colors.black,
-                                          fontSize:
-                                              displayHeight(context) * 0.03)),
-                                  onPressed: () {
-                                    Navigator.of(context).pop(false);
-                                  },
-                                ),
-                              ],
-                            ),
-                          ),
-                        ],
-                      ));
-            },
-          ),
-          IconButton(
-            icon: Image.asset('assets/notepadthingyicon.png'),
-            iconSize: displayHeight(context) * 0.05,
-            onPressed: () {
-              Navigator.push(
-                  context,
-                  MaterialPageRoute(
-                    builder: (context) => ViewRoutine(),
-                  ));
-            },
-          ),
-          IconButton(
-            icon: Image.asset('assets/ScanIcon.png'),
-            iconSize: displayHeight(context) * 0.05,
-            onPressed: () {
-              Navigator.push(
-                  context,
-                  MaterialPageRoute(
-                    builder: (context) => CameraApp(),
-                  ));
-            },
-          ),
-          IconButton(
-            icon: Image.asset('assets/molecularICON.png'),
-            iconSize: displayHeight(context) * 0.05,
-            onPressed: () async {
-              return showDialog(
-                  barrierDismissible: false,
-                  context: context,
-                  builder: (context) => AlertDialog(
-                        backgroundColor: const Color(0xff283618),
-                        title: Text('Enter your ingredient',
-                            style: GoogleFonts.reemKufi(
-                                color: Color(0xffFFFDF4),
-                                fontSize: displayHeight(context) * 0.04)),
-                        content: TextField(
-                          controller: ingredient_controller,
-                          autofocus: false,
-                          decoration: InputDecoration(
-                            hintText: 'Enter your ingredient',
-                            hintStyle: GoogleFonts.reemKufi(
-                                color: Color(0xffFFFDF4),
-                                fontSize: displayHeight(context) * 0.03),
-                          ),
-                          style: GoogleFonts.reemKufi(
-                              color: Color(0xffFFFDF4),
-                              fontSize: displayHeight(context) * 0.03),
-                        ),
-                        actions: <Widget>[
-                          Padding(
-                            padding:
-                                EdgeInsets.all(displayHeight(context) * 0.03),
-                            child: Row(
-                              mainAxisAlignment: MainAxisAlignment.spaceEvenly,
-                              children: [
-                                TextButton(
-                                  style: TextButton.styleFrom(
-                                      backgroundColor: Color(0xffBBBD88)),
-                                  child: Text('Continue',
-                                      style: GoogleFonts.reemKufi(
-                                          color: Colors.black,
-                                          fontSize:
-                                              displayHeight(context) * 0.03)),
-                                  onPressed: () {
-                                    Navigator.push(
-                                        context,
-                                        MaterialPageRoute(
-                                          builder: (context) =>
-                                              IngredientDetails(
-                                            ingredientName:
-                                                ingredient_controller.text,
-                                          ),
-                                        ));
-                                  },
-                                ),
-                                TextButton(
-                                  style: TextButton.styleFrom(
-                                      backgroundColor: Color(0xffBBBD88)),
-                                  child: Text('Cancel',
-                                      style: GoogleFonts.reemKufi(
-                                          color: Colors.black,
-                                          fontSize:
-                                              displayHeight(context) * 0.03)),
-                                  onPressed: () {
-                                    Navigator.of(context).pop(false);
-                                  },
-                                ),
-                              ],
-                            ),
-                          ),
-                        ],
-                      ));
-            },
-          ),
-          IconButton(
-            icon: Icon(CupertinoIcons.person),
-            color: Color(0xffDADBC6),
-            iconSize: displayHeight(context) * 0.05,
-            onPressed: () {
-              Navigator.push(context,
-                  MaterialPageRoute(builder: (context) => MyProfile()));
-            },
-          ),
-        ],
-      ),
-    );
-  }
-}
+          leading: GestureDetector(
+              child: Icon(Icons.arrow_back, color: Color(0xFF4D4D4D)),
+              onTap: () {
+                Navigator.pop(context);
+              }),
+          actions: [
+            Padding(
+              padding: EdgeInsets.only(
+                  right: displayWidth(context) * 0.05,
+                  top: displayHeight(context) * 0.005),
+              child: Image(
+                  image: AssetImage('assets/dots for app dev.png'),
+                  fit: BoxFit.fill,
+                  height: displayHeight(context) * 1,
+                  width: displayWidth(context) * 0.1),
+            ),
+          ],
+        ));
+      }
+    }

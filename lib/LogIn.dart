@@ -30,7 +30,6 @@ class _LogInScreenState extends State<LogInScreen> {
                   hintText: 'Enter your email',
                   prefixIcon:
                   Icon(Icons.email_sharp, color: Color(0xFF283618))),
-
               SizedBox(height: displayHeight(context) * 0.05),
               const field(
                   labelText: 'Password',
@@ -62,7 +61,7 @@ class _LogInScreenState extends State<LogInScreen> {
                 children: <Widget>[
                   Flexible(
                     child: InkWell(
-                      child: TextValue(text: "Forgot Password?", textSize: 20,bold: true),
+                      child: ReemKufi_Green_Bold(textValue: "Forgot Password?",size: displayHeight(context)* 0.0275),
                       onTap: (){
                         Navigator.of(context).push(MaterialPageRoute(
                             builder: (context) => ForgotPassword()));
@@ -75,55 +74,6 @@ class _LogInScreenState extends State<LogInScreen> {
             ],
           ),
         ),
-      ),
-    );
-  }
-}
-
-class field extends StatefulWidget {
-  final String labelText;
-  final String hintText;
-  final Icon prefixIcon;
-  final Icon? suffixIcon;
-  const field(
-      {Key? key,
-      required this.labelText,
-      required this.hintText,
-      required this.prefixIcon,
-      this.suffixIcon})
-      : super(key: key);
-
-  @override
-  _fieldState createState() => _fieldState();
-}
-
-class _fieldState extends State<field> {
-  @override
-  Widget build(BuildContext context) {
-    return Container(
-      width: displayWidth(context) * 0.8,
-      child: TextFormField(
-        autofocus: false,
-        decoration: InputDecoration(
-            fillColor: Color(0xFFDADBC6),
-            filled: true,
-            border: OutlineInputBorder(
-                borderRadius: BorderRadius.circular(15.0),
-                borderSide:
-                    const BorderSide(width: 6, style: BorderStyle.solid)),
-            labelText: widget.labelText,
-            labelStyle: GoogleFonts.reemKufi(
-                color: Color(0xFF283618),
-                fontSize: 18,
-                fontWeight: FontWeight.bold),
-            hintText: widget.hintText,
-            hintStyle: GoogleFonts.rambla(
-                color: Color(0xFF283618), fontStyle: FontStyle.italic),
-            prefixIcon: widget.prefixIcon,
-            //Icon(Icons.lock, color: Color(0xFF283618)),
-            suffixIcon: widget.suffixIcon
-            //Icon(Icons.visibility_off, color: Color(0xFF283618))),
-            ),
       ),
     );
   }
@@ -173,10 +123,7 @@ class _NewPasswordState extends State<NewPassword> {
                         backgroundColor: const Color(0xff283618),
                         title: Column(
                           children: [
-                            Text('Your Password has been reset',
-                                style: GoogleFonts.reemKufi(
-                                    color: Color(0xffFFFDF4),
-                                    fontSize: displayHeight(context) * 0.04)),
+                            ReemKufiOffwhite(textValue: 'Your Password has been reset', size: displayHeight(context) * 0.04),
                             Icon(Icons.check_circle_outline_outlined, color: Colors.white, size: displayHeight(context) * 0.08,)
                           ],
                         ),
@@ -251,7 +198,7 @@ class _ForgotPasswordState extends State<ForgotPassword> {
             mainAxisAlignment: MainAxisAlignment.start,
             children: <Widget>[
               Container(
-                child: TextValue(text: "Forgot your password? Don’t worry? \n Just enter your email to receive\n a link to reset your password.", textSize: 20, bold: true)
+                child: ReemKufi_Green_Bold(textValue: "Forgot your password? Don’t worry? \n Just enter your email to receive\n a link to reset your password.", size: displayHeight(context)*0.025)
               ),
               SizedBox(height: displayHeight(context) * 0.05),
               const field(
@@ -303,11 +250,11 @@ class _ResetPasswordState extends State<ResetPassword> {
             mainAxisAlignment: MainAxisAlignment.start,
             children: <Widget>[
               Container(
-                  child: TextValue(text: "Hi, Afzal.", textSize: 38, bold: true)
+                  child: ReemKufi_Green_Bold(textValue: "Hi, Afzal.", size: displayHeight(context)*0.05)
               ),
               SizedBox(height: displayHeight(context) * 0.05),
               Container(
-                  child: TextValue(text: "We’ve got a request to reset your \naccount password.", textSize: 20, bold: true)
+                  child: ReemKufi_Green_Bold(textValue: "We’ve got a request to reset your \naccount password.", size: displayHeight(context) * 0.025,)
               ),
               SizedBox(height: displayHeight(context) * 0.05),
               ElevatedButton(
@@ -329,7 +276,7 @@ class _ResetPasswordState extends State<ResetPassword> {
               ),
               SizedBox(height: displayHeight(context) * 0.05),
               Container(
-                  child: TextValue(text: "If you ignore this message, \nyour password will not be changed.", textSize: 20, bold: true)
+                  child: ReemKufi_Green_Bold(textValue: "If you ignore this message, \nyour password will not be changed.", size: displayHeight(context) * 0.0235,)
               ),
             ],
           ),
