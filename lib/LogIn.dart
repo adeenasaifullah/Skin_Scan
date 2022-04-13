@@ -1,5 +1,8 @@
 import 'package:flutter/material.dart';
+import 'package:flutter_signin_button/button_list.dart';
+import 'package:flutter_signin_button/button_view.dart';
 import 'package:google_fonts/google_fonts.dart';
+import 'package:skin_scan/registerAndQuiz.dart';
 import 'HomePage.dart';
 import 'package:skin_scan/MyBottomAppBar.dart';
 import 'package:skin_scan/main.dart';
@@ -37,7 +40,24 @@ class _LogInScreenState extends State<LogInScreen> {
                   prefixIcon: Icon(Icons.lock, color: Color(0xFF283618)),
                   suffixIcon:
                   Icon(Icons.visibility_off, color: Color(0xFF283618))),
-              SizedBox(height: displayHeight(context) * 0.05),
+              SizedBox(height: displayHeight(context) * 0.025),
+              Row(
+                children: [
+                  SizedBox(
+                    width: displayWidth(context) *0.55,
+                  ),
+                  Flexible(
+                      child: InkWell(
+                        child: ReemKufi_Green_Bold(textValue: "Forgot Password?",size: displayHeight(context)* 0.0225),
+                        onTap: (){
+                          Navigator.of(context).push(MaterialPageRoute(
+                              builder: (context) => ForgotPassword()));
+                        },
+                      )
+                  ),
+                ]
+              ),
+              SizedBox(height: displayHeight(context) * 0.025),
               ElevatedButton(
                 onPressed: () {
                   Navigator.of(context).push(MaterialPageRoute(
@@ -57,20 +77,72 @@ class _LogInScreenState extends State<LogInScreen> {
               ),
               SizedBox(height: displayHeight(context) * 0.02),
               Row(
-                mainAxisAlignment: MainAxisAlignment.center,
-                children: <Widget>[
-                  Flexible(
-                    child: InkWell(
-                      child: ReemKufi_Green_Bold(textValue: "Forgot Password?",size: displayHeight(context)* 0.0275),
-                      onTap: (){
-                        Navigator.of(context).push(MaterialPageRoute(
-                            builder: (context) => ForgotPassword()));
-                      },
-                    )
-                  ),
-                  SizedBox(width: displayWidth(context) * 0.03),
-                ],
+                  mainAxisAlignment: MainAxisAlignment.center,
+                  children: [
+                    ReemKufi_Green(textValue: "Don't have an account?  ", size: displayHeight(context)* 0.0225),
+                    Flexible(
+                        child: InkWell(
+                          child: ReemKufi_Green_Bold(textValue: "Register",size: displayHeight(context)* 0.025),
+                          onTap: (){
+                            Navigator.of(context).push(MaterialPageRoute(
+                                builder: (context) => registerAndQuiz()));
+                          },
+                        )
+                    ),
+                  ]
               ),
+              SizedBox(height: displayHeight(context) * 0.02),
+              Padding(
+                padding: EdgeInsets.only(
+                    left: displayHeight(context) * 0.03,
+                    right: displayHeight(context) * 0.03),
+                child: Row(
+                  mainAxisAlignment: MainAxisAlignment.center,
+                  children: [
+                    blackLine(),
+                    SizedBox(width: displayWidth(context) * 0.01),
+                    ReemKufi_Green_Bold(textValue: ' or continue with ', size: displayHeight(context) * 0.03),
+                    SizedBox(width: displayWidth(context) * 0.01),
+                    blackLine(),
+                  ],
+                ),
+              ),
+              Padding(
+                padding: EdgeInsets.only(
+                    left: displayHeight(context) * 0.05,
+                    right: displayHeight(context) * 0.05),
+                child: SignInButton(
+                  Buttons.Google,
+                  text: "Sign up with Google",
+                  onPressed: () {},
+                ),
+              ),
+              SizedBox(height: displayHeight(context) * 0.02),
+              Padding(
+                padding: EdgeInsets.only(
+                    left: displayHeight(context) * 0.05,
+                    right: displayHeight(context) * 0.05),
+                child: SignInButton(
+                  Buttons.Facebook,
+                  text: "Sign up with Facebook",
+                  onPressed: () {},
+                ),
+              ),
+              // Row(
+              //   mainAxisAlignment: MainAxisAlignment.center,
+              //   children: <Widget>[
+              //     Flexible(
+              //       child: InkWell(
+              //         child: ReemKufi_Green_Bold(textValue: "Forgot Password?",size: displayHeight(context)* 0.0275),
+              //         onTap: (){
+              //           Navigator.of(context).push(MaterialPageRoute(
+              //               builder: (context) => ForgotPassword()));
+              //         },
+              //       )
+              //     ),
+              //     SizedBox(width: displayWidth(context) * 0.03),
+              //   ],
+              // ),
             ],
           ),
         ),
