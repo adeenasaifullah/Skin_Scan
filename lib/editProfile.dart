@@ -61,7 +61,8 @@ class _editProfileState extends State<editProfile> {
                           Row(
                             mainAxisAlignment: MainAxisAlignment.start,
                             children: [
-                              textStyle(text: 'Name', heightRatio: 0.03),
+                              ReemKufi_Green(textValue: "Name", size: displayHeight(context)*0.03)
+
                             ],
                           ),
                           TextFormField(
@@ -81,7 +82,8 @@ class _editProfileState extends State<editProfile> {
                           Row(
                             mainAxisAlignment: MainAxisAlignment.start,
                             children: [
-                              textStyle(text: 'Email', heightRatio: 0.03),
+                              ReemKufi_Green(textValue: "Email", size: displayHeight(context)*0.03)
+
                             ],
                           ),
                           TextFormField(
@@ -101,7 +103,8 @@ class _editProfileState extends State<editProfile> {
                           Row(
                             mainAxisAlignment: MainAxisAlignment.start,
                             children: [
-                              textStyle(text: 'Date of birth', heightRatio: 0.03),
+                              ReemKufi_Green(textValue: "Date of birth", size: displayHeight(context)*0.03)
+
                             ],
                           ),
                           TextFormField(
@@ -125,92 +128,68 @@ class _editProfileState extends State<editProfile> {
                       mainAxisAlignment: MainAxisAlignment.center,
                       children: [
                         Flexible(
-                          child: ElevatedButton(
-                            onPressed: () async {
-                              showDialog(
-                                barrierDismissible: false,
-                                context: context, // user must tap button!
-                                builder: (context) {
-                                  return AlertDialog(
-                                    backgroundColor: const Color(0xff283618),
-                                    title: Text('Changes saved!',
-                                        style: GoogleFonts.reemKufi(
-                                            color: Color(0xffFFFDF4),
-                                            fontSize:
-                                                displayHeight(context) * 0.04)),
-                                    actions: <Widget>[
-                                      Padding(
-                                        padding: const EdgeInsets.all(8.0),
-                                        child: Row(
-                                          mainAxisAlignment:
-                                              MainAxisAlignment.spaceEvenly,
-                                          children: [
-                                            TextButton(
-                                              style: TextButton.styleFrom(
-                                                  backgroundColor:
-                                                      Color(0xffFFFDF4)),
-                                              child: Padding(
-                                                padding: const EdgeInsets.symmetric(
-                                                    horizontal: 18.0),
-                                                child: Text('OK',
-                                                    style: GoogleFonts.reemKufi(
-                                                        color: Colors.black,
-                                                        fontSize:
-                                                            displayHeight(context) *
-                                                                0.03)),
-                                              ),
-                                              onPressed: () {
-                                                Navigator.of(context).pop();
-                                              },
-                                            ),
-                                          ],
+
+                          child: GreenButton(buttonText: 'Save', buttonWidth: displayWidth(context) * 0.3,
+                      buttonHeight: displayHeight(context) * 0.07,  textSize: displayHeight(context) * 0.03,
+                        onPressed: () async {
+                          showDialog(
+                            barrierDismissible: false,
+                            context: context, // user must tap button!
+                            builder: (context) {
+                              return AlertDialog(
+                                backgroundColor: const Color(0xff283618),
+                                title: Text('Changes saved!',
+                                    style: GoogleFonts.reemKufi(
+                                        color: Color(0xffFFFDF4),
+                                        fontSize:
+                                        displayHeight(context) * 0.04)),
+                                actions: <Widget>[
+                                  Padding(
+                                    padding: const EdgeInsets.all(8.0),
+                                    child: Row(
+                                      mainAxisAlignment:
+                                      MainAxisAlignment.spaceEvenly,
+                                      children: [
+                                        TextButton(
+                                          style: TextButton.styleFrom(
+                                              backgroundColor:
+                                              Color(0xffFFFDF4)),
+                                          child: Padding(
+                                            padding: const EdgeInsets.symmetric(
+                                                horizontal: 18.0),
+                                            child: Text('OK',
+                                                style: GoogleFonts.reemKufi(
+                                                    color: Colors.black,
+                                                    fontSize:
+                                                    displayHeight(context) *
+                                                        0.03)),
+                                          ),
+                                          onPressed: () {
+                                            Navigator.of(context).pop();
+                                          },
                                         ),
-                                      ),
-                                    ],
-                                  );
-                                },
+                                      ],
+                                    ),
+                                  ),
+                                ],
                               );
                             },
-                            style: ElevatedButton.styleFrom(
-                              elevation: 20,
-                              fixedSize: Size(displayWidth(context) * 0.3,
-                                  displayHeight(context) * 0.07),
-                              primary: Color(0xFF283618),
-                              shape: RoundedRectangleBorder(
-                                borderRadius: BorderRadius.circular(20.0),
-                              ),
-                            ),
-                            child: Text('Save',
-                                style: GoogleFonts.reemKufi(
-                                    color: Colors.white,
-                                    fontSize: displayHeight(context) * 0.03)),
-                          ),
+                          );
+                        }
+
+                    ),
+
                         ),
                         SizedBox(width: displayHeight(context) * 0.1),
                         Flexible(
-                          child: ElevatedButton(
-                            onPressed: () {
+                          child: GreenButton(buttonWidth: displayWidth(context) * 0.3 ,
+                            buttonHeight: displayHeight(context) * 0.07,
+                            buttonText:"Cancel" , textSize: displayHeight(context) * 0.03 ,
+                            onPressed: () async{
                               Navigator.of(context).push(MaterialPageRoute(
                                   builder: (context) => MyProfile()));
-                            },
-                            style: ElevatedButton.styleFrom(
-                              elevation: 20,
-                              side: BorderSide(
-                                width: 1.5,
-                                color: Colors.black,
-                              ),
-                              fixedSize: Size(displayWidth(context) * 0.3,
-                                  displayHeight(context) * 0.07),
-                              primary: Color(0xFFDADBC6),
-                              shape: RoundedRectangleBorder(
-                                borderRadius: BorderRadius.circular(20.0),
-                              ),
-                            ),
-                            child: Text('Cancel',
-                                style: GoogleFonts.reemKufi(
-                                    color: Colors.black,
-                                    fontSize: displayHeight(context) * 0.03)),
-                          ),
+                          },),
+
                         ),
                       ],
                     ),
@@ -225,24 +204,4 @@ class _editProfileState extends State<editProfile> {
   }
 }
 
-class textStyle extends StatefulWidget {
-  final String text;
-  final double heightRatio;
-  const textStyle({Key? key, required this.text, required this.heightRatio})
-      : super(key: key);
 
-  @override
-  _textStyleState createState() => _textStyleState();
-}
-
-class _textStyleState extends State<textStyle> {
-  @override
-  Widget build(BuildContext context) {
-    return Text(
-      widget.text,
-      style: GoogleFonts.reemKufi(
-          color: Color(0xff283618),
-          fontSize: displayHeight(context) * widget.heightRatio),
-    );
-  }
-}

@@ -25,10 +25,8 @@ class _MyProfileState extends State<MyProfile> {
         elevation: 0,
         backgroundColor: const Color(0xFFFFFDF4),
         centerTitle: false,
-        title: Text("My Profile",
-            style: GoogleFonts.reemKufi(
-                color: Color(0xFF4D4D4D),
-                fontSize: displayHeight(context) * 0.04)),
+        title: ReemKufi_Grey(textValue:"My Profile", size: displayHeight(context) * 0.04),
+
         iconTheme: const IconThemeData(
           color: const Color(0xFF4D4D4D), //change your color here
         ),

@@ -27,7 +27,9 @@ double displayWidth(BuildContext context) {
 class ReemKufiOffwhite extends StatelessWidget {
   final String textValue;
   final double size;
-  const ReemKufiOffwhite({Key? key, required this.textValue, required this.size}) : super(key: key);
+  const ReemKufiOffwhite(
+      {Key? key, required this.textValue, required this.size})
+      : super(key: key);
 
   @override
   Widget build(BuildContext context) {
@@ -44,17 +46,18 @@ class ReemKufiOffwhite extends StatelessWidget {
 class ReemKufiOffwhite_Italic extends StatelessWidget {
   final String textValue;
   final double size;
-  const ReemKufiOffwhite_Italic({Key? key, required this.textValue, required this.size}) : super(key: key);
+  const ReemKufiOffwhite_Italic(
+      {Key? key, required this.textValue, required this.size})
+      : super(key: key);
 
   @override
   Widget build(BuildContext context) {
     return Text(
       textValue,
       style: GoogleFonts.reemKufi(
-        color: const Color(0xFFFFFDF4),
-        fontSize: size,
-        fontStyle: FontStyle.italic
-      ),
+          color: const Color(0xFFFFFDF4),
+          fontSize: size,
+          fontStyle: FontStyle.italic),
     );
   }
 }
@@ -62,7 +65,8 @@ class ReemKufiOffwhite_Italic extends StatelessWidget {
 class ReemKufi_Grey extends StatelessWidget {
   final String textValue;
   final double size;
-  const ReemKufi_Grey({Key? key, required this.textValue, required this.size}) : super(key: key);
+  const ReemKufi_Grey({Key? key, required this.textValue, required this.size})
+      : super(key: key);
 
   @override
   Widget build(BuildContext context) {
@@ -76,10 +80,68 @@ class ReemKufi_Grey extends StatelessWidget {
   }
 }
 
+// class ReemKufi_OffWhite extends StatelessWidget {
+//   final String textValue;
+//   final double size;
+//   const ReemKufi_OffWhite({Key? key, required this.textValue, required this.size})
+//       : super(key: key);
+//
+//   @override
+//   Widget build(BuildContext context) {
+//     return Text(
+//       textValue,
+//       style: GoogleFonts.reemKufi(
+//         color: const Color(0xFFFFFDF4),
+//         fontSize: size,
+//       ),
+//     );
+//   }
+// }
+
+class ReemKufi_OffWhite_Center extends StatelessWidget {
+  final String textValue;
+  final double size;
+  const ReemKufi_OffWhite_Center(
+      {Key? key, required this.textValue, required this.size})
+      : super(key: key);
+
+  @override
+  Widget build(BuildContext context) {
+    return Text(
+      textValue,
+      textAlign: TextAlign.center,
+      style: GoogleFonts.reemKufi(
+        color: const Color(0xFFFFFDF4),
+        fontSize: size,
+      ),
+    );
+  }
+}
+
+class ReemKufi_Black extends StatelessWidget {
+  final String textValue;
+  final double size;
+  const ReemKufi_Black({Key? key, required this.textValue, required this.size})
+      : super(key: key);
+
+  @override
+  Widget build(BuildContext context) {
+    return Text(
+      textValue,
+      style: GoogleFonts.reemKufi(
+        color: Colors.black,
+        fontSize: size,
+      ),
+    );
+  }
+}
+
 class ReemKufi_Grey_Center extends StatelessWidget {
   final String textValue;
   final double size;
-  const ReemKufi_Grey_Center({Key? key, required this.textValue, required this.size}) : super(key: key);
+  const ReemKufi_Grey_Center(
+      {Key? key, required this.textValue, required this.size})
+      : super(key: key);
 
   @override
   Widget build(BuildContext context) {
@@ -97,7 +159,8 @@ class ReemKufi_Grey_Center extends StatelessWidget {
 class ReemKufi_Green extends StatelessWidget {
   final String textValue;
   final double size;
-  const ReemKufi_Green({Key? key, required this.textValue, required this.size}) : super(key: key);
+  const ReemKufi_Green({Key? key, required this.textValue, required this.size})
+      : super(key: key);
 
   @override
   Widget build(BuildContext context) {
@@ -114,17 +177,18 @@ class ReemKufi_Green extends StatelessWidget {
 class ReemKufi_Green_Italic extends StatelessWidget {
   final String textValue;
   final double size;
-  const ReemKufi_Green_Italic({Key? key, required this.textValue, required this.size}) : super(key: key);
+  const ReemKufi_Green_Italic(
+      {Key? key, required this.textValue, required this.size})
+      : super(key: key);
 
   @override
   Widget build(BuildContext context) {
     return Text(
       textValue,
       style: GoogleFonts.reemKufi(
-        color: const Color(0xff283618),
-        fontSize: size,
-        fontStyle: FontStyle.italic
-      ),
+          color: const Color(0xff283618),
+          fontSize: size,
+          fontStyle: FontStyle.italic),
     );
   }
 }
@@ -132,7 +196,9 @@ class ReemKufi_Green_Italic extends StatelessWidget {
 class ReemKufi_Green_Center extends StatelessWidget {
   final String textValue;
   final double size;
-  const ReemKufi_Green_Center({Key? key, required this.textValue, required this.size}) : super(key: key);
+  const ReemKufi_Green_Center(
+      {Key? key, required this.textValue, required this.size})
+      : super(key: key);
 
   @override
   Widget build(BuildContext context) {
@@ -150,17 +216,79 @@ class ReemKufi_Green_Center extends StatelessWidget {
 class ReemKufi_Green_Bold extends StatelessWidget {
   final String textValue;
   final double size;
-  const ReemKufi_Green_Bold({Key? key, required this.textValue, required this.size}) : super(key: key);
+  const ReemKufi_Green_Bold(
+      {Key? key, required this.textValue, required this.size})
+      : super(key: key);
 
   @override
   Widget build(BuildContext context) {
     return Text(
       textValue,
       style: GoogleFonts.reemKufi(
-        color: const Color(0xff283618),
-        fontSize: size,
-        fontWeight: FontWeight.bold
-      ),
+          color: const Color(0xff283618),
+          fontSize: size,
+          fontWeight: FontWeight.bold),
+    );
+  }
+}
+
+class ReemKufi_Green_Bold_Center extends StatelessWidget {
+  final String textValue;
+  final double size;
+  const ReemKufi_Green_Bold_Center(
+      {Key? key, required this.textValue, required this.size})
+      : super(key: key);
+
+  @override
+  Widget build(BuildContext context) {
+    return Text(
+      textValue,
+      textAlign: TextAlign.center,
+      style: GoogleFonts.reemKufi(
+          color: const Color(0xff283618),
+          fontSize: size,
+          fontWeight: FontWeight.bold),
+    );
+  }
+}
+
+class ReemKufi_Green_Bold_Left extends StatelessWidget {
+  final String textValue;
+  final double size;
+  const ReemKufi_Green_Bold_Left(
+      {Key? key, required this.textValue, required this.size})
+      : super(key: key);
+
+  @override
+  Widget build(BuildContext context) {
+    return Text(
+      textValue,
+      textAlign: TextAlign.left,
+      style: GoogleFonts.reemKufi(
+          color: const Color(0xff283618),
+          fontSize: size,
+          fontWeight: FontWeight.bold),
+    );
+  }
+}
+
+class Raleway_Green_Bold_Left extends StatelessWidget {
+  final String textValue;
+  final double size;
+  const Raleway_Green_Bold_Left(
+      {Key? key, required this.textValue, required this.size})
+      : super(key: key);
+
+  @override
+  Widget build(BuildContext context) {
+    return Text(
+      textValue,
+      textAlign: TextAlign.left,
+      softWrap: true,
+      style: GoogleFonts.raleway(
+          color: const Color(0xff283618),
+          fontSize: size,
+          fontWeight: FontWeight.bold),
     );
   }
 }
@@ -168,7 +296,9 @@ class ReemKufi_Green_Bold extends StatelessWidget {
 class Rambla_Grey_Center extends StatelessWidget {
   final String textValue;
   final double size;
-  const Rambla_Grey_Center({Key? key, required this.textValue, required this.size}) : super(key: key);
+  const Rambla_Grey_Center(
+      {Key? key, required this.textValue, required this.size})
+      : super(key: key);
 
   @override
   Widget build(BuildContext context) {
@@ -176,15 +306,31 @@ class Rambla_Grey_Center extends StatelessWidget {
       textValue,
       textAlign: TextAlign.center,
       style: GoogleFonts.rambla(
-        color: const Color(0xff4D4D4D),
-        fontSize: size,
-        fontStyle: FontStyle.italic
-      ),
+          color: const Color(0xff4D4D4D),
+          fontSize: size,
+          fontStyle: FontStyle.italic),
     );
   }
 }
 
+class Rambla_Green_Italic extends StatelessWidget {
+  final String textValue;
+  final double size;
+  const Rambla_Green_Italic(
+      {Key? key, required this.textValue, required this.size})
+      : super(key: key);
 
+  @override
+  Widget build(BuildContext context) {
+    return Text(
+      textValue,
+      style: GoogleFonts.rambla(
+          color: const Color(0xFF283618),
+          fontSize: size,
+          fontStyle: FontStyle.italic),
+    );
+  }
+}
 
 class field extends StatefulWidget {
   final String labelText;
@@ -193,10 +339,10 @@ class field extends StatefulWidget {
   final Icon? suffixIcon;
   const field(
       {Key? key,
-        required this.labelText,
-        required this.hintText,
-        required this.prefixIcon,
-        this.suffixIcon})
+      required this.labelText,
+      required this.hintText,
+      required this.prefixIcon,
+      this.suffixIcon})
       : super(key: key);
 
   @override
@@ -215,7 +361,7 @@ class _fieldState extends State<field> {
             border: OutlineInputBorder(
                 borderRadius: BorderRadius.circular(15.0),
                 borderSide:
-                const BorderSide(width: 6, style: BorderStyle.solid)),
+                    const BorderSide(width: 6, style: BorderStyle.solid)),
             labelText: widget.labelText,
             labelStyle: GoogleFonts.reemKufi(
                 color: Color(0xFF283618),
@@ -227,9 +373,77 @@ class _fieldState extends State<field> {
             prefixIcon: widget.prefixIcon,
             //Icon(Icons.lock, color: Color(0xFF283618)),
             suffixIcon: widget.suffixIcon
-          //Icon(Icons.visibility_off, color: Color(0xFF283618))),
-        ),
+            //Icon(Icons.visibility_off, color: Color(0xFF283618))),
+            ),
       ),
     );
   }
 }
+
+class GreenButton extends StatelessWidget {
+  final double buttonWidth;
+  final double buttonHeight;
+  final double textSize;
+  final String buttonText;
+  final VoidCallback onPressed;
+  const GreenButton({
+    Key? key,
+    required this.buttonWidth,
+    required this.buttonHeight,
+    required this.textSize,
+    required this.buttonText,
+
+    required this.onPressed,
+  }) : super(key: key);
+
+  @override
+  Widget build(BuildContext context) {
+    return ElevatedButton(
+      style: ElevatedButton.styleFrom(
+        elevation: 20,
+        fixedSize: Size(buttonWidth, buttonHeight),
+        primary: Color(0xFF283618),
+        shape: RoundedRectangleBorder(
+          borderRadius: BorderRadius.circular(20.0),
+        ),
+      ),
+      onPressed: onPressed,
+      child: ReemKufiOffwhite(textValue: buttonText, size: textSize),
+    );
+  }
+}
+
+class LightGreenButton extends StatelessWidget {
+  final double buttonWidth;
+  final double buttonHeight;
+  final double textSize;
+  final String buttonText;
+  final VoidCallback onPressed;
+  const LightGreenButton(
+      {Key? key,
+      required this.buttonWidth,
+      required this.buttonHeight,
+      required this.textSize,
+      required this.buttonText,
+        required this.onPressed,
+      })
+      : super(key: key);
+
+  @override
+  Widget build(BuildContext context) {
+    return ElevatedButton(
+      style: ElevatedButton.styleFrom(
+        elevation: 20,
+        fixedSize: Size(buttonWidth, buttonHeight),
+        primary: Color(0xFFDADBC6),
+        shape: RoundedRectangleBorder(
+          borderRadius: BorderRadius.circular(20.0),
+        ),
+      ),
+      onPressed: onPressed,
+      child: ReemKufi_Green(textValue: buttonText, size: textSize),
+    );
+  }
+}
+
+

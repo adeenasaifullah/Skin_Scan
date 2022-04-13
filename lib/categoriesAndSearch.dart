@@ -29,19 +29,16 @@ class _CategoriesAndSearchState extends State<CategoriesAndSearch> {
   @override
   Widget build(BuildContext context) {
     return Scaffold(
-      appBar:
-      AppBarDetails(screenName: 'Categories'),
-      //bottomNavigationBar: BottomBar(),
-
+      appBar: AppBarDetails(screenName: 'Categories'),
       backgroundColor: const Color(0xFFFFFDF4),
 
       body: Column(
         children: <Widget>[
-          Text('Select to browse products by a category',
-              style: GoogleFonts.rambla(
-                  color: Color(0xFF283618),
-                  fontSize: displayHeight(context) * 0.02,
-                  fontStyle: FontStyle.italic)),
+          Rambla_Green_Italic(
+            textValue: 'Select to browse products by a category',
+            size: displayHeight(context) * 0.02,
+          ),
+
           SizedBox(height: displayHeight(context) * 0.03),
           //SizedBox(height: displayHeight(context) * 0.8),
           Expanded(
@@ -147,84 +144,10 @@ class _CategoriesAndSearchState extends State<CategoriesAndSearch> {
         ],
       ),
 
-      //FILTER BUTTON
-      // floatingActionButton: FloatingActionButton(
-      //   onPressed: () {
-      //     Navigator.push(
-      //         context,
-      //         MaterialPageRoute(
-      //           builder: (context) => CameraApp(),
-      //         ));
-      //   },
-      //   child: Icon(Icons.add),
-      // ),
-
       //  // This trailing comma makes auto-formatting nicer for build methods.
     );
   }
 }
-
-// class AppBarDetails extends StatefulWidget implements PreferredSizeWidget {
-//   final String screenName;
-//   final String screenName2;
-//   const AppBarDetails(
-//       {Key? key, required this.screenName, this.screenName2 = ""})
-//       : super(key: key);
-//
-//   @override
-//   _AppBarDetailsState createState() => _AppBarDetailsState();
-//
-//   @override
-//   // TODO: implement preferredSize
-//   Size get preferredSize => Size.fromHeight(80);
-// }
-//
-// class _AppBarDetailsState extends State<AppBarDetails> {
-//   @override
-//   Widget build(BuildContext context) {
-//     return Container(
-//         child: AppBar(
-//           elevation: 0,
-//           backgroundColor: const Color(0xFFFFFDF4),
-//           centerTitle: true,
-//           title: RichText(
-//
-//
-//             text: TextSpan(children: [
-//               TextSpan(text: "\n"),
-//               TextSpan(
-//                 text: widget.screenName,
-//                 style: GoogleFonts.reemKufi(
-//                     color: Color(0xFF4D4D4D),
-//                     fontSize: displayHeight(context) * 0.04),
-//               ),
-//               //TextSpan(text: "\n"),
-//               TextSpan(
-//                 text: widget.screenName2,
-//                 style: GoogleFonts.reemKufi(
-//                     color: Color(0xFF4D4D4D),
-//                     fontSize: displayHeight(context) * 0.04),
-//               )
-//             ]),
-//           ),
-//           iconTheme: const IconThemeData(
-//             color: const Color(0xFF4D4D4D), //change your color here
-//           ),
-//           actions: [
-//             Padding(
-//               padding: EdgeInsets.only(
-//                   right: displayWidth(context) * 0.05,
-//                   top: displayHeight(context) * 0.005),
-//               child: Image(
-//                   image: AssetImage('assets/dots for app dev.png'),
-//                   fit: BoxFit.fill,
-//                   height: displayHeight(context) * 1,
-//                   width: displayWidth(context) * 0.1),
-//             ),
-//           ],
-//         ));
-//   }
-// }
 
 class Category extends StatefulWidget {
   final String categoryName;
@@ -256,15 +179,13 @@ class _CategoryState extends State<Category> {
                   fit: BoxFit.contain,
                   height: displayHeight(context) * 0.125,
                   width: displayWidth(context) * 0.25),
-              Text(widget.categoryName,
-                  style: GoogleFonts.reemKufi(
-                      color: Color(0xff283618),
-                      fontSize: displayHeight(context) * 0.035)),
+              ReemKufi_Green(
+                textValue: widget.categoryName,
+                size: displayWidth(context) * 0.035,
+              ),
             ]));
   }
 }
-
-
 
 //CATEGORY PRODUCTS
 class CategoryProducts extends StatefulWidget {
@@ -293,7 +214,9 @@ class _CategoryProductsState extends State<CategoryProducts> {
         price: 1500));
     //SizedBox(height: displayHeight(context) * 0.02),
     ProductsLists.add(DisplayProducts(
-        productImage: 'assets/serumbottle.png', productName: "Niacis", price: 2500));
+        productImage: 'assets/serumbottle.png',
+        productName: "Niacis",
+        price: 2500));
     //SizedBox(height: displayHeight(context) * 0.02),
     ProductsLists.add(DisplayProducts(
         productImage: 'assets/serumbottle.png',
@@ -310,9 +233,6 @@ class _CategoryProductsState extends State<CategoryProducts> {
     return Scaffold(
         appBar: AppBarDetails(screenName: widget.categoryTitle),
         backgroundColor: Color(0xFFFFFDF4),
-        //bottomNavigationBar: BottomBar(),
-        //body: SingleChildScrollView(
-        //child: Column(
         body: Padding(
           padding: const EdgeInsets.all(8.0),
           child: Column(
@@ -326,12 +246,9 @@ class _CategoryProductsState extends State<CategoryProducts> {
                   padding: EdgeInsets.only(
                       top: displayHeight(context) * 0.02,
                       left: displayWidth(context) * 0.04),
-                  child: Text(
-                    'Found 13 results',
-                    style: GoogleFonts.rambla(
-                        color: Color(0xff283618),
-                        fontSize: displayHeight(context) * 0.03,
-                        fontStyle: FontStyle.italic),
+                  child: Rambla_Green_Italic(
+                    textValue: 'Found 13 results',
+                    size: displayWidth(context) * 0.03,
                   ),
                 ),
                 SizedBox(height: displayHeight(context) * 0.02),
@@ -339,14 +256,12 @@ class _CategoryProductsState extends State<CategoryProducts> {
                 Expanded(
                   child: GridView.count(
                     childAspectRatio:
-                    displayWidth(context) / displayHeight(context)*1.3,
-                    //crossAxisSpacing: displayWidth(context) * 0.0009,
-                    //mainAxisSpacing: displayWidth(context)*0.0009,
+                        displayWidth(context) / displayHeight(context) * 1.3,
                     scrollDirection: Axis.vertical,
                     crossAxisCount: 2,
                     children: List.generate(
                         ProductsLists.length,
-                            (index) => DisplayProducts(
+                        (index) => DisplayProducts(
                             productImage: ProductsLists[index].productImage,
                             productName: ProductsLists[index].productName,
                             price: ProductsLists[index].price)),
@@ -374,9 +289,9 @@ class _SearchandFilterState extends State<SearchandFilter> {
         Expanded(
           child: Padding(
             padding:
-            EdgeInsets.symmetric(horizontal: displayWidth(context) * 0.04),
+                EdgeInsets.symmetric(horizontal: displayWidth(context) * 0.04),
             child: TextField(
-              autofocus: false,
+                autofocus: false,
                 textAlign: TextAlign.center,
                 decoration: InputDecoration(
                   hintText: 'Search for a product',
@@ -435,9 +350,9 @@ class DisplayProducts extends StatefulWidget {
 
   const DisplayProducts(
       {Key? key,
-        required this.productImage,
-        required this.productName,
-        required this.price})
+      required this.productImage,
+      required this.productName,
+      required this.price})
       : super(key: key);
 
   @override
@@ -465,26 +380,21 @@ class _DisplayProductsState extends State<DisplayProducts> {
                     ),
                     child: FavouriteButton(),
                   ),
-
                   Image(
                       image: AssetImage(widget.productImage),
                       fit: BoxFit.fill,
                       height: displayHeight(context) * 0.1,
                       width: displayWidth(context) * 0.1),
                   SizedBox(height: displayHeight(context) * 0.005),
-                  Text(widget.productName,
-                      style: GoogleFonts.reemKufi(
-                          color: Color(0xff283618),
-                          fontSize: displayHeight(context) * 0.025)),
+                  ReemKufi_Green(
+                      textValue: widget.productName,
+                      size: displayHeight(context) * 0.025),
                   SizedBox(height: displayHeight(context) * 0.005),
                   Rating(),
-
                   SizedBox(height: displayHeight(context) * 0.005),
-                  Text(widget.price.toString() + ' PKR',
-                      style: GoogleFonts.rambla(
-                          color: Color(0xff000000),
-                          fontSize: displayHeight(context) * 0.025,
-                          fontStyle: FontStyle.italic))
+                  Rambla_Green_Italic(
+                      textValue: widget.price.toString() + ' PKR',
+                      size: displayHeight(context) * 0.025),
                 ],
               )),
           onTap: () {
@@ -495,7 +405,6 @@ class _DisplayProductsState extends State<DisplayProducts> {
                   productImage: widget.productImage,
                   productName: widget.productName,
                   productPrice: widget.price,
-                  //productRating: _rating,
                 ),
               ),
             );
@@ -566,7 +475,6 @@ class _ProductDetailState extends State<ProductDetail> {
   Widget build(BuildContext context) {
     return Scaffold(
         appBar: AppBarDetails(screenName: widget.productName),
-        //bottomNavigationBar: BottomBar(),
         backgroundColor: const Color(0xFFFFFDF4),
         body: SingleChildScrollView(
           child: Column(
@@ -581,40 +489,28 @@ class _ProductDetailState extends State<ProductDetail> {
                     child: Image(
                         image: AssetImage(widget.productImage),
                         fit: BoxFit.fill,
-                        height: displayHeight(context) * 0.2,
-                        width: displayWidth(context) * 0.3),
+                        height: displayHeight(context) * 0.15,
+                        width: displayWidth(context) * 0.15),
                   ),
                 ),
                 Row(
                   mainAxisAlignment: MainAxisAlignment.center,
                   children: <Widget>[
-                    Text(widget.productName,
-                        style: GoogleFonts.reemKufi(
-                            color: Color(0xff283618),
-                            fontSize: displayHeight(context) * 0.04)),
+                    ReemKufi_Green(
+                        textValue: widget.productName,
+                        size: displayHeight(context) * 0.04),
                     FavouriteButton(),
                   ],
                 ),
-                //SizedBox(height: displayHeight(context) * 0.02),
-                Text(widget.productPrice.toString() + ' PKR',
-                    style: GoogleFonts.rambla(
-                        color: Color(0xff000000),
-                        fontSize: displayHeight(context) * 0.03,
-                        fontStyle: FontStyle.italic)),
-
-                // Rating((productRating) {
-                //   setState(() {
-                //     _rating = productRating;
-                //   });
-                // }, 5),
-
+                Rambla_Green_Italic(
+                    textValue: widget.productPrice.toString() + ' PKR',
+                    size: displayHeight(context) * 0.03),
                 Row(
                   mainAxisAlignment: MainAxisAlignment.center,
                   children: [
-                    Text('Suitable for your skin type',
-                        style: GoogleFonts.reemKufi(
-                            color: Color(0xff283618),
-                            fontSize: displayHeight(context) * 0.03)),
+                    ReemKufi_Green(
+                        textValue: 'Suitable for your skin type',
+                        size: displayHeight(context) * 0.03),
                     Icon(
                       CupertinoIcons.checkmark_circle,
                       color: Color(0xff283618),
@@ -623,7 +519,6 @@ class _ProductDetailState extends State<ProductDetail> {
                 ),
                 Rating(),
                 RatingButton(),
-
                 SizedBox(height: displayHeight(context) * 0.02),
                 Container(
                   width: displayWidth(context) * 0.90,
@@ -640,61 +535,38 @@ class _ProductDetailState extends State<ProductDetail> {
                           Row(
                             mainAxisAlignment: MainAxisAlignment.start,
                             children: [
-                              Text(
-                                'Description',
-                                softWrap: true,
-                                style: GoogleFonts.reemKufi(
-                                    color: Color(0xff283618),
-                                    fontSize: displayHeight(context) * 0.03,
-                                    fontWeight: FontWeight.bold),
-                              ),
+                              ReemKufi_Green_Bold(
+                                  textValue: 'Description',
+                                  size: displayHeight(context) * 0.03),
                             ],
                           ),
-
-                          Text(
-                              'Healthier Looking Screen – T'
+                          ReemKufi_Grey(
+                              textValue: 'Healthier Looking Screen – T'
                                   'he face serum exfoliates for 2x surface skin cell'
                                   ' turnover(vs. facial moisturizer) while the night cream'
                                   ' hydrates for brighter and healthier looking skin',
-                              softWrap: true,
-                              style: GoogleFonts.reemKufi(
-                                  color: Color(0xff4D4D4D),
-                                  fontSize: displayHeight(context) * 0.025)),
+                              size: displayHeight(context) * 0.025),
                           Row(
                             mainAxisAlignment: MainAxisAlignment.start,
                             children: [
-                              Text('Ingredients',
-                                  style: GoogleFonts.reemKufi(
-                                      color: Color(0xff283618),
-                                      fontSize: displayHeight(context) * 0.03,
-                                      fontWeight: FontWeight.bold)),
+                              ReemKufi_Green_Bold(
+                                  textValue: 'Ingredients',
+                                  size: displayHeight(context) * 0.03),
                             ],
                           ),
                           Row(
                               mainAxisAlignment: MainAxisAlignment.start,
                               children: [
-                                Text('How To Use',
-                                    style: GoogleFonts.reemKufi(
-                                        color: Color(0xff283618),
-                                        fontSize: displayHeight(context) * 0.03,
-                                        fontWeight: FontWeight.bold)),
+                                ReemKufi_Green_Bold(
+                                    textValue: 'How To Use',
+                                    size: displayHeight(context) * 0.03),
                               ]),
-
-                          Text(
-                              'Each day use the product throughly,'
+                          ReemKufi_Grey(
+                              textValue: 'Each day use the product throughly,'
                                   ' Apply on face using the tip of your fingers.'
                                   ' Each day use the product throughly, '
                                   'Apply on face using the tip of your fingers.',
-                              softWrap: true,
-                              style: GoogleFonts.reemKufi(
-                                  color: Color(0xff4D4D4D),
-                                  fontSize: displayHeight(context) * 0.025))
-
-                          // Text(' Ingredient 1 14mg',
-                          //     softWrap: true,
-                          //     style: GoogleFonts.reemKufi(
-                          //         color: Color(0xff283618),
-                          //         fontSize: displayHeight(context) * 0.03)),
+                              size: displayHeight(context) * 0.025),
                         ]),
                   ),
                 ),
@@ -721,10 +593,9 @@ class _FavouriteButtonState extends State<FavouriteButton> {
             builder: (context) {
               return AlertDialog(
                 backgroundColor: const Color(0xff283618),
-                title: Text('Add the product to favourite?',
-                    style: GoogleFonts.reemKufi(
-                        color: Color(0xffFFFDF4),
-                        fontSize: displayHeight(context) * 0.04)),
+                title: ReemKufi_OffWhite_Center(
+                    textValue: 'Add the product to favourite?',
+                    size: displayHeight(context) * 0.04),
                 actions: <Widget>[
                   Padding(
                     padding: EdgeInsets.all(displayHeight(context) * 0.03),
@@ -734,10 +605,9 @@ class _FavouriteButtonState extends State<FavouriteButton> {
                         TextButton(
                           style: TextButton.styleFrom(
                               backgroundColor: Color(0xffFFFDF4)),
-                          child: Text('Yes',
-                              style: GoogleFonts.reemKufi(
-                                  color: Colors.black,
-                                  fontSize: displayHeight(context) * 0.03)),
+                          child: ReemKufi_Black(
+                              textValue: 'Yes',
+                              size: displayHeight(context) * 0.03),
                           onPressed: () {
                             Navigator.of(context).pop(true);
                           },
@@ -745,10 +615,9 @@ class _FavouriteButtonState extends State<FavouriteButton> {
                         TextButton(
                           style: TextButton.styleFrom(
                               backgroundColor: Color(0xffBBBD88)),
-                          child: Text('Cancel',
-                              style: GoogleFonts.reemKufi(
-                                  color: Colors.black,
-                                  fontSize: displayHeight(context) * 0.03)),
+                          child: ReemKufi_Black(
+                              textValue: 'Cancel',
+                              size: displayHeight(context) * 0.03),
                           onPressed: () {
                             Navigator.of(context).pop(false);
                           },
@@ -775,72 +644,61 @@ class RatingButton extends StatefulWidget {
 class _RatingButtonState extends State<RatingButton> {
   @override
   Widget build(BuildContext context) {
-    return ElevatedButton(
-      style: ElevatedButton.styleFrom(
-        shape: RoundedRectangleBorder(
-          borderRadius: BorderRadius.circular(20.0),
-        ),
-        fixedSize:
-        Size(displayWidth(context) * 0.25, displayHeight(context) * 0.06),
-        primary: const Color(0xff283618),
-      ),
-      onPressed: () async {
-        return showDialog(
-          barrierDismissible: false,
-          context: context, // user must tap button!
-          builder: (context) {
-            return AlertDialog(
-              backgroundColor: const Color(0xffFFFDF4),
-              title: Text('Rate the product',
-                  style: GoogleFonts.reemKufi(
-                      color: Color(0xff283618),
-                      fontSize: displayHeight(context) * 0.04)),
-              content: Padding(
-                padding: EdgeInsets.symmetric(
-                    horizontal: displayWidth(context) * 0.05),
-                child: Rating(),
-              ),
-              actions: <Widget>[
-                Padding(
-                  padding: EdgeInsets.all(displayHeight(context) * 0.03),
-                  child: Row(
-                    mainAxisAlignment: MainAxisAlignment.spaceEvenly,
-                    children: [
-                      TextButton(
-                        style: TextButton.styleFrom(
-                            backgroundColor: Color(0xff283618)),
-                        child: Text('Ok',
-                            style: GoogleFonts.reemKufi(
-                                color: Color(0xFFFFFDF4),
-                                fontSize: displayHeight(context) * 0.03)),
-                        onPressed: () {
-                          Navigator.of(context).pop(true);
-                        },
-                      ),
-                      TextButton(
-                        style: TextButton.styleFrom(
-                            backgroundColor: Color(0xff283618)),
-                        child: Text('Cancel',
-                            style: GoogleFonts.reemKufi(
-                                color: Color(0xFFFFFDF4),
-                                fontSize: displayHeight(context) * 0.03)),
-                        onPressed: () {
-                          Navigator.of(context).pop(false);
-                        },
-                      ),
-                    ],
-                  ),
+    return GreenButton(
+        textSize: displayHeight(context) * 0.03,
+        buttonWidth: displayWidth(context) * 0.25,
+        buttonHeight: displayHeight(context) * 0.06,
+        buttonText: 'Rate',
+        onPressed: () async {
+          return showDialog(
+            barrierDismissible: false,
+            context: context, // user must tap button!
+            builder: (context) {
+              return AlertDialog(
+                backgroundColor: const Color(0xFFFFFDF4),
+                title: ReemKufi_Green(
+                    textValue: 'Rate the product',
+                    size: displayHeight(context) * 0.04),
+                content: Padding(
+                  padding: EdgeInsets.symmetric(
+                      horizontal: displayWidth(context) * 0.05),
+                  child: Rating(),
                 ),
-              ],
-            );
-          },
-        );
-      },
-      child: Text('Rate',
-          style: GoogleFonts.reemKufi(
-              color: Color(0xFFFFFDF4),
-              fontSize: displayHeight(context) * 0.03)),
-    );
+                actions: <Widget>[
+                  Padding(
+                    padding: EdgeInsets.all(displayHeight(context) * 0.03),
+                    child: Row(
+                      mainAxisAlignment: MainAxisAlignment.spaceEvenly,
+                      children: [
+                        TextButton(
+                          style: TextButton.styleFrom(
+                              backgroundColor: Color(0xff283618)),
+                          child: ReemKufiOffwhite(
+                              textValue: 'Ok',
+                              size: displayHeight(context) * 0.03),
+                          onPressed: () {
+                            Navigator.of(context).pop(true);
+                          },
+                        ),
+                        TextButton(
+                          style: TextButton.styleFrom(
+                              backgroundColor: Color(0xff283618)),
+                          child: ReemKufiOffwhite(
+                              textValue: 'Cancel',
+                              size: displayHeight(context) * 0.03),
+                          onPressed: () {
+                            Navigator.of(context).pop(false);
+                          },
+                        ),
+                      ],
+                    ),
+                  ),
+                ],
+              );
+            },
+          );
+        });
+
   }
 }
 
@@ -863,7 +721,7 @@ class _FilterState extends State<Filter> {
         backgroundColor: Color(0xFFFFFDF4),
         body: Padding(
           padding:
-          EdgeInsets.symmetric(horizontal: displayWidth(context) * 0.08),
+              EdgeInsets.symmetric(horizontal: displayWidth(context) * 0.08),
           child: Column(
             mainAxisAlignment: MainAxisAlignment.start,
             crossAxisAlignment: CrossAxisAlignment.start,
@@ -872,7 +730,9 @@ class _FilterState extends State<Filter> {
               Padding(
                 padding: EdgeInsets.symmetric(
                     horizontal: displayWidth(context) * 0.08),
-                child: textStyle(text: 'Price Range', heightRatio: 0.04),
+                child: ReemKufi_Green(
+                    textValue: 'Price Range',
+                    size: displayHeight(context) * 0.04),
               ),
               Row(
                 //DADBC6
@@ -883,58 +743,24 @@ class _FilterState extends State<Filter> {
                       heightSize: 0.08,
                       buttonText: '<1000',
                       textSize: 0.02),
-                  // ElevatedButton(
-                  //     onPressed: () {
-                  //       setState(() {});
-                  //     },
-                  //     style: ElevatedButton.styleFrom(
-                  //       fixedSize: Size(displayWidth(context) * 0.22,
-                  //           displayHeight(context) * 0.08),
-                  //       primary: Color(0xffDADBC6),
-                  //       shape: RoundedRectangleBorder(
-                  //         borderRadius: BorderRadius.circular(20.0),
-                  //       ),
-                  //     ),
-                  //     child: textStyle(text: '<1000', heightRatio: 0.02)),
                   FilterButtons(
                       widthSize: 0.22,
                       heightSize: 0.08,
                       buttonText: '>1000 <5000',
                       textSize: 0.02),
-                  // ElevatedButton(
-                  //     onPressed: () {},
-                  //     style: ElevatedButton.styleFrom(
-                  //       fixedSize: Size(displayWidth(context) * 0.22,
-                  //           displayHeight(context) * 0.08),
-                  //       primary: Color(0xffDADBC6),
-                  //       shape: RoundedRectangleBorder(
-                  //         borderRadius: BorderRadius.circular(20.0),
-                  //       ),
-                  //     ),
-                  //     child: textStyle(text: '>1000 <5000', heightRatio: 0.02)),
                   FilterButtons(
                       widthSize: 0.22,
                       heightSize: 0.08,
                       buttonText: '>5000',
                       textSize: 0.02),
-                  // ElevatedButton(
-                  //     onPressed: () {},
-                  //     style: ElevatedButton.styleFrom(
-                  //       fixedSize: Size(displayWidth(context) * 0.22,
-                  //           displayHeight(context) * 0.08),
-                  //       primary: Color(0xffDADBC6),
-                  //       shape: RoundedRectangleBorder(
-                  //         borderRadius: BorderRadius.circular(20.0),
-                  //       ),
-                  //     ),
-                  //     child: textStyle(text: '>5000', heightRatio: 0.02)),
                 ],
               ),
               SizedBox(height: displayHeight(context) * 0.02),
               Padding(
                 padding: EdgeInsets.symmetric(
                     horizontal: displayWidth(context) * 0.06),
-                child: textStyle(text: 'Age', heightRatio: 0.04),
+                child: ReemKufi_Green(
+                    textValue: 'Age', size: displayHeight(context) * 0.04),
               ),
               Padding(
                 padding: EdgeInsets.symmetric(
@@ -967,7 +793,9 @@ class _FilterState extends State<Filter> {
                           value: items,
                           child: Padding(
                             padding: const EdgeInsets.all(8.0),
-                            child: textStyle(text: items, heightRatio: 0.03),
+                            child: ReemKufi_Green(
+                                textValue: items,
+                                size: displayHeight(context) * 0.03),
                           ),
                         );
                       }).toList(),
@@ -984,7 +812,8 @@ class _FilterState extends State<Filter> {
               Padding(
                 padding: EdgeInsets.symmetric(
                     horizontal: displayWidth(context) * 0.06),
-                child: textStyle(text: 'Gender', heightRatio: 0.04),
+                child: ReemKufi_Green(
+                    textValue: 'Gender', size: displayHeight(context) * 0.04),
               ),
               Padding(
                 padding: EdgeInsets.symmetric(
@@ -998,34 +827,12 @@ class _FilterState extends State<Filter> {
                         heightSize: 0.06,
                         buttonText: 'Male',
                         textSize: 0.03),
-                    // ElevatedButton(
-                    //     onPressed: () {},
-                    //     style: ElevatedButton.styleFrom(
-                    //       fixedSize: Size(displayWidth(context) * 0.25,
-                    //           displayHeight(context) * 0.06),
-                    //       primary: Color(0xffDADBC6),
-                    //       shape: RoundedRectangleBorder(
-                    //         borderRadius: BorderRadius.circular(20.0),
-                    //       ),
-                    //     ),
-                    //     child: textStyle(text: 'Male', heightRatio: 0.03)),
                     SizedBox(width: displayWidth(context) * 0.06),
                     FilterButtons(
                         widthSize: 0.28,
                         heightSize: 0.06,
                         buttonText: 'Female',
                         textSize: 0.03),
-                    // ElevatedButton(
-                    //     onPressed: () {},
-                    //     style: ElevatedButton.styleFrom(
-                    //       fixedSize: Size(displayWidth(context) * 0.28,
-                    //           displayHeight(context) * 0.06),
-                    //       primary: Color(0xffDADBC6),
-                    //       shape: RoundedRectangleBorder(
-                    //         borderRadius: BorderRadius.circular(20.0),
-                    //       ),
-                    //     ),
-                    //     child: textStyle(text: 'Female', heightRatio: 0.03)),
                   ],
                 ),
               ),
@@ -1033,150 +840,86 @@ class _FilterState extends State<Filter> {
               Padding(
                 padding: EdgeInsets.symmetric(
                     horizontal: displayWidth(context) * 0.06),
-                child: textStyle(text: 'Sort By', heightRatio: 0.04),
+                child: ReemKufi_Green(
+                    textValue: 'Sort By', size: displayHeight(context) * 0.04),
               ),
               Padding(
                 padding: EdgeInsets.symmetric(
                     horizontal: displayWidth(context) * 0.06),
                 child: Row(
-                  //DADBC6
-                  //mainAxisAlignment: MainAxisAlignment.spaceEvenly,
                   children: <Widget>[
                     FilterButtons(
                         widthSize: 0.25,
                         heightSize: 0.06,
                         buttonText: 'Rating',
                         textSize: 0.03),
-                    // ElevatedButton(
-                    //     onPressed: () {},
-                    //     style: ElevatedButton.styleFrom(
-                    //       fixedSize: Size(displayWidth(context) * 0.25,
-                    //           displayHeight(context) * 0.06),
-                    //       primary: Color(0xffDADBC6),
-                    //       shape: RoundedRectangleBorder(
-                    //         borderRadius: BorderRadius.circular(20.0),
-                    //       ),
-                    //     ),
-                    //     child: textStyle(text: 'Rating', heightRatio: 0.03)),
                     SizedBox(width: displayWidth(context) * 0.06),
                     FilterButtons(
                         widthSize: 0.25,
                         heightSize: 0.06,
                         buttonText: 'Price',
                         textSize: 0.03),
-                    // ElevatedButton(
-                    //     onPressed: () {},
-                    //     style: ElevatedButton.styleFrom(
-                    //       fixedSize: Size(displayWidth(context) * 0.25,
-                    //           displayHeight(context) * 0.06),
-                    //       primary: Color(0xffDADBC6),
-                    //       shape: RoundedRectangleBorder(
-                    //         borderRadius: BorderRadius.circular(20.0),
-                    //       ),
-                    //     ),
-                    //     child: textStyle(text: 'Price', heightRatio: 0.03)),
                   ],
                 ),
               ),
               SizedBox(height: displayHeight(context) * 0.08),
               Align(
                   alignment: Alignment.bottomCenter,
-                  child: ElevatedButton(
-                      onPressed: () async {
-                        return showDialog(
-                          barrierDismissible: false,
-                          context: context, // user must tap button!
-                          builder: (context) {
-                            return AlertDialog(
-                              backgroundColor: const Color(0xff283618),
-                              title: Text('Do you want to save changes?',
-                                  style: GoogleFonts.reemKufi(
-                                      color: Color(0xffFFFDF4),
-                                      fontSize: displayHeight(context) * 0.04)),
-                              actions: <Widget>[
-                                Padding(
-                                  padding: const EdgeInsets.all(8.0),
-                                  child: Row(
-                                    mainAxisAlignment:
-                                    MainAxisAlignment.spaceEvenly,
-                                    children: [
-                                      TextButton(
-                                        style: TextButton.styleFrom(
-                                            backgroundColor: Color(0xffFFFDF4)),
-                                        child: Padding(
-                                          padding: const EdgeInsets.symmetric(
-                                              horizontal: 18.0),
-                                          child: Text('Yes',
-                                              style: GoogleFonts.reemKufi(
-                                                  color: Colors.black,
-                                                  fontSize:
-                                                  displayHeight(context) *
-                                                      0.03)),
-                                        ),
-                                        onPressed: () {
-                                          Navigator.of(context).pop(true);
-                                        },
-                                      ),
-                                      TextButton(
-                                        style: TextButton.styleFrom(
-                                            backgroundColor: Color(0xffBBBD88)),
-                                        child: Text('Cancel',
-                                            style: GoogleFonts.reemKufi(
-                                                color: Colors.black,
-                                                fontSize:
-                                                displayHeight(context) *
-                                                    0.03)),
-                                        onPressed: () {
-                                          Navigator.of(context).pop(false);
-                                        },
-                                      ),
-                                    ],
+                  child: GreenButton(buttonHeight: displayHeight(context) * 0.06,
+                    buttonWidth: displayWidth(context) * 0.25, buttonText:"Save" ,
+                    textSize:displayHeight(context) * 0.03 , onPressed: () async {return showDialog(
+                    barrierDismissible: false,
+                    context: context, // user must tap button!
+                    builder: (context) {
+                      return AlertDialog(
+                        backgroundColor: const Color(0xff283618),
+                        title: ReemKufiOffwhite(
+                            textValue: 'Do you want to save changes?',
+                            size: displayHeight(context) * 0.04),
+                        actions: <Widget>[
+                          Padding(
+                            padding: const EdgeInsets.all(8.0),
+                            child: Row(
+                              mainAxisAlignment:
+                              MainAxisAlignment.spaceEvenly,
+                              children: [
+                                TextButton(
+                                  style: TextButton.styleFrom(
+                                      backgroundColor: Color(0xffFFFDF4)),
+                                  child: Padding(
+                                    padding: const EdgeInsets.symmetric(
+                                        horizontal: 18.0),
+                                    child: ReemKufi_Black(
+                                        textValue: 'Yes',
+                                        size:
+                                        displayHeight(context) * 0.03),
                                   ),
+                                  onPressed: () {
+                                    Navigator.of(context).pop(true);
+                                  },
+                                ),
+                                TextButton(
+                                  style: TextButton.styleFrom(
+                                      backgroundColor: Color(0xffBBBD88)),
+                                  child: ReemKufi_Black(
+                                      textValue: 'Cancel',
+                                      size: displayHeight(context) * 0.03),
+                                  onPressed: () {
+                                    Navigator.of(context).pop(false);
+                                  },
                                 ),
                               ],
-                            );
-                          },
-                        );
-                      },
-                      style: ElevatedButton.styleFrom(
-                        fixedSize: Size(displayWidth(context) * 0.25,
-                            displayHeight(context) * 0.06),
-                        primary: Color(0xff283618),
-                        shape: RoundedRectangleBorder(
-                          borderRadius: BorderRadius.circular(20.0),
-                        ),
-                      ),
-                      // child: textStyle(text: 'Save', heightRatio: 0.03)),
-                      child: Text('Save',
-                          textAlign: TextAlign.center,
-                          style: GoogleFonts.reemKufi(
-                              color: Color(0xffFFFDF4),
-                              fontSize: displayHeight(context) * 0.03)))),
+                            ),
+                          ),
+                        ],
+                      );
+                    },
+                  ); },),
+
+    ),
             ],
           ),
         ));
-  }
-}
-
-class textStyle extends StatefulWidget {
-  final String text;
-  final double heightRatio;
-  const textStyle({Key? key, required this.text, required this.heightRatio})
-      : super(key: key);
-
-  @override
-  _textStyleState createState() => _textStyleState();
-}
-
-class _textStyleState extends State<textStyle> {
-  @override
-  Widget build(BuildContext context) {
-    return Text(
-      widget.text,
-      style: GoogleFonts.reemKufi(
-          color: Color(0xff283618),
-          fontSize: displayHeight(context) * widget.heightRatio),
-    );
   }
 }
 
@@ -1187,10 +930,10 @@ class FilterButtons extends StatefulWidget {
   final double heightSize;
   const FilterButtons(
       {Key? key,
-        required this.widthSize,
-        required this.heightSize,
-        required this.buttonText,
-        required this.textSize})
+      required this.widthSize,
+      required this.heightSize,
+      required this.buttonText,
+      required this.textSize})
       : super(key: key);
 
   @override
@@ -1215,9 +958,8 @@ class _FilterButtonsState extends State<FilterButtons> {
             borderRadius: BorderRadius.circular(20.0),
           ),
         ),
-        child:
-        textStyle(text: widget.buttonText, heightRatio: widget.textSize));
+        child: ReemKufi_Green(
+            textValue: widget.buttonText,
+            size: displayHeight(context) * widget.textSize));
   }
 }
-
-

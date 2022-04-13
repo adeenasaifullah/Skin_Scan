@@ -42,63 +42,49 @@ class _registerAndQuizState extends State<registerAndQuiz> {
                     ),
                   ],
                 ),
-                ReemKufi_Green(textValue: 'Skin Scan', size: displayHeight(context) * 0.08),
+                ReemKufi_Green(
+                    textValue: 'Skin Scan',
+                    size: displayHeight(context) * 0.08),
                 Padding(
-                  padding: EdgeInsets.symmetric(
-                      horizontal: displayWidth(context) * 0.05),
-                  child: Rambla_Grey_Center(textValue: 'Efficient and safe decisions for your skin!',size: displayHeight(context) * 0.025)
-                ),
+                    padding: EdgeInsets.symmetric(
+                        horizontal: displayWidth(context) * 0.05),
+                    child: Rambla_Grey_Center(
+                        textValue:
+                            'Efficient and safe decisions for your skin!',
+                        size: displayHeight(context) * 0.025)),
                 SizedBox(height: displayHeight(context) * 0.05),
                 Row(
                   mainAxisAlignment: MainAxisAlignment.spaceEvenly,
                   children: [
                     Flexible(
                       flex: 2,
-                      child: ElevatedButton(
+                      child: GreenButton(
+                        buttonWidth: displayWidth(context) * 0.30,
+                        buttonHeight: displayHeight(context) * 0.07,
+                        textSize: displayHeight(context) * 0.03,
+                        buttonText: 'Register',
                         onPressed: () {
-                          Navigator.of(context).push(MaterialPageRoute(
-                              builder: (context) => createAccount()));
+                          Navigator.push(
+                              context,
+                              MaterialPageRoute(
+                                  builder: (context) => createAccount()));
                         },
-                        style: ElevatedButton.styleFrom(
-                          elevation: 20,
-                          fixedSize: Size(displayWidth(context) * 0.30,
-                              displayHeight(context) * 0.07),
-                          primary: Color(0xFF283618),
-                          shape: RoundedRectangleBorder(
-                            borderRadius: BorderRadius.circular(20.0),
-                          ),
-                        ),
-                        child: Text('Register',
-                            style: GoogleFonts.reemKufi(
-                                color: Colors.white,
-                                fontSize: displayHeight(context) * 0.03)),
                       ),
                     ),
                     SizedBox(width: displayWidth(context) * 0.1),
                     Flexible(
                       flex: 2,
-                      child: ElevatedButton(
+                      child: LightGreenButton(
+                        buttonWidth: displayWidth(context) * 0.30,
+                        buttonHeight: displayHeight(context) * 0.07,
+                        textSize: displayHeight(context) * 0.03,
+                        buttonText: 'Login',
                         onPressed: () {
-                          Navigator.of(context).push(MaterialPageRoute(
-                              builder: (context) => LogInScreen()));
+                          Navigator.push(
+                              context,
+                              MaterialPageRoute(
+                                  builder: (context) => LogInScreen()));
                         },
-                        style: ElevatedButton.styleFrom(
-                          elevation: 20,
-                          side: BorderSide(
-                            width: 1.5,
-                            color: Colors.black,
-                          ),
-                          fixedSize: Size(displayWidth(context) * 0.30,
-                              displayHeight(context) * 0.07),
-                          primary: Color(0xFFDADBC6),
-                          shape: RoundedRectangleBorder(
-                            borderRadius: BorderRadius.circular(20.0),
-                          ),
-                        ),
-                        child: Text('Login',
-                            style: GoogleFonts.reemKufi(
-                                color: Colors.black,
-                                fontSize: displayHeight(context) * 0.03)),
                       ),
                     ),
                   ],
@@ -113,7 +99,9 @@ class _registerAndQuizState extends State<registerAndQuiz> {
                     children: [
                       blackLine(),
                       SizedBox(width: displayWidth(context) * 0.01),
-                      ReemKufi_Green(textValue: ' or continue with ', size: displayHeight(context) * 0.03),
+                      ReemKufi_Green(
+                          textValue: ' or continue with ',
+                          size: displayHeight(context) * 0.03),
                       SizedBox(width: displayWidth(context) * 0.01),
                       blackLine(),
                     ],
@@ -148,7 +136,6 @@ class _registerAndQuizState extends State<registerAndQuiz> {
     );
   }
 }
-
 
 class blackLine extends StatelessWidget {
   const blackLine({Key? key}) : super(key: key);
@@ -214,23 +201,17 @@ class _createAccountState extends State<createAccount> {
                   suffixIcon:
                       Icon(Icons.visibility_off, color: Color(0xFF283618))),
               SizedBox(height: displayHeight(context) * 0.05),
-              ElevatedButton(
+              GreenButton(
+                buttonWidth: displayWidth(context) * 0.7,
+                buttonHeight: displayHeight(context) * 0.08,
+                textSize: displayHeight(context) * 0.03,
+                buttonText: 'Create Account',
                 onPressed: () {
-                  Navigator.of(context).push(MaterialPageRoute(
-                      builder: (context) => accountCreated()));
+                  Navigator.push(
+                      context,
+                      MaterialPageRoute(
+                          builder: (context) => accountCreated()));
                 },
-                style: ElevatedButton.styleFrom(
-                  side: BorderSide(width: displayWidth(context) * 0.7),
-                  padding: EdgeInsets.symmetric(horizontal: 80, vertical: 20),
-                  primary: Color(0xFF283618),
-                  shape: RoundedRectangleBorder(
-                    borderRadius: BorderRadius.circular(25.0),
-                  ),
-                ),
-                child: Text('Create Account',
-                    style: GoogleFonts.reemKufi(
-                        color: Colors.white,
-                        fontSize: displayHeight(context) * 0.03)),
               ),
               SizedBox(height: displayHeight(context) * 0.02),
               Row(
@@ -238,7 +219,9 @@ class _createAccountState extends State<createAccount> {
                 children: <Widget>[
                   Flexible(
                     flex: 2,
-                    child: ReemKufi_Green_Bold(textValue: 'Already have an account?', size: displayHeight(context) *0.025),
+                    child: ReemKufi_Green_Bold(
+                        textValue: 'Already have an account?',
+                        size: displayHeight(context) * 0.025),
                   ),
                   SizedBox(width: displayWidth(context) * 0.03),
                   Flexible(
@@ -246,7 +229,7 @@ class _createAccountState extends State<createAccount> {
                     child: FloatingActionButton(
                       onPressed: () {
                         Navigator.of(context).push(MaterialPageRoute(
-                             builder: (context) => LogInScreen()));
+                            builder: (context) => LogInScreen()));
                       },
                       child: Text('Login',
                           style: GoogleFonts.reemKufi(
@@ -295,7 +278,9 @@ class _accountCreatedState extends State<accountCreated> {
                   children: [
                     Flexible(
                       flex: 2,
-                      child: ReemKufi_Grey_Center(textValue: 'Welcome!',size: displayWidth(context) * 0.12),
+                      child: ReemKufi_Grey_Center(
+                          textValue: 'Welcome!',
+                          size: displayWidth(context) * 0.12),
                     ),
                     SizedBox(width: displayWidth(context) * 0.02),
                     ImageIcon(
@@ -306,34 +291,34 @@ class _accountCreatedState extends State<accountCreated> {
                   ],
                 ),
                 SizedBox(height: displayHeight(context) * 0.05),
-                ReemKufi_Grey_Center(textValue: 'Congrats!', size: displayHeight(context) * 0.04),
+                ReemKufi_Grey_Center(
+                    textValue: 'Congrats!',
+                    size: displayHeight(context) * 0.04),
                 SizedBox(height: displayHeight(context) * 0.05),
-                ReemKufi_Grey_Center(textValue: 'Your account has been created.', size: displayHeight(context) * 0.04),
+                ReemKufi_Grey_Center(
+                    textValue: 'Your account has been created.',
+                    size: displayHeight(context) * 0.04),
                 SizedBox(height: displayHeight(context) * 0.1),
-                Rambla_Grey_Center(textValue: 'Continue to take a quiz to identify your skin type.', size:  displayHeight(context) * 0.03),
+                Rambla_Grey_Center(
+                    textValue:
+                        'Continue to take a quiz to identify your skin type.',
+                    size: displayHeight(context) * 0.03),
                 SizedBox(height: displayHeight(context) * 0.15),
                 //SizedBox(height: displayHeight(context) * 0.02),
                 Flexible(
-                  flex: 2,
-                  child: ElevatedButton(
-                    onPressed: () {
-                      Navigator.of(context).push(MaterialPageRoute(
-                          builder: (context) => skinTypeQuiz()));
-                    },
-                    style: ElevatedButton.styleFrom(
-                      fixedSize: Size(displayWidth(context) * 0.40,
-                          displayHeight(context) * 0.09),
-                      primary: const Color(0xFF283618),
-                      shape: RoundedRectangleBorder(
-                        borderRadius: BorderRadius.circular(20.0),
-                      ),
-                    ),
-                    child: Text('Continue',
-                        style: GoogleFonts.reemKufi(
-                            color: Colors.white,
-                            fontSize: displayHeight(context) * 0.03)),
-                  ),
-                ),
+                    flex: 2,
+                    child: GreenButton(
+                      buttonHeight: displayHeight(context) * 0.09,
+                      buttonWidth: displayWidth(context) * 0.40,
+                      textSize: displayHeight(context) * 0.03,
+                      buttonText: 'Continue',
+                      onPressed: () {
+                        Navigator.push(
+                            context,
+                            MaterialPageRoute(
+                                builder: (context) => skinTypeQuiz()));
+                      },
+                    )),
               ],
             ),
           ),
@@ -359,7 +344,9 @@ class _skinTypeQuizState extends State<skinTypeQuiz> {
       appBar: const AppBarDetails(screenName: 'Skin Type Quiz'),
       body: SingleChildScrollView(
         child: Padding(
-          padding: EdgeInsets.only(left: displayWidth(context)*0.03, right:displayWidth(context)*0.03 ),
+          padding: EdgeInsets.only(
+              left: displayWidth(context) * 0.03,
+              right: displayWidth(context) * 0.03),
           child: Column(
             mainAxisAlignment: MainAxisAlignment.start,
             children: <Widget>[
@@ -429,29 +416,13 @@ class selectAge extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    return ElevatedButton(
-      onPressed: () {
-        Navigator.of(context)
-            .push(MaterialPageRoute(builder: (context) => skinTypeQuizb()));
-      },
-      style: ElevatedButton.styleFrom(
-        fixedSize:
-            Size(displayWidth(context) * 0.20, displayHeight(context) * 0.10),
-        elevation: 50,
-        shadowColor: Colors.black,
-        primary: const Color(0xFFDADBC6),
-        shape: RoundedRectangleBorder(
-          borderRadius: BorderRadius.circular(20.0),
-        ),
-      ),
-      child: Text(
-        ageBracket,
-        style: GoogleFonts.reemKufi(
-          fontSize: 20,
-          color: Colors.black,
-        ),
-      ),
-    );
+    return LightGreenButton(buttonWidth:displayWidth(context) * 0.22 ,
+        buttonHeight: displayHeight(context) * 0.10,
+        textSize: displayHeight(context) * 0.025, buttonText: ageBracket, onPressed: (){
+          Navigator.of(context)
+              .push(MaterialPageRoute(builder: (context) => skinTypeQuizb()));
+        });
+
   }
 }
 
@@ -525,7 +496,6 @@ class _skinTypeQuizbState extends State<skinTypeQuizb> {
                     question: 'What do you call home?',
                     description:
                         'Different climates and environments call for \n different approaches to skincare.'),
-
               ],
             ),
             SizedBox(height: displayHeight(context) * 0.03),
@@ -556,30 +526,13 @@ class place extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    return ElevatedButton(
-      onPressed: () {
+    return LightGreenButton(buttonWidth:displayWidth(context) * 0.50, buttonHeight: displayHeight(context) * 0.09,
+        textSize: displayHeight(context) * 0.025,
+        buttonText: typeOfPlace, onPressed: (){
         Navigator.of(context)
             .push(MaterialPageRoute(builder: (context) => skinTypeQuizc()));
-      },
-      style: ElevatedButton.styleFrom(
-        fixedSize:
-            Size(displayWidth(context) * 0.50, displayHeight(context) * 0.09),
-        elevation: 10,
-        shadowColor: Colors.black,
-        primary: const Color(0xFFDADBC6),
-        shape: RoundedRectangleBorder(
-          borderRadius: BorderRadius.circular(20.0),
-        ),
-      ),
-      child: Text(
-        typeOfPlace,
-        textAlign: TextAlign.center,
-        style: GoogleFonts.reemKufi(
-          fontSize: displayHeight(context) * 0.025,
-          color: Colors.black,
-        ),
-      ),
-    );
+        });
+
   }
 }
 
@@ -610,7 +563,6 @@ class _skinTypeQuizcState extends State<skinTypeQuizc> {
                     question:
                         'On a scale of 1 - 5, how reactive \n would you consider your skin?',
                     description: ''),
-
               ],
             ),
             SizedBox(height: displayHeight(context) * 0.03),
@@ -656,25 +608,10 @@ class rating extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    return ElevatedButton(
-        style: ElevatedButton.styleFrom(
-          fixedSize:
-              Size(displayWidth(context) * 0.10, displayHeight(context) * 0.10),
-          elevation: 20,
-          shadowColor: Colors.black,
-          primary: const Color(0xFFDADBC6),
-          shape: RoundedRectangleBorder(
-            borderRadius: BorderRadius.circular(20.0),
-          ),
-        ),
-        child: Text(
-          rate,
-          style: GoogleFonts.reemKufi(
-            fontSize: 20,
-            color: Colors.black,
-          ),
-        ),
-        onPressed: () async {
+
+    return LightGreenButton(buttonWidth:displayWidth(context) * 0.10, buttonHeight: displayHeight(context) * 0.10,
+        textSize: displayHeight(context) * 0.03,
+        buttonText: rate, onPressed: () async {
           return showDialog(
               barrierDismissible: false,
               context: context, // user must tap button!
@@ -692,15 +629,15 @@ class rating extends StatelessWidget {
                       child: Row(
                         mainAxisAlignment: MainAxisAlignment.center,
                         children: [
-                          // IconButton(onPressed: () {},
-                          //     icon: Icon(CupertinoIcons.clear_circled, color: Colors.white)),
+
                           TextButton(
                             style: TextButton.styleFrom(
                                 backgroundColor: Color(0xffBBBD88)),
-                            child: Text('OK',
-                                style: GoogleFonts.reemKufi(
-                                    color: Colors.black,
-                                    fontSize: displayHeight(context) * 0.03)),
+                            child: ReemKufi_Black(textValue: 'OK', size: displayHeight(context) * 0.03,),
+                            // Text('OK',
+                            //     style: GoogleFonts.reemKufi(
+                            //         color: Colors.black,
+                            //         fontSize: displayHeight(context) * 0.03)),
                             onPressed: () {
                               Navigator.of(context).push(MaterialPageRoute(
                                   builder: (context) => MyBottomAppBar()));
@@ -713,6 +650,7 @@ class rating extends StatelessWidget {
                 );
               });
         });
+
   }
 }
 
@@ -723,7 +661,8 @@ class howReactiveText extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return Flexible(
-      child: Text(text,
+      child:
+      Text(text,
           textAlign: TextAlign.start,
           softWrap: true,
           style: GoogleFonts.rambla(

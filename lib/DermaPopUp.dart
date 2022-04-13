@@ -31,10 +31,8 @@ class _DermaPopUpState extends State<DermaPopUp> {
     return Scaffold(
       body: AlertDialog(
         backgroundColor: const Color(0xff283618),
-        title: Text('Enter your area to find dermatologists',
-            style: GoogleFonts.reemKufi(
-                color: Color(0xffFFFDF4),
-                fontSize: displayHeight(context) * 0.04)),
+        title: ReemKufiOffwhite(textValue: 'Enter your area to find dermatologists', size: displayHeight(context) * 0.04  ),
+
 
         content: TextField(
           autofocus: false,
@@ -60,19 +58,12 @@ class _DermaPopUpState extends State<DermaPopUp> {
                 TextButton(
                   style: TextButton.styleFrom(
                       backgroundColor: Color(0xffBBBD88)),
-                  child: Text('Continue',
-                      style: GoogleFonts.reemKufi(
-                          color: Colors.black,
-                          fontSize:
-                          displayHeight(context) * 0.03)),
+                  child: ReemKufi_Black(textValue: 'Continue', size: displayHeight(context) * 0.03),
+
                   onPressed: () {
                     Navigator.push(
                         context,
-                        // MaterialPageRoute(builder: (context) =>
-                        //     Dermatologist(
-                        //       areaName: derma_controller.text,
-                        //
-                        //     ),)
+
 
                         MaterialPageRoute(
                           builder: (context) => MapDemo(),
@@ -82,18 +73,10 @@ class _DermaPopUpState extends State<DermaPopUp> {
                 TextButton(
                   style: TextButton.styleFrom(
                       backgroundColor: Color(0xffBBBD88)),
-                  child: Text('Cancel',
-                      style: GoogleFonts.reemKufi(
-                          color: Colors.black,
-                          fontSize:
-                          displayHeight(context) * 0.03)),
+                  child: ReemKufi_Black(textValue: 'Cancel',size:displayHeight(context) * 0.03 ),
+
                   onPressed: () {
-                    // Navigator.push(
-                    //     context,
-                    //     MaterialPageRoute(
-                    //         builder: (context) =>MyBottomAppBar()
-                    //
-                    //     ));
+
                     Navigator.pushAndRemoveUntil(
                       context,
                       MaterialPageRoute(

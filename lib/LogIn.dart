@@ -38,23 +38,13 @@ class _LogInScreenState extends State<LogInScreen> {
                   suffixIcon:
                   Icon(Icons.visibility_off, color: Color(0xFF283618))),
               SizedBox(height: displayHeight(context) * 0.05),
-              ElevatedButton(
-                onPressed: () {
-                  Navigator.of(context).push(MaterialPageRoute(
-                      builder: (context) => MyBottomAppBar()));
-                },
-                style: ElevatedButton.styleFrom(
-                  side: BorderSide(width: displayWidth(context) * 0.7),
-                  padding: EdgeInsets.symmetric(horizontal: 80, vertical: 20),
-                  primary: Color(0xFF283618),
-                  shape: RoundedRectangleBorder(
-                    borderRadius: BorderRadius.circular(25.0),
-                  ),
-                ),
-                child: Text('Login',
-                    style: GoogleFonts.reemKufi(
-                        color: Colors.white, fontSize: 20)),
-              ),
+              GreenButton(buttonText: 'Login',
+                textSize: displayHeight(context)*0.03,
+                buttonHeight: displayHeight(context)*0.08,
+                buttonWidth: displayWidth(context) * 0.7,
+                onPressed: () {  Navigator.of(context).push(MaterialPageRoute(
+                    builder: (context) => MyBottomAppBar()));},),
+
               SizedBox(height: displayHeight(context) * 0.02),
               Row(
                 mainAxisAlignment: MainAxisAlignment.center,
@@ -113,7 +103,10 @@ class _NewPasswordState extends State<NewPassword> {
                   suffixIcon:
                   Icon(Icons.visibility_off, color: Color(0xFF283618))),
               SizedBox(height: displayHeight(context) * 0.05),
-              ElevatedButton(
+              GreenButton(buttonText: 'Change Password',
+                textSize: displayHeight(context)*0.03,
+                buttonHeight: displayHeight(context)*0.08,
+                buttonWidth: displayWidth(context) * 0.7,
                 onPressed: () {
                   showDialog(
                     barrierDismissible: false,
@@ -159,19 +152,9 @@ class _NewPasswordState extends State<NewPassword> {
                       );
                     },
                   );
-                },
-                style: ElevatedButton.styleFrom(
-                  side: BorderSide(width: displayWidth(context) * 0.7),
-                  padding: EdgeInsets.symmetric(horizontal: 80, vertical: 20),
-                  primary: Color(0xFF283618),
-                  shape: RoundedRectangleBorder(
-                    borderRadius: BorderRadius.circular(25.0),
-                  ),
-                ),
-                child: Text('Change Password',
-                    style: GoogleFonts.reemKufi(
-                        color: Colors.white, fontSize: 20)),
-              ),
+
+                },),
+
             ],
           ),
         ),
@@ -207,23 +190,13 @@ class _ForgotPasswordState extends State<ForgotPassword> {
                   prefixIcon: Icon(Icons.email_sharp, color: Color(0xFF283618)),
               ),
               SizedBox(height: displayHeight(context) * 0.05),
-              ElevatedButton(
-                onPressed: () {
-                  Navigator.of(context).push(MaterialPageRoute(
-                      builder: (context) => ResetPassword()));
-                },
-                style: ElevatedButton.styleFrom(
-                  side: BorderSide(width: displayWidth(context) * 0.7),
-                  padding: EdgeInsets.symmetric(horizontal: 80, vertical: 20),
-                  primary: Color(0xFF283618),
-                  shape: RoundedRectangleBorder(
-                    borderRadius: BorderRadius.circular(25.0),
-                  ),
-                ),
-                child: Text('Send',
-                    style: GoogleFonts.reemKufi(
-                        color: Colors.white, fontSize: 20)),
-              ),
+              GreenButton(buttonText: 'Send',
+                textSize: displayHeight(context)*0.03,
+                buttonHeight: displayHeight(context)*0.08,
+                buttonWidth: displayWidth(context) * 0.7,
+                onPressed: () {  Navigator.of(context).push(MaterialPageRoute(
+                    builder: (context) => ResetPassword()));},),
+
             ],
           ),
         ),
@@ -257,23 +230,13 @@ class _ResetPasswordState extends State<ResetPassword> {
                   child: ReemKufi_Green_Bold(textValue: "We’ve got a request to reset your \naccount password.", size: displayHeight(context) * 0.025,)
               ),
               SizedBox(height: displayHeight(context) * 0.05),
-              ElevatedButton(
-                onPressed: () {
-                  Navigator.of(context).push(MaterialPageRoute(
-                      builder: (context) => NewPassword()));
-                },
-                style: ElevatedButton.styleFrom(
-                  side: BorderSide(width: displayWidth(context) * 0.7),
-                  padding: EdgeInsets.symmetric(horizontal: 80, vertical: 20),
-                  primary: Color(0xFF283618),
-                  shape: RoundedRectangleBorder(
-                    borderRadius: BorderRadius.circular(25.0),
-                  ),
-                ),
-                child: Text('Reset Password',
-                    style: GoogleFonts.reemKufi(
-                        color: Colors.white, fontSize: 20)),
-              ),
+              GreenButton(buttonText: 'Reset Password',
+                textSize: displayHeight(context)*0.03,
+                buttonHeight: displayHeight(context)*0.08,
+                buttonWidth: displayWidth(context) * 0.7,
+                onPressed: () {  Navigator.of(context).push(MaterialPageRoute(
+                    builder: (context) => NewPassword()));},),
+
               SizedBox(height: displayHeight(context) * 0.05),
               Container(
                   child: ReemKufi_Green_Bold(textValue: "If you ignore this message, \nyour password will not be changed.", size: displayHeight(context) * 0.0235,)
