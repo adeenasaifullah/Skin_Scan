@@ -1,5 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:google_fonts/google_fonts.dart';
+import 'package:skin_scan/main.dart';
 import 'screenSizes.dart';
 import 'MyProfile.dart';
 
@@ -15,28 +16,29 @@ class _editProfileState extends State<editProfile> {
   Widget build(BuildContext context) {
     return Scaffold(
       backgroundColor: const Color(0xFFFFFDF4),
-      appBar: AppBar(
-        elevation: 0,
-        backgroundColor: const Color(0xFFFFFDF4),
-        centerTitle: true,
-        title: Text('Edit Profile',
-            style: GoogleFonts.reemKufi(
-                color: Color(0xFF4D4D4D),
-                fontSize: displayHeight(context) * 0.05)),
-        iconTheme: const IconThemeData(
-          color: const Color(0xFF4D4D4D), //change your color here
-        ),
-        actions: [
-          Padding(
-            padding: EdgeInsets.only(
-                right: displayWidth(context) * 0.15,
-                top: displayHeight(context) * 0.005),
-            child: Image(
-              image: AssetImage('assets/dots.png'),
-            ),
-          ),
-        ],
-      ),
+      appBar: AppBarDetails(screenName: "Edit Profile"),
+      // appBar: AppBar(
+      //   elevation: 0,
+      //   backgroundColor: const Color(0xFFFFFDF4),
+      //   centerTitle: true,
+      //   title: Text('Edit Profile',
+      //       style: GoogleFonts.reemKufi(
+      //           color: Color(0xFF4D4D4D),
+      //           fontSize: displayHeight(context) * 0.05)),
+      //   iconTheme: const IconThemeData(
+      //     color: const Color(0xFF4D4D4D), //change your color here
+      //   ),
+      //   actions: [
+      //     Padding(
+      //       padding: EdgeInsets.only(
+      //           right: displayWidth(context) * 0.15,
+      //           top: displayHeight(context) * 0.005),
+      //       child: Image(
+      //         image: AssetImage('assets/dots.png'),
+      //       ),
+      //     ),
+      //   ],
+      // ),
       body: SingleChildScrollView(
         child: Padding(
           padding: const EdgeInsets.all(16.0),
