@@ -40,13 +40,23 @@ class MyApp extends StatelessWidget {
   // This widget is the root of your application.
   @override
   Widget build(BuildContext context) {
-    return MaterialApp(
-      title: 'Flutter Demo',
-      debugShowCheckedModeBanner: false,
-      theme: ThemeData(
-        primarySwatch: Colors.blue,
+    FocusScope.of(context).unfocus();
+    return GestureDetector(
+      onTap: () {
+        FocusScopeNode currentFocus = FocusScope.of(context);
+
+        if (!currentFocus.hasPrimaryFocus) {
+          currentFocus.unfocus();
+        }
+      },
+      child: MaterialApp(
+        title: 'Flutter Demo',
+        debugShowCheckedModeBanner: false,
+        theme: ThemeData(
+          primarySwatch: Colors.blue,
+        ),
+        home: const LogoScreen(),
       ),
-      home: const LogoScreen(),
     );
   }
 }
@@ -176,29 +186,6 @@ class _progressloaderState extends State<progressloader> {
   }
 }
 
-class TextValue extends StatelessWidget {
-  final String text;
-  final double textSize;
-  final bool bold;
-  const TextValue(
-      {Key? key,
-      required this.text,
-      required this.textSize,
-      required this.bold})
-      : super(key: key);
-
-  @override
-  Widget build(BuildContext context) {
-    return Text(
-      text,
-      style: GoogleFonts.reemKufi(
-        color: Color(0xFF283618),
-        fontSize: textSize,
-        fontWeight: bold ? FontWeight.bold : null,
-      ),
-    );
-  }
-}
 
 class AppBarDetails extends StatefulWidget implements PreferredSizeWidget {
   final String screenName;

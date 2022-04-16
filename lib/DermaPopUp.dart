@@ -31,13 +31,10 @@ class _DermaPopUpState extends State<DermaPopUp> {
     return Scaffold(
       body: AlertDialog(
         backgroundColor: const Color(0xff283618),
-        title: ReemKufiOffwhite(textValue: 'Enter your area to find dermatologists', size: displayHeight(context) * 0.04  ),
-
-
+        title: ReemKufiOffwhite(textValue: 'Enter your area',size: displayHeight(context)*0.04, ),
         content: TextField(
-          autofocus: false,
           controller: derma_controller,
-          //autofocus: true,
+          autofocus: true,
           decoration: InputDecoration(
             hintText: 'Enter your area',
             hintStyle: GoogleFonts.reemKufi(
@@ -58,12 +55,15 @@ class _DermaPopUpState extends State<DermaPopUp> {
                 TextButton(
                   style: TextButton.styleFrom(
                       backgroundColor: Color(0xffBBBD88)),
-                  child: ReemKufi_Black(textValue: 'Continue', size: displayHeight(context) * 0.03),
-
+                  child: ReemKufi_Black(textValue: 'Yes', size: displayHeight(context)*0.03,),
                   onPressed: () {
                     Navigator.push(
                         context,
-
+                        // MaterialPageRoute(builder: (context) =>
+                        //     Dermatologist(
+                        //       areaName: derma_controller.text,
+                        //
+                        //     ),)
 
                         MaterialPageRoute(
                           builder: (context) => MapDemo(),
@@ -73,10 +73,14 @@ class _DermaPopUpState extends State<DermaPopUp> {
                 TextButton(
                   style: TextButton.styleFrom(
                       backgroundColor: Color(0xffBBBD88)),
-                  child: ReemKufi_Black(textValue: 'Cancel',size:displayHeight(context) * 0.03 ),
-
+                  child: ReemKufi_Black(textValue: 'cancel', size: displayHeight(context)*0.03,),
                   onPressed: () {
-
+                    // Navigator.push(
+                    //     context,
+                    //     MaterialPageRoute(
+                    //         builder: (context) =>MyBottomAppBar()
+                    //
+                    //     ));
                     Navigator.pushAndRemoveUntil(
                       context,
                       MaterialPageRoute(

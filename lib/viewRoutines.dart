@@ -30,6 +30,7 @@ class _ViewRoutineState extends State<ViewRoutine> {
             color: const Color(0xFF4D4D4D), //change your color here
           ),
           leading: GestureDetector(
+
               child: Icon(Icons.arrow_back, color: Color(0xFF4D4D4D)),
               onTap:() {
                 Navigator.pushAndRemoveUntil(
@@ -134,40 +135,20 @@ class _ViewRoutineState extends State<ViewRoutine> {
                                                       color:
                                                           Color(0xFF283618))),
                                             ),
+                                      ReemKufi_Green(textValue: context
+                                          .read<routine_provider>()
+                                          .routine_list[index]
+                                          .RoutineName,size: displayHeight(context)*0.04, ),
 
-                                      Text(
-                                        context
-                                            .read<routine_provider>()
-                                            .routine_list[index]
-                                            .RoutineName,
-                                        style: GoogleFonts.reemKufi(
-                                          color: const Color(0xFF283618),
-                                          fontSize:
-                                              displayHeight(context) * 0.04,
-                                        ),
-                                      ),
+                                      ReemKufi_Green(textValue: "Number of products: ${context.read<routine_provider>().routine_list[index].numofproducts.toString()}"
+                                        ,size: displayHeight(context)*0.02, ),
 
-                                      Text(
-                                        "Number of products: ${context.read<routine_provider>().routine_list[index].numofproducts.toString()}",
-                                        style: GoogleFonts.reemKufi(
-                                          color: const Color(0xFF283618),
-                                          fontSize:
-                                              displayHeight(context) * 0.02,
-                                        ),
-                                      ),
 
                                       Divider(
                                           height: displayWidth(context) * 0.04),
 
                                       InkWell(
-                                        child: Text(
-                                          "View",
-                                          style: GoogleFonts.reemKufi(
-                                              color: const Color(0xFF283618),
-                                              fontSize: displayHeight(context) *
-                                                  0.026,
-                                              fontWeight: FontWeight.bold),
-                                        ),
+                                        child: ReemKufi_Green_Bold(textValue:"View",size: displayHeight(context)*0.026, ),
                                         onTap: () {
                                           Navigator.of(context).push(MaterialPageRoute(
                                               builder: (context) => BuildRoutine(
@@ -267,13 +248,8 @@ class _BuildRoutineState extends State<BuildRoutine> {
                   Padding(
                     padding:
                         EdgeInsets.only(left: displayWidth(context) * 0.15),
-                    child: Text(
-                      "Add products to your routine",
-                      style: GoogleFonts.reemKufi(
-                          color: const Color(0xFF283618),
-                          fontSize: displayHeight(context) * 0.023,
-                          fontStyle: FontStyle.italic),
-                    ),
+                    child: ReemKufi_Green_Italic(textValue: "Add products to your routine",
+                    size: displayHeight(context)*0.023, ),
                   )
                 ],
               ),
@@ -304,12 +280,9 @@ class _BuildRoutineState extends State<BuildRoutine> {
                                   shape: BoxShape.circle,
                                 ),
                                 child: Center(
-                                    child: Text((i + 1).toString(),
-                                        style: GoogleFonts.reemKufi(
-                                          color: const Color(0xFFFFFDF4),
-                                          fontSize:
-                                              displayHeight(context) * 0.026,
-                                        )))),
+                                    child: ReemKufiOffwhite(textValue: (i + 1).toString(), size: displayHeight(context) * 0.026),
+                                )
+                            ),
                           ),
                           Container(
                               height: 80,
@@ -398,17 +371,12 @@ class _BuildRoutineState extends State<BuildRoutine> {
                               height: displayHeight(context) * 0.04,
                               width: displayWidth(context) * 0.18,
                               child: Center(
-                                child: Text(
-                                  context
-                                      .read<routine_provider>()
-                                      .routine_list[index]
-                                      .listofproducts[i]
-                                      .category,
-                                  style: GoogleFonts.reemKufi(
-                                      color: const Color(0xFF283618),
-                                      fontSize: displayHeight(context) * 0.02,
-                                      fontWeight: FontWeight.bold),
-                                ),
+                                child: ReemKufi_Green_Bold(textValue: context
+                                    .read<routine_provider>()
+                                    .routine_list[index]
+                                    .listofproducts[i]
+                                    .category , size: displayHeight(context) * 0.02,),
+
                               ),
                               decoration: const BoxDecoration(
                                   color: Color(0xFFDADBC6),
@@ -438,18 +406,11 @@ class _BuildRoutineState extends State<BuildRoutine> {
                                 bottomRight: Radius.circular(11.0),
                               )),
                               child: Center(
-                                child: Text(
-                                  context
-                                      .read<routine_provider>()
-                                      .routine_list[index]
-                                      .listofproducts[i]
-                                      .productname,
-                                  textAlign: TextAlign.center,
-                                  style: GoogleFonts.reemKufi(
-                                      color: const Color(0xFF283618),
-                                      fontSize: displayHeight(context) * 0.018,
-                                      fontWeight: FontWeight.bold),
-                                ),
+                                child: ReemKufi_Green_Bold(textValue: context
+                                    .read<routine_provider>()
+                                    .routine_list[index]
+                                    .listofproducts[i]
+                                    .productname , size:displayHeight(context) * 0.018),
                               ),
                             ),
                           ),
@@ -543,13 +504,7 @@ class _AddProductState extends State<AddProduct> {
                 mainAxisAlignment: MainAxisAlignment.spaceEvenly,
                 mainAxisSize: MainAxisSize.max,
                 children: [
-                  Text(
-                    "Product name: ",
-                    style: GoogleFonts.reemKufi(
-                      color: const Color(0xFF283618),
-                      fontSize: displayWidth(context) * 0.035,
-                    ),
-                  ),
+                  ReemKufi_Green(textValue: "Product name: ", size: displayWidth(context) * 0.035),
                   SizedBox(
                     width: displayWidth(context) * 0.05,
                   ),
@@ -585,13 +540,7 @@ class _AddProductState extends State<AddProduct> {
                 mainAxisAlignment: MainAxisAlignment.spaceEvenly,
                 mainAxisSize: MainAxisSize.max,
                 children: [
-                  Text(
-                    "Category: ",
-                    style: GoogleFonts.reemKufi(
-                      color: const Color(0xFF283618),
-                      fontSize: displayWidth(context) * 0.035,
-                    ),
-                  ),
+                  ReemKufi_Green(textValue: "Category: ", size: displayWidth(context) * 0.035),
                   SizedBox(
                     width: displayWidth(context) * 0.05,
                   ),
@@ -640,13 +589,7 @@ class _AddProductState extends State<AddProduct> {
                 children: [
                   Padding(
                     padding: const EdgeInsets.all(8.0),
-                    child: Text(
-                      "Choose your days: ",
-                      style: GoogleFonts.reemKufi(
-                        color: const Color(0xFF283618),
-                        fontSize: displayWidth(context) * 0.04,
-                      ),
-                    ),
+                    child: ReemKufi_Green(textValue: "Choose your days: ", size: displayWidth(context) * 0.04),
                   ),
                 ],
               ),

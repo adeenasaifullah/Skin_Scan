@@ -48,7 +48,7 @@ class _MyBottomAppBarState extends State<MyBottomAppBar> {
 
   @override
   Widget build(BuildContext context) {
-
+    FocusScope.of(context).unfocus();
     return Scaffold(
       body:  SafeArea(child: IndexedStack(
         index: curindex,
@@ -59,6 +59,7 @@ class _MyBottomAppBarState extends State<MyBottomAppBar> {
         backgroundColor: const Color(0xff4D4D4D),
         iconSize:  displayHeight(context) * 0.05,
         onTap: ontapped,
+
         currentIndex: curindex,
         items: [
           const BottomNavigationBarItem(
@@ -149,10 +150,7 @@ class _IngredientPopUpState extends State<IngredientPopUp> {
     return Scaffold(
       body:  AlertDialog(
     backgroundColor: const Color(0xff283618),
-    title: Text('Enter your ingredient',
-    style: GoogleFonts.reemKufi(
-    color: Color(0xffFFFDF4),
-    fontSize: displayHeight(context) * 0.04)),
+    title: ReemKufiOffwhite(textValue: 'Enter your ingredient',size: displayHeight(context)*0.04, ),
     content: TextField(
     controller: ingredient_controller,
     autofocus: false,
@@ -176,11 +174,7 @@ class _IngredientPopUpState extends State<IngredientPopUp> {
     TextButton(
     style: TextButton.styleFrom(
     backgroundColor: Color(0xffBBBD88)),
-    child: Text('Continue',
-    style: GoogleFonts.reemKufi(
-    color: Colors.black,
-    fontSize:
-    displayHeight(context) * 0.03)),
+    child: ReemKufi_Black(textValue: 'Continue', size: displayHeight(context)*0.03,),
     onPressed: () {
     Navigator.push(
     context,
@@ -196,11 +190,7 @@ class _IngredientPopUpState extends State<IngredientPopUp> {
     TextButton(
     style: TextButton.styleFrom(
     backgroundColor: Color(0xffBBBD88)),
-    child: Text('Cancel',
-    style: GoogleFonts.reemKufi(
-    color: Colors.black,
-    fontSize:
-    displayHeight(context) * 0.03)),
+    child: ReemKufi_Black(textValue: 'cancel', size: displayHeight(context)*0.03,),
     onPressed: () {
       Navigator.pushAndRemoveUntil(
         context,
