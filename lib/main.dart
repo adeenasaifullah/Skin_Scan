@@ -1,27 +1,16 @@
 import 'package:animated_splash_screen/animated_splash_screen.dart';
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
-import 'package:google_fonts/google_fonts.dart';
 import 'package:provider/provider.dart';
-import 'HomePage.dart';
-import 'package:skin_scan/LogIn.dart';
-import 'package:skin_scan/MyProfile.dart';
-import 'categoriesAndSearch.dart';
-import 'editProfile.dart';
-import 'ingredientDetails.dart';
-import 'package:skin_scan/registerAndQuiz.dart';
-import 'package:skin_scan/scan.dart';
-import 'package:skin_scan/screenSizes.dart';
 import 'package:camera/camera.dart';
-import 'package:skin_scan/viewRoutines.dart';
+import 'package:skin_scan/provider/routine_provider.dart';
+import 'package:skin_scan/utilities/utility.dart';
 import 'package:page_transition/page_transition.dart';
-import 'map_demo.dart';
 import 'dart:ui';
 import 'package:liquid_progress_indicator/liquid_progress_indicator.dart';
 import 'dart:async';
-import 'package:custom_top_navigator/custom_top_navigator.dart';
-
 import 'dart:math' as math;
+import 'log_in_sign_up_feature/log_in_register_screen.dart';
 
 late List<CameraDescription> cameras;
 
@@ -29,7 +18,7 @@ Future<void> main() async {
   WidgetsFlutterBinding.ensureInitialized();
   cameras = await availableCameras();
   runApp(ChangeNotifierProvider(
-    create: (_) => routine_provider(),
+    create: (_) => RoutineProvider(),
     child: const MyApp(),
   ));
 }
@@ -118,7 +107,7 @@ class _progressloaderState extends State<progressloader> {
         if (percent >= 100) {
           timer!.cancel();
           Navigator.of(context)
-              .push(MaterialPageRoute(builder: (context) => registerAndQuiz()));
+              .push(MaterialPageRoute(builder: (context) => LogInRegisterScreen()));
         }
       });
     });

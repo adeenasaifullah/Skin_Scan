@@ -1,13 +1,7 @@
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 import 'package:google_fonts/google_fonts.dart';
-import 'HomePage.dart';
-import 'MyProfile.dart';
-import 'scan.dart';
-import 'package:skin_scan/viewRoutines.dart';
 
-import 'ingredientDetails.dart';
-import 'map_demo.dart';
 
 Size displaySize(BuildContext context) {
   debugPrint('Size = ' + MediaQuery.of(context).size.toString());
@@ -342,10 +336,10 @@ class field extends StatefulWidget {
   final Icon? suffixIcon;
   const field(
       {Key? key,
-      required this.labelText,
-      required this.hintText,
-      required this.prefixIcon,
-      this.suffixIcon})
+        required this.labelText,
+        required this.hintText,
+        required this.prefixIcon,
+        this.suffixIcon})
       : super(key: key);
 
   @override
@@ -364,7 +358,7 @@ class _fieldState extends State<field> {
             border: OutlineInputBorder(
                 borderRadius: BorderRadius.circular(15.0),
                 borderSide:
-                    const BorderSide(width: 6, style: BorderStyle.solid)),
+                const BorderSide(width: 6, style: BorderStyle.solid)),
             labelText: widget.labelText,
             labelStyle: GoogleFonts.reemKufi(
                 color: Color(0xFF283618),
@@ -376,8 +370,8 @@ class _fieldState extends State<field> {
             prefixIcon: widget.prefixIcon,
             //Icon(Icons.lock, color: Color(0xFF283618)),
             suffixIcon: widget.suffixIcon
-            //Icon(Icons.visibility_off, color: Color(0xFF283618))),
-            ),
+          //Icon(Icons.visibility_off, color: Color(0xFF283618))),
+        ),
       ),
     );
   }
@@ -424,10 +418,10 @@ class LightGreenButton extends StatelessWidget {
   final VoidCallback onPressed;
   const LightGreenButton(
       {Key? key,
-      required this.buttonWidth,
-      required this.buttonHeight,
-      required this.textSize,
-      required this.buttonText,
+        required this.buttonWidth,
+        required this.buttonHeight,
+        required this.textSize,
+        required this.buttonText,
         required this.onPressed,
       })
       : super(key: key);

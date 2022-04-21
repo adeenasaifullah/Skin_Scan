@@ -1,7 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:google_fonts/google_fonts.dart';
-import 'screenSizes.dart';
-import 'MyBottomAppBar.dart';
+import '../utilities/bottom_app_bar.dart';
+import '../utilities/utility.dart';
 import 'map_demo.dart';
 
 
@@ -73,7 +73,7 @@ class _DermaPopUpState extends State<DermaPopUp> {
                 TextButton(
                   style: TextButton.styleFrom(
                       backgroundColor: Color(0xffBBBD88)),
-                  child: ReemKufi_Black(textValue: 'cancel', size: displayHeight(context)*0.03,),
+                  child: ReemKufi_Black(textValue: 'Cancel', size: displayHeight(context)*0.03,),
                   onPressed: () {
                     // Navigator.push(
                     //     context,

@@ -4,11 +4,10 @@ import 'package:flutter/foundation.dart';
 import 'package:flutter/material.dart';
 import 'package:camera/camera.dart';
 import 'package:google_fonts/google_fonts.dart';
-import 'MyBottomAppBar.dart';
-import 'categoriesAndSearch.dart';
-import 'ingredientDetails.dart';
-import 'screenSizes.dart';
-import 'main.dart';
+import 'package:skin_scan/utilities/bottom_app_bar.dart';
+import 'package:skin_scan/utilities/utility.dart';
+import '../ingredient_search_feature/ingredient_details.dart';
+import '../main.dart';
 
 class CameraApp extends StatefulWidget {
   @override
@@ -86,7 +85,7 @@ class _CameraAppState extends State<CameraApp> {
                 MaterialPageRoute(
                   builder: (BuildContext context) => MyBottomAppBar(),
                 ),
-                (route) => false,
+                    (route) => false,
               );
             }),
         actions: [
@@ -111,87 +110,87 @@ class _CameraAppState extends State<CameraApp> {
             children: [
               cameraInitialized
                   ? Column(
-                      children: [
-                        Container(
-                          height: displayHeight(context) * 0.7,
-                          child: AspectRatio(
-                              aspectRatio: controller.value.aspectRatio,
-                              child: CameraPreview(controller)),
-                        ),
-                        GreenButton(
-                            buttonWidth: displayWidth(context) * 0.3,
-                            buttonHeight: displayHeight(context) * 0.06,
-                            textSize: displayHeight(context) * 0.03,
-                            buttonText: 'Capture',
-                            onPressed: () async {
-                              return showDialog(
-                                barrierDismissible: false,
-                                context: context, // user must tap button!
-                                builder: (context) {
-                                  return AlertDialog(
-                                    backgroundColor: const Color(0xff283618),
-                                    title: ReemKufiOffwhite(
-                                        textValue:
-                                            'Ingredient Scan Successful!',
-                                        size: displayHeight(context) * 0.04),
-                                    actions: <Widget>[
-                                      Padding(
-                                        padding: const EdgeInsets.all(8.0),
-                                        child: Row(
-                                          mainAxisAlignment:
-                                              MainAxisAlignment.spaceEvenly,
-                                          children: [
-                                            TextButton(
-                                              style: TextButton.styleFrom(
-                                                  backgroundColor:
-                                                      Color(0xffBBBD88)),
-                                              child: Padding(
-                                                padding:
-                                                    const EdgeInsets.symmetric(
-                                                        horizontal: 18.0),
-                                                child: ReemKufi_Black(
-                                                    textValue: 'Continue',
-                                                    size:
-                                                        displayHeight(context) *
-                                                            0.03),
-                                              ),
-                                              onPressed: () {
-                                                Navigator.push(
-                                                    context,
-                                                    MaterialPageRoute(
-                                                      builder: (context) =>
-                                                          IngredientsList(),
-                                                    ));
-                                              },
-                                            ),
-                                            TextButton(
-                                              style: TextButton.styleFrom(
-                                                  backgroundColor:
-                                                      Color(0xffBBBD88)),
-                                              child: ReemKufi_Black(
-                                                  textValue: 'Cancel',
-                                                  size: displayHeight(context) *
-                                                      0.03),
-                                              onPressed: () {
-                                                Navigator.of(context)
-                                                    .pop(false);
-                                              },
-                                            ),
-                                          ],
+                children: [
+                  Container(
+                    height: displayHeight(context) * 0.7,
+                    child: AspectRatio(
+                        aspectRatio: controller.value.aspectRatio,
+                        child: CameraPreview(controller)),
+                  ),
+                  GreenButton(
+                      buttonWidth: displayWidth(context) * 0.3,
+                      buttonHeight: displayHeight(context) * 0.06,
+                      textSize: displayHeight(context) * 0.03,
+                      buttonText: 'Capture',
+                      onPressed: () async {
+                        return showDialog(
+                          barrierDismissible: false,
+                          context: context, // user must tap button!
+                          builder: (context) {
+                            return AlertDialog(
+                              backgroundColor: const Color(0xff283618),
+                              title: ReemKufiOffwhite(
+                                  textValue:
+                                  'Ingredient Scan Successful!',
+                                  size: displayHeight(context) * 0.04),
+                              actions: <Widget>[
+                                Padding(
+                                  padding: const EdgeInsets.all(8.0),
+                                  child: Row(
+                                    mainAxisAlignment:
+                                    MainAxisAlignment.spaceEvenly,
+                                    children: [
+                                      TextButton(
+                                        style: TextButton.styleFrom(
+                                            backgroundColor:
+                                            Color(0xffBBBD88)),
+                                        child: Padding(
+                                          padding:
+                                          const EdgeInsets.symmetric(
+                                              horizontal: 18.0),
+                                          child: ReemKufi_Black(
+                                              textValue: 'Continue',
+                                              size:
+                                              displayHeight(context) *
+                                                  0.03),
                                         ),
+                                        onPressed: () {
+                                          Navigator.push(
+                                              context,
+                                              MaterialPageRoute(
+                                                builder: (context) =>
+                                                    IngredientsList(),
+                                              ));
+                                        },
+                                      ),
+                                      TextButton(
+                                        style: TextButton.styleFrom(
+                                            backgroundColor:
+                                            Color(0xffBBBD88)),
+                                        child: ReemKufi_Black(
+                                            textValue: 'Cancel',
+                                            size: displayHeight(context) *
+                                                0.03),
+                                        onPressed: () {
+                                          Navigator.of(context)
+                                              .pop(false);
+                                        },
                                       ),
                                     ],
-                                  );
-                                },
-                              );
-                            }),
-                      ],
-                    )
+                                  ),
+                                ),
+                              ],
+                            );
+                          },
+                        );
+                      }),
+                ],
+              )
                   : Padding(
-                      padding: EdgeInsets.symmetric(
-                          vertical: displayHeight(context) * 0.3),
-                      child: CircularProgressIndicator(),
-                    ),
+                padding: EdgeInsets.symmetric(
+                    vertical: displayHeight(context) * 0.3),
+                child: CircularProgressIndicator(),
+              ),
             ],
           ),
         ),
@@ -255,7 +254,7 @@ class _IngredientsListState extends State<IngredientsList> {
                             style: BorderStyle.solid)),
                     filled: true,
                     contentPadding:
-                        EdgeInsets.all(displayHeight(context) * 0.01),
+                    EdgeInsets.all(displayHeight(context) * 0.01),
                   )),
             ),
             ReemKufi_Green_Bold(
@@ -295,7 +294,7 @@ class _IngredientsListState extends State<IngredientsList> {
                                             builder: (context) =>
                                                 IngredientDetails(
                                                     ingredientName:
-                                                        ILists[index]),
+                                                    ILists[index]),
                                           ));
                                     },
                                     icon: Icon(Icons.arrow_forward_rounded)),

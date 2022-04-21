@@ -1,8 +1,8 @@
 import 'package:flutter/material.dart';
 import 'package:google_fonts/google_fonts.dart';
 import 'package:skin_scan/main.dart';
-import 'screenSizes.dart';
-import 'MyProfile.dart';
+import '../utilities/utility.dart';
+import 'my_profile.dart';
 
 class editProfile extends StatefulWidget {
   const editProfile({Key? key}) : super(key: key);
@@ -17,28 +17,6 @@ class _editProfileState extends State<editProfile> {
     return Scaffold(
       backgroundColor: const Color(0xFFFFFDF4),
       appBar: AppBarDetails(screenName: "Edit Profile"),
-      // appBar: AppBar(
-      //   elevation: 0,
-      //   backgroundColor: const Color(0xFFFFFDF4),
-      //   centerTitle: true,
-      //   title: Text('Edit Profile',
-      //       style: GoogleFonts.reemKufi(
-      //           color: Color(0xFF4D4D4D),
-      //           fontSize: displayHeight(context) * 0.05)),
-      //   iconTheme: const IconThemeData(
-      //     color: const Color(0xFF4D4D4D), //change your color here
-      //   ),
-      //   actions: [
-      //     Padding(
-      //       padding: EdgeInsets.only(
-      //           right: displayWidth(context) * 0.15,
-      //           top: displayHeight(context) * 0.005),
-      //       child: Image(
-      //         image: AssetImage('assets/dots.png'),
-      //       ),
-      //     ),
-      //   ],
-      // ),
       body: SingleChildScrollView(
         child: Padding(
           padding: const EdgeInsets.all(16.0),
@@ -60,6 +38,7 @@ class _editProfileState extends State<editProfile> {
                       width: displayHeight(context) * 0.7,
                       child: Column(
                         children: [
+                          SizedBox(height: displayHeight(context) * 0.08),
                           Row(
                             mainAxisAlignment: MainAxisAlignment.start,
                             children: [
@@ -101,28 +80,28 @@ class _editProfileState extends State<editProfile> {
                                   left: 15, bottom: 11, top: 11, right: 15),
                             ),
                           ),
-                          SizedBox(height: displayHeight(context) * 0.03),
-                          Row(
-                            mainAxisAlignment: MainAxisAlignment.start,
-                            children: [
-                              ReemKufi_Green(textValue: "Date of birth", size: displayHeight(context)*0.03)
-
-                            ],
-                          ),
-                          TextFormField(
-                            autofocus: false,
-                            initialValue: "12/04/2004",
-                            cursorColor: Colors.black,
-                            decoration: const InputDecoration(
-                              enabledBorder: UnderlineInputBorder(
-                                borderSide: BorderSide(color: Colors.black),
-                              ),
-                              focusedBorder: InputBorder.none,
-                              contentPadding: EdgeInsets.only(
-                                  left: 15, bottom: 11, top: 11, right: 15),
-                            ),
-                          ),
-                          SizedBox(height: displayHeight(context) * 0.03),
+                          SizedBox(height: displayHeight(context) * 0.20),
+                          // Row(
+                          //   mainAxisAlignment: MainAxisAlignment.start,
+                          //   children: [
+                          //     ReemKufi_Green(textValue: "Date of birth", size: displayHeight(context)*0.03)
+                          //
+                          //   ],
+                          // ),
+                          // TextFormField(
+                          //   autofocus: false,
+                          //   initialValue: "12/04/2004",
+                          //   cursorColor: Colors.black,
+                          //   decoration: const InputDecoration(
+                          //     enabledBorder: UnderlineInputBorder(
+                          //       borderSide: BorderSide(color: Colors.black),
+                          //     ),
+                          //     focusedBorder: InputBorder.none,
+                          //     contentPadding: EdgeInsets.only(
+                          //         left: 15, bottom: 11, top: 11, right: 15),
+                          //   ),
+                          // ),
+                          //SizedBox(height: displayHeight(context) * 0.03),
                         ],
                       ),
                     ),
@@ -132,54 +111,54 @@ class _editProfileState extends State<editProfile> {
                         Flexible(
 
                           child: GreenButton(buttonText: 'Save', buttonWidth: displayWidth(context) * 0.3,
-                      buttonHeight: displayHeight(context) * 0.07,  textSize: displayHeight(context) * 0.03,
-                        onPressed: () async {
-                          showDialog(
-                            barrierDismissible: false,
-                            context: context, // user must tap button!
-                            builder: (context) {
-                              return AlertDialog(
-                                backgroundColor: const Color(0xff283618),
-                                title: Text('Changes saved!',
-                                    style: GoogleFonts.reemKufi(
-                                        color: Color(0xffFFFDF4),
-                                        fontSize:
-                                        displayHeight(context) * 0.04)),
-                                actions: <Widget>[
-                                  Padding(
-                                    padding: const EdgeInsets.all(8.0),
-                                    child: Row(
-                                      mainAxisAlignment:
-                                      MainAxisAlignment.spaceEvenly,
-                                      children: [
-                                        TextButton(
-                                          style: TextButton.styleFrom(
-                                              backgroundColor:
-                                              Color(0xffFFFDF4)),
-                                          child: Padding(
-                                            padding: const EdgeInsets.symmetric(
-                                                horizontal: 18.0),
-                                            child: Text('OK',
-                                                style: GoogleFonts.reemKufi(
-                                                    color: Colors.black,
-                                                    fontSize:
-                                                    displayHeight(context) *
-                                                        0.03)),
+                              buttonHeight: displayHeight(context) * 0.07,  textSize: displayHeight(context) * 0.03,
+                              onPressed: () async {
+                                showDialog(
+                                  barrierDismissible: false,
+                                  context: context, // user must tap button!
+                                  builder: (context) {
+                                    return AlertDialog(
+                                      backgroundColor: const Color(0xff283618),
+                                      title: Text('Changes saved!',
+                                          style: GoogleFonts.reemKufi(
+                                              color: Color(0xffFFFDF4),
+                                              fontSize:
+                                              displayHeight(context) * 0.04)),
+                                      actions: <Widget>[
+                                        Padding(
+                                          padding: const EdgeInsets.all(8.0),
+                                          child: Row(
+                                            mainAxisAlignment:
+                                            MainAxisAlignment.spaceEvenly,
+                                            children: [
+                                              TextButton(
+                                                style: TextButton.styleFrom(
+                                                    backgroundColor:
+                                                    Color(0xffFFFDF4)),
+                                                child: Padding(
+                                                  padding: const EdgeInsets.symmetric(
+                                                      horizontal: 18.0),
+                                                  child: Text('OK',
+                                                      style: GoogleFonts.reemKufi(
+                                                          color: Colors.black,
+                                                          fontSize:
+                                                          displayHeight(context) *
+                                                              0.03)),
+                                                ),
+                                                onPressed: () {
+                                                  Navigator.of(context).pop();
+                                                },
+                                              ),
+                                            ],
                                           ),
-                                          onPressed: () {
-                                            Navigator.of(context).pop();
-                                          },
                                         ),
                                       ],
-                                    ),
-                                  ),
-                                ],
-                              );
-                            },
-                          );
-                        }
+                                    );
+                                  },
+                                );
+                              }
 
-                    ),
+                          ),
 
                         ),
                         SizedBox(width: displayHeight(context) * 0.1),
@@ -190,7 +169,7 @@ class _editProfileState extends State<editProfile> {
                             onPressed: () async{
                               Navigator.of(context).push(MaterialPageRoute(
                                   builder: (context) => MyProfile()));
-                          },),
+                            },),
 
                         ),
                       ],

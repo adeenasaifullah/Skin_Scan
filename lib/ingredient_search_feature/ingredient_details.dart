@@ -1,9 +1,8 @@
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
-import 'package:google_fonts/google_fonts.dart';
-import 'categoriesAndSearch.dart';
-import 'main.dart';
-import 'screenSizes.dart';
+import 'package:skin_scan/utilities/utility.dart';
+import '../main.dart';
+
 
 
 class IngredientDetails extends StatefulWidget {
@@ -47,9 +46,9 @@ class _IngredientDetailsState extends State<IngredientDetails> {
               ),
               SizedBox(height: displayHeight(context) * 0.03),
               Padding(
-                padding: EdgeInsets.only(left: displayWidth(context)*0.17, right: displayWidth(context)*0.07 ),
+                  padding: EdgeInsets.only(left: displayWidth(context)*0.17, right: displayWidth(context)*0.07 ),
 
-                child: ReemKufi_Green_Bold_Center(textValue: widget.ingredientName , size: displayHeight(context) * 0.04 )
+                  child: ReemKufi_Green_Bold_Center(textValue: widget.ingredientName , size: displayHeight(context) * 0.04 )
 
               ),
               Padding(
@@ -70,12 +69,12 @@ class _IngredientDetailsState extends State<IngredientDetails> {
                   " your body. The largest amounts of it are found in your skin,"
                   " connective tissue and eyes. Its main function is to retain"
                   " water to keep your tissues well lubricated and moist ", size: displayHeight(context) * 0.02),
-             ReemKufi_Green_Bold_Left(textValue: 'Benefits', size: displayHeight(context) * 0.04),
-            Raleway_Green_Bold_Left(textValue: "Promotes Healthier, More Supple Skin. Share on Pinterest."
-                "Can Speed Wound Healing."
-                " Relieve Joint Pain by Keeping Bones Well Lubricated."
-                "Soothe Acid Reflux Symptoms."
-                " Relieve Dry Eye and Discomfort. ", size: displayHeight(context) * 0.02),
+              ReemKufi_Green_Bold_Left(textValue: 'Benefits', size: displayHeight(context) * 0.04),
+              Raleway_Green_Bold_Left(textValue: "Promotes Healthier, More Supple Skin. Share on Pinterest."
+                  "Can Speed Wound Healing."
+                  " Relieve Joint Pain by Keeping Bones Well Lubricated."
+                  "Soothe Acid Reflux Symptoms."
+                  " Relieve Dry Eye and Discomfort. ", size: displayHeight(context) * 0.02),
 
             ],
 

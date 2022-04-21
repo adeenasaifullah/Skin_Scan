@@ -1,17 +1,14 @@
 import 'package:flutter/material.dart';
-import 'package:cupertino_icons/cupertino_icons.dart';
 import 'package:flutter/cupertino.dart';
-import 'package:custom_top_navigator/custom_scaffold.dart';
 import 'package:google_fonts/google_fonts.dart';
-import 'package:skin_scan/MyProfile.dart';
-import 'package:skin_scan/registerAndQuiz.dart';
-import 'package:skin_scan/screenSizes.dart';
-import 'package:skin_scan/viewRoutines.dart';
-import 'DermaPopUp.dart';
-import 'scan.dart';
-import 'ingredientDetails.dart';
-import 'HomePage.dart';
-import 'map_demo.dart';
+import 'package:skin_scan/profile_feature/my_profile.dart';
+import 'package:skin_scan/utilities/utility.dart';
+import '../find_dermatologist_feature/derma_pop_up.dart';
+import '../ingredient_scan_feature/ingredient_scan.dart';
+import '../ingredient_search_feature/ingredient_details.dart';
+import '../log_in_sign_up_feature/home_page_screen.dart';
+import '../routine_feature/view_routine.dart';
+
 
 
 class MyBottomAppBar extends StatefulWidget {
@@ -23,7 +20,12 @@ class MyBottomAppBar extends StatefulWidget {
 
 class _MyBottomAppBarState extends State<MyBottomAppBar> {
 
-  TextEditingController ingredient_controller = TextEditingController();
+  late TextEditingController ingredient_controller = TextEditingController();
+
+  void initState() {
+    super.initState();
+    ingredient_controller = TextEditingController();
+  }
   void dispose()
   {
     ingredient_controller.dispose();
@@ -48,7 +50,7 @@ class _MyBottomAppBarState extends State<MyBottomAppBar> {
 
   @override
   Widget build(BuildContext context) {
-    FocusScope.of(context).unfocus();
+    //FocusScope.of(context).unfocus();
     return Scaffold(
       body:  SafeArea(child: IndexedStack(
         index: curindex,
@@ -148,64 +150,64 @@ class _IngredientPopUpState extends State<IngredientPopUp> {
   @override
   Widget build(BuildContext context) {
     return Scaffold(
-      body:  AlertDialog(
-    backgroundColor: const Color(0xff283618),
-    title: ReemKufiOffwhite(textValue: 'Enter your ingredient',size: displayHeight(context)*0.04, ),
-    content: TextField(
-    controller: ingredient_controller,
-    autofocus: false,
-    decoration: InputDecoration(
-    hintText: 'Enter your ingredient',
-    hintStyle: GoogleFonts.reemKufi(
-    color: Color(0xffFFFDF4),
-    fontSize: displayHeight(context) * 0.03),
-    ),
-    style: GoogleFonts.reemKufi(
-    color: Color(0xffFFFDF4),
-    fontSize: displayHeight(context) * 0.03),
-    ),
-    actions: <Widget>[
-    Padding(
-    padding:
-    EdgeInsets.all(displayHeight(context) * 0.03),
-    child: Row(
-    mainAxisAlignment: MainAxisAlignment.spaceEvenly,
-    children: [
-    TextButton(
-    style: TextButton.styleFrom(
-    backgroundColor: Color(0xffBBBD88)),
-    child: ReemKufi_Black(textValue: 'Continue', size: displayHeight(context)*0.03,),
-    onPressed: () {
-    Navigator.push(
-    context,
-    MaterialPageRoute(
-    builder: (context) =>
-    IngredientDetails(
-    ingredientName:
-    ingredient_controller.text,
-    ),
-    ));
-    },
-    ),
-    TextButton(
-    style: TextButton.styleFrom(
-    backgroundColor: Color(0xffBBBD88)),
-    child: ReemKufi_Black(textValue: 'cancel', size: displayHeight(context)*0.03,),
-    onPressed: () {
-      Navigator.pushAndRemoveUntil(
-        context,
-        MaterialPageRoute(
-          builder: (BuildContext context) => MyBottomAppBar(),
-        ),
-            (route) => false,
-      );
-    },
-    ),
-    ],
-    ),
-    ),
-    ],
-    )
+        body:  AlertDialog(
+          backgroundColor: const Color(0xff283618),
+          title: ReemKufiOffwhite(textValue: 'Enter your ingredient',size: displayHeight(context)*0.04, ),
+          content: TextField(
+            controller: ingredient_controller,
+            autofocus: false,
+            decoration: InputDecoration(
+              hintText: 'Enter your ingredient',
+              hintStyle: GoogleFonts.reemKufi(
+                  color: Color(0xffFFFDF4),
+                  fontSize: displayHeight(context) * 0.03),
+            ),
+            style: GoogleFonts.reemKufi(
+                color: Color(0xffFFFDF4),
+                fontSize: displayHeight(context) * 0.03),
+          ),
+          actions: <Widget>[
+            Padding(
+              padding:
+              EdgeInsets.all(displayHeight(context) * 0.03),
+              child: Row(
+                mainAxisAlignment: MainAxisAlignment.spaceEvenly,
+                children: [
+                  TextButton(
+                    style: TextButton.styleFrom(
+                        backgroundColor: Color(0xffBBBD88)),
+                    child: ReemKufi_Black(textValue: 'Continue', size: displayHeight(context)*0.03,),
+                    onPressed: () {
+                      Navigator.push(
+                          context,
+                          MaterialPageRoute(
+                            builder: (context) =>
+                                IngredientDetails(
+                                  ingredientName:
+                                  ingredient_controller.text,
+                                ),
+                          ));
+                    },
+                  ),
+                  TextButton(
+                    style: TextButton.styleFrom(
+                        backgroundColor: Color(0xffBBBD88)),
+                    child: ReemKufi_Black(textValue: 'Cancel', size: displayHeight(context)*0.03,),
+                    onPressed: () {
+                      Navigator.pushAndRemoveUntil(
+                        context,
+                        MaterialPageRoute(
+                          builder: (BuildContext context) => MyBottomAppBar(),
+                        ),
+                            (route) => false,
+                      );
+                    },
+                  ),
+                ],
+              ),
+            ),
+          ],
+        )
     );
   }
 }

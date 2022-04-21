@@ -1,7 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:google_maps_flutter/google_maps_flutter.dart';
+import '../main.dart';
 import 'locations.dart' as locations;
-import 'main.dart';
 
 class MapDemo extends StatefulWidget {
   const MapDemo({Key? key}) : super(key: key);
@@ -30,13 +30,13 @@ class _MapDemoState extends State<MapDemo> with AutomaticKeepAliveClientMixin {
       }
     });
   }
-@override
+  @override
   Widget build(BuildContext context) {
     return Scaffold(
-      appBar: AppBarDetails(
-        screenName: 'Find Dermatologist',
-      ),
-      backgroundColor: Color(0xFFFFFDF4),
+        appBar: AppBarDetails(
+          screenName: 'Find Dermatologist',
+        ),
+        backgroundColor: Color(0xFFFFFDF4),
         body: GoogleMap(
           onMapCreated: _onMapCreated,
           initialCameraPosition: const CameraPosition(
