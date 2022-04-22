@@ -149,10 +149,14 @@ class _CategoriesAndSearchState extends State<CategoriesAndSearch> {
 
 class Category extends StatelessWidget {
   final String categoryName;
-  final String categoryImage;
+  final String? categoryImage;
   const Category(
-      {Key? key, required this.categoryName, required this.categoryImage})
+      {Key? key, required this.categoryName, this.categoryImage})
       : super(key: key);
+
+  static Category fromJson(Map<String, dynamic> json) => Category(
+      categoryName: json['categName'],
+      );
 
   @override
   Widget build(BuildContext context) {
@@ -168,7 +172,7 @@ class Category extends StatelessWidget {
             mainAxisAlignment: MainAxisAlignment.center,
             children: <Widget>[
               Image(
-                  image: AssetImage(categoryImage),
+                  image: AssetImage(categoryImage!),
                   fit: BoxFit.contain,
                   height: displayHeight(context) * 0.125,
                   width: displayWidth(context) * 0.25),

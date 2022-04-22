@@ -2,7 +2,6 @@ import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 import '../routine_feature/routine_feature_utilities.dart';
 
-
 class RoutineProvider extends ChangeNotifier {
   List<Routine> routine_list = [];
 

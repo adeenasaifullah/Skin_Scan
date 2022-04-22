@@ -3,6 +3,7 @@ import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 import 'package:google_fonts/google_fonts.dart';
 import 'package:provider/provider.dart';
+import 'package:skin_scan/provider/categories_provider.dart';
 import 'package:skin_scan/provider/routine_provider.dart';
 import 'package:skin_scan/register_feature/account_created.dart';
 import 'package:skin_scan/utilities/utility.dart';
@@ -11,6 +12,7 @@ import 'package:page_transition/page_transition.dart';
 import 'dart:ui';
 import 'package:liquid_progress_indicator/liquid_progress_indicator.dart';
 import 'dart:async';
+import 'package:firebase_core/firebase_core.dart';
 import 'package:custom_top_navigator/custom_top_navigator.dart';
 
 import 'dart:math' as math;
@@ -21,9 +23,15 @@ late List<CameraDescription> cameras;
 
 Future<void> main() async {
   WidgetsFlutterBinding.ensureInitialized();
+  await Firebase.initializeApp();
   cameras = await availableCameras();
-  runApp(ChangeNotifierProvider(
-    create: (_) => RoutineProvider(),
+  runApp(MultiProvider(
+    providers: [
+      Provider<RoutineProvider>
+        (create: (_) => RoutineProvider()),
+      Provider<CategoryProvider>
+        (create: (_) => CategoryProvider()),
+    ],
     child: const MyApp(),
   ));
 }

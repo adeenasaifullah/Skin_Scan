@@ -1,33 +1,33 @@
 {
   "project_info": {
-    "project_number": "451695617774",
-    "project_id": "skin-scan-d6039",
-    "storage_bucket": "skin-scan-d6039.appspot.com"
+    "project_number": "478652240956",
+    "project_id": "skin-scan-bf4a1",
+    "storage_bucket": "skin-scan-bf4a1.appspot.com"
   },
   "client": [
     {
       "client_info": {
-        "mobilesdk_app_id": "1:451695617774:android:d0de8b12fafb0f20ccb5ff",
+        "mobilesdk_app_id": "1:478652240956:android:9a65185874ea61559d1f39",
         "android_client_info": {
-          "package_name": "skin.scan"
+          "package_name": "com.example.skin_scan"
         }
       },
       "oauth_client": [
         {
-          "client_id": "451695617774-fkd94ul5lkbonj9q5h9aopqgriasolel.apps.googleusercontent.com",
+          "client_id": "478652240956-iscooknndd2stumreaed6922bbdo6r55.apps.googleusercontent.com",
           "client_type": 3
         }
       ],
       "api_key": [
         {
-          "current_key": "AIzaSyCzLDDaA23fKaWhuFyztyGQ3R49cBSTavo"
+          "current_key": "AIzaSyDMTLDdJ6FlHISE2tDjJXazVTF8BMi3Ytk"
         }
       ],
       "services": {
         "appinvite_service": {
           "other_platform_oauth_client": [
             {
-              "client_id": "451695617774-fkd94ul5lkbonj9q5h9aopqgriasolel.apps.googleusercontent.com",
+              "client_id": "478652240956-iscooknndd2stumreaed6922bbdo6r55.apps.googleusercontent.com",
               "client_type": 3
             }
           ]
