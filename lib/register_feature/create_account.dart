@@ -82,7 +82,7 @@ class _createAccountState extends State<createAccount> {
                   SizedBox(width: displayWidth(context) * 0.03),
                   Flexible(
                     flex: 2,
-                    child: FloatingActionButton(
+                    child: TextButton(
                       onPressed: () {
                         Navigator.of(context).push(MaterialPageRoute(
                             builder: (context) => LogInScreen()));
@@ -90,7 +90,7 @@ class _createAccountState extends State<createAccount> {
                       child: Text('Login',
                           style: GoogleFonts.reemKufi(
                               color: Color(0xFF4D4D4D), fontSize: 20)),
-                      backgroundColor: Colors.white,
+                      //backgroundColor: Colors.white,
                     ),
                   ),
                 ],

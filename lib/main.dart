@@ -1,15 +1,20 @@
 import 'package:animated_splash_screen/animated_splash_screen.dart';
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
+import 'package:google_fonts/google_fonts.dart';
 import 'package:provider/provider.dart';
-import 'package:camera/camera.dart';
 import 'package:skin_scan/provider/routine_provider.dart';
+import 'package:skin_scan/register_feature/account_created.dart';
 import 'package:skin_scan/utilities/utility.dart';
+import 'package:camera/camera.dart';
 import 'package:page_transition/page_transition.dart';
 import 'dart:ui';
 import 'package:liquid_progress_indicator/liquid_progress_indicator.dart';
 import 'dart:async';
+import 'package:custom_top_navigator/custom_top_navigator.dart';
+
 import 'dart:math' as math;
+
 import 'log_in_sign_up_feature/log_in_register_screen.dart';
 
 late List<CameraDescription> cameras;
