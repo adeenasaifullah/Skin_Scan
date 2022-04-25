@@ -1,16 +1,21 @@
+import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 import 'package:google_fonts/google_fonts.dart';
+import 'package:provider/provider.dart';
 import 'package:skin_scan/product_categories_feature/product_categories_utilities.dart';
 import 'package:skin_scan/product_categories_feature/product_detail.dart';
 import 'package:skin_scan/product_categories_feature/product_filter.dart';
 import 'package:skin_scan/utilities/utility.dart';
 
+import '../entities/product_entities.dart';
 import '../main.dart';
+import '../provider/product_provider.dart';
 
 class CategoryProducts extends StatefulWidget {
   final String categoryTitle;
-  const CategoryProducts({Key? key, required this.categoryTitle})
+  //final List<Product> productsOfCategory;
+  const CategoryProducts({Key? key, required this.categoryTitle, })
       : super(key: key);
 
   @override
@@ -18,79 +23,75 @@ class CategoryProducts extends StatefulWidget {
 }
 
 class _CategoryProductsState extends State<CategoryProducts> {
-  final List<DisplayProducts> ProductsLists = [];
+  //final List<DisplayProducts> ProductsLists = [];
 
-  void initState() {
-    super.initState();
-    ProductsLists.add(DisplayProducts(
-        productImage: 'assets/serumbottle.png',
-        productName: "Paula's Choice",
-        price: 2000));
-    //SizedBox(height: displayHeight(context) * 0.02)
-
-    ProductsLists.add(DisplayProducts(
-        productImage: 'assets/serumbottle.png',
-        productName: "CoNatural",
-        price: 1500));
-    //SizedBox(height: displayHeight(context) * 0.02),
-    ProductsLists.add(DisplayProducts(
-        productImage: 'assets/serumbottle.png',
-        productName: "Niacis",
-        price: 2500));
-    //SizedBox(height: displayHeight(context) * 0.02),
-    ProductsLists.add(DisplayProducts(
-        productImage: 'assets/serumbottle.png',
-        productName: "Acne Serum",
-        price: 2080));
-    ProductsLists.add(DisplayProducts(
-        productImage: 'assets/serumbottle.png',
-        productName: "Acne Serum",
-        price: 2080));
-  }
+  // void initState() {
+  //   super.initState();
+  //   ProductsLists.add(DisplayProducts(
+  //       productImage: 'assets/serumbottle.png',
+  //       productName: "Paula's Choice",
+  //       price: 2000));
+  //   //SizedBox(height: displayHeight(context) * 0.02)
+  //
+  //   ProductsLists.add(DisplayProducts(
+  //       productImage: 'assets/serumbottle.png',
+  //       productName: "CoNatural",
+  //       price: 1500));
+  //   //SizedBox(height: displayHeight(context) * 0.02),
+  //   ProductsLists.add(DisplayProducts(
+  //       productImage: 'assets/serumbottle.png',
+  //       productName: "Niacis",
+  //       price: 2500));
+  //   //SizedBox(height: displayHeight(context) * 0.02),
+  //   ProductsLists.add(DisplayProducts(
+  //       productImage: 'assets/serumbottle.png',
+  //       productName: "Acne Serum",
+  //       price: 2080));
+  //   ProductsLists.add(DisplayProducts(
+  //       productImage: 'assets/serumbottle.png',
+  //       productName: "Acne Serum",
+  //       price: 2080));
+  // }
 
   @override
   Widget build(BuildContext context) {
+    //var currentCategory = widget.categoryTitle;
     return Scaffold(
         appBar: AppBarDetails(screenName: widget.categoryTitle),
         backgroundColor: Color(0xFFFFFDF4),
-        body: Padding(
-          padding: const EdgeInsets.all(8.0),
-          child: Column(
-              mainAxisAlignment: MainAxisAlignment.start,
-              crossAxisAlignment: CrossAxisAlignment.start,
-              children: [
-                SizedBox(height: displayHeight(context) * 0.02),
-                SearchandFilter(),
-                SizedBox(height: displayHeight(context) * 0.01),
-                Padding(
-                  padding: EdgeInsets.only(
-                      top: displayHeight(context) * 0.02,
-                      left: displayWidth(context) * 0.04),
-                  child: Rambla_Green_Italic(
-                    textValue: 'Found 13 results',
-                    size: displayWidth(context) * 0.03,
-                  ),
+        body: Column(
+            mainAxisAlignment: MainAxisAlignment.start,
+            crossAxisAlignment: CrossAxisAlignment.start,
+            children: [
+              SizedBox(height: displayHeight(context) * 0.02),
+              SearchandFilter(),
+              SizedBox(height: displayHeight(context) * 0.01),
+              Padding(
+                padding: EdgeInsets.only(
+                    top: displayHeight(context) * 0.02,
+                    left: displayWidth(context) * 0.04),
+                child: Rambla_Green_Italic(
+                  textValue: 'Found 13 results',
+                  size: displayWidth(context) * 0.03,
                 ),
-                SizedBox(height: displayHeight(context) * 0.02),
+              ),
+              SizedBox(height: displayHeight(context) * 0.02),
+              DisplayProducts(listOfCategoryProducts: context.read<ProductProvider>().getProductsOfCategory(widget.categoryTitle)),
 
-                Expanded(
-                  child: GridView.count(
-                    childAspectRatio:
-                    displayWidth(context) / displayHeight(context) * 1.3,
-                    scrollDirection: Axis.vertical,
-                    crossAxisCount: 2,
-                    children: List.generate(
-                        ProductsLists.length,
-                            (index) => DisplayProducts(
-                            productImage: ProductsLists[index].productImage,
-                            productName: ProductsLists[index].productName,
-                            price: ProductsLists[index].price)),
-                  ),
-                )
-                //] )
-              ]),
-        ));
+
+
+              // children: List.generate(
+              //     ProductsLists.length,
+              //         (index) => DisplayProducts(
+              //         productImage: ProductsLists[index].productImage,
+              //         productName: ProductsLists[index].productName,
+              //         price: ProductsLists[index].price)),
+
+              //] )
+            ]),
+        );
   }
+
 }
 
 class SearchandFilter extends StatefulWidget {
@@ -164,16 +165,18 @@ class _SearchandFilterState extends State<SearchandFilter> {
 }
 
 class DisplayProducts extends StatefulWidget {
-  final String productImage;
-  final String productName;
-  final int price;
+  final List<Product> listOfCategoryProducts;
+  // final String productImage;
+  // final String productName;
+  // final int price;
+  var prodID;
 
-  const DisplayProducts(
+  DisplayProducts(
       {Key? key,
-        required this.productImage,
-        required this.productName,
-        required this.price})
+        required this.listOfCategoryProducts})
       : super(key: key);
+
+
 
   @override
   _DisplayProductsState createState() => _DisplayProductsState();
@@ -183,7 +186,21 @@ class _DisplayProductsState extends State<DisplayProducts> {
   late int _rating;
   @override
   Widget build(BuildContext context) {
-    return Padding(
+    return Expanded(
+      child: GridView.builder(
+        primary: false,
+        scrollDirection: Axis.vertical,
+        padding: const EdgeInsets.all(20),
+        itemCount: widget.listOfCategoryProducts.length,
+        gridDelegate: SliverGridDelegateWithFixedCrossAxisCount(
+          childAspectRatio:
+          displayWidth(context) / displayHeight(context) * 1.3,
+          crossAxisCount: 2,
+        ),
+        itemBuilder: (BuildContext context, int index) {
+          return
+
+    Padding(
         padding: EdgeInsets.fromLTRB(8, 8, 8, 8),
         child: InkWell(
           child: Card(
@@ -201,34 +218,38 @@ class _DisplayProductsState extends State<DisplayProducts> {
                     child: FavouriteButton(),
                   ),
                   Image(
-                      image: AssetImage(widget.productImage),
+                      image: AssetImage('assets/dermatologistIcon.png'),
                       fit: BoxFit.fill,
                       height: displayHeight(context) * 0.1,
                       width: displayWidth(context) * 0.1),
                   SizedBox(height: displayHeight(context) * 0.005),
                   ReemKufi_Green(
-                      textValue: widget.productName,
-                      size: displayHeight(context) * 0.025),
+                      textValue: widget.listOfCategoryProducts[index].productName,
+                      size: displayHeight(context) * 0.015),
                   SizedBox(height: displayHeight(context) * 0.005),
                   Rating(),
                   SizedBox(height: displayHeight(context) * 0.005),
                   Rambla_Green_Italic(
-                      textValue: widget.price.toString() + ' PKR',
+                      textValue: widget.listOfCategoryProducts[index].productPrice.toString() + ' PKR',
                       size: displayHeight(context) * 0.025),
                 ],
               )),
           onTap: () {
-            Navigator.push(
-              context,
-              MaterialPageRoute(
-                builder: (context) => ProductDetail(
-                  productImage: widget.productImage,
-                  productName: widget.productName,
-                  productPrice: widget.price,
-                ),
-              ),
-            );
+            // Navigator.push(
+            //   context,
+            //   MaterialPageRoute(
+            //     builder: (context) => ProductDetail(
+            //       productImage: widget.productImage,
+            //       productName: widget.productName,
+            //       productPrice: widget.price,
+            //     ),
+            //   ),
+            // );
           },
         ));
+        },
+
+      ),
+    );
   }
 }

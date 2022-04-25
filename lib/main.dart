@@ -1,9 +1,12 @@
+
+
 import 'package:animated_splash_screen/animated_splash_screen.dart';
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 import 'package:google_fonts/google_fonts.dart';
 import 'package:provider/provider.dart';
 import 'package:skin_scan/provider/categories_provider.dart';
+import 'package:skin_scan/provider/product_provider.dart';
 import 'package:skin_scan/provider/routine_provider.dart';
 import 'package:skin_scan/register_feature/account_created.dart';
 import 'package:skin_scan/utilities/utility.dart';
@@ -22,6 +25,7 @@ import 'log_in_sign_up_feature/log_in_register_screen.dart';
 late List<CameraDescription> cameras;
 
 Future<void> main() async {
+  //Provider.debugCheckInvalidValueType = null;
   WidgetsFlutterBinding.ensureInitialized();
   await Firebase.initializeApp();
   cameras = await availableCameras();
@@ -29,12 +33,14 @@ Future<void> main() async {
     providers: [
       Provider<RoutineProvider>
         (create: (_) => RoutineProvider()),
-      Provider<CategoryProvider>
-        (create: (_) => CategoryProvider()),
+      ChangeNotifierProvider(create: (_) => CategoryProvider()),
+      ChangeNotifierProvider(create: (_) => ProductProvider())
     ],
     child: const MyApp(),
   ));
 }
+
+
 
 class MyApp extends StatelessWidget {
   const MyApp({Key? key}) : super(key: key);
@@ -42,7 +48,11 @@ class MyApp extends StatelessWidget {
   // This widget is the root of your application.
   @override
   Widget build(BuildContext context) {
-    FocusScope.of(context).unfocus();
+      //Load all your data from firebase over here:
+      context.read<CategoryProvider>().getCategoriesFromDb();
+      context.read<ProductProvider>().getProductsFromDatabase();
+
+    //FocusScope.of(context).unfocus();
     return GestureDetector(
       onTap: () {
         FocusScopeNode currentFocus = FocusScope.of(context);
@@ -71,6 +81,7 @@ class LogoScreen extends StatefulWidget {
 }
 
 class _LogoScreenState extends State<LogoScreen> {
+
   @override
   Widget build(BuildContext context) {
     return AnimatedSplashScreen(

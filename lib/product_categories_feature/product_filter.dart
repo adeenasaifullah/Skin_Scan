@@ -109,33 +109,33 @@ class _FilterState extends State<Filter> {
               //   ),
               // ),
               SizedBox(height: displayHeight(context) * 0.03),
-              Padding(
-                padding: EdgeInsets.symmetric(
-                    horizontal: displayWidth(context) * 0.06),
-                child: ReemKufi_Green(
-                    textValue: 'Gender', size: displayHeight(context) * 0.04),
-              ),
-              Padding(
-                padding: EdgeInsets.symmetric(
-                    horizontal: displayWidth(context) * 0.06),
-                child: Row(
-                  //DADBC6
-                  //mainAxisAlignment: MainAxisAlignment.spaceEvenly,
-                  children: <Widget>[
-                    FilterButtons(
-                        widthSize: 0.25,
-                        heightSize: 0.06,
-                        buttonText: 'Male',
-                        textSize: 0.03),
-                    SizedBox(width: displayWidth(context) * 0.06),
-                    FilterButtons(
-                        widthSize: 0.28,
-                        heightSize: 0.06,
-                        buttonText: 'Female',
-                        textSize: 0.03),
-                  ],
-                ),
-              ),
+              // Padding(
+              //   padding: EdgeInsets.symmetric(
+              //       horizontal: displayWidth(context) * 0.06),
+              //   child: ReemKufi_Green(
+              //       textValue: 'Gender', size: displayHeight(context) * 0.04),
+              // ),
+              // Padding(
+              //   padding: EdgeInsets.symmetric(
+              //       horizontal: displayWidth(context) * 0.06),
+              //   child: Row(
+              //     //DADBC6
+              //     //mainAxisAlignment: MainAxisAlignment.spaceEvenly,
+              //     children: <Widget>[
+              //       FilterButtons(
+              //           widthSize: 0.25,
+              //           heightSize: 0.06,
+              //           buttonText: 'Male',
+              //           textSize: 0.03),
+              //       SizedBox(width: displayWidth(context) * 0.06),
+              //       FilterButtons(
+              //           widthSize: 0.28,
+              //           heightSize: 0.06,
+              //           buttonText: 'Female',
+              //           textSize: 0.03),
+              //     ],
+              //   ),
+              // ),
               SizedBox(height: displayHeight(context) * 0.03),
               Padding(
                 padding: EdgeInsets.symmetric(
