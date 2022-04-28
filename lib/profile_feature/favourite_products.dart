@@ -2,6 +2,7 @@ import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_rating_bar/flutter_rating_bar.dart';
 import 'package:google_fonts/google_fonts.dart';
+import '../entities/product_entities.dart';
 import '../main.dart';
 import '../product_categories_feature/product_detail.dart';
 import '../utilities/utility.dart';
@@ -72,6 +73,7 @@ class _FavouriteProductsState extends State<FavouriteProducts> {
                 children: List.generate(
                     FavouriteLists.length,
                         (index) => FavouriteProductsCard(
+                          //product: products,
                       productImage: FavouriteLists[index].productImage,
                       productName: FavouriteLists[index].productName,
                       productRating: FavouriteLists[index].productRating,
@@ -90,12 +92,15 @@ class FavouriteProductsCard extends StatefulWidget {
   final String productImage;
   final String productName;
   final int productRating;
+  //final Product product;
 
   const FavouriteProductsCard(
       {Key? key,
+        //required this.product,
         required this.productImage,
         required this.productName,
-        required this.productRating})
+        required this.productRating
+      })
       : super(key: key);
 
   @override
@@ -190,12 +195,12 @@ class _FavouriteProductsCardState extends State<FavouriteProductsCard> {
                 ],
               )),
           onTap: () {
-            Navigator.push(
-              context,
-              MaterialPageRoute(
-                builder: (context) => ProductDetail(productPrice: 2500, productImage: widget.productImage, productName: widget.productName,),
-              ),
-            );
+            // Navigator.push(
+            //   context,
+            //   MaterialPageRoute(
+            //     builder: (context) => ProductDetail(),
+            //   ),
+            // );
           },
         ));
   }

@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:form_field_validator/form_field_validator.dart';
 import 'package:google_fonts/google_fonts.dart';
 import 'package:skin_scan/main.dart';
 import '../log_in_sign_up_feature/log_in_screen.dart';
@@ -12,6 +13,8 @@ class NewPassword extends StatefulWidget {
 }
 
 class _NewPasswordState extends State<NewPassword> {
+  String password = "";
+  String confirmPassword = "";
   @override
   Widget build(BuildContext context) {
     return Scaffold(
@@ -23,7 +26,17 @@ class _NewPasswordState extends State<NewPassword> {
             mainAxisAlignment: MainAxisAlignment.start,
             children: <Widget>[
               SizedBox(height: displayHeight(context) * 0.05),
-              const field(
+              field(
+                  validateInput: MultiValidator([
+                    RequiredValidator(errorText: "* Required"),
+                    MinLengthValidator(6,
+                        errorText:
+                        "Password should be at least 6 characters"),
+                    MaxLengthValidator(15,
+                        errorText:
+                        "Password should not be greater than 15 characters")
+                  ]),
+                  onChanged: (val){setState(() => password = val);},
                   labelText: 'New Password',
                   hintText: 'Enter your password',
                   prefixIcon: Icon(Icons.lock, color: Color(0xFF283618)),
@@ -31,7 +44,14 @@ class _NewPasswordState extends State<NewPassword> {
                   Icon(Icons.visibility_off, color: Color(0xFF283618))),
 
               SizedBox(height: displayHeight(context) * 0.05),
-              const field(
+              field(
+                  validateInput: (phone) {
+                    if (confirmPassword!.isEmpty) return '* Required';
+                    if (confirmPassword! != password!)
+                      return 'The password does not match!';
+                    return null;
+                  },
+                  onChanged: (val){setState(() => confirmPassword = val);},
                   labelText: 'Confirm Password',
                   hintText: 'Re-Enter your password',
                   prefixIcon: Icon(Icons.lock, color: Color(0xFF283618)),

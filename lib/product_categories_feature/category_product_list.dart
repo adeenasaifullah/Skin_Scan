@@ -12,6 +12,10 @@ import '../entities/product_entities.dart';
 import '../main.dart';
 import '../provider/product_provider.dart';
 
+
+
+
+
 class CategoryProducts extends StatefulWidget {
   final String categoryTitle;
   //final List<Product> productsOfCategory;
@@ -211,6 +215,7 @@ class _DisplayProductsState extends State<DisplayProducts> {
               child: Column(
                 mainAxisAlignment: MainAxisAlignment.start,
                 children: [
+                  //SizedBox(height: displayHeight(context) * 0.005),
                   Padding(
                     padding: EdgeInsets.only(
                       left: displayWidth(context) * 0.25,
@@ -225,9 +230,9 @@ class _DisplayProductsState extends State<DisplayProducts> {
                   SizedBox(height: displayHeight(context) * 0.005),
                   ReemKufi_Green(
                       textValue: widget.listOfCategoryProducts[index].productName,
-                      size: displayHeight(context) * 0.015),
+                      size: displayHeight(context) * 0.019),
                   SizedBox(height: displayHeight(context) * 0.005),
-                  Rating(),
+                  Rating(product: widget.listOfCategoryProducts[index]),
                   SizedBox(height: displayHeight(context) * 0.005),
                   Rambla_Green_Italic(
                       textValue: widget.listOfCategoryProducts[index].productPrice.toString() + ' PKR',
@@ -235,16 +240,16 @@ class _DisplayProductsState extends State<DisplayProducts> {
                 ],
               )),
           onTap: () {
-            // Navigator.push(
-            //   context,
-            //   MaterialPageRoute(
-            //     builder: (context) => ProductDetail(
-            //       productImage: widget.productImage,
-            //       productName: widget.productName,
-            //       productPrice: widget.price,
-            //     ),
-            //   ),
-            // );
+            Navigator.push(
+              context,
+              MaterialPageRoute(
+                builder: (context) => ProductDetail(
+                  product: widget.listOfCategoryProducts[index]
+
+
+                ),
+              ),
+            );
           },
         ));
         },

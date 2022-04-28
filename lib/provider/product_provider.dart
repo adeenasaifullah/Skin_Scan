@@ -47,14 +47,13 @@ class ProductProvider extends ChangeNotifier {
     //getProductsFromDatabase();
     List<Product> productsOfCategory = [];
 
-
     for (int i = 0; i < productsList.length; i++) {
       //print('snoop');
       if (productsList[i].nameOfCategory == name) {
         productsOfCategory.add(productsList[i]);
       }
     }
-    print("get categogory products + $productsOfCategory");
+    print("get category products + $productsOfCategory");
     return productsOfCategory;
   }
 
@@ -62,44 +61,37 @@ class ProductProvider extends ChangeNotifier {
     int length = productsList.length;
     return length;
   }
-  // var list = jsonDecode(response) as List;
-  // final productList = list.map((e)=> ProductModel.fromJson(e as Map<String, dynamic>)).toList();
 
-  // var list = jsonDecode(response) as List;
-  //
-  // var displayProducts = list.((e) => DisplayProducts(
-  //
-  // )).toList();
+  void updateRating(Product product, double userRating) async {
+    userRating = (userRating + product.productRating) / 2;
 
-  // int getProductListLength() {
-  //   int length = productsList.length;
-  //   return length;
-  // }
-  //
-  // List<DisplayProducts> getProducts() {
-  //   return productsList;
-  // }
+    product.productRating = userRating;
+    print(product.productRating);
+    //CollectionReference products = FirebaseFirestore.instance.collection('products');
 
-  // Future getProductsFromDb() async {
-  //   //categoriesList == null ?
-  //
-  //   productsList.clear();
-  //   //categoriesList=[];
-  //   // mytasks.clear()
-  //
-  //   await FirebaseFirestore.instance
-  //       .collection('products')
-  //       .get()
-  //       .then((QuerySnapshot querySnapshot) {
-  //     querySnapshot.docs.forEach((doc) {
-  //       DisplayProducts product =
-  //       DisplayProducts.fromJson(doc.data() as Map<String, dynamic>);
-  //       product.prodID = doc.id;
-  //
-  //       productsList.add(product);
-  //     });
-  //   });
-  //   notifyListeners();
-  //   print('product list ${productsList}');
-  // }
+    //await products.doc(product.prodID).update(product.toJson()).whenComplete(() => print('rating updated'));
+    //await products.doc(product.prodID).update(product.toJson());
+    updateRatinginDB(product);
+    //double avgRating = (userRating + product.productRating)/2;
+    //return userRating;
+    notifyListeners();
+  }
+
+  Future<void> updateRatinginDB(Product product) async {
+    //product.productRating = userRating;
+
+    CollectionReference products =
+        FirebaseFirestore.instance.collection('products');
+
+    await products
+        .doc(product.prodID)
+        .update(product.toJson())
+        .whenComplete(() => print('rating updated'));
+    //await products.doc(product.prodID).update(product.toJson());
+    //getProductsFromDatabase();
+
+    //double avgRating = (userRating + product.productRating)/2;
+    //return userRating;
+    notifyListeners();
+  }
 }

@@ -1,14 +1,14 @@
 class Product {
   var prodID;
-  final String productBrand;
-  final String nameOfCategory;
-  final String productDescription;
-  final String howToUse;
-  final String productIngredients;
-  final String productName;
-  final String productPrice;
-  final String skinType;
-  final int productRating;
+   String productBrand;
+   String nameOfCategory;
+   String productDescription;
+   String howToUse;
+   String productIngredients;
+   String productName;
+   String productPrice;
+   String skinType;
+   num productRating;
 
 
   Product({
@@ -23,4 +23,18 @@ class Product {
     required this.productRating,
 
   });
+  Map<String, dynamic> toJson() {
+    final Map<String, dynamic> data = {};
+    data['Brand'] = productBrand;
+    data['Category'] = nameOfCategory;
+    data['Description'] = productDescription;
+    data['Ingredients'] = productIngredients;
+    data['Price'] = productPrice;
+    data['Name'] = productName;
+    data['Skin Type'] = skinType;
+    data['How to use'] = howToUse;
+    data['Rating'] = productRating;
+
+    return data;
+  }
 }

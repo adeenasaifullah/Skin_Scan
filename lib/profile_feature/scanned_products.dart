@@ -32,7 +32,7 @@ class _ScannedProductsState extends State<ScannedProducts> {
                     return InkWell(
                       onTap: (){
                         Navigator.of(context).push(MaterialPageRoute(
-                            builder: (context) => ProductDetail(productPrice: 2000, productImage: 'assets/Favourite.png', productName: products[index],)));
+                            builder: (context) => ProductDetail(product: products[index])));
                       },
                       child: Container(
                           alignment: Alignment.center,

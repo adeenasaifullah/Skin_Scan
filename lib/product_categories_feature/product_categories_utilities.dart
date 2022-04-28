@@ -1,21 +1,30 @@
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_rating_bar/flutter_rating_bar.dart';
+import 'package:provider/provider.dart';
 import 'package:skin_scan/utilities/utility.dart';
 
+import '../entities/product_entities.dart';
+import '../provider/product_provider.dart';
+
 class Rating extends StatefulWidget {
-  const Rating({Key? key}) : super(key: key);
+  final Product product;
+
+  const Rating({Key? key, required this.product}) : super(key: key);
 
   @override
   _RatingState createState() => _RatingState();
 }
 
 class _RatingState extends State<Rating> {
+   double rating = 0;
+  //final double initialRating = widget.product.productRating.toDouble()
+
   @override
   Widget build(BuildContext context) {
     return RatingBar(
-      itemSize: displayHeight(context) * 0.03,
-      initialRating: 3,
+      itemSize: displayHeight(context) * 0.025,
+      initialRating: widget.product.productRating.toDouble(),
       direction: Axis.horizontal,
       allowHalfRating: false,
       itemCount: 5,
@@ -35,8 +44,22 @@ class _RatingState extends State<Rating> {
       ),
       itemPadding: EdgeInsets.symmetric(horizontal: 4.0),
       onRatingUpdate: (rating) {
+
+        //rating = (rating + widget.product.productRating)/2;
+        //_rating = rating;
+        //print(_rating);
+        //context.watch()<ProductProvider>().updateRating(widget.product, rating);
+        Provider.of<ProductProvider>(context, listen: false).updateRating(widget.product, rating);
+        setState(() {
+          this.rating = rating;
+          //context.watch()<ProductProvider>().updateRating(widget.product, rating);
+        });
+
+
+
         print(rating);
       },
+
     );
   }
 }

@@ -334,12 +334,16 @@ class field extends StatefulWidget {
   final String hintText;
   final Icon prefixIcon;
   final Icon? suffixIcon;
+  final String? Function(String?)? validateInput;
+  final Function(String value) onChanged;
+
   const field(
       {Key? key,
         required this.labelText,
         required this.hintText,
         required this.prefixIcon,
-        this.suffixIcon})
+        this.suffixIcon, required this.onChanged,
+        required this.validateInput})
       : super(key: key);
 
   @override
@@ -347,11 +351,14 @@ class field extends StatefulWidget {
 }
 
 class _fieldState extends State<field> {
+  final _formKey = GlobalKey<FormState>();
   @override
   Widget build(BuildContext context) {
     return Container(
       width: displayWidth(context) * 0.8,
       child: TextFormField(
+        onChanged: widget.onChanged,
+        validator: widget.validateInput,
         decoration: InputDecoration(
             fillColor: Color(0xFFDADBC6),
             filled: true,
@@ -382,7 +389,7 @@ class GreenButton extends StatelessWidget {
   final double buttonHeight;
   final double textSize;
   final String buttonText;
-  final VoidCallback onPressed;
+  final VoidCallback? onPressed;
   const GreenButton({
     Key? key,
     required this.buttonWidth,
