@@ -34,7 +34,7 @@ class _DermaPopUpState extends State<DermaPopUp> {
         title: ReemKufiOffwhite(textValue: 'Enter your area',size: displayHeight(context)*0.04, ),
         content: TextField(
           controller: derma_controller,
-          autofocus: true,
+          autofocus: false,
           decoration: InputDecoration(
             hintText: 'Enter your area',
             hintStyle: GoogleFonts.reemKufi(

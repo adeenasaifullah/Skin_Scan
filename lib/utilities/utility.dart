@@ -331,6 +331,7 @@ class field extends StatefulWidget {
   final String hintText;
   final Icon prefixIcon;
   final Icon? suffixIcon;
+  final bool autoFocus;
   final String? Function(String?)? validateInput;
   //final Function(String value) onChanged;
   final TextEditingController textController;
@@ -344,7 +345,7 @@ class field extends StatefulWidget {
       required this.prefixIcon,
       this.suffixIcon,
       //required this.onChanged,
-      this.validateInput,
+      this.validateInput, required this.autoFocus,
         //this.obscuredText,
         //this.onPressed
   })

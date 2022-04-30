@@ -60,10 +60,9 @@ class _LogInScreenState extends State<LogInScreen> {
                     labelText: 'Email',
                     hintText: 'Enter your email',
                     prefixIcon:
-                        Icon(Icons.email_sharp, color: Color(0xFF283618))),
+                        Icon(Icons.email_sharp, color: Color(0xFF283618)), autoFocus: false,),
                 SizedBox(height: displayHeight(context) * 0.05),
                 field(
-
                     validateInput: MultiValidator([
                       RequiredValidator(errorText: "* Required"),
                       MinLengthValidator(6,
@@ -81,25 +80,23 @@ class _LogInScreenState extends State<LogInScreen> {
                     hintText: 'Enter your password',
                     prefixIcon: Icon(Icons.lock, color: Color(0xFF283618)),
                     suffixIcon:
-                        Icon(Icons.visibility_off, color: Color(0xFF283618))),
+                        Icon(Icons.visibility_off, color: Color(0xFF283618)), autoFocus: false,),
                 SizedBox(height: displayHeight(context) * 0.025),
-
                 Row(
                   //mainAxisAlignment: MainAxisAlignment.center,
                   children: [
                     SizedBox(
                       width: displayWidth(context) * 0.55,
                     ),
-                    Flexible(
-                        child: InkWell(
+                    InkWell(
                       child: ReemKufi_Green_Bold(
-                          textValue: "Forgot Password?",
-                          size: displayHeight(context) * 0.0275),
+                      textValue: "Forgot Password?",
+                      size: displayHeight(context) * 0.0275),
                       onTap: () {
-                        Navigator.of(context).push(MaterialPageRoute(
-                            builder: (context) => ForgotPassword()));
+                    Navigator.of(context).push(MaterialPageRoute(
+                        builder: (context) => ForgotPassword()));
                       },
-                    )),
+                    ),
                   ],
                 ),
                 SizedBox(height: displayHeight(context) * 0.025),
@@ -116,7 +113,6 @@ class _LogInScreenState extends State<LogInScreen> {
                             context,
                             MaterialPageRoute(
                                 builder: (context) => MyBottomAppBar()));
-
                       }
                       else {
                         setState(() =>
@@ -141,16 +137,15 @@ class _LogInScreenState extends State<LogInScreen> {
                   ReemKufi_Green(
                       textValue: "Don't have an account?  ",
                       size: displayHeight(context) * 0.0225),
-                  Flexible(
-                      child: InkWell(
+                  InkWell(
                     child: ReemKufi_Green_Bold(
-                        textValue: "Register",
-                        size: displayHeight(context) * 0.025),
+                    textValue: "Register",
+                    size: displayHeight(context) * 0.025),
                     onTap: () {
-                      Navigator.of(context).push(MaterialPageRoute(
-                          builder: (context) => LogInRegisterScreen()));
+                  Navigator.of(context).push(MaterialPageRoute(
+                      builder: (context) => LogInRegisterScreen()));
                     },
-                  )),
+                  ),
                 ]),
                 SizedBox(height: displayHeight(context) * 0.02),
                 Padding(

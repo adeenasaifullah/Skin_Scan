@@ -21,7 +21,6 @@ class ProductProvider extends ChangeNotifier {
     productsList.clear();
     await products.get().then((QuerySnapshot querySnapshot) {
       querySnapshot.docs.forEach((doc) {
-        //print(doc.id);
         ProductModel productModel =
             ProductModel.fromJson(doc.data() as Map<String, dynamic>);
         Product product = Product(
@@ -44,7 +43,6 @@ class ProductProvider extends ChangeNotifier {
   }
 
   List<Product> getProductsOfCategory(String name) {
-    //getProductsFromDatabase();
     List<Product> productsOfCategory = [];
 
     for (int i = 0; i < productsList.length; i++) {

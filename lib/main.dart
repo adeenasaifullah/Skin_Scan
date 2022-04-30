@@ -37,7 +37,6 @@ Future<void> main() async {
       Provider<RoutineProvider>(create: (_) => RoutineProvider()),
       ChangeNotifierProvider(create: (_) => CategoryProvider()),
       ChangeNotifierProvider(create: (_) => ProductProvider()),
-      ChangeNotifierProvider(create: (_) => GoogleSignInProvider()),
       //Provider<AuthService>(create: (_) => AuthService(FirebaseAuth.instance)),
       //StreamProvider(create: (context) => context.read<AuthService>().authStateChanges, initialData: null,),
     ],
@@ -59,7 +58,7 @@ class MyApp extends StatelessWidget {
     return StreamProvider<AuthenticateUser?>.value(
       value: AuthService().user,
       initialData: null,
-      //GestureDetector(
+      // GestureDetector(
       // onTap: () {
       //   FocusScopeNode currentFocus = FocusScope.of(context);
       //

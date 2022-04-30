@@ -108,70 +108,63 @@ class _editProfileState extends State<editProfile> {
                     Row(
                       mainAxisAlignment: MainAxisAlignment.center,
                       children: [
-                        Flexible(
-
-                          child: GreenButton(buttonText: 'Save', buttonWidth: displayWidth(context) * 0.3,
-                              buttonHeight: displayHeight(context) * 0.07,  textSize: displayHeight(context) * 0.03,
-                              onPressed: () async {
-                                showDialog(
-                                  barrierDismissible: false,
-                                  context: context, // user must tap button!
-                                  builder: (context) {
-                                    return AlertDialog(
-                                      backgroundColor: const Color(0xff283618),
-                                      title: Text('Changes saved!',
-                                          style: GoogleFonts.reemKufi(
-                                              color: Color(0xffFFFDF4),
-                                              fontSize:
-                                              displayHeight(context) * 0.04)),
-                                      actions: <Widget>[
-                                        Padding(
-                                          padding: const EdgeInsets.all(8.0),
-                                          child: Row(
-                                            mainAxisAlignment:
-                                            MainAxisAlignment.spaceEvenly,
-                                            children: [
-                                              TextButton(
-                                                style: TextButton.styleFrom(
-                                                    backgroundColor:
-                                                    Color(0xffFFFDF4)),
-                                                child: Padding(
-                                                  padding: const EdgeInsets.symmetric(
-                                                      horizontal: 18.0),
-                                                  child: Text('OK',
-                                                      style: GoogleFonts.reemKufi(
-                                                          color: Colors.black,
-                                                          fontSize:
-                                                          displayHeight(context) *
-                                                              0.03)),
-                                                ),
-                                                onPressed: () {
-                                                  Navigator.of(context).pop();
-                                                },
+                        GreenButton(buttonText: 'Save', buttonWidth: displayWidth(context) * 0.3,
+                            buttonHeight: displayHeight(context) * 0.07,  textSize: displayHeight(context) * 0.03,
+                            onPressed: () async {
+                              showDialog(
+                                barrierDismissible: false,
+                                context: context, // user must tap button!
+                                builder: (context) {
+                                  return AlertDialog(
+                                    backgroundColor: const Color(0xff283618),
+                                    title: Text('Changes saved!',
+                                        style: GoogleFonts.reemKufi(
+                                            color: Color(0xffFFFDF4),
+                                            fontSize:
+                                            displayHeight(context) * 0.04)),
+                                    actions: <Widget>[
+                                      Padding(
+                                        padding: const EdgeInsets.all(8.0),
+                                        child: Row(
+                                          mainAxisAlignment:
+                                          MainAxisAlignment.spaceEvenly,
+                                          children: [
+                                            TextButton(
+                                              style: TextButton.styleFrom(
+                                                  backgroundColor:
+                                                  Color(0xffFFFDF4)),
+                                              child: Padding(
+                                                padding: const EdgeInsets.symmetric(
+                                                    horizontal: 18.0),
+                                                child: Text('OK',
+                                                    style: GoogleFonts.reemKufi(
+                                                        color: Colors.black,
+                                                        fontSize:
+                                                        displayHeight(context) *
+                                                            0.03)),
                                               ),
-                                            ],
-                                          ),
+                                              onPressed: () {
+                                                Navigator.of(context).pop();
+                                              },
+                                            ),
+                                          ],
                                         ),
-                                      ],
-                                    );
-                                  },
-                                );
-                              }
-
-                          ),
+                                      ),
+                                    ],
+                                  );
+                                },
+                              );
+                            }
 
                         ),
                         SizedBox(width: displayHeight(context) * 0.1),
-                        Flexible(
-                          child: GreenButton(buttonWidth: displayWidth(context) * 0.3 ,
-                            buttonHeight: displayHeight(context) * 0.07,
-                            buttonText:"Cancel" , textSize: displayHeight(context) * 0.03 ,
-                            onPressed: () async{
-                              Navigator.of(context).push(MaterialPageRoute(
-                                  builder: (context) => MyProfile()));
-                            },),
-
-                        ),
+                        GreenButton(buttonWidth: displayWidth(context) * 0.3 ,
+                          buttonHeight: displayHeight(context) * 0.07,
+                          buttonText:"Cancel" , textSize: displayHeight(context) * 0.03 ,
+                          onPressed: () async{
+                            Navigator.of(context).push(MaterialPageRoute(
+                                builder: (context) => MyProfile()));
+                          },),
                       ],
                     ),
                   ],
