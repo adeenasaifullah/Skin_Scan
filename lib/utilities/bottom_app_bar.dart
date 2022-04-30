@@ -1,12 +1,15 @@
 import 'package:flutter/material.dart';
 import 'package:flutter/cupertino.dart';
 import 'package:google_fonts/google_fonts.dart';
+import 'package:provider/provider.dart';
 import 'package:skin_scan/profile_feature/my_profile.dart';
 import 'package:skin_scan/utilities/utility.dart';
+import '../entities/ingredient_entities.dart';
 import '../find_dermatologist_feature/derma_pop_up.dart';
 import '../ingredient_scan_feature/ingredient_scan.dart';
 import '../ingredient_search_feature/ingredient_details.dart';
 import '../log_in_sign_up_feature/home_page_screen.dart';
+import '../provider/ingredient_provider.dart';
 import '../routine_feature/view_routine.dart';
 
 
@@ -177,16 +180,29 @@ class _IngredientPopUpState extends State<IngredientPopUp> {
                     style: TextButton.styleFrom(
                         backgroundColor: Color(0xffBBBD88)),
                     child: ReemKufi_Black(textValue: 'Continue', size: displayHeight(context)*0.03,),
-                    onPressed: () {
-                      Navigator.push(
-                          context,
-                          MaterialPageRoute(
-                            builder: (context) =>
-                                IngredientDetails(
-                                  ingredientName:
-                                  ingredient_controller.text,
-                                ),
-                          ));
+                    onPressed: () async {
+                      await Provider.of<IngredientProvider>(context,listen: false).getIngredientInfo(ingredient_controller.text.substring(0,1), ingredient_controller.text);
+                      //context.read<IngredientProvider>().getIngredientInfo(ingredient_controller.text.substring(0,1), ingredient_controller.text);
+                      //Ingredient ingredient = context.watch<IngredientProvider>().ingredient;
+                      Ingredient ingredient = await Provider.of<IngredientProvider>(context,listen: false).ingredientList[0];
+                      print(ingredient.ingredientName);
+                      print(ingredient.ingredientRating);
+                      print(ingredient.ingredientDescription);
+                      print(ingredient.ingredientCategory);
+                      if(ingredient!=null){
+                        Navigator.push(
+                            context,
+                            MaterialPageRoute(
+                              builder: (context) =>
+                                  IngredientDetails(
+                                    ingredient: ingredient,
+                                  ),
+                            ));
+                      }
+                      else{
+
+                      }
+
                     },
                   ),
                   TextButton(

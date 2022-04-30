@@ -4,6 +4,7 @@ import 'package:flutter/foundation.dart';
 import 'package:flutter/material.dart';
 import 'package:camera/camera.dart';
 import 'package:google_fonts/google_fonts.dart';
+import 'package:skin_scan/entities/ingredient_entities.dart';
 import 'package:skin_scan/utilities/bottom_app_bar.dart';
 import 'package:skin_scan/utilities/utility.dart';
 import '../ingredient_search_feature/ingredient_details.dart';
@@ -214,17 +215,18 @@ class IngredientsList extends StatefulWidget {
 }
 
 class _IngredientsListState extends State<IngredientsList> {
-  final List ILists = [
-    "Aqua (Water)",
-    "Paraffinum Liquid",
-    "Hyaluronic Acid",
-    "Palmitic Acid",
-    "Glyceryl Stearate",
-    "Triethanolamine",
-    " Cera Alba (Beeswax)",
-    "1,2-Hexanediol",
-    "Sugar"
-  ];
+  // final List IngredientList = [
+  //   "Aqua (Water)",
+  //   "Paraffinum Liquid",
+  //   "Hyaluronic Acid",
+  //   "Palmitic Acid",
+  //   "Glyceryl Stearate",
+  //   "Triethanolamine",
+  //   " Cera Alba (Beeswax)",
+  //   "1,2-Hexanediol",
+  //   "Sugar"
+  // ];
+  List<Ingredient> IngredientList = [];
   @override
   Widget build(BuildContext context) {
     return Scaffold(
@@ -261,13 +263,13 @@ class _IngredientsListState extends State<IngredientsList> {
                 textValue: 'Ingredients:', size: displayHeight(context) * 0.04),
             Expanded(
               child: ListView.builder(
-                  itemCount: ILists.length,
+                  itemCount: IngredientList.length,
                   itemBuilder: (context, index) {
                     return InkWell(
                       onTap: () {
                         Navigator.of(context).push(MaterialPageRoute(
                             builder: (context) => IngredientDetails(
-                                ingredientName: ILists[index])));
+                                ingredient: IngredientList[index])));
                       },
                       child: Container(
                           alignment: Alignment.center,
@@ -284,7 +286,7 @@ class _IngredientsListState extends State<IngredientsList> {
                               mainAxisAlignment: MainAxisAlignment.spaceBetween,
                               children: [
                                 ReemKufi_Green_Italic(
-                                    textValue: ILists[index],
+                                    textValue: IngredientList[index].ingredientName,
                                     size: displayHeight(context) * 0.02),
                                 IconButton(
                                     onPressed: () {
@@ -293,8 +295,8 @@ class _IngredientsListState extends State<IngredientsList> {
                                           MaterialPageRoute(
                                             builder: (context) =>
                                                 IngredientDetails(
-                                                    ingredientName:
-                                                    ILists[index]),
+                                                    ingredient:
+                                                    IngredientList[index]),
                                           ));
                                     },
                                     icon: Icon(Icons.arrow_forward_rounded)),
