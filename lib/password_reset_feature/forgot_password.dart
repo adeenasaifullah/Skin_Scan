@@ -11,8 +11,10 @@ class ForgotPassword extends StatefulWidget {
 }
 
 class _ForgotPasswordState extends State<ForgotPassword> {
-  String email= "";
-  String password = "";
+  // String email= "";
+
+  final TextEditingController emailController = TextEditingController();
+
   @override
   Widget build(BuildContext context) {
     return Scaffold(
@@ -29,21 +31,22 @@ class _ForgotPasswordState extends State<ForgotPassword> {
                       size: displayHeight(context) * 0.025)),
               SizedBox(height: displayHeight(context) * 0.05),
               field(
-                validateInput: (email) {
-                  if (email!.isEmpty) {
-                    return "* Required";
-                  }
-                  if (!RegExp(
-                      r"^[a-zA-Z0-9.a-zA-Z0-9.!#$%&'*+-/=?^_`{|}~]+@[a-zA-Z0-9]+\.[a-zA-Z]+")
-                      .hasMatch(email!)) {
-                    return "Enter correct email address";
-                  } else {
-                    return null;
-                  }
-                },
-                onChanged: (val) {
-                  setState(() => email = val);
-                },
+                // validateInput: (email) {
+                //   if (email!.isEmpty) {
+                //     return "* Required";
+                //   }
+                //   if (!RegExp(
+                //       r"^[a-zA-Z0-9.a-zA-Z0-9.!#$%&'*+-/=?^_`{|}~]+@[a-zA-Z0-9]+\.[a-zA-Z]+")
+                //       .hasMatch(email!)) {
+                //     return "Enter correct email address";
+                //   } else {
+                //     return null;
+                //   }
+                // },
+                // onChanged: (val) {
+                //   setState(() => email = val);
+                // },
+                textController: emailController,
                 labelText: 'Email',
                 hintText: 'Enter your email',
                 prefixIcon: Icon(Icons.email_sharp, color: Color(0xFF283618)),

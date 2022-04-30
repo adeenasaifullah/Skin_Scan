@@ -3,6 +3,7 @@ import 'package:google_fonts/google_fonts.dart';
 import 'package:skin_scan/product_categories_feature/categories_list.dart';
 import 'package:skin_scan/utilities/utility.dart';
 import '../routine_feature/view_routine.dart';
+import '../services/auth.dart';
 import 'log_in_screen.dart';
 
 class HomePageScreen extends StatefulWidget {
@@ -13,6 +14,7 @@ class HomePageScreen extends StatefulWidget {
 }
 
 class _HomePageScreenState extends State<HomePageScreen> {
+  final AuthService _auth = AuthService();
   @override
   Widget build(BuildContext context) {
     return Scaffold(
@@ -125,7 +127,8 @@ class _HomePageScreenState extends State<HomePageScreen> {
                                                 fontSize:
                                                 displayHeight(context) *
                                                     0.03)),
-                                        onPressed: () {
+                                        onPressed: () async {
+                                          await _auth.signOut();
                                           Navigator.of(context).push(MaterialPageRoute(
                                               builder: (context) => LogInScreen()));
                                         },

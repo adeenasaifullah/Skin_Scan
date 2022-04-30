@@ -11,6 +11,7 @@ import 'package:skin_scan/provider/product_provider.dart';
 import 'package:skin_scan/provider/routine_provider.dart';
 import 'package:skin_scan/register_feature/account_created.dart';
 import 'package:skin_scan/services/auth.dart';
+
 import 'package:skin_scan/utilities/utility.dart';
 import 'package:camera/camera.dart';
 import 'package:page_transition/page_transition.dart';
@@ -24,6 +25,7 @@ import 'dart:math' as math;
 
 import 'Models/users_model.dart';
 import 'log_in_sign_up_feature/log_in_register_screen.dart';
+import 'services/auth.dart';
 
 late List<CameraDescription> cameras;
 
@@ -54,13 +56,14 @@ class MyApp extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
 
+
       //Load all your data from firebase over here:
 
       context.read<CategoryProvider>().getCategoriesFromDb();
       context.read<ProductProvider>().getProductsFromDatabase();
 
     //FocusScope.of(context).unfocus();
-    return StreamProvider<UserProfile?>.value(
+    return StreamProvider<AuthenticateUser?>.value(
       value: AuthService().user,
       initialData: null,
       //GestureDetector(
@@ -72,6 +75,7 @@ class MyApp extends StatelessWidget {
       //   }
       // },
       child: MaterialApp(
+        //scaffoldMessengerKey: Utils.messengerKey,
         title: 'Flutter Demo',
         debugShowCheckedModeBanner: false,
         theme: ThemeData(
@@ -135,7 +139,7 @@ class _progressloaderState extends State<progressloader> {
   void initState() {
     Timer? timer;
     timer = Timer.periodic(const Duration(milliseconds: 100), (_) {
-      print('Percent Update');
+      //print('Percent Update');
       setState(() {
         percent += 1;
         if (percent >= 100) {

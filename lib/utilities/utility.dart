@@ -2,7 +2,6 @@ import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 import 'package:google_fonts/google_fonts.dart';
 
-
 Size displaySize(BuildContext context) {
   //debugPrint('Size = ' + MediaQuery.of(context).size.toString());
   return MediaQuery.of(context).size;
@@ -326,24 +325,29 @@ class Rambla_Green_Italic extends StatelessWidget {
   }
 }
 
-
-
-
 class field extends StatefulWidget {
+  final bool? obscuredText;
   final String labelText;
   final String hintText;
   final Icon prefixIcon;
   final Icon? suffixIcon;
   final String? Function(String?)? validateInput;
-  final Function(String value) onChanged;
+  //final Function(String value) onChanged;
+  final TextEditingController textController;
+  final VoidCallback? onPressed;
 
   const field(
       {Key? key,
-        required this.labelText,
-        required this.hintText,
-        required this.prefixIcon,
-        this.suffixIcon, required this.onChanged,
-        required this.validateInput})
+      required this.textController,
+      required this.labelText,
+      required this.hintText,
+      required this.prefixIcon,
+      this.suffixIcon,
+      //required this.onChanged,
+      this.validateInput,
+        this.obscuredText,
+        this.onPressed
+  })
       : super(key: key);
 
   @override
@@ -352,12 +356,15 @@ class field extends StatefulWidget {
 
 class _fieldState extends State<field> {
   final _formKey = GlobalKey<FormState>();
+
   @override
   Widget build(BuildContext context) {
     return Container(
       width: displayWidth(context) * 0.8,
       child: TextFormField(
-        onChanged: widget.onChanged,
+        obscureText: widget.obscuredText!,
+        controller: widget.textController,
+        //onChanged: widget.onChanged,
         validator: widget.validateInput,
         decoration: InputDecoration(
             fillColor: Color(0xFFDADBC6),
@@ -365,7 +372,7 @@ class _fieldState extends State<field> {
             border: OutlineInputBorder(
                 borderRadius: BorderRadius.circular(15.0),
                 borderSide:
-                const BorderSide(width: 6, style: BorderStyle.solid)),
+                    const BorderSide(width: 6, style: BorderStyle.solid)),
             labelText: widget.labelText,
             labelStyle: GoogleFonts.reemKufi(
                 color: Color(0xFF283618),
@@ -376,9 +383,9 @@ class _fieldState extends State<field> {
                 color: Color(0xFF283618), fontStyle: FontStyle.italic),
             prefixIcon: widget.prefixIcon,
             //Icon(Icons.lock, color: Color(0xFF283618)),
-            suffixIcon: widget.suffixIcon
-          //Icon(Icons.visibility_off, color: Color(0xFF283618))),
-        ),
+            suffixIcon: InkWell(child: widget.suffixIcon, onTap: widget.onPressed,)
+            //Icon(Icons.visibility_off, color: Color(0xFF283618))),
+            ),
       ),
     );
   }
@@ -396,7 +403,6 @@ class GreenButton extends StatelessWidget {
     required this.buttonHeight,
     required this.textSize,
     required this.buttonText,
-
     required this.onPressed,
   }) : super(key: key);
 
@@ -423,15 +429,14 @@ class LightGreenButton extends StatelessWidget {
   final double textSize;
   final String buttonText;
   final VoidCallback onPressed;
-  const LightGreenButton(
-      {Key? key,
-        required this.buttonWidth,
-        required this.buttonHeight,
-        required this.textSize,
-        required this.buttonText,
-        required this.onPressed,
-      })
-      : super(key: key);
+  const LightGreenButton({
+    Key? key,
+    required this.buttonWidth,
+    required this.buttonHeight,
+    required this.textSize,
+    required this.buttonText,
+    required this.onPressed,
+  }) : super(key: key);
 
   @override
   Widget build(BuildContext context) {
@@ -449,5 +454,3 @@ class LightGreenButton extends StatelessWidget {
     );
   }
 }
-
-

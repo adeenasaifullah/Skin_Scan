@@ -2,6 +2,7 @@ import 'package:flutter/material.dart';
 import 'package:flutter_signin_button/button_list.dart';
 import 'package:flutter_signin_button/button_view.dart';
 import 'package:form_field_validator/form_field_validator.dart';
+import 'package:skin_scan/Models/users_model.dart';
 import 'package:skin_scan/password_reset_feature/forgot_password.dart';
 import 'package:skin_scan/main.dart';
 import 'package:skin_scan/services/auth.dart';
@@ -21,8 +22,11 @@ class _LogInScreenState extends State<LogInScreen> {
   final AuthService _auth = AuthService();
 
   //text field state
-  String email = "";
-  String password = "";
+  // String email = "";
+  // String password = "";
+  String error = "";
+  final TextEditingController emailController = TextEditingController();
+  final TextEditingController passwordController = TextEditingController();
   @override
   Widget build(BuildContext context) {
     return Scaffold(
@@ -38,7 +42,7 @@ class _LogInScreenState extends State<LogInScreen> {
                 SizedBox(height: displayHeight(context) * 0.05),
                 field(
                     validateInput: (email) {
-                      if (email!.isEmpty) {
+                      if (emailController.text.isEmpty) {
                         return "* Required";
                       }
                       if (!RegExp(
@@ -49,15 +53,17 @@ class _LogInScreenState extends State<LogInScreen> {
                         return null;
                       }
                     },
-                    onChanged: (val) {
-                      setState(() => email = val);
-                    },
+                    // onChanged: (val) {
+                    //   setState(() => email = val);
+                    // },
+                  textController: emailController,
                     labelText: 'Email',
                     hintText: 'Enter your email',
                     prefixIcon:
                         Icon(Icons.email_sharp, color: Color(0xFF283618))),
                 SizedBox(height: displayHeight(context) * 0.05),
                 field(
+
                     validateInput: MultiValidator([
                       RequiredValidator(errorText: "* Required"),
                       MinLengthValidator(6,
@@ -67,23 +73,17 @@ class _LogInScreenState extends State<LogInScreen> {
                           errorText:
                               "Password should not be greater than 15 characters")
                     ]),
-                    onChanged: (val) {
-                      setState(() => password = val);
-                    },
+                    // onChanged: (val) {
+                    //   setState(() => password = val);
+                    // },
+                  textController: passwordController,
                     labelText: 'Password',
                     hintText: 'Enter your password',
                     prefixIcon: Icon(Icons.lock, color: Color(0xFF283618)),
                     suffixIcon:
                         Icon(Icons.visibility_off, color: Color(0xFF283618))),
                 SizedBox(height: displayHeight(context) * 0.025),
-                // GreenButton(buttonText: 'Login',
-                //   textSize: displayHeight(context)*0.03,
-                //   buttonHeight: displayHeight(context)*0.08,
-                //   buttonWidth: displayWidth(context) * 0.7,
-                //   onPressed: () {  Navigator.of(context).push(MaterialPageRoute(
-                //       builder: (context) => MyBottomAppBar()));},),
 
-                //SizedBox(height: displayHeight(context) * 0.02),
                 Row(
                   //mainAxisAlignment: MainAxisAlignment.center,
                   children: [
@@ -109,14 +109,32 @@ class _LogInScreenState extends State<LogInScreen> {
                   buttonHeight: displayHeight(context) * 0.08,
                   buttonWidth: displayWidth(context) * 0.7,
                   onPressed: () async {
-                    bool isValid = _formKey.currentState!.validate();
-                    if (isValid) {
-                      Navigator.push(
-                          context,
-                          MaterialPageRoute(
-                              builder: (context) => MyBottomAppBar()));
+                    if (_formKey.currentState!.validate()) {
+                      dynamic result = await _auth.signInWithEmailAndPassword(emailController.text, passwordController.text);
+                      if (result is AuthenticateUser){
+                        Navigator.push(
+                            context,
+                            MaterialPageRoute(
+                                builder: (context) => MyBottomAppBar()));
+
+                      }
+                      else {
+                        setState(() =>
+                        error = 'You have entered wrong credentials.');
+                      }
                     }
-                  },
+                  }
+
+
+                  // {
+                  //   bool isValid = _formKey.currentState!.validate();
+                  //   if (isValid) {
+                  //     Navigator.push(
+                  //         context,
+                  //         MaterialPageRoute(
+                  //             builder: (context) => MyBottomAppBar()));
+                  //   }
+                  // },
                 ),
                 SizedBox(height: displayHeight(context) * 0.02),
                 Row(mainAxisAlignment: MainAxisAlignment.center, children: [

@@ -1,7 +1,7 @@
-class UserProfile{
+class AuthenticateUser{
   final String userID;
 
-  UserProfile({
+  AuthenticateUser({
     required this.userID
 });
 }

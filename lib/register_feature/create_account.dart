@@ -5,6 +5,7 @@ import 'package:form_field_validator/form_field_validator.dart';
 import 'package:form_field_validator/form_field_validator.dart';
 import 'package:google_fonts/google_fonts.dart';
 import 'package:skin_scan/services/auth.dart';
+import '../Models/users_model.dart';
 import '../log_in_sign_up_feature/log_in_screen.dart';
 import '../main.dart';
 import '../utilities/utility.dart';
@@ -13,6 +14,7 @@ import 'package:firebase_auth/firebase_auth.dart';
 import 'package:skin_scan/services/auth.dart';
 
 class createAccount extends StatefulWidget {
+
   const createAccount({Key? key}) : super(key: key);
 
   @override
@@ -20,14 +22,28 @@ class createAccount extends StatefulWidget {
 }
 
 class _createAccountState extends State<createAccount> {
+
+  bool _obscureText = true;
+  void _toggle(){
+    setState(() {
+      _obscureText = !_obscureText;
+    });
+  }
   final AuthService _auth = AuthService();
   final _formKey = GlobalKey<FormState>();
-  String name = "";
-  String email = "";
-  String phone = "";
-  String password = "";
-  String confirmPassword = "";
-  TextEditingController emailController = TextEditingController();
+  // String name = "";
+  // String email = "";
+  // String phone = "";
+  // String password = "";
+  // String confirmPassword = "";
+  String error = "";
+  final TextEditingController emailController = TextEditingController();
+  final TextEditingController passwordController = TextEditingController();
+  final TextEditingController nameController = TextEditingController();
+  final TextEditingController phoneController = TextEditingController();
+  final TextEditingController confirmPasswordController =
+      TextEditingController();
+
   //r"^[a-zA-Z0-9.a-zA-Z0-9.!#$%&'*+-/=?^_`{|}~]+@[a-zA-Z0-9]+\.[a-zA-Z]+"
   final validators = MultiValidator([
     //EmailValidator(errorText: "Enter valid email id"),
@@ -50,16 +66,19 @@ class _createAccountState extends State<createAccount> {
               mainAxisAlignment: MainAxisAlignment.start,
               children: <Widget>[
                 field(
-                  onChanged: (val) {
-                    setState(() => name = val);
-                  },
+                  textController: nameController,
+                  // onChanged: (val) {
+                  //   setState(() => name = val);
+                  // },
                   labelText: 'Name',
                   hintText: 'Enter your name',
                   prefixIcon:
                       Icon(Icons.person_outline, color: Color(0xFF283618)),
                   validateInput: (name) {
-                    if (name!.isEmpty ||
-                        !RegExp(r'^[a-z A-Z]+$').hasMatch(name!)) {
+                    if (nameController.text.isEmpty) {
+                      return "* Required";
+                    }
+                    if (!RegExp(r'^[a-z A-Z]+$').hasMatch(name!)) {
                       //allow upper and lower case alphabets and space
                       return "Enter correct name";
                     } else {
@@ -69,81 +88,89 @@ class _createAccountState extends State<createAccount> {
                 ),
                 SizedBox(height: displayHeight(context) * 0.05),
                 field(
-                    onChanged: (val) {
-                      setState(() => email = val);
-                    },
-                    labelText: 'Email',
-                    hintText: 'Enter your email',
-                    prefixIcon:
-                        Icon(Icons.email_sharp, color: Color(0xFF283618)),
-                    //validateInput: (email) => EmailValidator(errorText: 'Please enter valid email!') ,
-                    validateInput: (email) {
-                      // if (email!.isEmpty) {
-                      //   return "* Required";
-                      // }
-                      //EmailValidator(errorText: "Enter valid email id");
-                      //PatternValidator(r"^[a-zA-Z0-9.a-zA-Z0-9.!#$%&'*+-/=?^_`{|}~]+@[a-zA-Z0-9]+\.[a-zA-Z]+",
-                      // errorText: 'passwords must have at least one special character');
-                      if (email!.isEmpty) {
-                        return "* Required";
-                      }
-                      if (!RegExp(
-                              r"^[a-zA-Z0-9.a-zA-Z0-9.!#$%&'*+-/=?^_`{|}~]+@[a-zA-Z0-9]+\.[a-zA-Z]+")
-                          .hasMatch(email!)) {
-                        return "Enter correct email address";
-                      } else {
-                        return null;
-                      }
-                    }),
+                  textController: emailController,
+                  // onChanged: (val) {
+                  //   setState(() => email = val);
+                  // },
+                  labelText: 'Email',
+                  hintText: 'Enter your email',
+                  prefixIcon: Icon(Icons.email_sharp, color: Color(0xFF283618)),
+                  //validateInput: (email) => EmailValidator(errorText: 'Please enter valid email!') ,
+                  validateInput: (email) {
+                    // if (email!.isEmpty) {
+                    //   return "* Required";
+                    // }
+                    //EmailValidator(errorText: "Enter valid email id");
+                    //PatternValidator(r"^[a-zA-Z0-9.a-zA-Z0-9.!#$%&'*+-/=?^_`{|}~]+@[a-zA-Z0-9]+\.[a-zA-Z]+",
+                    // errorText: 'passwords must have at least one special character');
+                    if (emailController.text.isEmpty) {
+                      return "* Required";
+                    }
+                    if (!RegExp(
+                            r"^[a-zA-Z0-9.a-zA-Z0-9.!#$%&'*+-/=?^_`{|}~]+@[a-zA-Z0-9]+\.[a-zA-Z]+")
+                        .hasMatch(email!)) {
+                      return "Enter correct email address";
+                    } else {
+                      return null;
+                    }
+                  }
+                ),
                 SizedBox(height: displayHeight(context) * 0.05),
                 field(
-                    validateInput: (phone) {
-                      if (phone!.isEmpty) {
-                        return "* Required";
-                      } else if (!RegExp(r'^[0-9]{11}$').hasMatch(phone!)) {
-                        //  r'^[0-9]{10}$' pattern plain match number with length 11
-                        return "Enter correct phone number";
-                      } else {
-                        return null;
-                      }
-                    },
-                    onChanged: (val) {
-                      setState(() => phone = val);
-                    },
-                    labelText: 'Phone',
-                    hintText: 'Enter your phone number',
-                    prefixIcon: Icon(Icons.smartphone_rounded,
-                        color: Color(0xFF283618))),
+                  validateInput: (phone) {
+                    if (phone!.isEmpty) {
+                      return "* Required";
+                    } else if (!RegExp(r'^[0-9]{11}$').hasMatch(phone!)) {
+                      //  r'^[0-9]{10}$' pattern plain match number with length 11
+                      return "Enter correct phone number";
+                    } else {
+                      return null;
+                    }
+                  },
+                  // onChanged: (val) {
+                  //   setState(() => phone = val);
+                  // },
+                  labelText: 'Phone',
+                  hintText: 'Enter your phone number',
+                  prefixIcon:
+                      Icon(Icons.smartphone_rounded, color: Color(0xFF283618)),
+                  textController: phoneController,
+                ),
                 SizedBox(height: displayHeight(context) * 0.05),
                 field(
-                    validateInput: MultiValidator([
-                      RequiredValidator(errorText: "* Required"),
-                      MinLengthValidator(6,
-                          errorText:
-                              "Password should be at least 6 characters"),
-                      MaxLengthValidator(15,
-                          errorText:
-                              "Password should not be greater than 15 characters")
-                    ]),
-                    onChanged: (val) {
-                      setState(() => password = val);
-                    },
-                    labelText: 'Password',
-                    hintText: 'Enter your password',
-                    prefixIcon: Icon(Icons.lock, color: Color(0xFF283618)),
-                    suffixIcon:
-                        Icon(Icons.visibility_off, color: Color(0xFF283618))),
+                  validateInput: MultiValidator([
+                    RequiredValidator(errorText: "* Required"),
+                    MinLengthValidator(6,
+                        errorText:
+                            "Password should be at least 6 characters"),
+                    MaxLengthValidator(15,
+                        errorText:
+                            "Password should not be greater than 15 characters")
+                  ]),
+                  // onChanged: (val) {
+                  //   setState(() => password = val);
+                  // },
+                  obscuredText: _obscureText,
+                  labelText: 'Password',
+                  hintText: 'Enter your password',
+                  prefixIcon: Icon(Icons.lock, color: Color(0xFF283618)),
+                  suffixIcon:
+                      (Icon(Icons.visibility_off, color: Color(0xFF283618))),
+                  textController: passwordController,
+                ),
                 SizedBox(height: displayHeight(context) * 0.05),
                 field(
+                    textController: confirmPasswordController,
+
                     validateInput: (confirmPassword) {
-                      if (confirmPassword!.isEmpty) return '* Required';
-                      if (confirmPassword! != password!)
+                      if (confirmPasswordController.text!.isEmpty) return '* Required';
+                      if (confirmPasswordController.text! != passwordController.text!)
                         return 'The password does not match!';
                       return null;
                     },
-                    onChanged: (val) {
-                      setState(() => confirmPassword = val);
-                    },
+                    // onChanged: (val) {
+                    //   setState(() => confirmPassword = val);
+                    // },
                     labelText: 'Confirm Password',
                     hintText: 'Confirm Password',
                     prefixIcon: Icon(Icons.lock, color: Color(0xFF283618)),
@@ -157,11 +184,22 @@ class _createAccountState extends State<createAccount> {
                   buttonText: 'Create Account',
                   onPressed: () async {
                     bool isValid = _formKey.currentState!.validate();
-                    if (isValid) {
-                      Navigator.push(
-                          context,
-                          MaterialPageRoute(
-                              builder: (context) => accountCreated()));
+                    if (_formKey.currentState!.validate()) {
+                      print(emailController.text);
+                      print(passwordController.text);
+                      dynamic result = await _auth.registerWithEmailAndPassword(
+                          emailController.text, passwordController.text);
+
+                      if (result is AuthenticateUser) {
+                        Navigator.push(
+                            context,
+                            MaterialPageRoute(
+                                builder: (context) => accountCreated()));
+
+                      }
+                      else {
+                        setState(() => error = 'Please supply a valid email.');
+                      }
                     }
                   },
                 ),

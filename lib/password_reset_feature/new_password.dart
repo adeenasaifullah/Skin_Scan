@@ -13,8 +13,10 @@ class NewPassword extends StatefulWidget {
 }
 
 class _NewPasswordState extends State<NewPassword> {
-  String password = "";
-  String confirmPassword = "";
+  // String password = "";
+  // String confirmPassword = "";
+  final TextEditingController confirmPasswordController = TextEditingController();
+  final TextEditingController passwordController = TextEditingController();
   @override
   Widget build(BuildContext context) {
     return Scaffold(
@@ -27,16 +29,17 @@ class _NewPasswordState extends State<NewPassword> {
             children: <Widget>[
               SizedBox(height: displayHeight(context) * 0.05),
               field(
-                  validateInput: MultiValidator([
-                    RequiredValidator(errorText: "* Required"),
-                    MinLengthValidator(6,
-                        errorText:
-                        "Password should be at least 6 characters"),
-                    MaxLengthValidator(15,
-                        errorText:
-                        "Password should not be greater than 15 characters")
-                  ]),
-                  onChanged: (val){setState(() => password = val);},
+                  // validateInput: MultiValidator([
+                  //   RequiredValidator(errorText: "* Required"),
+                  //   MinLengthValidator(6,
+                  //       errorText:
+                  //       "Password should be at least 6 characters"),
+                  //   MaxLengthValidator(15,
+                  //       errorText:
+                  //       "Password should not be greater than 15 characters")
+                  // ]),
+                  // onChanged: (val){setState(() => password = val);},
+                textController: passwordController,
                   labelText: 'New Password',
                   hintText: 'Enter your password',
                   prefixIcon: Icon(Icons.lock, color: Color(0xFF283618)),
@@ -45,13 +48,14 @@ class _NewPasswordState extends State<NewPassword> {
 
               SizedBox(height: displayHeight(context) * 0.05),
               field(
-                  validateInput: (phone) {
-                    if (confirmPassword!.isEmpty) return '* Required';
-                    if (confirmPassword! != password!)
-                      return 'The password does not match!';
-                    return null;
-                  },
-                  onChanged: (val){setState(() => confirmPassword = val);},
+                textController: confirmPasswordController,
+                  // validateInput: (phone) {
+                  //   if (confirmPassword!.isEmpty) return '* Required';
+                  //   if (confirmPassword! != password!)
+                  //     return 'The password does not match!';
+                  //   return null;
+                  // },
+                  // onChanged: (val){setState(() => confirmPassword = val);},
                   labelText: 'Confirm Password',
                   hintText: 'Re-Enter your password',
                   prefixIcon: Icon(Icons.lock, color: Color(0xFF283618)),
