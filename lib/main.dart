@@ -1,5 +1,3 @@
-
-
 import 'package:animated_splash_screen/animated_splash_screen.dart';
 import 'package:firebase_auth/firebase_auth.dart';
 import 'package:flutter/cupertino.dart';
@@ -7,11 +5,11 @@ import 'package:flutter/material.dart';
 import 'package:google_fonts/google_fonts.dart';
 import 'package:provider/provider.dart';
 import 'package:skin_scan/provider/categories_provider.dart';
+import 'package:skin_scan/provider/google_sign_in.dart';
 import 'package:skin_scan/provider/product_provider.dart';
 import 'package:skin_scan/provider/routine_provider.dart';
 import 'package:skin_scan/register_feature/account_created.dart';
 import 'package:skin_scan/services/auth.dart';
-
 import 'package:skin_scan/utilities/utility.dart';
 import 'package:camera/camera.dart';
 import 'package:page_transition/page_transition.dart';
@@ -36,10 +34,10 @@ Future<void> main() async {
   cameras = await availableCameras();
   runApp(MultiProvider(
     providers: [
-      Provider<RoutineProvider>
-        (create: (_) => RoutineProvider()),
+      Provider<RoutineProvider>(create: (_) => RoutineProvider()),
       ChangeNotifierProvider(create: (_) => CategoryProvider()),
       ChangeNotifierProvider(create: (_) => ProductProvider()),
+      ChangeNotifierProvider(create: (_) => GoogleSignInProvider()),
       //Provider<AuthService>(create: (_) => AuthService(FirebaseAuth.instance)),
       //StreamProvider(create: (context) => context.read<AuthService>().authStateChanges, initialData: null,),
     ],
@@ -47,20 +45,15 @@ Future<void> main() async {
   ));
 }
 
-
-
 class MyApp extends StatelessWidget {
   const MyApp({Key? key}) : super(key: key);
 
-  // This widget is the root of your application.
   @override
   Widget build(BuildContext context) {
 
-
-      //Load all your data from firebase over here:
-
-      context.read<CategoryProvider>().getCategoriesFromDb();
-      context.read<ProductProvider>().getProductsFromDatabase();
+    //Load all your data from firebase over here:
+    context.read<CategoryProvider>().getCategoriesFromDb();
+    context.read<ProductProvider>().getProductsFromDatabase();
 
     //FocusScope.of(context).unfocus();
     return StreamProvider<AuthenticateUser?>.value(
@@ -95,7 +88,6 @@ class LogoScreen extends StatefulWidget {
 }
 
 class _LogoScreenState extends State<LogoScreen> {
-
   @override
   Widget build(BuildContext context) {
     return AnimatedSplashScreen(
@@ -105,7 +97,8 @@ class _LogoScreenState extends State<LogoScreen> {
           Image.asset('assets/skinscanlogolight.png',
               width: displayWidth(context) * 0.4,
               height: displayHeight(context) * 0.3),
-          ReemKufiOffwhite(textValue: "Skin Scan", size: displayHeight(context) * 0.05),
+          ReemKufiOffwhite(
+              textValue: "Skin Scan", size: displayHeight(context) * 0.05),
           ReemKufiOffwhite_Italic(
               textValue: "Efficient and safe decisions for your skin!",
               size: displayWidth(context) * 0.03),
@@ -132,20 +125,19 @@ class progressloader extends StatefulWidget {
 class _progressloaderState extends State<progressloader> {
   double? _height;
   double? _width;
-
   double percent = 0.0;
 
   @override
   void initState() {
     Timer? timer;
-    timer = Timer.periodic(const Duration(milliseconds: 100), (_) {
+    timer = Timer.periodic(const Duration(milliseconds: 30), (_) {
       //print('Percent Update');
       setState(() {
         percent += 1;
         if (percent >= 100) {
           timer!.cancel();
-          Navigator.of(context)
-              .push(MaterialPageRoute(builder: (context) => LogInRegisterScreen()));
+          Navigator.of(context).push(
+              MaterialPageRoute(builder: (context) => LogInRegisterScreen()));
         }
       });
     });
@@ -191,7 +183,9 @@ class _progressloaderState extends State<progressloader> {
                   ),
                 ),
                 SizedBox(height: 4),
-                ReemKufiOffwhite(textValue: "Loading...", size: displayHeight(context) * 0.04),
+                ReemKufiOffwhite(
+                    textValue: "Loading...",
+                    size: displayHeight(context) * 0.04),
               ],
             ),
           ],
@@ -213,7 +207,6 @@ class _progressloaderState extends State<progressloader> {
   }
 }
 
-
 class AppBarDetails extends StatefulWidget implements PreferredSizeWidget {
   final String screenName;
   const AppBarDetails({Key? key, required this.screenName}) : super(key: key);
@@ -231,30 +224,31 @@ class _AppBarDetailsState extends State<AppBarDetails> {
   Widget build(BuildContext context) {
     return Container(
         child: AppBar(
-          elevation: 0,
-          backgroundColor: const Color(0xFFFFFDF4),
-          centerTitle: false,
-          title: ReemKufi_Grey(textValue: widget.screenName,size: displayHeight(context) * 0.03),
-          iconTheme: const IconThemeData(
-          color: const Color(0xFF4D4D4D), //change your color here
-          ),
-          leading: GestureDetector(
-              child: Icon(Icons.arrow_back, color: Color(0xFF4D4D4D)),
-              onTap: () {
-                Navigator.pop(context);
-              }),
-          actions: [
-            Padding(
-              padding: EdgeInsets.only(
-                  right: displayWidth(context) * 0.05,
-                  top: displayHeight(context) * 0.005),
-              child: Image(
-                  image: AssetImage('assets/dots for app dev.png'),
-                  fit: BoxFit.fill,
-                  height: displayHeight(context) * 1,
-                  width: displayWidth(context) * 0.1),
-            ),
-          ],
-        ));
-      }
-    }
+      elevation: 0,
+      backgroundColor: const Color(0xFFFFFDF4),
+      centerTitle: false,
+      title: ReemKufi_Grey(
+          textValue: widget.screenName, size: displayHeight(context) * 0.03),
+      iconTheme: const IconThemeData(
+        color: const Color(0xFF4D4D4D), //change your color here
+      ),
+      leading: GestureDetector(
+          child: Icon(Icons.arrow_back, color: Color(0xFF4D4D4D)),
+          onTap: () {
+            Navigator.pop(context);
+          }),
+      actions: [
+        Padding(
+          padding: EdgeInsets.only(
+              right: displayWidth(context) * 0.05,
+              top: displayHeight(context) * 0.005),
+          child: Image(
+              image: AssetImage('assets/dots for app dev.png'),
+              fit: BoxFit.fill,
+              height: displayHeight(context) * 1,
+              width: displayWidth(context) * 0.1),
+        ),
+      ],
+    ));
+  }
+}

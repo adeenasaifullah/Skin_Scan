@@ -2,6 +2,7 @@ import 'package:firebase_auth/firebase_auth.dart';
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 import 'package:fluttertoast/fluttertoast.dart';
+import 'package:google_sign_in/google_sign_in.dart';
 import 'package:skin_scan/Models/users_model.dart';
 //import 'package:google_sign_in/google_sign_in.dart';
 
@@ -97,24 +98,26 @@ class AuthService {
     }
   }
   //sign in with google
-  // Future signInWithGoogle() async {
-  //   try {
-  //     final GoogleSignIn googleSignIn = GoogleSignIn();
-  //     final GoogleSignInAccount? account = await googleSignIn.signIn();
-  //     final GoogleSignInAuthentication auth = await account!.authentication;
-  //
-  //     final AuthCredential credential = GoogleAuthProvider.credential(
-  //       accessToken: auth.accessToken,
-  //       idToken: auth.idToken,
-  //     );
-  //     UserCredential result = await _auth.signInWithCredential(credential);
-  //     User user = result.user!;
-  //     return _userFromFirebaseUser(user);
-  //   } catch (e) {
-  //     print(e.toString());
-  //     return e;
-  //   }
-  // }
+  Future signInWithGoogle() async {
+    try {
+      final GoogleSignIn googleSignIn = GoogleSignIn();
+      final GoogleSignInAccount? account = await googleSignIn.signIn();
+      final GoogleSignInAuthentication auth = await account!.authentication;
+
+      final AuthCredential credential = GoogleAuthProvider.credential(
+        accessToken: auth.accessToken,
+        idToken: auth.idToken,
+      );
+
+      UserCredential result = await _auth.signInWithCredential(credential);
+      User user = result.user!;
+      return _userFromFirebaseUser(user);
+    } catch (e) {
+      print(e.toString());
+      return e;
+    }
+
+  }
 }
 // final  messengerKey = GlobalKey<ScaffoldMessengerState>();
 // class Utils{

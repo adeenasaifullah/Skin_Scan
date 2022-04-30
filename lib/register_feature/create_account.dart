@@ -175,7 +175,7 @@ class _createAccountState extends State<createAccount> {
                     hintText: 'Confirm Password',
                     prefixIcon: Icon(Icons.lock, color: Color(0xFF283618)),
                     suffixIcon:
-                        Icon(Icons.visibility_off, color: Color(0xFF283618))),
+                        const Icon(Icons.visibility_off, color: Color(0xFF283618))),
                 SizedBox(height: displayHeight(context) * 0.05),
                 GreenButton(
                   buttonWidth: displayWidth(context) * 0.7,
@@ -195,7 +195,6 @@ class _createAccountState extends State<createAccount> {
                             context,
                             MaterialPageRoute(
                                 builder: (context) => accountCreated()));
-
                       }
                       else {
                         setState(() => error = 'Please supply a valid email.');

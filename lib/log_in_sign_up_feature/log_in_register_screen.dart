@@ -1,10 +1,16 @@
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
+import 'package:google_sign_in/google_sign_in.dart';
+import 'package:provider/provider.dart';
+import 'package:skin_scan/provider/google_sign_in.dart';
 import 'package:skin_scan/register_feature/create_account.dart';
 import 'package:flutter_signin_button/flutter_signin_button.dart';
+import '../Models/users_model.dart';
 import '../main.dart';
+import '../register_feature/account_created.dart';
 import '../utilities/utility.dart';
 import 'log_in_screen.dart';
+import 'package:skin_scan/services/auth.dart';
 
 class LogInRegisterScreen extends StatefulWidget {
   const LogInRegisterScreen({Key? key}) : super(key: key);
@@ -14,6 +20,9 @@ class LogInRegisterScreen extends StatefulWidget {
 }
 
 class _LogInRegisterScreenState extends State<LogInRegisterScreen> {
+ final AuthService _auth = AuthService();
+ String error = "";
+
   @override
   Widget build(BuildContext context) {
     return Scaffold(
@@ -109,22 +118,37 @@ class _LogInRegisterScreenState extends State<LogInRegisterScreen> {
                       left: displayHeight(context) * 0.05,
                       right: displayHeight(context) * 0.05),
                   child: SignInButton(
-                    Buttons.Google,
-                    text: "Sign up with Google",
-                    onPressed: () {},
+                      Buttons.Google,
+                      text: "Sign in with Google",
+                    onPressed: () async {
+                      // Provider.of<GoogleSignInProvider>(context, listen: false).googleSignIn;
+                      // print('im in method');
+                      // print('im below method');
+                      dynamic result = await _auth.signInWithGoogle(
+                          );
+                      if (result is AuthenticateUser) {
+                        Navigator.push(
+                            context,
+                            MaterialPageRoute(
+                                builder: (context) => accountCreated()));
+                      }
+                      else {
+                        setState(() => error = 'Please supply a valid email.');
+                      }
+                    },
                   ),
                 ),
                 SizedBox(height: displayHeight(context) * 0.02),
-                Padding(
-                  padding: EdgeInsets.only(
-                      left: displayHeight(context) * 0.05,
-                      right: displayHeight(context) * 0.05),
-                  child: SignInButton(
-                    Buttons.Facebook,
-                    text: "Sign up with Facebook",
-                    onPressed: () {},
-                  ),
-                ),
+                // Padding(
+                //   padding: EdgeInsets.only(
+                //       left: displayHeight(context) * 0.05,
+                //       right: displayHeight(context) * 0.05),
+                //   child: SignInButton(
+                //     Buttons.Facebook,
+                //     text: "Sign up with Facebook",
+                //     onPressed: () {},
+                //   ),
+                // ),
               ],
             ),
           ),
