@@ -49,7 +49,7 @@ class _ForgotPasswordState extends State<ForgotPassword> {
                 textController: emailController,
                 labelText: 'Email',
                 hintText: 'Enter your email',
-                prefixIcon: Icon(Icons.email_sharp, color: Color(0xFF283618)),
+                prefixIcon: Icon(Icons.email_sharp, color: Color(0xFF283618)), autoFocus: false,
               ),
               SizedBox(height: displayHeight(context) * 0.05),
               GreenButton(

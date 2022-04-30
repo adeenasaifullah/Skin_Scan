@@ -1,3 +1,4 @@
+import 'package:firebase_auth/firebase_auth.dart';
 import 'package:flutter/material.dart';
 import 'package:google_fonts/google_fonts.dart';
 import 'package:skin_scan/product_categories_feature/categories_list.dart';
@@ -14,7 +15,10 @@ class HomePageScreen extends StatefulWidget {
 }
 
 class _HomePageScreenState extends State<HomePageScreen> {
+
   final AuthService _auth = AuthService();
+  final user = FirebaseAuth.instance.currentUser!;
+
   @override
   Widget build(BuildContext context) {
     return Scaffold(
@@ -90,71 +94,77 @@ class _HomePageScreenState extends State<HomePageScreen> {
                     SizedBox(
                       width: displayWidth(context)*0.05,
                     ),
-                    InkWell(
-                      child: Icon(
-                        Icons.logout,
-                        color: Color(0xff283618),
-                        size: displayWidth(context) * 0.125,
-                      ),
-                      onTap : () async {
-                        return showDialog(
-                          barrierDismissible: false,
-                          context: context, // user must tap button!
-                          builder: (context) {
-                            return AlertDialog(
-                              backgroundColor: const Color(0xff283618),
-                              title: Text(
-                                  'Are you sure you want to logout?',
-                                  style: GoogleFonts.reemKufi(
-                                      color: Color(0xffFFFDF4),
-                                      fontSize:
-                                      displayHeight(context) * 0.04)),
-                              actions: <Widget>[
-                                Padding(
-                                  padding: EdgeInsets.all(
-                                      displayHeight(context) * 0.03),
-                                  child: Row(
-                                    mainAxisAlignment:
-                                    MainAxisAlignment.spaceEvenly,
-                                    children: [
-                                      TextButton(
-                                        style: TextButton.styleFrom(
-                                            backgroundColor:
-                                            Color(0xffFFFDF4)),
-                                        child: Text('Yes',
-                                            style: GoogleFonts.reemKufi(
-                                                color: Colors.black,
-                                                fontSize:
-                                                displayHeight(context) *
-                                                    0.03)),
-                                        onPressed: () async {
-                                          await _auth.signOut();
-                                          Navigator.of(context).push(MaterialPageRoute(
-                                              builder: (context) => LogInScreen()));
-                                        },
+                    Column(
+                      mainAxisAlignment: MainAxisAlignment.center,
+                      children: [
+                        InkWell(
+                          child: Icon(
+                            Icons.logout,
+                            color: Color(0xff283618),
+                            size: displayWidth(context) * 0.125,
+                          ),
+                          onTap : () async {
+                            return showDialog(
+                              barrierDismissible: false,
+                              context: context, // user must tap button!
+                              builder: (context) {
+                                return AlertDialog(
+                                  backgroundColor: const Color(0xff283618),
+                                  title: Text(
+                                      'Are you sure you want to logout?',
+                                      style: GoogleFonts.reemKufi(
+                                          color: Color(0xffFFFDF4),
+                                          fontSize:
+                                          displayHeight(context) * 0.04)),
+                                  actions: <Widget>[
+                                    Padding(
+                                      padding: EdgeInsets.all(
+                                          displayHeight(context) * 0.03),
+                                      child: Row(
+                                        mainAxisAlignment:
+                                        MainAxisAlignment.spaceEvenly,
+                                        children: [
+                                          TextButton(
+                                            style: TextButton.styleFrom(
+                                                backgroundColor:
+                                                Color(0xffFFFDF4)),
+                                            child: Text('Yes',
+                                                style: GoogleFonts.reemKufi(
+                                                    color: Colors.black,
+                                                    fontSize:
+                                                    displayHeight(context) *
+                                                        0.03)),
+                                            onPressed: () async {
+                                              await _auth.signOut();
+                                              Navigator.of(context).push(MaterialPageRoute(
+                                                  builder: (context) => LogInScreen()));
+                                            },
+                                          ),
+                                          TextButton(
+                                            style: TextButton.styleFrom(
+                                                backgroundColor:
+                                                Color(0xffBBBD88)),
+                                            child: Text('No',
+                                                style: GoogleFonts.reemKufi(
+                                                    color: Colors.black,
+                                                    fontSize:
+                                                    displayHeight(context) *
+                                                        0.03)),
+                                            onPressed: () {
+                                              Navigator.of(context).pop(false);
+                                            },
+                                          ),
+                                        ],
                                       ),
-                                      TextButton(
-                                        style: TextButton.styleFrom(
-                                            backgroundColor:
-                                            Color(0xffBBBD88)),
-                                        child: Text('No',
-                                            style: GoogleFonts.reemKufi(
-                                                color: Colors.black,
-                                                fontSize:
-                                                displayHeight(context) *
-                                                    0.03)),
-                                        onPressed: () {
-                                          Navigator.of(context).pop(false);
-                                        },
-                                      ),
-                                    ],
-                                  ),
-                                ),
-                              ],
+                                    ),
+                                  ],
+                                );
+                              },
                             );
                           },
-                        );
-                      },
+                        ),
+                        ReemKufi_OffWhite_Center(textValue: 'Logout', size: displayHeight(context)*0.025),
+                      ],
                     )
                   ],
                 ),

@@ -61,7 +61,7 @@ class MyApp extends StatelessWidget {
     return StreamProvider<AuthenticateUser?>.value(
       value: AuthService().user,
       initialData: null,
-      //GestureDetector(
+      // GestureDetector(
       // onTap: () {
       //   FocusScopeNode currentFocus = FocusScope.of(context);
       //

@@ -84,7 +84,7 @@ class _createAccountState extends State<createAccount> {
                     } else {
                       return null;
                     }
-                  },
+                  }, autoFocus: false,
                 ),
                 SizedBox(height: displayHeight(context) * 0.05),
                 field(
@@ -113,7 +113,7 @@ class _createAccountState extends State<createAccount> {
                     } else {
                       return null;
                     }
-                  }
+                  }, autoFocus: false,
                 ),
                 SizedBox(height: displayHeight(context) * 0.05),
                 field(
@@ -134,7 +134,7 @@ class _createAccountState extends State<createAccount> {
                   hintText: 'Enter your phone number',
                   prefixIcon:
                       Icon(Icons.smartphone_rounded, color: Color(0xFF283618)),
-                  textController: phoneController,
+                  textController: phoneController, autoFocus: false,
                 ),
                 SizedBox(height: displayHeight(context) * 0.05),
                 field(
@@ -156,7 +156,7 @@ class _createAccountState extends State<createAccount> {
                   prefixIcon: Icon(Icons.lock, color: Color(0xFF283618)),
                   suffixIcon:
                       (Icon(Icons.visibility_off, color: Color(0xFF283618))),
-                  textController: passwordController,
+                  textController: passwordController, autoFocus: false,
                 ),
                 SizedBox(height: displayHeight(context) * 0.05),
                 field(
@@ -174,8 +174,7 @@ class _createAccountState extends State<createAccount> {
                     labelText: 'Confirm Password',
                     hintText: 'Confirm Password',
                     prefixIcon: Icon(Icons.lock, color: Color(0xFF283618)),
-                    suffixIcon:
-                        const Icon(Icons.visibility_off, color: Color(0xFF283618))),
+                    suffixIcon: const Icon(Icons.visibility_off, color: Color(0xFF283618)), autoFocus: false,),
                 SizedBox(height: displayHeight(context) * 0.05),
                 GreenButton(
                   buttonWidth: displayWidth(context) * 0.7,
@@ -206,25 +205,19 @@ class _createAccountState extends State<createAccount> {
                 Row(
                   mainAxisAlignment: MainAxisAlignment.center,
                   children: <Widget>[
-                    Flexible(
-                      flex: 2,
-                      child: ReemKufi_Green_Bold(
-                          textValue: 'Already have an account?',
-                          size: displayHeight(context) * 0.025),
-                    ),
+                    ReemKufi_Green_Bold(
+                        textValue: 'Already have an account?',
+                        size: displayHeight(context) * 0.025),
                     SizedBox(width: displayWidth(context) * 0.03),
-                    Flexible(
-                      flex: 2,
-                      child: TextButton(
-                        onPressed: () {
-                          Navigator.of(context).push(MaterialPageRoute(
-                              builder: (context) => LogInScreen()));
-                        },
-                        child: Text('Login',
-                            style: GoogleFonts.reemKufi(
-                                color: Color(0xFF4D4D4D), fontSize: 20)),
-                        //backgroundColor: Colors.white,
-                      ),
+                    TextButton(
+                      onPressed: () {
+                        Navigator.of(context).push(MaterialPageRoute(
+                            builder: (context) => LogInScreen()));
+                      },
+                      child: Text('Login',
+                          style: GoogleFonts.reemKufi(
+                              color: Color(0xFF4D4D4D), fontSize: 20)),
+                      //backgroundColor: Colors.white,
                     ),
                   ],
                 ),

@@ -33,12 +33,9 @@ class _accountCreatedState extends State<accountCreated> {
                 Row(
                   mainAxisAlignment: MainAxisAlignment.center,
                   children: [
-                    Flexible(
-                      flex: 2,
-                      child: ReemKufi_Grey_Center(
-                          textValue: 'Welcome!',
-                          size: displayWidth(context) * 0.12),
-                    ),
+                    ReemKufi_Grey_Center(
+                        textValue: 'Welcome!',
+                        size: displayWidth(context) * 0.12),
                     SizedBox(width: displayWidth(context) * 0.02),
                     ImageIcon(
                       const AssetImage("assets/dots.png"),
@@ -62,20 +59,18 @@ class _accountCreatedState extends State<accountCreated> {
                     size: displayHeight(context) * 0.03),
                 SizedBox(height: displayHeight(context) * 0.15),
                 //SizedBox(height: displayHeight(context) * 0.02),
-                Flexible(
-                    flex: 2,
-                    child: GreenButton(
-                      buttonHeight: displayHeight(context) * 0.09,
-                      buttonWidth: displayWidth(context) * 0.40,
-                      textSize: displayHeight(context) * 0.03,
-                      buttonText: 'Continue',
-                      onPressed: () {
-                        Navigator.push(
-                            context,
-                            MaterialPageRoute(
-                                builder: (context) => skinTypeQuiz()));
-                      },
-                    )),
+                GreenButton(
+                  buttonHeight: displayHeight(context) * 0.09,
+                  buttonWidth: displayWidth(context) * 0.40,
+                  textSize: displayHeight(context) * 0.03,
+                  buttonText: 'Continue',
+                  onPressed: () {
+                    Navigator.push(
+                        context,
+                        MaterialPageRoute(
+                            builder: (context) => skinTypeQuiz()));
+                  },
+                ),
               ],
             ),
           ),

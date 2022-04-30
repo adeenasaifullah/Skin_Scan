@@ -130,15 +130,12 @@ class howReactiveText extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    return Flexible(
-      child:
-      Text(text,
-          textAlign: TextAlign.start,
-          softWrap: true,
-          style: GoogleFonts.rambla(
-              fontSize: displayHeight(context) * 0.015,
-              color: Colors.black,
-              fontStyle: FontStyle.italic)),
-    );
+    return Text(text,
+        textAlign: TextAlign.start,
+        softWrap: true,
+        style: GoogleFonts.rambla(
+            fontSize: displayHeight(context) * 0.015,
+            color: Colors.black,
+            fontStyle: FontStyle.italic));
   }
 }
