@@ -6,6 +6,7 @@
 
         android:label="skin_scan"
         android:name="${applicationName}"
+        android:usesCleartextTraffic="true"
         android:icon="@mipmap/ic_launcher">
 
 

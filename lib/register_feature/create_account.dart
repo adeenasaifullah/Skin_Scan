@@ -23,12 +23,12 @@ class createAccount extends StatefulWidget {
 
 class _createAccountState extends State<createAccount> {
 
-  bool _obscureText = true;
-  void _toggle(){
-    setState(() {
-      _obscureText = !_obscureText;
-    });
-  }
+  // bool _obscureText = true;
+  // void _toggle(){
+  //   setState(() {
+  //     _obscureText = !_obscureText;
+  //   });
+  // }
   final AuthService _auth = AuthService();
   final _formKey = GlobalKey<FormState>();
   // String name = "";
@@ -150,7 +150,7 @@ class _createAccountState extends State<createAccount> {
                   // onChanged: (val) {
                   //   setState(() => password = val);
                   // },
-                  obscuredText: _obscureText,
+                  //obscuredText: _obscureText,
                   labelText: 'Password',
                   hintText: 'Enter your password',
                   prefixIcon: Icon(Icons.lock, color: Color(0xFF283618)),

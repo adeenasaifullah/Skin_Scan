@@ -326,7 +326,7 @@ class Rambla_Green_Italic extends StatelessWidget {
 }
 
 class field extends StatefulWidget {
-  final bool? obscuredText;
+  //final bool? obscuredText;
   final String labelText;
   final String hintText;
   final Icon prefixIcon;
@@ -334,7 +334,7 @@ class field extends StatefulWidget {
   final String? Function(String?)? validateInput;
   //final Function(String value) onChanged;
   final TextEditingController textController;
-  final VoidCallback? onPressed;
+  //final VoidCallback? onPressed;
 
   const field(
       {Key? key,
@@ -345,8 +345,8 @@ class field extends StatefulWidget {
       this.suffixIcon,
       //required this.onChanged,
       this.validateInput,
-        this.obscuredText,
-        this.onPressed
+        //this.obscuredText,
+        //this.onPressed
   })
       : super(key: key);
 
@@ -362,7 +362,7 @@ class _fieldState extends State<field> {
     return Container(
       width: displayWidth(context) * 0.8,
       child: TextFormField(
-        obscureText: widget.obscuredText!,
+        //obscureText: widget.obscuredText!,
         controller: widget.textController,
         //onChanged: widget.onChanged,
         validator: widget.validateInput,
@@ -383,7 +383,7 @@ class _fieldState extends State<field> {
                 color: Color(0xFF283618), fontStyle: FontStyle.italic),
             prefixIcon: widget.prefixIcon,
             //Icon(Icons.lock, color: Color(0xFF283618)),
-            suffixIcon: InkWell(child: widget.suffixIcon, onTap: widget.onPressed,)
+            suffixIcon: widget.suffixIcon,
             //Icon(Icons.visibility_off, color: Color(0xFF283618))),
             ),
       ),
