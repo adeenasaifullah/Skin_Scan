@@ -1,30 +1,25 @@
 import 'package:flutter/material.dart';
 import 'package:google_maps_flutter/google_maps_flutter.dart';
+import 'package:skin_scan/Models/location_model.dart';
+import 'package:skin_scan/utilities/utility.dart';
 import '../main.dart';
-import 'locations.dart' as locations;
 
 class MapDemo extends StatefulWidget {
-  //final locations.Locations selectedLocation;
-  const MapDemo({Key? key}) : super(key: key);
+  final LocationModel selectedLocation;
+  const MapDemo({Key? key, required this.selectedLocation}) : super(key: key);
 
   @override
   _MapDemoState createState() => _MapDemoState();
 }
 
 class _MapDemoState extends State<MapDemo> with AutomaticKeepAliveClientMixin {
-  int i= 0;
-  var areaList = ["gulshan"];
-  late locations.Locations selectedLocation;
+
   final Map<String, Marker> _markers = {};
   Future<void> _onMapCreated(GoogleMapController controller) async {
-    final googleOffices = await locations.getGoogleOffices();
-    for(var area in googleOffices) {
-      print(area.areaName);
-      selectedLocation = area;
-    }
     setState(() {
       _markers.clear();
-      for (final office in selectedLocation.areas) {
+      for (final office in widget.selectedLocation.areas) {
+        //print(widget.selectedLocation.areaName);
         final marker = Marker(
           markerId: MarkerId(office.id),
           position: LatLng(office.coords.lat, office.coords.lng),
@@ -34,6 +29,7 @@ class _MapDemoState extends State<MapDemo> with AutomaticKeepAliveClientMixin {
           ),
         );
         _markers[office.name] = marker;
+        //print(widget.selectedLocation.areaName);
       }
 
     });
@@ -45,14 +41,23 @@ class _MapDemoState extends State<MapDemo> with AutomaticKeepAliveClientMixin {
           screenName: 'Find Dermatologist',
         ),
         backgroundColor: Color(0xFFFFFDF4),
-        body: GoogleMap(
-          onMapCreated: _onMapCreated,
-          initialCameraPosition: const CameraPosition(
-            //target: LatLng(0, 0),
-            target: LatLng( 24.81035940772831,67.05361192479758),
-            zoom: 13,
-          ),
-          markers: _markers.values.toSet(),
+        body: Column(
+          crossAxisAlignment: CrossAxisAlignment.center,
+          children: [
+            ReemKufi_Green(textValue: "Dermatoligist nearby " + widget.selectedLocation.areaName, size: displayHeight(context)*0.03),
+            SizedBox(height: displayHeight(context)*0.01),
+            Expanded(
+              child: GoogleMap(
+                onMapCreated: _onMapCreated,
+                initialCameraPosition: CameraPosition(
+                  target: LatLng(widget.selectedLocation.areaLocation.lat, widget.selectedLocation.areaLocation.lng),
+                  //target: LatLng( 24.81035940772831,67.05361192479758),
+                  zoom: 13,
+                ),
+                markers: _markers.values.toSet(),
+              ),
+            ),
+          ],
         )
     );
   }

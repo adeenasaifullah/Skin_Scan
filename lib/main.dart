@@ -7,6 +7,7 @@ import 'package:provider/provider.dart';
 import 'package:skin_scan/provider/categories_provider.dart';
 import 'package:skin_scan/provider/google_sign_in.dart';
 import 'package:skin_scan/provider/ingredient_provider.dart';
+import 'package:skin_scan/provider/location_provider.dart';
 import 'package:skin_scan/provider/product_provider.dart';
 import 'package:skin_scan/provider/routine_provider.dart';
 import 'package:skin_scan/register_feature/account_created.dart';
@@ -40,6 +41,7 @@ Future<void> main() async {
       ChangeNotifierProvider(create: (_) => ProductProvider()),
       ChangeNotifierProvider(create: (_) => GoogleSignInProvider()),
       ChangeNotifierProvider(create: (_) => IngredientProvider()),
+      ChangeNotifierProvider(create: (_) => LocationProvider()),
       //Provider<AuthService>(create: (_) => AuthService(FirebaseAuth.instance)),
       //StreamProvider(create: (context) => context.read<AuthService>().authStateChanges, initialData: null,),
     ],

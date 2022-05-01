@@ -9,6 +9,7 @@ import '../find_dermatologist_feature/derma_pop_up.dart';
 import '../ingredient_scan_feature/ingredient_scan.dart';
 import '../ingredient_search_feature/ingredient_details.dart';
 import '../log_in_sign_up_feature/home_page_screen.dart';
+import '../log_in_sign_up_feature/log_in_screen.dart';
 import '../provider/ingredient_provider.dart';
 import '../routine_feature/view_routine.dart';
 
@@ -181,15 +182,14 @@ class _IngredientPopUpState extends State<IngredientPopUp> {
                         backgroundColor: Color(0xffBBBD88)),
                     child: ReemKufi_Black(textValue: 'Continue', size: displayHeight(context)*0.03,),
                     onPressed: () async {
-                      await Provider.of<IngredientProvider>(context,listen: false).getIngredientInfo(ingredient_controller.text.substring(0,1), ingredient_controller.text);
-                      //context.read<IngredientProvider>().getIngredientInfo(ingredient_controller.text.substring(0,1), ingredient_controller.text);
-                      //Ingredient ingredient = context.watch<IngredientProvider>().ingredient;
-                      Ingredient ingredient = await Provider.of<IngredientProvider>(context,listen: false).ingredientList[0];
-                      print(ingredient.ingredientName);
-                      print(ingredient.ingredientRating);
-                      print(ingredient.ingredientDescription);
-                      print(ingredient.ingredientCategory);
-                      if(ingredient!=null){
+                      await Provider.of<IngredientProvider>(context,listen: false).getIngredientInfo(ingredient_controller.text);
+                      int length = await Provider.of<IngredientProvider>(context,listen: false).ingredientList.length;
+                      // print(ingredient.ingredientName);
+                      // print(ingredient.ingredientRating);
+                      // print(ingredient.ingredientDescription);
+                      // print(ingredient.ingredientCategory);
+                      if(length!=0){
+                        Ingredient ingredient = await Provider.of<IngredientProvider>(context,listen: false).ingredientList[0];
                         Navigator.push(
                             context,
                             MaterialPageRoute(
@@ -200,7 +200,54 @@ class _IngredientPopUpState extends State<IngredientPopUp> {
                             ));
                       }
                       else{
-
+                        showDialog(
+                          barrierDismissible: false,
+                          context: context, // user must tap button!
+                          builder: (context) {
+                            return AlertDialog(
+                              backgroundColor: const Color(0xff283618),
+                              title: Column(
+                                children: [
+                                  ReemKufiOffwhite(textValue: 'Ingredient not found', size: displayHeight(context) * 0.04),
+                                ],
+                              ),
+                              actions: <Widget>[
+                                Padding(
+                                  padding: const EdgeInsets.all(8.0),
+                                  child: Row(
+                                    mainAxisAlignment:
+                                    MainAxisAlignment.spaceEvenly,
+                                    children: [
+                                      TextButton(
+                                        style: TextButton.styleFrom(
+                                            backgroundColor: Color(0xffFFFDF4)),
+                                        child: Padding(
+                                          padding: const EdgeInsets.symmetric(
+                                              horizontal: 18.0),
+                                          child: Text('OK',
+                                              style: GoogleFonts.reemKufi(
+                                                  color: Colors.black,
+                                                  fontSize:
+                                                  displayHeight(context) *
+                                                      0.03)),
+                                        ),
+                                        onPressed: () {
+                                          Navigator.pushAndRemoveUntil(
+                                            context,
+                                            MaterialPageRoute(
+                                              builder: (BuildContext context) => IngredientPopUp(),
+                                            ),
+                                                (route) => false,
+                                          );
+                                        },
+                                      ),
+                                    ],
+                                  ),
+                                ),
+                              ],
+                            );
+                          },
+                        );
                       }
 
                     },

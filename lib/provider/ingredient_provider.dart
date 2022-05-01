@@ -5,18 +5,18 @@ import '../Models/ingredient_model.dart';
 
 class IngredientProvider extends ChangeNotifier {
 
-  //late Ingredient ingredient ;
   List<Ingredient> ingredientList = [];
 
-  Future getIngredientInfo(String alphabet, String findIngredient) async {
-    //print("here");
-    //productsList.clear();
-    String collectionName = alphabet.toLowerCase() + "_ingredient";
+  Future getIngredientInfo(String findIngredient) async {
+    ingredientList.clear();
+    String modifiedIngredient = titleCase(findIngredient);
+    //print("Modified:" + modifiedIngredient);
+    String collectionName = findIngredient.substring(0,1).toLowerCase() + "_ingredient";
     //print("CollectionName: " + collectionName);
     await FirebaseFirestore.instance
         .collection(collectionName)
         .limit(1)
-        .where('name', isEqualTo: findIngredient)
+        .where('name', whereIn: [findIngredient.toLowerCase(),findIngredient.toUpperCase(),modifiedIngredient.trim(),findIngredient])
         .get()
         .then((QuerySnapshot querySnapshot) {
       querySnapshot.docs.forEach((doc) {
@@ -29,15 +29,24 @@ class IngredientProvider extends ChangeNotifier {
             ingredientDescription: ingredientModel.ingredientDescription
         );
         ingredientList.add(ingredient);
-        //print(ingredient.ingredientName);
-        //print(ingredient.ingredientRating);
-        //print(ingredient.ingredientDescription);
-        //print(ingredient.ingredientCategory);
+        // print(ingredient.ingredientName);
+        // print(ingredient.ingredientRating);
+        // print(ingredient.ingredientDescription);
+        // print(ingredient.ingredientCategory);
       });
     });
     notifyListeners();
-    //print("here now");
-    //return ingredient;
+  }
+
+  String titleCase(String ingredient){
+    String changeIngredient = "";
+    List<String> arr = ingredient.split(" ");
+    for(var word in arr){
+      changeIngredient = changeIngredient + word.substring(0,1).toUpperCase();
+      changeIngredient = changeIngredient + word.substring(1) + " " ;
+    }
+    //print(changeIngredient);
+    return changeIngredient;
   }
 
 }
