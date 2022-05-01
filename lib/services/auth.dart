@@ -4,6 +4,8 @@ import 'package:flutter/material.dart';
 import 'package:fluttertoast/fluttertoast.dart';
 import 'package:google_sign_in/google_sign_in.dart';
 import 'package:skin_scan/Models/users_model.dart';
+
+import 'database_users.dart';
 //import 'package:google_sign_in/google_sign_in.dart';
 
 class AuthService {
@@ -28,6 +30,7 @@ class AuthService {
       UserCredential result = await _auth.signInWithEmailAndPassword(
           email: email, password: password);
       User user = result.user!;
+
       return _userFromFirebaseUser(user);
     } on FirebaseAuthException catch (e) {
       switch (e.code) {
@@ -66,6 +69,7 @@ class AuthService {
           email: email, password: password);
       //print(email);
       User user = result.user!;
+      await Database(uid: user.uid).updateUserData(userName: 'newMember');
       return _userFromFirebaseUser(user);
       //await _auth.createUserWithEmailAndPassword(email: email, password: password);
 
