@@ -23,6 +23,7 @@ class Database{
       UserRoutines: []
        );
 
+
     var data = user.toJson();
 
     await documentReferencer.set(data).whenComplete(() {

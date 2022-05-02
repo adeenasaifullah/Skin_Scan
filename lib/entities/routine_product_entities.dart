@@ -14,6 +14,7 @@ class RoutineProducts {
 
 
 
+
   static RoutineProducts fromJson(Map<String, dynamic> json) {
     return RoutineProducts(
         category: json['Category'],

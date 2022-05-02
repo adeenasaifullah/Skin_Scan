@@ -22,6 +22,7 @@ import 'log_in_screen.dart';
 import 'package:skin_scan/services/auth.dart';
 import 'package:skin_scan/entities/user_entities.dart';
 
+
 class LogInRegisterScreen extends StatefulWidget {
   const LogInRegisterScreen({Key? key}) : super(key: key);
 

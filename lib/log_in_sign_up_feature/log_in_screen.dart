@@ -22,6 +22,7 @@ class LogInScreen extends StatefulWidget {
   _LogInScreenState createState() => _LogInScreenState();
 }
 
+
 class _LogInScreenState extends State<LogInScreen> {
   final _formKey = GlobalKey<FormState>();
   final AuthService _auth = AuthService();
