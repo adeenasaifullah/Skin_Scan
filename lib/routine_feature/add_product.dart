@@ -21,6 +21,10 @@ class _AddProductState extends State<AddProduct> {
   late String category;
   late List<String> days;
 
+  var boolvalues = [false, false, false, false, false, false, false];
+
+  bool mastercheckbox = false;
+
   @override
   Widget build(BuildContext context) {
     TextEditingController productcontroller = TextEditingController();
@@ -48,9 +52,7 @@ class _AddProductState extends State<AddProduct> {
       'Sunday'
     ];
 
-    var boolvalues = [false, false, false, false, false, false, false];
 
-    bool mastercheckbox = false;
 
     return StatefulBuilder(builder: (context, setState) {
       return Scaffold(
@@ -167,41 +169,43 @@ class _AddProductState extends State<AddProduct> {
                   children: [
                     // SizedBox(width:10),
                     Expanded(
-                      child: StatefulBuilder(builder: (context, setState) {
-                        return ListView(
+                      child: ListView(
                             scrollDirection: Axis.vertical,
                             children: [
-                              // StatefulBuilder(builder: (context, setState) {
-                              //   return CheckboxListTile(
-                              //     title: const Text('Choose all'),
-                              //     checkColor: Colors.black,
-                              //     activeColor: Colors.lightGreen,
-                              //     value: mastercheckbox,
-                              //     onChanged: (value) {
-                              //       setState(() {
-                              //         mastercheckbox = value!;
-                              //         boolvalues.forEach((boolvalue) {
-                              //           boolvalue = mastercheckbox;
-                              //         });
-                              //       });
-                              //     },
-                              //   );
-                              // }),
-                              StatefulBuilder(builder: (context, setState) {
-                                return CheckboxListTile(
-                                  title: const Text('Monday'),
-                                  checkColor: Colors.black,
-                                  activeColor: Colors.lightGreen,
-                                  value: boolvalues[0],
-                                  onChanged: (value) {
-                                    setState(() {
-                                      boolvalues[0] = value!;
-                                    });
-                                  },
-                                );
-                              }),
-                              StatefulBuilder(builder: (context, setState) {
-                                return CheckboxListTile(
+                               StatefulBuilder(
+                                 builder: (context, setState) {
+                                   return CheckboxListTile(
+                                      title: const Text('Choose all'),
+                                      checkColor: Colors.black,
+                                      activeColor: Colors.lightGreen,
+                                      value: mastercheckbox,
+                                      onChanged: (value) {
+                                        setState(() {
+                                          mastercheckbox = value!;
+                                          boolvalues.forEach((boolvalue) {
+                                            boolvalue = mastercheckbox;
+                                          });
+                                        });
+                                      },
+                                    );
+                                 }
+                               ),
+                              StatefulBuilder(
+                                builder: (context,setState) {
+                                  return CheckboxListTile(
+                                      title: const Text('Monday'),
+                                      checkColor: Colors.black,
+                                      activeColor: Colors.lightGreen,
+                                      value: boolvalues[0],
+                                      onChanged: (value) {
+                                        setState(() {
+                                          boolvalues[0] = value!;
+                                        });
+                                      },
+                                    );
+                                }
+                              ),
+                              CheckboxListTile(
                                   title: const Text('Tuesday'),
                                   checkColor: Colors.black,
                                   activeColor: Colors.lightGreen,
@@ -211,10 +215,8 @@ class _AddProductState extends State<AddProduct> {
                                       boolvalues[1] = value!;
                                     });
                                   },
-                                );
-                              }),
-                              StatefulBuilder(builder: (context, setState) {
-                                return CheckboxListTile(
+                                ),
+                              CheckboxListTile(
                                   title: const Text('Wednesday'),
                                   checkColor: Colors.black,
                                   activeColor: Colors.lightGreen,
@@ -224,10 +226,8 @@ class _AddProductState extends State<AddProduct> {
                                       boolvalues[2] = value!;
                                     });
                                   },
-                                );
-                              }),
-                              StatefulBuilder(builder: (context, setState) {
-                                return CheckboxListTile(
+                                ),
+                              CheckboxListTile(
                                   title: const Text('Thursday'),
                                   checkColor: Colors.black,
                                   activeColor: Colors.lightGreen,
@@ -237,10 +237,8 @@ class _AddProductState extends State<AddProduct> {
                                       boolvalues[3] = value!;
                                     });
                                   },
-                                );
-                              }),
-                              StatefulBuilder(builder: (context, setState) {
-                                return CheckboxListTile(
+                                ),
+                             CheckboxListTile(
                                   title: const Text('Friday'),
                                   checkColor: Colors.black,
                                   activeColor: Colors.lightGreen,
@@ -250,10 +248,8 @@ class _AddProductState extends State<AddProduct> {
                                       boolvalues[4] = value!;
                                     });
                                   },
-                                );
-                              }),
-                              StatefulBuilder(builder: (context, setState) {
-                                return CheckboxListTile(
+                                ),
+                               CheckboxListTile(
                                   title: const Text('Saturday'),
                                   checkColor: Colors.black,
                                   activeColor: Colors.lightGreen,
@@ -263,10 +259,8 @@ class _AddProductState extends State<AddProduct> {
                                       boolvalues[5] = value!;
                                     });
                                   },
-                                );
-                              }),
-                              StatefulBuilder(builder: (context, setState) {
-                                return CheckboxListTile(
+                                ),
+                               CheckboxListTile(
                                   title: const Text('Sunday'),
                                   checkColor: Colors.black,
                                   activeColor: Colors.lightGreen,
@@ -276,10 +270,8 @@ class _AddProductState extends State<AddProduct> {
                                       boolvalues[6] = value!;
                                     });
                                   },
-                                );
-                              })
-                            ]);
-                      }),
+                                )
+                            ]),
                     ),
                   ],
                 ),

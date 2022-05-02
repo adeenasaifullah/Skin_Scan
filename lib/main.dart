@@ -1,9 +1,12 @@
+
+
 import 'package:animated_splash_screen/animated_splash_screen.dart';
 import 'package:firebase_auth/firebase_auth.dart';
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 import 'package:google_fonts/google_fonts.dart';
 import 'package:provider/provider.dart';
+import 'package:skin_scan/provider/UserProvider.dart';
 import 'package:skin_scan/provider/categories_provider.dart';
 import 'package:skin_scan/provider/google_sign_in.dart';
 import 'package:skin_scan/provider/ingredient_provider.dart';
@@ -23,7 +26,7 @@ import 'package:custom_top_navigator/custom_top_navigator.dart';
 
 import 'dart:math' as math;
 
-import 'Models/users_model.dart';
+import 'Models/users_adeena_model.dart';
 import 'log_in_sign_up_feature/log_in_register_screen.dart';
 import 'services/auth.dart';
 
@@ -34,9 +37,12 @@ Future<void> main() async {
   WidgetsFlutterBinding.ensureInitialized();
   await Firebase.initializeApp();
   cameras = await availableCameras();
+  Provider.debugCheckInvalidValueType = null;
   runApp(MultiProvider(
     providers: [
       Provider<RoutineProvider>(create: (_) => RoutineProvider()),
+      Provider<UserProvider>(create: (_) => UserProvider()),
+      //Provider<RoutineProvider>(create: (_) => RoutineProvider()),
       ChangeNotifierProvider(create: (_) => CategoryProvider()),
       ChangeNotifierProvider(create: (_) => ProductProvider()),
       ChangeNotifierProvider(create: (_) => GoogleSignInProvider()),
@@ -49,9 +55,12 @@ Future<void> main() async {
   ));
 }
 
+
+
 class MyApp extends StatelessWidget {
   const MyApp({Key? key}) : super(key: key);
 
+  // This widget is the root of your application.
   @override
   Widget build(BuildContext context) {
 
@@ -63,7 +72,7 @@ class MyApp extends StatelessWidget {
     return StreamProvider<AuthenticateUser?>.value(
       value: AuthService().user,
       initialData: null,
-      // GestureDetector(
+      //GestureDetector(
       // onTap: () {
       //   FocusScopeNode currentFocus = FocusScope.of(context);
       //
@@ -92,6 +101,7 @@ class LogoScreen extends StatefulWidget {
 }
 
 class _LogoScreenState extends State<LogoScreen> {
+
   @override
   Widget build(BuildContext context) {
     return AnimatedSplashScreen(
@@ -101,8 +111,7 @@ class _LogoScreenState extends State<LogoScreen> {
           Image.asset('assets/skinscanlogolight.png',
               width: displayWidth(context) * 0.4,
               height: displayHeight(context) * 0.3),
-          ReemKufiOffwhite(
-              textValue: "Skin Scan", size: displayHeight(context) * 0.05),
+          ReemKufiOffwhite(textValue: "Skin Scan", size: displayHeight(context) * 0.05),
           ReemKufiOffwhite_Italic(
               textValue: "Efficient and safe decisions for your skin!",
               size: displayWidth(context) * 0.03),
@@ -129,6 +138,7 @@ class progressloader extends StatefulWidget {
 class _progressloaderState extends State<progressloader> {
   double? _height;
   double? _width;
+
   double percent = 0.0;
 
   @override
@@ -210,6 +220,7 @@ class _progressloaderState extends State<progressloader> {
       ..close();
   }
 }
+
 
 class AppBarDetails extends StatefulWidget implements PreferredSizeWidget {
   final String screenName;

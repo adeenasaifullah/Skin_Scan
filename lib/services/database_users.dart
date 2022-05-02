@@ -1,10 +1,13 @@
 import 'package:cloud_firestore/cloud_firestore.dart';
 
-import '../Models/users_model.dart';
+import '../Models/users_adeena_model.dart';
+
 
 class Database{
   final String uid;
-  Database({required this.uid});
+  final String name;
+  final String email;
+  Database({required this.uid, required this.email, required this.name});
 
   //collecion reference
   final CollectionReference userCollection = FirebaseFirestore.instance.collection('usersDemo');
@@ -12,9 +15,12 @@ class Database{
   {
     DocumentReference documentReferencer = userCollection.doc(uid);
 
-    UserProfile user = UserProfile(
-      uid: uid,
-      name: userName,
+    UserModel user = UserModel(
+      //uid: uid,
+      userID: uid,
+      UserName: userName,
+      UserEmail: '',
+      UserRoutines: []
        );
 
     var data = user.toJson();

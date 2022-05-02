@@ -53,11 +53,11 @@ class RoutineProvider extends ChangeNotifier {
     routine_list.add(PMroutine);
   }
 
-  Future<void> addroutine(String name, String time) async {
-    Routine newroutine = Routine(RoutineName: name, time: time);
-    routine_list.add(newroutine);
-    notifyListeners();
-  }
+  // Future<void> addroutine(String name, String time) async {
+  //   Routine newroutine = Routine(RoutineName: name, time: time);
+  //   routine_list.add(newroutine);
+  //   notifyListeners();
+  // }
 
   Future<void> addproductToRoutine(Routine x, Product P) async {
     int index = routine_list

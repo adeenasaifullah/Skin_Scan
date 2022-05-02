@@ -3,13 +3,14 @@ import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 import 'package:fluttertoast/fluttertoast.dart';
 import 'package:google_sign_in/google_sign_in.dart';
-import 'package:skin_scan/Models/users_model.dart';
-
 import 'database_users.dart';
+import 'package:skin_scan/Models/users_adeena_model.dart';
 //import 'package:google_sign_in/google_sign_in.dart';
 
 class AuthService {
   final FirebaseAuth _auth = FirebaseAuth.instance;
+
+
 
   //create user object based on firebase user
   AuthenticateUser? _userFromFirebaseUser(User? user) {
@@ -61,6 +62,8 @@ class AuthService {
     }
   }
 
+
+
   //register with email and password
   Future registerWithEmailAndPassword(String email, String password) async {
     try {
@@ -69,7 +72,7 @@ class AuthService {
           email: email, password: password);
       //print(email);
       User user = result.user!;
-      await Database(uid: user.uid).updateUserData(userName: 'newMember');
+      //await Database(uid: user.uid, email: user.email!, name: user.displayName!).updateUserData(userName: 'newMember');
       return _userFromFirebaseUser(user);
       //await _auth.createUserWithEmailAndPassword(email: email, password: password);
 
