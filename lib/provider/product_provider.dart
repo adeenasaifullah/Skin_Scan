@@ -55,6 +55,8 @@ class ProductProvider extends ChangeNotifier {
     return productsOfCategory;
   }
 
+
+
   int getProductListLength() {
     int length = productsList.length;
     return length;

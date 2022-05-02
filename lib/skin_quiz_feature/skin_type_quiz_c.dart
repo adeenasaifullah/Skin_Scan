@@ -53,16 +53,19 @@ class _skinTypeQuizcState extends State<skinTypeQuizc> {
               ],
             ),
             SizedBox(height: displayHeight(context) * 0.07),
-            Row(
-              mainAxisAlignment: MainAxisAlignment.spaceEvenly,
-              children: [
-                SizedBox(width: displayWidth(context) * 0.1),
-                howReactiveText(text: '1- Very low reactive skin'),
-                SizedBox(width: displayWidth(context) * 0.08),
-                howReactiveText(text: '3- Moderately reactive skin'),
-                SizedBox(width: displayWidth(context) * 0.18),
-                howReactiveText(text: '5- Very reactive skin'),
-              ],
+            Padding(
+              padding:  EdgeInsets.symmetric(horizontal: displayWidth(context)*0.03, vertical: displayWidth(context)*0.03),
+              child: Row(
+                mainAxisAlignment: MainAxisAlignment.spaceEvenly,
+                children: [
+                  SizedBox(width: displayWidth(context) * 0.1),
+                  howReactiveText(text: '1- Very low reactive skin'),
+                  SizedBox(width: displayWidth(context) * 0.08),
+                  // howReactiveText(text: '3- Moderately reactive skin'),
+                  // SizedBox(width: displayWidth(context) * 0.18),
+                  // howReactiveText(text: '5- Very reactive skin'),
+                ],
+              ),
             ),
           ],
         ),

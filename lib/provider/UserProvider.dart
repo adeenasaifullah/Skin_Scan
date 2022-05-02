@@ -37,7 +37,7 @@ Future getUsersfromDB() async {
   });
 }
 
-Future<void> storeUserinDB(Users thisuser)
+Future storeUserinDB(Users thisuser)
 async {
   var userroutine = thisuser.UserRoutines
       .map((e) => RoutineModel(

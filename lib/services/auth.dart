@@ -1,16 +1,17 @@
+import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:firebase_auth/firebase_auth.dart';
-import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 import 'package:fluttertoast/fluttertoast.dart';
 import 'package:google_sign_in/google_sign_in.dart';
-import 'database_users.dart';
+import '../Models/routine_model.dart';
+import '../Models/routine_product_model.dart';
+import '../entities/routine_entities.dart';
+import '../entities/user_entities.dart';
 import 'package:skin_scan/Models/users_adeena_model.dart';
-//import 'package:google_sign_in/google_sign_in.dart';
+
 
 class AuthService {
   final FirebaseAuth _auth = FirebaseAuth.instance;
-
-
 
   //create user object based on firebase user
   AuthenticateUser? _userFromFirebaseUser(User? user) {
@@ -62,21 +63,67 @@ class AuthService {
     }
   }
 
-
-
   //register with email and password
   Future registerWithEmailAndPassword(String email, String password) async {
     try {
-
       UserCredential result = await _auth.createUserWithEmailAndPassword(
           email: email, password: password);
-      //print(email);
+      print(email);
+      print(password);
       User user = result.user!;
-      //await Database(uid: user.uid, email: user.email!, name: user.displayName!).updateUserData(userName: 'newMember');
+      String authID = user.uid;
+
+      // String name = (user.displayName!);
+      // print(user.displayName);
+      // print(name);
+
+      //DocumentReference documentReferencer = userCollection.doc(uid);
+      Routine AMroutine = Routine(RoutineName: "Morning", listofproducts: []);
+      Routine PMroutine = Routine(RoutineName: "Night", listofproducts: []);
+
+      List<Routine> routine_list = [];
+      routine_list.add(AMroutine);
+      routine_list.add(PMroutine);
+
+      Users obj = Users(
+          //uid: uid,
+
+          UserName: "Hello",
+          UserEmail: email,
+          UserRoutines: routine_list
+          //routine_list.map((e) => e.toJson()).toList();
+          //this.UserRoutines.map((v) => v.toJson()).toList();
+
+          );
+      obj.userID = authID;
+            var userroutine = obj.UserRoutines.map((e) => RoutineModel(
+          RoutineName: e.RoutineName,
+          listofproducts: e.listofproducts
+              .map((p) => RoutineProductsModel(
+                  productname: p.productname,
+                  category: p.category,
+                  days: p.days))
+              .toList())).toList();
+      UserModel databaseuser = UserModel(
+          userID: obj.userID,
+          UserName: obj.UserName,
+          UserEmail: obj.UserEmail,
+          UserRoutines: userroutine);
+
+      CollectionReference database =
+          FirebaseFirestore.instance.collection('users');
+      var test = databaseuser.toJson();
+      print(test);
+      DocumentReference documentReferencer = database.doc(authID);
+      await documentReferencer.set(test).whenComplete(() {
+        print("User data added");
+      });
+      //DocumentReference docref = await database.add(test);
+
+      //databaseuser.userID = authID;
+
+      //await Database(uid: user.uid).storeUserData(name: user.displayName!, email: user.email!);
       return _userFromFirebaseUser(user);
-      //await _auth.createUserWithEmailAndPassword(email: email, password: password);
-
-
     } catch (e) {
       //Fluttertoast.showToast(msg: e!.message);
       print(e);
@@ -84,16 +131,16 @@ class AuthService {
     }
   }
 
-    void _buildErrorMessage(String text) {
-      Fluttertoast.showToast(
-          msg: text,
-          timeInSecForIosWeb: 2,
-          toastLength: Toast.LENGTH_SHORT,
-          gravity: ToastGravity.BOTTOM,
-          backgroundColor: Colors.grey[600],
-          textColor: Colors.white,
-          fontSize: 14);
-    }
+  void _buildErrorMessage(String text) {
+    Fluttertoast.showToast(
+        msg: text,
+        timeInSecForIosWeb: 2,
+        toastLength: Toast.LENGTH_SHORT,
+        gravity: ToastGravity.BOTTOM,
+        backgroundColor: Colors.grey[600],
+        textColor: Colors.white,
+        fontSize: 14);
+  }
 
   //sign out
   Future signOut() async {
@@ -104,6 +151,7 @@ class AuthService {
       return null;
     }
   }
+
   //sign in with google
   Future signInWithGoogle() async {
     try {
@@ -123,26 +171,6 @@ class AuthService {
       print(e.toString());
       return e;
     }
-
   }
 }
-// final  messengerKey = GlobalKey<ScaffoldMessengerState>();
-// class Utils{
-//
-//    static showSnackBar(String? text){
-//     if(text == null) return;
-//
-//     final snackBar = showSnackBar(
-//       text = text,
-//     );
-//     messengerKey.
-//     currentState!..
-//     removeCurrentSnackBar()..
-//     showSnackBar(snackBar);
-//
-//   }
-// }
-
-
-
 

@@ -158,7 +158,11 @@ class ReemKufi_Green extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return Text(
+
       textValue,
+      //overflow: TextOverflow.visible,
+      textAlign: TextAlign.center,
+      softWrap: true,
       style: GoogleFonts.reemKufi(
         color: const Color(0xff283618),
         fontSize: size,

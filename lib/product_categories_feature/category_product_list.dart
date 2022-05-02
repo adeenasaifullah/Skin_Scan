@@ -27,37 +27,7 @@ class CategoryProducts extends StatefulWidget {
 }
 
 class _CategoryProductsState extends State<CategoryProducts> {
-  //final List<DisplayProducts> ProductsLists = [];
-
-  // void initState() {
-  //   super.initState();
-  //   ProductsLists.add(DisplayProducts(
-  //       productImage: 'assets/serumbottle.png',
-  //       productName: "Paula's Choice",
-  //       price: 2000));
-  //   //SizedBox(height: displayHeight(context) * 0.02)
-  //
-  //   ProductsLists.add(DisplayProducts(
-  //       productImage: 'assets/serumbottle.png',
-  //       productName: "CoNatural",
-  //       price: 1500));
-  //   //SizedBox(height: displayHeight(context) * 0.02),
-  //   ProductsLists.add(DisplayProducts(
-  //       productImage: 'assets/serumbottle.png',
-  //       productName: "Niacis",
-  //       price: 2500));
-  //   //SizedBox(height: displayHeight(context) * 0.02),
-  //   ProductsLists.add(DisplayProducts(
-  //       productImage: 'assets/serumbottle.png',
-  //       productName: "Acne Serum",
-  //       price: 2080));
-  //   ProductsLists.add(DisplayProducts(
-  //       productImage: 'assets/serumbottle.png',
-  //       productName: "Acne Serum",
-  //       price: 2080));
-  // }
-
-  @override
+   @override
   Widget build(BuildContext context) {
     //var currentCategory = widget.categoryTitle;
     return Scaffold(
@@ -75,8 +45,8 @@ class _CategoryProductsState extends State<CategoryProducts> {
                     top: displayHeight(context) * 0.02,
                     left: displayWidth(context) * 0.04),
                 child: Rambla_Green_Italic(
-                  textValue: 'Found 13 results',
-                  size: displayWidth(context) * 0.03,
+                  textValue: ' Found ${context.read<ProductProvider>().getProductsOfCategory(widget.categoryTitle).length} results',
+                  size: displayWidth(context) * 0.045,
                 ),
               ),
               SizedBox(height: displayHeight(context) * 0.02),
@@ -194,18 +164,18 @@ class _DisplayProductsState extends State<DisplayProducts> {
       child: GridView.builder(
         primary: false,
         scrollDirection: Axis.vertical,
-        padding: const EdgeInsets.all(20),
+        padding: const EdgeInsets.all(10),
         itemCount: widget.listOfCategoryProducts.length,
         gridDelegate: SliverGridDelegateWithFixedCrossAxisCount(
           childAspectRatio:
-          displayWidth(context) / displayHeight(context) * 1.3,
+          displayWidth(context) / displayHeight(context) * 1.15,
           crossAxisCount: 2,
         ),
         itemBuilder: (BuildContext context, int index) {
           return
 
     Padding(
-        padding: EdgeInsets.fromLTRB(8, 8, 8, 8),
+        padding: EdgeInsets.fromLTRB(4, 4, 4, 4),
         child: InkWell(
           child: Card(
               elevation: 2,
@@ -228,9 +198,12 @@ class _DisplayProductsState extends State<DisplayProducts> {
                       height: displayHeight(context) * 0.1,
                       width: displayWidth(context) * 0.1),
                   SizedBox(height: displayHeight(context) * 0.005),
-                  ReemKufi_Green(
-                      textValue: widget.listOfCategoryProducts[index].productName,
-                      size: displayHeight(context) * 0.019),
+                  Padding(
+                    padding:  EdgeInsets.all(displayWidth(context)*0.03),
+                    child: ReemKufi_Green(
+                        textValue: widget.listOfCategoryProducts[index].productName,
+                        size: displayHeight(context) * 0.025),
+                  ),
                   SizedBox(height: displayHeight(context) * 0.005),
                   Rating(product: widget.listOfCategoryProducts[index]),
                   SizedBox(height: displayHeight(context) * 0.005),

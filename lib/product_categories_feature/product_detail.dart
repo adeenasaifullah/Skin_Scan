@@ -47,6 +47,13 @@ class _ProductDetailState extends State<ProductDetail> {
                         width: displayWidth(context) * 0.15),
                   ),
                 ),
+
+
+                    ReemKufi_Green(
+                        textValue: widget.product.productBrand,
+                        size: displayHeight(context) * 0.025),
+
+
                 Row(
                   mainAxisAlignment: MainAxisAlignment.center,
                   children: <Widget>[

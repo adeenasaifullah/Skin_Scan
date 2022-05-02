@@ -232,7 +232,7 @@ class Category extends StatelessWidget {
                     width: displayWidth(context) * 0.25, ),
                 ReemKufi_Green(
                   textValue: categoryName,
-                  size: displayWidth(context) * 0.035,
+                  size: displayWidth(context) * 0.045,
                 ),
               ])
       ),
