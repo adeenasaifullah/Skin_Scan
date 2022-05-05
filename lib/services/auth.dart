@@ -63,6 +63,8 @@ class AuthService {
     }
   }
 
+
+
   //register with email and password
   Future registerWithEmailAndPassword(String email, String password) async {
     try {

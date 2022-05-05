@@ -187,7 +187,7 @@ class _createAccountState extends State<createAccount> {
                       print(emailController.text);
                       print(passwordController.text);
                       dynamic result = await _auth.registerWithEmailAndPassword(
-                          emailController.text, passwordController.text);
+                          emailController.text.trim(), passwordController.text.trim());
 
                       if (result is AuthenticateUser) {
                         Navigator.push(

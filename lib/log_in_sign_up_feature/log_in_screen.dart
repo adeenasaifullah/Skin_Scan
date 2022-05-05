@@ -1,3 +1,5 @@
+import 'package:firebase_auth/firebase_auth.dart';
+import 'package:firebase_core/firebase_core.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_signin_button/button_list.dart';
 import 'package:flutter_signin_button/button_view.dart';
@@ -6,6 +8,7 @@ import 'package:skin_scan/password_reset_feature/forgot_password.dart';
 import 'package:skin_scan/main.dart';
 import 'package:skin_scan/services/auth.dart';
 import '../Models/users_adeena_model.dart';
+import '../register_feature/account_created.dart';
 import '../utilities/bottom_app_bar.dart';
 import '../utilities/utility.dart';
 import 'log_in_register_screen.dart';
@@ -32,7 +35,7 @@ class _LogInScreenState extends State<LogInScreen> {
   Widget build(BuildContext context) {
     return Scaffold(
       backgroundColor: const Color(0xFFFFFDF4),
-      appBar: AppBarDetails(screenName: "Log In"),
+      appBar: AppBarDetails(screenName: "Log In", backOption: false),
       body: Center(
         child: SingleChildScrollView(
           child: Form(
@@ -157,7 +160,7 @@ class _LogInScreenState extends State<LogInScreen> {
                     //Users testinguser = Users(UserName: "Adeena", UserEmail: "adeenakhalidsaifullah@gmail.com", UserRoutines: routine_list);
                     //context.read<UserProvider>().storeUserinDB(testinguser);
                     if (_formKey.currentState!.validate()) {
-                      dynamic result = await _auth.signInWithEmailAndPassword(emailController.text, passwordController.text);
+                      dynamic result = await _auth.signInWithEmailAndPassword(emailController.text.trim(), passwordController.text.trim());
                       if (result is AuthenticateUser){
                         Navigator.push(
                             context,
@@ -222,20 +225,47 @@ class _LogInScreenState extends State<LogInScreen> {
                   child: SignInButton(
                     Buttons.Google,
                     text: "Sign up with Google",
-                    onPressed: () {},
+                    onPressed: () async {
+                      // Provider.of<GoogleSignInProvider>(context, listen: false).googleSignIn;
+                      // print('im in method');
+                      // print('im below method');
+                      dynamic result = await _auth.signInWithGoogle();
+                      if (result is AuthenticateUser) {
+                        if (FirebaseAuth.instance.currentUser==null){
+                          Navigator.push(
+                              context,
+                              MaterialPageRoute(
+                                  builder: (context) =>
+                                      accountCreated()));
+                        }
+                        else {
+                          Navigator.push(
+                              context,
+                              MaterialPageRoute(
+                                  builder: (context) =>
+                                      MyBottomAppBar()));
+                        }
+
+
+
+                      } else {
+                        setState(() =>
+                        error = 'Please supply a valid email.');
+                      }
+                    },
                   ),
                 ),
                 SizedBox(height: displayHeight(context) * 0.02),
-                Padding(
-                  padding: EdgeInsets.only(
-                      left: displayHeight(context) * 0.05,
-                      right: displayHeight(context) * 0.05),
-                  child: SignInButton(
-                    Buttons.Facebook,
-                    text: "Sign up with Facebook",
-                    onPressed: () {},
-                  ),
-                ),
+                // Padding(
+                //   padding: EdgeInsets.only(
+                //       left: displayHeight(context) * 0.05,
+                //       right: displayHeight(context) * 0.05),
+                //   child: SignInButton(
+                //     Buttons.Facebook,
+                //     text: "Sign up with Facebook",
+                //     onPressed: () {},
+                //   ),
+                // ),
               ],
             ),
           ),
