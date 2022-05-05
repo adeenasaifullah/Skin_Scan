@@ -148,10 +148,15 @@ class AuthService {
   Future signOut() async {
     try {
       return await _auth.signOut();
+
     } catch (e) {
       print(e.toString());
       return null;
     }
+  }
+  //
+  Future googleSignOut() async {
+
   }
 
   //sign in with google
@@ -168,6 +173,51 @@ class AuthService {
 
       UserCredential result = await _auth.signInWithCredential(credential);
       User user = result.user!;
+      String authID = user.uid;
+
+      // String name = (user.displayName!);
+      // print(user.displayName);
+      // print(name);
+
+      //DocumentReference documentReferencer = userCollection.doc(uid);
+      Routine AMroutine = Routine(RoutineName: "Morning", listofproducts: []);
+      Routine PMroutine = Routine(RoutineName: "Night", listofproducts: []);
+
+      List<Routine> routine_list = [];
+      routine_list.add(AMroutine);
+      routine_list.add(PMroutine);
+
+      Users obj = Users(
+        //uid: uid,
+          UserName: account.displayName!,
+          UserEmail: account.email,
+          UserRoutines: routine_list
+        //routine_list.map((e) => e.toJson()).toList();
+        //this.UserRoutines.map((v) => v.toJson()).toList();
+      );
+      obj.userID = authID;
+      var userroutine = obj.UserRoutines.map((e) => RoutineModel(
+          RoutineName: e.RoutineName,
+          listofproducts: e.listofproducts
+              .map((p) => RoutineProductsModel(
+              productname: p.productname,
+              category: p.category,
+              days: p.days))
+              .toList())).toList();
+      UserModel databaseuser = UserModel(
+          userID: obj.userID,
+          UserName: obj.UserName,
+          UserEmail: obj.UserEmail,
+          UserRoutines: userroutine);
+
+      CollectionReference database =
+      FirebaseFirestore.instance.collection('users');
+      var test = databaseuser.toJson();
+      print(test);
+      DocumentReference documentReferencer = database.doc(authID);
+      await documentReferencer.set(test).whenComplete(() {
+        print("User data added");
+      });
       return _userFromFirebaseUser(user);
     } catch (e) {
       print(e.toString());

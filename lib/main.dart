@@ -224,8 +224,7 @@ class _progressloaderState extends State<progressloader> {
 
 class AppBarDetails extends StatefulWidget implements PreferredSizeWidget {
   final String screenName;
-  final bool? backOption;
-  const AppBarDetails({Key? key, required this.screenName, this.backOption}) : super(key: key);
+  const AppBarDetails({Key? key, required this.screenName}) : super(key: key);
 
   @override
   _AppBarDetailsState createState() => _AppBarDetailsState();
@@ -240,7 +239,7 @@ class _AppBarDetailsState extends State<AppBarDetails> {
   Widget build(BuildContext context) {
     return Container(
         child: AppBar(
-          automaticallyImplyLeading: widget.backOption!,
+          // automaticallyImplyLeading: widget.backOption!,
       elevation: 0,
       backgroundColor: const Color(0xFFFFFDF4),
       centerTitle: false,

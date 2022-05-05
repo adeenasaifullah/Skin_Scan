@@ -158,7 +158,6 @@ class ReemKufi_Green extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return Text(
-
       textValue,
       //overflow: TextOverflow.visible,
       textAlign: TextAlign.center,
@@ -334,26 +333,26 @@ class field extends StatefulWidget {
   final String labelText;
   final String hintText;
   final Icon prefixIcon;
-  final Icon? suffixIcon;
+  final IconData? suffixIcon;
   final bool autoFocus;
   final String? Function(String?)? validateInput;
-  //final Function(String value) onChanged;
   final TextEditingController textController;
-  //final VoidCallback? onPressed;
+  final VoidCallback? onPressed;
 
-  const field(
-      {Key? key,
-      required this.textController,
-      required this.labelText,
-      required this.hintText,
-      required this.prefixIcon,
-      this.suffixIcon,
-      //required this.onChanged,
-      this.validateInput, required this.autoFocus,
-        //this.obscuredText,
-        //this.onPressed
-  })
-      : super(key: key);
+  const field({
+    Key? key,
+    required this.textController,
+    required this.labelText,
+    required this.hintText,
+    required this.prefixIcon,
+    this.suffixIcon,
+    //required this.onChanged,
+    this.validateInput,
+    required this.autoFocus,
+    this.onPressed,
+    //this.obscuredText,
+    //this.onPressed
+  }) : super(key: key);
 
   @override
   _fieldState createState() => _fieldState();
@@ -361,36 +360,39 @@ class field extends StatefulWidget {
 
 class _fieldState extends State<field> {
   final _formKey = GlobalKey<FormState>();
-
+  bool _obscured = false;
   @override
   Widget build(BuildContext context) {
     return Container(
       width: displayWidth(context) * 0.8,
       child: TextFormField(
-        //obscureText: widget.obscuredText!,
+        obscureText: _obscured,
         controller: widget.textController,
         //onChanged: widget.onChanged,
         validator: widget.validateInput,
         decoration: InputDecoration(
-            fillColor: Color(0xFFDADBC6),
-            filled: true,
-            border: OutlineInputBorder(
-                borderRadius: BorderRadius.circular(15.0),
-                borderSide:
-                    const BorderSide(width: 6, style: BorderStyle.solid)),
-            labelText: widget.labelText,
-            labelStyle: GoogleFonts.reemKufi(
-                color: Color(0xFF283618),
-                fontSize: 18,
-                fontWeight: FontWeight.bold),
-            hintText: widget.hintText,
-            hintStyle: GoogleFonts.rambla(
-                color: Color(0xFF283618), fontStyle: FontStyle.italic),
-            prefixIcon: widget.prefixIcon,
-            //Icon(Icons.lock, color: Color(0xFF283618)),
-            suffixIcon: widget.suffixIcon,
-            //Icon(Icons.visibility_off, color: Color(0xFF283618))),
-            ),
+          fillColor: Color(0xFFDADBC6),
+          filled: true,
+          border: OutlineInputBorder(
+              borderRadius: BorderRadius.circular(15.0),
+              borderSide: const BorderSide(width: 6, style: BorderStyle.solid)),
+          labelText: widget.labelText,
+          labelStyle: GoogleFonts.reemKufi(
+              color: Color(0xFF283618),
+              fontSize: 18,
+              fontWeight: FontWeight.bold),
+          hintText: widget.hintText,
+          hintStyle: GoogleFonts.rambla(
+              color: Color(0xFF283618), fontStyle: FontStyle.italic),
+          prefixIcon: widget.prefixIcon,
+          //Icon(Icons.lock, color: Color(0xFF283618)),
+          suffixIcon: IconButton(
+              icon: Icon(widget.suffixIcon),
+              onPressed: () {
+                _obscured = !_obscured;
+                setState(() {});
+              }),
+        ),
       ),
     );
   }

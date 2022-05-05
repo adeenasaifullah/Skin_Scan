@@ -16,6 +16,7 @@ import '../entities/routine_product_entities.dart';
 import '../main.dart';
 import '../register_feature/account_created.dart';
 import '../utilities/bottom_app_bar.dart';
+import '../utilities/progressIndicator.dart';
 import '../utilities/utility.dart';
 import 'home_page_screen.dart';
 import 'log_in_screen.dart';
@@ -36,6 +37,7 @@ class _LogInRegisterScreenState extends State<LogInRegisterScreen> {
 
   @override
   Widget build(BuildContext context) {
+    bool _isLoading = true;
     return Scaffold(
       backgroundColor: const Color(0xFFFFFDF4),
       //appBar: AppBarDetails(screenName: ''),
@@ -43,10 +45,11 @@ class _LogInRegisterScreenState extends State<LogInRegisterScreen> {
           stream: FirebaseAuth.instance.authStateChanges(),
           builder: (context, snapshot) {
             if (snapshot.connectionState == ConnectionState.waiting) {
-              return Center(child: CircularProgressIndicator());
+              return const Center(child: CircularProgressIndicator());
             } else if (snapshot.hasData) {
-              return MyBottomAppBar();
-            } else if (snapshot.hasError) {
+              return const MyBottomAppBar();
+            }
+              else if (snapshot.hasError) {
               return Center(child: Text('Something went wrong'));
             } else {
               return SingleChildScrollView(
@@ -133,6 +136,14 @@ class _LogInRegisterScreenState extends State<LogInRegisterScreen> {
                           Buttons.Google,
                           text: "Sign in with Google",
                           onPressed: () async {
+                            if (_isLoading == true) {
+                              buildShowDialog(context);
+                              Future.delayed(Duration(seconds: 3), () {
+                                setState(() {
+                                  _isLoading = false;
+                                });
+                              });
+                            }
                             // Provider.of<GoogleSignInProvider>(context, listen: false).googleSignIn;
                             // print('im in method');
                             // print('im below method');
@@ -142,7 +153,7 @@ class _LogInRegisterScreenState extends State<LogInRegisterScreen> {
                                   context,
                                   MaterialPageRoute(
                                       builder: (context) =>
-                                          accountCreated()));
+                                          const MyBottomAppBar()));
                             } else {
                               setState(() =>
                               error = 'Please supply a valid email.');

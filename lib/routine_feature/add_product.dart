@@ -7,7 +7,6 @@ import 'package:skin_scan/utilities/utility.dart';
 import '../provider/routine_provider.dart';
 import 'build_routine.dart';
 
-
 class AddProduct extends StatefulWidget {
   const AddProduct({Key? key, required this.currentroutine}) : super(key: key);
 

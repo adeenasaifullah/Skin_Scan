@@ -20,7 +20,6 @@ class Product {
     required this.productPrice,
     required this.skinType,
     required this.productRating,
-
   });
 
   Map<String, dynamic> toJson() {

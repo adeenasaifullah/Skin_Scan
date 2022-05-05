@@ -43,8 +43,8 @@ class _NewPasswordState extends State<NewPassword> {
                   labelText: 'New Password',
                   hintText: 'Enter your password',
                   prefixIcon: Icon(Icons.lock, color: Color(0xFF283618)),
-                  suffixIcon:
-                  Icon(Icons.visibility_off, color: Color(0xFF283618)), autoFocus: false,),
+                  suffixIcon: Icons.visibility_off,
+                autoFocus: false,),
 
               SizedBox(height: displayHeight(context) * 0.05),
               field(
@@ -59,8 +59,8 @@ class _NewPasswordState extends State<NewPassword> {
                   labelText: 'Confirm Password',
                   hintText: 'Re-Enter your password',
                   prefixIcon: Icon(Icons.lock, color: Color(0xFF283618)),
-                  suffixIcon:
-                  Icon(Icons.visibility_off, color: Color(0xFF283618)), autoFocus: false,),
+                  suffixIcon: Icons.visibility_off,
+                autoFocus: false,),
               SizedBox(height: displayHeight(context) * 0.05),
               GreenButton(buttonText: 'Change Password',
                 textSize: displayHeight(context)*0.03,

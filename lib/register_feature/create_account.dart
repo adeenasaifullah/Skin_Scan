@@ -14,7 +14,6 @@ import 'package:firebase_auth/firebase_auth.dart';
 import 'package:skin_scan/services/auth.dart';
 
 class createAccount extends StatefulWidget {
-
   const createAccount({Key? key}) : super(key: key);
 
   @override
@@ -22,7 +21,6 @@ class createAccount extends StatefulWidget {
 }
 
 class _createAccountState extends State<createAccount> {
-
   // bool _obscureText = true;
   // void _toggle(){
   //   setState(() {
@@ -84,7 +82,8 @@ class _createAccountState extends State<createAccount> {
                     } else {
                       return null;
                     }
-                  }, autoFocus: false,
+                  },
+                  autoFocus: false,
                 ),
                 SizedBox(height: displayHeight(context) * 0.05),
                 field(
@@ -113,14 +112,15 @@ class _createAccountState extends State<createAccount> {
                     } else {
                       return null;
                     }
-                  }, autoFocus: false,
+                  },
+                  autoFocus: false,
                 ),
                 SizedBox(height: displayHeight(context) * 0.05),
                 field(
                   validateInput: (phone) {
                     if (phone!.isEmpty) {
                       return "* Required";
-                    } else if (!RegExp(r'^[0-9]{11}$').hasMatch(phone!)) {
+                    } else if (!RegExp(r'^[0-9]{11}$').hasMatch(phone)) {
                       //  r'^[0-9]{10}$' pattern plain match number with length 11
                       return "Enter correct phone number";
                     } else {
@@ -141,40 +141,36 @@ class _createAccountState extends State<createAccount> {
                   validateInput: MultiValidator([
                     RequiredValidator(errorText: "* Required"),
                     MinLengthValidator(6,
-                        errorText:
-                            "Password should be at least 6 characters"),
+                        errorText: "Password should be at least 6 characters"),
                     MaxLengthValidator(15,
                         errorText:
                             "Password should not be greater than 15 characters")
                   ]),
-                  // onChanged: (val) {
-                  //   setState(() => password = val);
-                  // },
-                  //obscuredText: _obscureText,
                   labelText: 'Password',
                   hintText: 'Enter your password',
                   prefixIcon: Icon(Icons.lock, color: Color(0xFF283618)),
-                  suffixIcon:
-                      (Icon(Icons.visibility_off, color: Color(0xFF283618))),
-                  textController: passwordController, autoFocus: false,
+                  suffixIcon: Icons.visibility_off,
+                  textController: passwordController,
+                  autoFocus: false,
                 ),
                 SizedBox(height: displayHeight(context) * 0.05),
                 field(
-                    textController: confirmPasswordController,
-
-                    validateInput: (confirmPassword) {
-                      if (confirmPasswordController.text!.isEmpty) return '* Required';
-                      if (confirmPasswordController.text! != passwordController.text!)
-                        return 'The password does not match!';
-                      return null;
-                    },
-                    // onChanged: (val) {
-                    //   setState(() => confirmPassword = val);
-                    // },
-                    labelText: 'Confirm Password',
-                    hintText: 'Confirm Password',
-                    prefixIcon: Icon(Icons.lock, color: Color(0xFF283618)),
-                    suffixIcon: const Icon(Icons.visibility_off, color: Color(0xFF283618)), autoFocus: false,),
+                  textController: confirmPasswordController,
+                  autoFocus: false,
+                  validateInput: (confirmPassword) {
+                    if (confirmPasswordController.text.isEmpty)
+                      return '* Required';
+                    if (confirmPasswordController.text !=
+                        passwordController.text)
+                      return 'The password does not match!';
+                    return null;
+                  },
+                  labelText: 'Confirm Password',
+                  hintText: 'Confirm Password',
+                  prefixIcon: Icon(Icons.lock, color: Color(0xFF283618)),
+                  suffixIcon: Icons.visibility_off,
+                  // onPressed: ,
+                ),
                 SizedBox(height: displayHeight(context) * 0.05),
                 GreenButton(
                   buttonWidth: displayWidth(context) * 0.7,
@@ -187,15 +183,15 @@ class _createAccountState extends State<createAccount> {
                       print(emailController.text);
                       print(passwordController.text);
                       dynamic result = await _auth.registerWithEmailAndPassword(
-                          emailController.text.trim(), passwordController.text.trim());
+                          emailController.text.trim(),
+                          passwordController.text.trim());
 
                       if (result is AuthenticateUser) {
                         Navigator.push(
                             context,
                             MaterialPageRoute(
                                 builder: (context) => accountCreated()));
-                      }
-                      else {
+                      } else {
                         setState(() => error = 'Please supply a valid email.');
                       }
                     }
