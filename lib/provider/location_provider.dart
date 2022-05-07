@@ -3,8 +3,8 @@ import 'package:flutter/cupertino.dart';
 import 'package:skin_scan/entities/location_entities.dart';
 import '../Models/location_model.dart';
 
-class LocationProvider extends ChangeNotifier{
-  List<LocationModel> locationList = [];
+class LocationProvider extends ChangeNotifier {
+  List<Location> locationList = [];
 
   Future getLocation() async {
     locationList.clear();
@@ -14,24 +14,21 @@ class LocationProvider extends ChangeNotifier{
         .then((QuerySnapshot querySnapshot) {
       querySnapshot.docs.forEach((doc) {
         LocationModel locations =
-        LocationModel.fromJson(doc.data() as Map<String, dynamic>);
-        locationList.add(locations);
-        // LatitudeLongitude latlong = LatitudeLongitude(
-        //     lat: locations.areaLocation.lat,
-        //     lng: locations.areaLocation.lng
-        // );
-        // Area area = Area(
-        //     coords: locations.areas.,
-        //     address: address,
-        //     id: id,
-        //     name: name,
-        //     phone: phone
-        // );
-        // Location location = Location(
-        //     areaName: locations.areaName,
-        //     areaLocation: latlong,
-        //     areas: areas
-        // );
+            LocationModel.fromJson(doc.data() as Map<String, dynamic>);
+        LatitudeLongitude latlong = LatitudeLongitude(
+            lat: locations.areaLocation.lat, lng: locations.areaLocation.lng);
+        List<Area> area = locations.areas.map((e) => Area(
+            coords: LatitudeLongitude(lat: e.coords.lat, lng: e.coords.lng),
+            address: e.address,
+            id: e.id,
+            name: e.name,
+            phone: e.phone)).toList();
+        Location location = Location(
+            areaName: locations.areaName,
+            areaLocation: latlong,
+            areas: area
+        );
+        locationList.add(location);
         //print("Location retrieved");
       });
     });
