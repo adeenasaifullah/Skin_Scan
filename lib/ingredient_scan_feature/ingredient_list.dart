@@ -2,25 +2,45 @@ import 'package:flutter/cupertino.dart';
 import 'package:flutter/foundation.dart';
 import 'package:flutter/material.dart';
 import 'package:google_fonts/google_fonts.dart';
+import 'package:provider/provider.dart';
 import 'package:skin_scan/entities/ingredient_entities.dart';
 import 'package:skin_scan/utilities/utility.dart';
 import '../ingredient_search_feature/ingredient_details.dart';
 import '../main.dart';
+import '../provider/ingredient_provider.dart';
 
 class IngredientsList extends StatefulWidget {
-  final List<Ingredient> IngredientList ;
-  const IngredientsList({Key? key, required this.IngredientList}) : super(key: key);
+  final List<String> ingredientName ;
+  const IngredientsList({Key? key, required this.ingredientName}) : super(key: key);
 
   @override
   _IngredientsListState createState() => _IngredientsListState();
 }
 
 class _IngredientsListState extends State<IngredientsList> {
+  List<Ingredient> ingredientList = [];
+
+  // void initState() {
+  //   super.initState();
+  //   ExtractIngredientInfo(context, widget.ingredientName);
+  //
+  // }
+
+  Future<List<Ingredient>> ExtractIngredientInfo(context, List<String> ingredientName) async {
+    Provider.of<IngredientProvider>(context,listen: false).ingredientList.clear();
+    for(String name in ingredientName){
+      //print(name);
+      await Provider.of<IngredientProvider>(context,listen: false).getIngredientInfo(name);
+    }
+    ingredientList = await Provider.of<IngredientProvider>(context,listen: false).ingredientList;
+    //print("here");
+    return ingredientList;
+  }
 
   @override
   Widget build(BuildContext context) {
     return Scaffold(
-      appBar: AppBarDetails(screenName: 'Product Name'),
+      appBar: AppBarDetails(screenName: 'Ingredient List'),
       // bottomNavigationBar: BottomBar(),
       body: Container(
         child: Column(
@@ -51,52 +71,64 @@ class _IngredientsListState extends State<IngredientsList> {
             ),
             ReemKufi_Green_Bold(
                 textValue: 'Ingredients:', size: displayHeight(context) * 0.04),
-            Expanded(
-              child: ListView.builder(
-                  itemCount: widget.IngredientList.length,
-                  itemBuilder: (context, index) {
-                    print(widget.IngredientList[index].ingredientName);
-                    return InkWell(
-                      onTap: () {
-                        Navigator.of(context).push(MaterialPageRoute(
-                            builder: (context) => IngredientDetails(
-                                ingredient: widget.IngredientList[index])));
-                      },
-                      child: Container(
-                          alignment: Alignment.center,
-                          margin: EdgeInsets.fromLTRB(8, 8, 8, 8),
-                          width: double.infinity,
-                          decoration: BoxDecoration(
-                            color: const Color(0xFFDADBC6),
-                            borderRadius: BorderRadius.circular(
-                                20), //border corner radius
-                          ),
-                          child: Padding(
-                            padding: const EdgeInsets.all(8.0),
-                            child: Row(
-                              mainAxisAlignment: MainAxisAlignment.spaceBetween,
-                              children: [
-                                ReemKufi_Green_Italic(
-                                    textValue: widget.IngredientList[index].ingredientName,
-                                    size: displayHeight(context) * 0.02),
-                                IconButton(
-                                    onPressed: () {
-                                      Navigator.push(
-                                          context,
-                                          MaterialPageRoute(
-                                            builder: (context) =>
-                                                IngredientDetails(
-                                                    ingredient:
-                                                    widget.IngredientList[index]),
-                                          ));
-                                    },
-                                    icon: Icon(Icons.arrow_forward_rounded)),
-                              ],
-                            ),
-                          )),
+            FutureBuilder(
+                future : ExtractIngredientInfo(context, widget.ingredientName),
+                builder: (context, AsyncSnapshot<List<Ingredient>> snapshot){
+                  if(!snapshot.hasData){
+                    return Center(child: CircularProgressIndicator());
+                  }
+                  else{
+                    //print("here ak lle");
+                    print(snapshot.data?.length);
+                    return Expanded(
+                      child: ListView.builder(
+                          itemCount: snapshot.data?.length,
+                          itemBuilder: (context, index) {
+                            print(snapshot.data?.length);
+                            return InkWell(
+                              onTap: () {
+                                Navigator.of(context).push(MaterialPageRoute(
+                                    builder: (context) => IngredientDetails(
+                                        ingredient: snapshot.data![index])));
+                              },
+                              child: Container(
+                                  alignment: Alignment.center,
+                                  margin: EdgeInsets.fromLTRB(8, 8, 8, 8),
+                                  width: double.infinity,
+                                  decoration: BoxDecoration(
+                                    color: const Color(0xFFDADBC6),
+                                    borderRadius: BorderRadius.circular(
+                                        20), //border corner radius
+                                  ),
+                                  child: Padding(
+                                    padding: const EdgeInsets.all(8.0),
+                                    child: Row(
+                                      mainAxisAlignment: MainAxisAlignment.spaceBetween,
+                                      children: [
+                                        ReemKufi_Green_Italic(
+                                            textValue: snapshot.data![index].ingredientName,
+                                            size: displayHeight(context) * 0.02),
+                                        IconButton(
+                                            onPressed: () {
+                                              Navigator.push(
+                                                  context,
+                                                  MaterialPageRoute(
+                                                    builder: (context) =>
+                                                        IngredientDetails(
+                                                            ingredient:
+                                                            snapshot.data![index]),
+                                                  ));
+                                            },
+                                            icon: Icon(Icons.arrow_forward_rounded)),
+                                      ],
+                                    ),
+                                  )),
+                            );
+                          }),
                     );
-                  }),
-            )
+                  }
+                }
+                )
           ],
         ),
       ),

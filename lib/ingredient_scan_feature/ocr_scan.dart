@@ -297,13 +297,13 @@ class OcrTextWidget extends StatelessWidget {
     }
   }
 
-  Future ExtractIngredientInfo(context, List<String> ingredientName) async {
-    Provider.of<IngredientProvider>(context,listen: false).ingredientList.clear();
-    for(String name in ingredientName){
-      await Provider.of<IngredientProvider>(context,listen: false).getIngredientInfo(name);
-    }
-    ingredientList = await Provider.of<IngredientProvider>(context,listen: false).ingredientList;
-  }
+  // Future ExtractIngredientInfo(context, List<String> ingredientName) async {
+  //   Provider.of<IngredientProvider>(context,listen: false).ingredientList.clear();
+  //   for(String name in ingredientName){
+  //     await Provider.of<IngredientProvider>(context,listen: false).getIngredientInfo(name);
+  //   }
+  //   ingredientList = await Provider.of<IngredientProvider>(context,listen: false).ingredientList;
+  // }
 
   @override
   Widget build(BuildContext context) {
@@ -314,10 +314,10 @@ class OcrTextWidget extends StatelessWidget {
       trailing: const Icon(Icons.arrow_forward),
       onTap: (){
         CommaSeparateIngredients(ocrText.value);
-        ExtractIngredientInfo(context, ingredientName);
+        //ExtractIngredientInfo(context, ingredientName);
         Navigator.of(context).push(
           MaterialPageRoute(
-            builder: (context) => IngredientsList(IngredientList: ingredientList),
+            builder: (context) => IngredientsList(ingredientName: ingredientName),
           ),
         );
         // Navigator.of(context).push(
