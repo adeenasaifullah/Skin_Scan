@@ -2,11 +2,12 @@ import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_rating_bar/flutter_rating_bar.dart';
 import 'package:provider/provider.dart';
-import 'package:skin_scan/provider/UserProvider.dart';
+//import 'package:skin_scan/provider/UserProvider.dart';
 import 'package:skin_scan/utilities/utility.dart';
 
 import '../entities/product_entities.dart';
 import '../provider/product_provider.dart';
+import '../provider/user_provider.dart';
 
 class Rating extends StatefulWidget {
   final Product product;
