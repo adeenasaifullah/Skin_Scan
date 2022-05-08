@@ -143,7 +143,7 @@ class DisplayProducts extends StatefulWidget {
   // final String productImage;
   // final String productName;
   // final int price;
-  var prodID;
+  //var prodID;
 
   DisplayProducts(
       {Key? key,
@@ -190,8 +190,9 @@ class _DisplayProductsState extends State<DisplayProducts> {
                     padding: EdgeInsets.only(
                       left: displayWidth(context) * 0.25,
                     ),
-                    child: FavouriteButton(),
+                    child: FavouriteButton(prodID: widget.listOfCategoryProducts[index].prodID),
                   ),
+
                   Image(
                       image: AssetImage('assets/dermatologistIcon.png'),
                       fit: BoxFit.fill,

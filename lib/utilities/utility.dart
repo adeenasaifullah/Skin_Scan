@@ -333,13 +333,13 @@ class field extends StatefulWidget {
   final String labelText;
   final String hintText;
   final Icon prefixIcon;
-  final IconData? suffixIcon;
+  IconData? suffixIcon;
   final bool autoFocus;
   final String? Function(String?)? validateInput;
   final TextEditingController textController;
   final VoidCallback? onPressed;
 
-  const field({
+  field({
     Key? key,
     required this.textController,
     required this.labelText,
@@ -361,6 +361,7 @@ class field extends StatefulWidget {
 class _fieldState extends State<field> {
   final _formKey = GlobalKey<FormState>();
   bool _obscured = false;
+
   @override
   Widget build(BuildContext context) {
     return Container(
@@ -389,7 +390,14 @@ class _fieldState extends State<field> {
           suffixIcon: IconButton(
               icon: Icon(widget.suffixIcon),
               onPressed: () {
+
+                if (_obscured == false) {
+                  widget.suffixIcon = Icons.visibility_off;
+                } else {
+                  widget.suffixIcon = Icons.visibility;
+                }
                 _obscured = !_obscured;
+
                 setState(() {});
               }),
         ),

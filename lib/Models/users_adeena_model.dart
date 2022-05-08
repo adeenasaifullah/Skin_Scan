@@ -1,3 +1,4 @@
+import 'package:skin_scan/Models/product_model.dart';
 import 'package:skin_scan/entities/routine_entities.dart';
 import 'routine_model.dart';
 import '../entities/product_entities.dart';
@@ -8,9 +9,16 @@ class UserModel {
   final String UserEmail;
   //String UserPassword;
   List<RoutineModel> UserRoutines = [];
- // final List<Product> UserFavoritedProducts;
+  List<String> UserFavouriteProducts = [];
 
-  UserModel({required this.userID,required this.UserName, required this.UserEmail, required this.UserRoutines}  );
+
+  UserModel({
+    required this.userID,
+    required this.UserName,
+    required this.UserEmail,
+    required this.UserRoutines,
+    required this.UserFavouriteProducts
+  }  );
 
 
 
@@ -20,6 +28,9 @@ class UserModel {
       UserEmail: json['Email'],
       UserName: json['UserName'],
       UserRoutines: (json['Routines'] as List).map((e) => RoutineModel.fromJson(e as Map<String, dynamic>)).toList(),
+      UserFavouriteProducts: List.from(json['FavouriteProducts']),
+      //UserFavouriteProducts: List.from(json['FavouriteProducts'])
+
     );
   }
 
@@ -31,6 +42,9 @@ class UserModel {
     data['UserName'] = this.UserName;
     data['Email'] = this.UserEmail;
     data['Routines'] = this.UserRoutines.map((v) => v.toJson()).toList();
+    data['FavouriteProducts'] = List.of(this.UserFavouriteProducts);
+
+
 
     return data;
   }

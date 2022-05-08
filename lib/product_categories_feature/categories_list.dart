@@ -1,3 +1,4 @@
+import 'package:cached_network_image/cached_network_image.dart';
 import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:flutter/material.dart';
 import 'package:provider/provider.dart';
@@ -20,15 +21,11 @@ class _CategoriesAndSearchState extends State<CategoriesAndSearch> {
   void initState() {
     //context.read<CategoryProvider>().getCategories().clear();
 
-      //context.read<CategoryProvider>().getCategoriesFromDb();
-
-
+    //context.read<CategoryProvider>().getCategoriesFromDb();
 
     super.initState();
     ingredient_controller = TextEditingController();
   }
-
-
 
   // void dispose() {
   //   ingredient_controller.dispose();
@@ -44,7 +41,6 @@ class _CategoriesAndSearchState extends State<CategoriesAndSearch> {
 
       body: Column(
         children: <Widget>[
-
           Rambla_Green_Italic(
             textValue: 'Select to browse products by a category',
             size: displayHeight(context) * 0.02,
@@ -64,114 +60,120 @@ class _CategoriesAndSearchState extends State<CategoriesAndSearch> {
                 crossAxisCount: 2,
               ),
               itemBuilder: (BuildContext context, int index) {
-                return Category(categoryName: context.watch<CategoryProvider>().getCategories()[index].categoryName,
-                    categoryImage: context.watch<CategoryProvider>().getCategories()[index].categoryImage
-                  // Text(context.watch<CategoryProvider>().getCategories()[index].categoryName)
-                  // child: Column(
-                  //   mainAxisSize: MainAxisSize.min,
-                  //   //crossAxisAlignment: CrossAxisAlignment.center,
-                  //
-                  //   children: <Widget>[
-                  //     InkWell(
-                  //       onTap: () {
-                  //         Navigator.push(
-                  //           context,
-                  //           MaterialPageRoute(
-                  //             builder: (context) =>
-                  //                 CategoryProducts(
-                  //                   categoryTitle: 'Serums',
-                  //                 ),
-                  //           ),
-                  //         );
-                  //       },
-                  //       child: Category(
-                  //           categoryName: context.watch<CategoryProvider>().categoriesList[index].categoryName,
-                  //           categoryImage: 'assets/serumbottle.png'),
-                  //     ),
-                  //     InkWell(
-                  //       onTap: () {
-                  //         Navigator.push(
-                  //           context,
-                  //           MaterialPageRoute(
-                  //             builder: (context) =>
-                  //                 CategoryProducts(
-                  //                   categoryTitle: 'Moisturizers',
-                  //                 ),
-                  //           ),
-                  //         );
-                  //       },
-                  //       child: Category(
-                  //           categoryName: context.watch<CategoryProvider>().categoriesList[index].categoryName,
-                  //           categoryImage: 'assets/moisturizerbottle.png'),
-                  //     ),
-                  //     InkWell(
-                  //       onTap: () {
-                  //         Navigator.push(
-                  //           context,
-                  //           MaterialPageRoute(
-                  //             builder: (context) =>
-                  //                 CategoryProducts(
-                  //                   categoryTitle: 'Toners',
-                  //                 ),
-                  //           ),
-                  //         );
-                  //       },
-                  //       child: Category(
-                  //           categoryName: context.watch<CategoryProvider>().categoriesList[index].categoryName,
-                  //           categoryImage: 'assets/tonerbottle.png'),
-                  //     ),
-                  //     InkWell(
-                  //       onTap: () {
-                  //         Navigator.push(
-                  //           context,
-                  //           MaterialPageRoute(
-                  //             builder: (context) =>
-                  //                 CategoryProducts(
-                  //                   categoryTitle: 'Suncare',
-                  //                 ),
-                  //           ),
-                  //         );
-                  //       },
-                  //       child: Category(
-                  //           categoryName: context.watch<CategoryProvider>().categoriesList[index].categoryName,
-                  //           categoryImage: 'assets/Suncare.png'),
-                  //     ),
-                  //     InkWell(
-                  //       onTap: () {
-                  //         Navigator.push(
-                  //           context,
-                  //           MaterialPageRoute(
-                  //             builder: (context) =>
-                  //                 CategoryProducts(
-                  //                   categoryTitle: 'Masks',
-                  //                 ),
-                  //           ),
-                  //         );
-                  //       },
-                  //       child: Category(
-                  //           categoryName: context.watch<CategoryProvider>().categoriesList[index].categoryName,
-                  //           categoryImage: 'assets/Masks.png'),
-                  //     ),
-                  //     InkWell(
-                  //       onTap: () {
-                  //         Navigator.push(
-                  //           context,
-                  //           MaterialPageRoute(
-                  //             builder: (context) =>
-                  //                 CategoryProducts(
-                  //                   categoryTitle: 'Exfoliators',
-                  //                 ),
-                  //           ),
-                  //         );
-                  //       },
-                  //       child: Category(
-                  //           categoryName: context.watch<CategoryProvider>().categoriesList[index].categoryName,
-                  //           categoryImage: 'assets/exfoliators.png'),
-                  //     )
-                  //   ],
-                  // ),
-                );
-
+                return Category(
+                    categoryName: context
+                        .watch<CategoryProvider>()
+                        .getCategories()[index]
+                        .categoryName,
+                    categoryImage: context
+                        .watch<CategoryProvider>()
+                        .getCategories()[index]
+                        .categoryImage
+                    // Text(context.watch<CategoryProvider>().getCategories()[index].categoryName)
+                    // child: Column(
+                    //   mainAxisSize: MainAxisSize.min,
+                    //   //crossAxisAlignment: CrossAxisAlignment.center,
+                    //
+                    //   children: <Widget>[
+                    //     InkWell(
+                    //       onTap: () {
+                    //         Navigator.push(
+                    //           context,
+                    //           MaterialPageRoute(
+                    //             builder: (context) =>
+                    //                 CategoryProducts(
+                    //                   categoryTitle: 'Serums',
+                    //                 ),
+                    //           ),
+                    //         );
+                    //       },
+                    //       child: Category(
+                    //           categoryName: context.watch<CategoryProvider>().categoriesList[index].categoryName,
+                    //           categoryImage: 'assets/serumbottle.png'),
+                    //     ),
+                    //     InkWell(
+                    //       onTap: () {
+                    //         Navigator.push(
+                    //           context,
+                    //           MaterialPageRoute(
+                    //             builder: (context) =>
+                    //                 CategoryProducts(
+                    //                   categoryTitle: 'Moisturizers',
+                    //                 ),
+                    //           ),
+                    //         );
+                    //       },
+                    //       child: Category(
+                    //           categoryName: context.watch<CategoryProvider>().categoriesList[index].categoryName,
+                    //           categoryImage: 'assets/moisturizerbottle.png'),
+                    //     ),
+                    //     InkWell(
+                    //       onTap: () {
+                    //         Navigator.push(
+                    //           context,
+                    //           MaterialPageRoute(
+                    //             builder: (context) =>
+                    //                 CategoryProducts(
+                    //                   categoryTitle: 'Toners',
+                    //                 ),
+                    //           ),
+                    //         );
+                    //       },
+                    //       child: Category(
+                    //           categoryName: context.watch<CategoryProvider>().categoriesList[index].categoryName,
+                    //           categoryImage: 'assets/tonerbottle.png'),
+                    //     ),
+                    //     InkWell(
+                    //       onTap: () {
+                    //         Navigator.push(
+                    //           context,
+                    //           MaterialPageRoute(
+                    //             builder: (context) =>
+                    //                 CategoryProducts(
+                    //                   categoryTitle: 'Suncare',
+                    //                 ),
+                    //           ),
+                    //         );
+                    //       },
+                    //       child: Category(
+                    //           categoryName: context.watch<CategoryProvider>().categoriesList[index].categoryName,
+                    //           categoryImage: 'assets/Suncare.png'),
+                    //     ),
+                    //     InkWell(
+                    //       onTap: () {
+                    //         Navigator.push(
+                    //           context,
+                    //           MaterialPageRoute(
+                    //             builder: (context) =>
+                    //                 CategoryProducts(
+                    //                   categoryTitle: 'Masks',
+                    //                 ),
+                    //           ),
+                    //         );
+                    //       },
+                    //       child: Category(
+                    //           categoryName: context.watch<CategoryProvider>().categoriesList[index].categoryName,
+                    //           categoryImage: 'assets/Masks.png'),
+                    //     ),
+                    //     InkWell(
+                    //       onTap: () {
+                    //         Navigator.push(
+                    //           context,
+                    //           MaterialPageRoute(
+                    //             builder: (context) =>
+                    //                 CategoryProducts(
+                    //                   categoryTitle: 'Exfoliators',
+                    //                 ),
+                    //           ),
+                    //         );
+                    //       },
+                    //       child: Category(
+                    //           categoryName: context.watch<CategoryProvider>().categoriesList[index].categoryName,
+                    //           categoryImage: 'assets/exfoliators.png'),
+                    //     )
+                    //   ],
+                    // ),
+                    );
               },
             ),
           ),
@@ -188,13 +190,12 @@ class Category extends StatelessWidget {
   final String categoryName;
   final String categoryImage;
   var catID;
-  Category(
-      {Key? key, required this.categoryName, required this.categoryImage})
+  Category({Key? key, required this.categoryName, required this.categoryImage})
       : super(key: key);
 
   static Category fromJson(Map<String, dynamic> json) => Category(
-      categoryName: json['categName'],
-    categoryImage: json['categImg'],
+        categoryName: json['categName'],
+        categoryImage: json['categImg'],
       );
 
   @override
@@ -204,16 +205,12 @@ class Category extends StatelessWidget {
         Navigator.push(
           context,
           MaterialPageRoute(
-            builder: (context) =>
-                CategoryProducts(
-                  categoryTitle: categoryName,
-                ),
+            builder: (context) => CategoryProducts(
+              categoryTitle: categoryName,
+            ),
           ),
         );
-
-
       },
-
       child: Container(
           decoration: BoxDecoration(
             borderRadius: BorderRadius.all(Radius.circular(20.0)),
@@ -225,17 +222,22 @@ class Category extends StatelessWidget {
           child: Column(
               mainAxisAlignment: MainAxisAlignment.center,
               children: <Widget>[
-                Image(
-                    image: NetworkImage(categoryImage),
+                CachedNetworkImage(
+                    imageUrl: categoryImage,
                     fit: BoxFit.contain,
                     height: displayHeight(context) * 0.125,
-                    width: displayWidth(context) * 0.25, ),
+                    width: displayWidth(context) * 0.25
+                    // child: Image(
+                    //     image: NetworkImage(categoryImage),
+                    //     fit: BoxFit.contain,
+                    //     height: displayHeight(context) * 0.125,
+                    //     width: displayWidth(context) * 0.25, ),
+                    ),
                 ReemKufi_Green(
                   textValue: categoryName,
                   size: displayWidth(context) * 0.045,
                 ),
-              ])
-      ),
+              ])),
     );
   }
 }

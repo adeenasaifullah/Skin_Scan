@@ -67,6 +67,8 @@ class MyApp extends StatelessWidget {
     //Load all your data from firebase over here:
     context.read<CategoryProvider>().getCategoriesFromDb();
     context.read<ProductProvider>().getProductsFromDatabase();
+    context.watch<UserProvider>().getUsersfromDB();
+    //Provider.of<UserProvider>(context, listen: false).getUsersfromDB();
 
     //FocusScope.of(context).unfocus();
     return StreamProvider<AuthenticateUser?>.value(
@@ -82,7 +84,7 @@ class MyApp extends StatelessWidget {
       // },
       child: MaterialApp(
         //scaffoldMessengerKey: Utils.messengerKey,
-        title: 'Flutter Demo',
+        title: 'Skin Scan',
         debugShowCheckedModeBanner: false,
         theme: ThemeData(
           primarySwatch: Colors.blue,
@@ -143,6 +145,8 @@ class _progressloaderState extends State<progressloader> {
 
   @override
   void initState() {
+
+
     Timer? timer;
     timer = Timer.periodic(const Duration(milliseconds: 30), (_) {
       //print('Percent Update');

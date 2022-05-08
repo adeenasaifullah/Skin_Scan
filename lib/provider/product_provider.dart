@@ -33,6 +33,7 @@ class ProductProvider extends ChangeNotifier {
           skinType: productModel.skinType,
           nameOfCategory: productModel.nameOfCategory,
           productIngredients: productModel.productIngredients,
+
         );
         product.prodID = doc.id;
         productsList.add(product);
