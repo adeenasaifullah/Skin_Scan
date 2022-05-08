@@ -1,11 +1,11 @@
 import 'package:flutter/material.dart';
 import 'package:google_maps_flutter/google_maps_flutter.dart';
-import 'package:skin_scan/Models/location_model.dart';
+import 'package:skin_scan/entities/location_entities.dart';
 import 'package:skin_scan/utilities/utility.dart';
 import '../main.dart';
 
 class MapDemo extends StatefulWidget {
-  final LocationModel selectedLocation;
+  final Location selectedLocation;
   const MapDemo({Key? key, required this.selectedLocation}) : super(key: key);
 
   @override

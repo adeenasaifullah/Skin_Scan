@@ -8,7 +8,6 @@ class IngredientProvider extends ChangeNotifier {
   List<Ingredient> ingredientList = [];
 
   Future getIngredientInfo(String findIngredient) async {
-    ingredientList.clear();
     String modifiedIngredient = titleCase(findIngredient);
     //print("Modified:" + modifiedIngredient);
     String collectionName = findIngredient.substring(0,1).toLowerCase() + "_ingredient";
@@ -29,10 +28,10 @@ class IngredientProvider extends ChangeNotifier {
             ingredientDescription: ingredientModel.ingredientDescription
         );
         ingredientList.add(ingredient);
-        // print(ingredient.ingredientName);
-        // print(ingredient.ingredientRating);
-        // print(ingredient.ingredientDescription);
-        // print(ingredient.ingredientCategory);
+        print(ingredient.ingredientName);
+        print(ingredient.ingredientRating);
+        print(ingredient.ingredientDescription);
+        print(ingredient.ingredientCategory);
       });
     });
     notifyListeners();

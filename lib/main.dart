@@ -6,7 +6,7 @@ import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 import 'package:google_fonts/google_fonts.dart';
 import 'package:provider/provider.dart';
-import 'package:skin_scan/provider/UserProvider.dart';
+import 'package:skin_scan/provider/user_provider.dart';
 import 'package:skin_scan/provider/categories_provider.dart';
 import 'package:skin_scan/provider/google_sign_in.dart';
 import 'package:skin_scan/provider/ingredient_provider.dart';
@@ -42,7 +42,6 @@ Future<void> main() async {
     providers: [
       Provider<RoutineProvider>(create: (_) => RoutineProvider()),
       Provider<UserProvider>(create: (_) => UserProvider()),
-      //Provider<RoutineProvider>(create: (_) => RoutineProvider()),
       ChangeNotifierProvider(create: (_) => CategoryProvider()),
       ChangeNotifierProvider(create: (_) => ProductProvider()),
       ChangeNotifierProvider(create: (_) => GoogleSignInProvider()),

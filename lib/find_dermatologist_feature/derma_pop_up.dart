@@ -1,7 +1,7 @@
+import 'package:skin_scan/entities/location_entities.dart';
 import 'package:flutter/material.dart';
 import 'package:google_fonts/google_fonts.dart';
 import 'package:provider/provider.dart';
-import 'package:skin_scan/Models/location_model.dart';
 import 'package:skin_scan/provider/location_provider.dart';
 import '../utilities/bottom_app_bar.dart';
 import '../utilities/utility.dart';
@@ -16,7 +16,7 @@ class DermaPopUp extends StatefulWidget {
 
 class _DermaPopUpState extends State<DermaPopUp> {
   var areaList = ['Select your area'];
-  List<LocationModel> locationList = [];
+  List<Location> locationList = [];
   late TextEditingController derma_controller;
   var dropdownValue = 'Select your area';
   int selectedIndex = 0;
