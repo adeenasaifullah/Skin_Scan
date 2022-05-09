@@ -83,6 +83,9 @@ class AuthService {
       Routine AMroutine = Routine(RoutineName: "Morning", listofproducts: []);
       Routine PMroutine = Routine(RoutineName: "Night", listofproducts: []);
 
+      List<String> favourite_products = [];
+      //favourite_products.add("");
+
       List<Routine> routine_list = [];
       routine_list.add(AMroutine);
       routine_list.add(PMroutine);
@@ -92,7 +95,9 @@ class AuthService {
 
           UserName: "Hello",
           UserEmail: email,
-          UserRoutines: routine_list
+          UserRoutines: routine_list,
+         UserFavouriteProducts: favourite_products,
+          //UserFavouriteProducts: favourite_products
           //routine_list.map((e) => e.toJson()).toList();
           //this.UserRoutines.map((v) => v.toJson()).toList();
 
@@ -110,7 +115,10 @@ class AuthService {
           userID: obj.userID,
           UserName: obj.UserName,
           UserEmail: obj.UserEmail,
-          UserRoutines: userroutine);
+          UserRoutines: userroutine,
+        UserFavouriteProducts: obj.UserFavouriteProducts,
+
+          );
 
       CollectionReference database =
           FirebaseFirestore.instance.collection('users');
@@ -154,10 +162,6 @@ class AuthService {
       return null;
     }
   }
-  //
-  Future googleSignOut() async {
-
-  }
 
   //sign in with google
   Future signInWithGoogle() async {
@@ -179,6 +183,8 @@ class AuthService {
       // print(user.displayName);
       // print(name);
 
+      List<String> favourite_products = [];
+      //favourite_products.add("");
       //DocumentReference documentReferencer = userCollection.doc(uid);
       Routine AMroutine = Routine(RoutineName: "Morning", listofproducts: []);
       Routine PMroutine = Routine(RoutineName: "Night", listofproducts: []);
@@ -191,7 +197,9 @@ class AuthService {
         //uid: uid,
           UserName: account.displayName!,
           UserEmail: account.email,
-          UserRoutines: routine_list
+          UserRoutines: routine_list,
+        UserFavouriteProducts: favourite_products,
+          //UserFavouriteProducts: favourite_products
         //routine_list.map((e) => e.toJson()).toList();
         //this.UserRoutines.map((v) => v.toJson()).toList();
       );
@@ -208,7 +216,10 @@ class AuthService {
           userID: obj.userID,
           UserName: obj.UserName,
           UserEmail: obj.UserEmail,
-          UserRoutines: userroutine);
+          UserRoutines: userroutine,
+        UserFavouriteProducts: obj.UserFavouriteProducts,
+          //UserFavouriteProducts: obj.UserFavouriteProducts
+          );
 
       CollectionReference database =
       FirebaseFirestore.instance.collection('users');

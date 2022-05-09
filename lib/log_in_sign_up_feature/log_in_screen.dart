@@ -25,6 +25,7 @@ class _LogInScreenState extends State<LogInScreen> {
   final _formKey = GlobalKey<FormState>();
   final AuthService _auth = AuthService();
   bool _isLoading = true;
+  //bool obscureIcon = true;
   //text field state
   // String email = "";
   // String password = "";
@@ -84,6 +85,7 @@ class _LogInScreenState extends State<LogInScreen> {
                   hintText: 'Enter your password',
                   prefixIcon: Icon(Icons.lock, color: Color(0xFF283618)),
                   suffixIcon: Icons.visibility_off,
+                  //suffixIcon:  obscureIcon ? Icons.visibility : Icons.visibility_off,
                   autoFocus: false,
                 ),
                 SizedBox(height: displayHeight(context) * 0.025),

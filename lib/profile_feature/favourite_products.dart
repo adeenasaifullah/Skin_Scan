@@ -2,6 +2,7 @@ import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_rating_bar/flutter_rating_bar.dart';
 import 'package:google_fonts/google_fonts.dart';
+import 'package:skin_scan/product_categories_feature/product_categories_utilities.dart';
 import '../entities/product_entities.dart';
 import '../main.dart';
 import '../product_categories_feature/product_detail.dart';
@@ -126,60 +127,61 @@ class _FavouriteProductsCardState extends State<FavouriteProductsCard> {
                     padding:
                     EdgeInsets.only(left: displayWidth(context) * 0.25),
 
-                    child: IconButton(
-                        onPressed: () async {
-                          return showDialog(
-                            barrierDismissible: false,
-                            context: context, // user must tap button!
-                            builder: (context) {
-                              return AlertDialog(
-                                backgroundColor: const Color(0xff283618),
-                                title: ReemKufiOffwhite(textValue: 'Are you sure you want to unfavourite this product?',size: displayHeight(context) * 0.04),
-                                actions: <Widget>[
-                                  Padding(
-                                    padding: EdgeInsets.all(
-                                        displayHeight(context) * 0.03),
-                                    child: Row(
-                                      mainAxisAlignment:
-                                      MainAxisAlignment.spaceEvenly,
-                                      children: [
-                                        TextButton(
-                                          style: TextButton.styleFrom(
-                                              backgroundColor:
-                                              Color(0xffFFFDF4)),
-                                          child: Text('Yes',
-                                              style: GoogleFonts.reemKufi(
-                                                  color: Colors.black,
-                                                  fontSize:
-                                                  displayHeight(context) *
-                                                      0.03)),
-                                          onPressed: () {
-                                            Navigator.of(context).pop(true);
-                                          },
-                                        ),
-                                        TextButton(
-                                          style: TextButton.styleFrom(
-                                              backgroundColor:
-                                              Color(0xffBBBD88)),
-                                          child: Text('Cancel',
-                                              style: GoogleFonts.reemKufi(
-                                                  color: Colors.black,
-                                                  fontSize:
-                                                  displayHeight(context) *
-                                                      0.03)),
-                                          onPressed: () {
-                                            Navigator.of(context).pop(false);
-                                          },
-                                        ),
-                                      ],
-                                    ),
-                                  ),
-                                ],
-                              );
-                            },
-                          );
-                        },
-                        icon: Icon(Icons.favorite, color: Colors.black)),
+                    child: FavouriteButton(),
+                    // IconButton(
+                    //     onPressed: () async {
+                    //       return showDialog(
+                    //         barrierDismissible: false,
+                    //         context: context, // user must tap button!
+                    //         builder: (context) {
+                    //           return AlertDialog(
+                    //             backgroundColor: const Color(0xff283618),
+                    //             title: ReemKufiOffwhite(textValue: 'Are you sure you want to unfavourite this product?',size: displayHeight(context) * 0.04),
+                    //             actions: <Widget>[
+                    //               Padding(
+                    //                 padding: EdgeInsets.all(
+                    //                     displayHeight(context) * 0.03),
+                    //                 child: Row(
+                    //                   mainAxisAlignment:
+                    //                   MainAxisAlignment.spaceEvenly,
+                    //                   children: [
+                    //                     TextButton(
+                    //                       style: TextButton.styleFrom(
+                    //                           backgroundColor:
+                    //                           Color(0xffFFFDF4)),
+                    //                       child: Text('Yes',
+                    //                           style: GoogleFonts.reemKufi(
+                    //                               color: Colors.black,
+                    //                               fontSize:
+                    //                               displayHeight(context) *
+                    //                                   0.03)),
+                    //                       onPressed: () {
+                    //                         Navigator.of(context).pop(true);
+                    //                       },
+                    //                     ),
+                    //                     TextButton(
+                    //                       style: TextButton.styleFrom(
+                    //                           backgroundColor:
+                    //                           Color(0xffBBBD88)),
+                    //                       child: Text('Cancel',
+                    //                           style: GoogleFonts.reemKufi(
+                    //                               color: Colors.black,
+                    //                               fontSize:
+                    //                               displayHeight(context) *
+                    //                                   0.03)),
+                    //                       onPressed: () {
+                    //                         Navigator.of(context).pop(false);
+                    //                       },
+                    //                     ),
+                    //                   ],
+                    //                 ),
+                    //               ),
+                    //             ],
+                    //           );
+                    //         },
+                    //       );
+                    //     },
+                    //     icon: Icon(Icons.favorite, color: Colors.black)),
                   ),
                   Image(
                       image: AssetImage(widget.productImage),
