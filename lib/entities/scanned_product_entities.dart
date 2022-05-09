@@ -9,10 +9,4 @@ class ScannedProduct{
     required this.ingredientList
   });
 
-  Map<String, dynamic> toJson() {
-    final Map<String, dynamic> scannedProduct = {};
-    scannedProduct['name'] = productName;
-    scannedProduct['ingredientList'] = ingredientList.map((v) => v.toJson()).toList();
-    return scannedProduct;
-  }
 }

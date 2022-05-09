@@ -35,18 +35,18 @@ class ScannedProductProvider extends ChangeNotifier {
   }
 
   Future storeScannedProduct(ScannedProduct product) async {
-    // List<IngredientModel> ingredient = product.ingredientList
-    //     .map((e) => IngredientModel(
-    //         ingredientName: e.ingredientName,
-    //         ingredientRating: e.ingredientRating,
-    //         ingredientCategory: e.ingredientCategory,
-    //         ingredientDescription: e.ingredientDescription))
-    //     .toList();
-    // ScannedProductModel productModel = ScannedProductModel(
-    //     productName: product.productName, ingredientList: ingredient);
+    List<IngredientModel> ingredient = product.ingredientList
+        .map((e) => IngredientModel(
+            ingredientName: e.ingredientName,
+            ingredientRating: e.ingredientRating,
+            ingredientCategory: e.ingredientCategory,
+            ingredientDescription: e.ingredientDescription))
+        .toList();
+    ScannedProductModel productModel = ScannedProductModel(
+        productName: product.productName, ingredientList: ingredient);
     CollectionReference database =
         FirebaseFirestore.instance.collection('scanned_product');
-    database.add(product.toJson());
+    database.add(productModel.toJson());
     notifyListeners();
   }
 }
