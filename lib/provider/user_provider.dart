@@ -7,15 +7,18 @@ import 'package:skin_scan/Models/product_model.dart';
 import 'package:skin_scan/Models/routine_product_model.dart';
 import 'package:skin_scan/entities/routine_entities.dart';
 import 'package:skin_scan/profile_feature/favourite_products.dart';
+import 'package:skin_scan/provider/product_provider.dart';
 
 import '../Models/routine_model.dart';
 import '../Models/users_adeena_model.dart';
+import '../entities/product_entities.dart';
 import '../entities/routine_product_entities.dart';
 import '../entities/user_entities.dart';
 
 class UserProvider extends ChangeNotifier {
   final List<Users> allUsers = [];
   List<String> currentUserFavList = [];
+  List<Product> FavouriteLists = [];
   List<String> getCurrentUserList() {
     return currentUserFavList;
   }
@@ -101,12 +104,58 @@ class UserProvider extends ChangeNotifier {
     notifyListeners();
   }
 
+  // List<Product> getUserFavouriteProducts(String name) {
+  //   int index = allUsers.indexWhere((user) => user.userID == currentUser.uid);
+  //   List<Product> productsOfCategory = [];
+  //
+  //   for (int i = 0; i < productsList.length; i++) {
+  //     //print('snoop');
+  //     if (productsList[i].nameOfCategory == name) {
+  //       productsOfCategory.add(productsList[i]);
+  //     }
+  //   }
+  //   print("get category products + $productsOfCategory");
+  //   return productsOfCategory;
+  // }
+
+  bool checkUserFavouriteProduct(var prodID) {
+    int index = allUsers.indexWhere((user) => user.userID == currentUser.uid);
+    if (allUsers[index].UserFavouriteProducts.contains(prodID)) {
+      return true;
+    } else
+      return false;
+  }
+
+  List<Product> getUserFavouriteProducts(List<Product> productsList){
+    FavouriteLists.clear();
+    int index = allUsers.indexWhere((user) => user.userID == currentUser.uid);
+    print(productsList);
+    print('hello fav list');
 
 
+    for (int i = 0; i < productsList.length; i++) {
+      for(int j =0; j< allUsers[index].UserFavouriteProducts.length; j++){
+        if ( allUsers[index].UserFavouriteProducts[j]== productsList[i].prodID) {
+          FavouriteLists.add(productsList[i]);
+          print("This is the product list");
+          print(productsList[i]);
+
+        }
+      }
+      //print('snoop');
+
+
+    }
+    notifyListeners();
+    print("Fav list");
+    print(FavouriteLists);
+    return FavouriteLists;
+    //currentUserFavList;
+
+  }
 
   addProductToFavourites(var prodID) {
     //getUsersfromDB();
-
 
     int index = allUsers.indexWhere((user) => user.userID == currentUser.uid);
     print("current id " + currentUser.uid);
@@ -123,12 +172,10 @@ class UserProvider extends ChangeNotifier {
 
       var userroutine = allUsers[index]
           .UserRoutines
-          .map((e) =>
-          RoutineModel(
+          .map((e) => RoutineModel(
               RoutineName: e.RoutineName,
               listofproducts: e.listofproducts
-                  .map((p) =>
-                  RoutineProductsModel(
+                  .map((p) => RoutineProductsModel(
                       productname: p.productname,
                       category: p.category,
                       days: p.days))

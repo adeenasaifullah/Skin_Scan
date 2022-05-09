@@ -60,7 +60,7 @@ class _ProductDetailState extends State<ProductDetail> {
                     ReemKufi_Green(
                         textValue: widget.product.productName,
                         size: displayHeight(context) * 0.035),
-                    FavouriteButton(),
+                    FavouriteButton(prodID: widget.product.prodID),
                   ],
                 ),
                 Rambla_Green_Italic(

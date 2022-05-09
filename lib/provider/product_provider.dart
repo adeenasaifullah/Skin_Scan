@@ -43,6 +43,8 @@ class ProductProvider extends ChangeNotifier {
     notifyListeners();
   }
 
+
+
   List<Product> getProductsOfCategory(String name) {
     List<Product> productsOfCategory = [];
 
