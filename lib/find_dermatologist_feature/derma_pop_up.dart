@@ -29,9 +29,8 @@ class _DermaPopUpState extends State<DermaPopUp> {
 
   Future getLocations() async {
     await Provider.of<LocationProvider>(context, listen: false).getLocation();
-    locationList =
-        await Provider.of<LocationProvider>(context, listen: false)
-            .locationList;
+    locationList = await Provider.of<LocationProvider>(context, listen: false)
+        .locationList;
     for (var area in locationList) {
       areaList.add(area.areaName);
     }
@@ -54,7 +53,7 @@ class _DermaPopUpState extends State<DermaPopUp> {
         actions: <Widget>[
           Padding(
             padding:
-            EdgeInsets.symmetric(horizontal: displayWidth(context) * 0.05),
+                EdgeInsets.symmetric(horizontal: displayWidth(context) * 0.05),
             child: Container(
               decoration: BoxDecoration(
                 borderRadius: BorderRadius.all(Radius.circular(20.0)),
@@ -64,35 +63,66 @@ class _DermaPopUpState extends State<DermaPopUp> {
               //color: Color(0xffDADBC6),
               child: ButtonTheme(
                 alignedDropdown: true,
-                child: DropdownButton(
-                  menuMaxHeight: displayHeight(context) * 0.2,
-                  isExpanded: true,
-                  dropdownColor: Color(0xffDADBC6),
-                  value: dropdownValue,
-                  borderRadius: BorderRadius.all(Radius.circular(20.0)),
-                  icon: const Icon(Icons.arrow_downward_sharp),
-                  underline: DecoratedBox(
-                    decoration: BoxDecoration(color: Color(0xffDADBC6)),
-                  ),
-                  items: areaList.map((String items) {
-                    return DropdownMenuItem(
-                      value: items,
-                      child: Padding(
-                        padding: const EdgeInsets.all(8.0),
-                        child: ReemKufi_Green(
-                            textValue: items,
-                            size: displayHeight(context) * 0.03),
+                child: StatefulBuilder(builder: (context, setState) {
+                    return DropdownButton(
+                      menuMaxHeight: displayHeight(context) * 0.2,
+                      isExpanded: true,
+                      dropdownColor: Color(0xffDADBC6),
+                      value: dropdownValue,
+                      borderRadius: BorderRadius.all(Radius.circular(20.0)),
+                      icon: const Icon(Icons.arrow_downward_sharp),
+                      underline: DecoratedBox(
+                        decoration: BoxDecoration(color: Color(0xffDADBC6)),
                       ),
+                      items: areaList.map((String items) {
+                        return DropdownMenuItem(
+                          value: items,
+                          child: Padding(
+                            padding: const EdgeInsets.all(8.0),
+                            child: ReemKufi_Green(
+                                textValue: items,
+                                size: displayHeight(context) * 0.03),
+                          ),
+                        );
+                      }).toList(),
+                      onChanged: (String? newValue) {
+                        setState(() {
+                          selectedIndex = areaList.indexOf(newValue!);
+                          dropdownValue = newValue!;
+                        });
+                      },
                     );
-                  }).toList(),
-                  onChanged: (String? newValue) {
-                    setState(() {
-                      selectedIndex = areaList.indexOf(newValue!);
-                      dropdownValue = newValue!;
-                    });
                   },
                 ),
               ),
+              // child: DropdownButton(
+              //   menuMaxHeight: displayHeight(context) * 0.2,
+              //   isExpanded: true,
+              //   dropdownColor: Color(0xffDADBC6),
+              //   value: dropdownValue,
+              //   borderRadius: BorderRadius.all(Radius.circular(20.0)),
+              //   icon: const Icon(Icons.arrow_downward_sharp),
+              //   underline: DecoratedBox(
+              //     decoration: BoxDecoration(color: Color(0xffDADBC6)),
+              //   ),
+              //   items: areaList.map((String items) {
+              //     return DropdownMenuItem(
+              //       value: items,
+              //       child: Padding(
+              //         padding: const EdgeInsets.all(8.0),
+              //         child: ReemKufi_Green(
+              //             textValue: items,
+              //             size: displayHeight(context) * 0.03),
+              //       ),
+              //     );
+              //   }).toList(),
+              //   onChanged: (String? newValue) {
+              //     setState(() {
+              //       selectedIndex = areaList.indexOf(newValue!);
+              //       dropdownValue = newValue!;
+              //     });
+              //   },
+              // ),
             ),
           ),
           Padding(
@@ -108,7 +138,7 @@ class _DermaPopUpState extends State<DermaPopUp> {
                     size: displayHeight(context) * 0.03,
                   ),
                   onPressed: () {
-                    if(selectedIndex==0){
+                    if (selectedIndex == 0) {
                       showDialog(
                         barrierDismissible: false,
                         context: context, // user must tap button!
@@ -117,7 +147,9 @@ class _DermaPopUpState extends State<DermaPopUp> {
                             backgroundColor: const Color(0xff283618),
                             title: Column(
                               children: [
-                                ReemKufiOffwhite(textValue: 'Area not selected', size: displayHeight(context) * 0.04),
+                                ReemKufiOffwhite(
+                                    textValue: 'Area not selected',
+                                    size: displayHeight(context) * 0.04),
                               ],
                             ),
                             actions: <Widget>[
@@ -125,7 +157,7 @@ class _DermaPopUpState extends State<DermaPopUp> {
                                 padding: const EdgeInsets.all(8.0),
                                 child: Row(
                                   mainAxisAlignment:
-                                  MainAxisAlignment.spaceEvenly,
+                                      MainAxisAlignment.spaceEvenly,
                                   children: [
                                     TextButton(
                                       style: TextButton.styleFrom(
@@ -137,16 +169,17 @@ class _DermaPopUpState extends State<DermaPopUp> {
                                             style: GoogleFonts.reemKufi(
                                                 color: Colors.black,
                                                 fontSize:
-                                                displayHeight(context) *
-                                                    0.03)),
+                                                    displayHeight(context) *
+                                                        0.03)),
                                       ),
                                       onPressed: () {
                                         Navigator.pushAndRemoveUntil(
                                           context,
                                           MaterialPageRoute(
-                                            builder: (BuildContext context) => DermaPopUp(),
+                                            builder: (BuildContext context) =>
+                                                DermaPopUp(),
                                           ),
-                                              (route) => false,
+                                          (route) => false,
                                         );
                                       },
                                     ),
@@ -157,15 +190,13 @@ class _DermaPopUpState extends State<DermaPopUp> {
                           );
                         },
                       );
-                    }
-                    else{
+                    } else {
                       Navigator.push(
                           context,
                           MaterialPageRoute(
-                            builder: (context) =>
-                                MapDemo(
-                                    selectedLocation: locationList[selectedIndex-1]
-                                ),
+                            builder: (context) => MapDemo(
+                                selectedLocation:
+                                    locationList[selectedIndex - 1]),
                           ));
                     }
                   },
@@ -195,4 +226,3 @@ class _DermaPopUpState extends State<DermaPopUp> {
     );
   }
 }
-
