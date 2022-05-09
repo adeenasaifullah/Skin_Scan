@@ -1,6 +1,3 @@
-
-
-
 import 'package:skin_scan/entities/routine_product_entities.dart';
 
 class Routine {

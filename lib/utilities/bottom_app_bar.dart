@@ -35,6 +35,7 @@ class _MyBottomAppBarState extends State<MyBottomAppBar> {
   void dispose()
   {
     ingredient_controller.dispose();
+    super.dispose();
   }
   int curindex = 0;
 

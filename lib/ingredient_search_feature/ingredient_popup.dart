@@ -26,7 +26,9 @@ class _IngredientPopUpState extends State<IngredientPopUp> {
   void dispose()
   {
     ingredient_controller.dispose();
+    super.dispose();
   }
+
   @override
   Widget build(BuildContext context) {
     return Scaffold(

@@ -26,8 +26,8 @@ class _OcrScanState extends State<OcrScan> {
   bool _multipleOcr = true;
   bool _waitTapOcr = true;
   bool _showTextOcr = true;
-  bool _commaSeparated = false;
-  bool _lineSeparated = false;
+  // bool _commaSeparated = false;
+  // bool _lineSeparated = false;
   Size? _previewOcr;
   List<OcrText> _textsOcr = [];
 
@@ -193,25 +193,25 @@ class _OcrScanState extends State<OcrScan> {
     //   onChanged: (value) => setState(() => _multipleOcr = value),
     // ));
 
-    items.add(SwitchListTile(
-      title: ReemKufi_Grey(textValue: 'Comma Separated Ingredients:', size: displayHeight(context)*0.025,),
-      tileColor: Color(0xffFFFDF4),
-      activeTrackColor: Color(0xffBBBD88),
-      activeColor: Color(0xFF283618),
-      inactiveThumbColor: Color(0xFFFFFDF4),
-      value: _commaSeparated,
-      onChanged: (value) => setState(() => _commaSeparated = value),
-    ));
+    // items.add(SwitchListTile(
+    //   title: ReemKufi_Grey(textValue: 'Comma Separated Ingredients:', size: displayHeight(context)*0.025,),
+    //   tileColor: Color(0xffFFFDF4),
+    //   activeTrackColor: Color(0xffBBBD88),
+    //   activeColor: Color(0xFF283618),
+    //   inactiveThumbColor: Color(0xFFFFFDF4),
+    //   value: _commaSeparated,
+    //   onChanged: (value) => setState(() => _commaSeparated = value),
+    // ));
 
-    items.add(SwitchListTile(
-      title: ReemKufi_Grey(textValue: 'Line Separated Ingredients:', size: displayHeight(context)*0.025,),
-      tileColor: Color(0xffFFFDF4),
-      activeTrackColor: Color(0xffBBBD88),
-      activeColor: Color(0xFF283618),
-      inactiveThumbColor: Color(0xFFFFFDF4),
-      value: _lineSeparated,
-      onChanged: (value) => setState(() => _lineSeparated = value),
-    ));
+    // items.add(SwitchListTile(
+    //   title: ReemKufi_Grey(textValue: 'Line Separated Ingredients:', size: displayHeight(context)*0.025,),
+    //   tileColor: Color(0xffFFFDF4),
+    //   activeTrackColor: Color(0xffBBBD88),
+    //   activeColor: Color(0xFF283618),
+    //   inactiveThumbColor: Color(0xFFFFFDF4),
+    //   value: _lineSeparated,
+    //   onChanged: (value) => setState(() => _lineSeparated = value),
+    // ));
 
     items.add(SwitchListTile(
       title: ReemKufi_Grey(textValue: 'Capture on Tap:', size: displayHeight(context)*0.025,),
