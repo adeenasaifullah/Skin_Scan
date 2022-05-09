@@ -9,9 +9,9 @@ class IngredientProvider extends ChangeNotifier {
 
   Future getIngredientInfo(String findIngredient) async {
     String modifiedIngredient = titleCase(findIngredient);
-    //print("Modified:" + modifiedIngredient);
+    print("Modified:" + modifiedIngredient);
     String collectionName = findIngredient.substring(0,1).toLowerCase() + "_ingredient";
-    //print("CollectionName: " + collectionName);
+    print("CollectionName: " + collectionName);
     await FirebaseFirestore.instance
         .collection(collectionName)
         .limit(1)
@@ -35,6 +35,7 @@ class IngredientProvider extends ChangeNotifier {
       });
     });
     notifyListeners();
+
   }
 
   String titleCase(String ingredient){

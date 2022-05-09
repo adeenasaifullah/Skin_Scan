@@ -67,6 +67,7 @@ class MyApp extends StatelessWidget {
     context.read<CategoryProvider>().getCategoriesFromDb();
     context.read<ProductProvider>().getProductsFromDatabase();
     context.watch<UserProvider>().getUsersfromDB();
+    context.watch<UserProvider>().getUserFavouriteProducts(context.read<ProductProvider>().productsList);
     //Provider.of<UserProvider>(context, listen: false).getUsersfromDB();
 
     //FocusScope.of(context).unfocus();

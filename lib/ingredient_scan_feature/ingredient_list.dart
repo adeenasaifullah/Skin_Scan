@@ -20,11 +20,6 @@ class IngredientsList extends StatefulWidget {
 class _IngredientsListState extends State<IngredientsList> {
   List<Ingredient> ingredientList = [];
 
-  // void initState() {
-  //   super.initState();
-  //   ExtractIngredientInfo(context, widget.ingredientName);
-  //
-  // }
 
   Future<List<Ingredient>> ExtractIngredientInfo(context, List<String> ingredientName) async {
     Provider.of<IngredientProvider>(context,listen: false).ingredientList.clear();
@@ -33,7 +28,7 @@ class _IngredientsListState extends State<IngredientsList> {
       await Provider.of<IngredientProvider>(context,listen: false).getIngredientInfo(name);
     }
     ingredientList = await Provider.of<IngredientProvider>(context,listen: false).ingredientList;
-    //print("here");
+    print("here");
     return ingredientList;
   }
 
@@ -128,7 +123,24 @@ class _IngredientsListState extends State<IngredientsList> {
                     );
                   }
                 }
-                )
+                ),
+            ElevatedButton(
+              onPressed: () {
+                // Navigator.of(context).push(MaterialPageRoute(
+                //     builder: (context) => CategoriesAndSearch()));
+              },
+              style: ElevatedButton.styleFrom(
+                side: BorderSide(width: displayWidth(context) * 0.2),
+                padding: EdgeInsets.symmetric(horizontal: 20, vertical: 10),
+                primary: Color(0xFF283618),
+                shape: RoundedRectangleBorder(
+                  borderRadius: BorderRadius.circular(25.0),
+                ),
+              ),
+              child: Text('Browse Categories',
+                  style: GoogleFonts.reemKufi(
+                      color: Colors.white, fontSize: 20)),
+            ),
           ],
         ),
       ),

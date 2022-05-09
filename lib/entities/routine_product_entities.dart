@@ -12,9 +12,6 @@ class RoutineProducts {
         required this.days});
 
 
-
-
-
   static RoutineProducts fromJson(Map<String, dynamic> json) {
     return RoutineProducts(
         category: json['Category'],

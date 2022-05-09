@@ -11,4 +11,6 @@ class Ingredient {
     required this.ingredientDescription,
   });
 
+
+
 }

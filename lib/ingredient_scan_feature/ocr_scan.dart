@@ -8,6 +8,7 @@ import 'package:skin_scan/entities/ingredient_entities.dart';
 import 'package:skin_scan/main.dart';
 import 'package:skin_scan/utilities/utility.dart';
 import '../provider/ingredient_provider.dart';
+import '../utilities/bottom_app_bar.dart';
 import 'ingredient_list.dart';
 import 'ocr_text_detail.dart';
 
@@ -26,8 +27,8 @@ class _OcrScanState extends State<OcrScan> {
   bool _multipleOcr = true;
   bool _waitTapOcr = true;
   bool _showTextOcr = true;
-  bool _commaSeparated = false;
-  bool _lineSeparated = false;
+  // bool _commaSeparated = false;
+  // bool _lineSeparated = false;
   Size? _previewOcr;
   List<OcrText> _textsOcr = [];
 
@@ -193,25 +194,25 @@ class _OcrScanState extends State<OcrScan> {
     //   onChanged: (value) => setState(() => _multipleOcr = value),
     // ));
 
-    items.add(SwitchListTile(
-      title: ReemKufi_Grey(textValue: 'Comma Separated Ingredients:', size: displayHeight(context)*0.025,),
-      tileColor: Color(0xffFFFDF4),
-      activeTrackColor: Color(0xffBBBD88),
-      activeColor: Color(0xFF283618),
-      inactiveThumbColor: Color(0xFFFFFDF4),
-      value: _commaSeparated,
-      onChanged: (value) => setState(() => _commaSeparated = value),
-    ));
+    // items.add(SwitchListTile(
+    //   title: ReemKufi_Grey(textValue: 'Comma Separated Ingredients:', size: displayHeight(context)*0.025,),
+    //   tileColor: Color(0xffFFFDF4),
+    //   activeTrackColor: Color(0xffBBBD88),
+    //   activeColor: Color(0xFF283618),
+    //   inactiveThumbColor: Color(0xFFFFFDF4),
+    //   value: _commaSeparated,
+    //   onChanged: (value) => setState(() => _commaSeparated = value),
+    // ));
 
-    items.add(SwitchListTile(
-      title: ReemKufi_Grey(textValue: 'Line Separated Ingredients:', size: displayHeight(context)*0.025,),
-      tileColor: Color(0xffFFFDF4),
-      activeTrackColor: Color(0xffBBBD88),
-      activeColor: Color(0xFF283618),
-      inactiveThumbColor: Color(0xFFFFFDF4),
-      value: _lineSeparated,
-      onChanged: (value) => setState(() => _lineSeparated = value),
-    ));
+    // items.add(SwitchListTile(
+    //   title: ReemKufi_Grey(textValue: 'Line Separated Ingredients:', size: displayHeight(context)*0.025,),
+    //   tileColor: Color(0xffFFFDF4),
+    //   activeTrackColor: Color(0xffBBBD88),
+    //   activeColor: Color(0xFF283618),
+    //   inactiveThumbColor: Color(0xFFFFFDF4),
+    //   value: _lineSeparated,
+    //   onChanged: (value) => setState(() => _lineSeparated = value),
+    // ));
 
     items.add(SwitchListTile(
       title: ReemKufi_Grey(textValue: 'Capture on Tap:', size: displayHeight(context)*0.025,),
@@ -271,7 +272,39 @@ class _OcrScanState extends State<OcrScan> {
   Widget build(BuildContext context) {
     return Scaffold(
       backgroundColor: const Color(0xFFFFFDF4),
-      appBar: AppBarDetails(screenName: 'Scan Ingredient List',),
+      appBar: AppBar(
+        elevation: 0,
+        backgroundColor: const Color(0xFFFFFDF4),
+        centerTitle: false,
+        title: ReemKufi_Grey(
+            textValue: 'Scan Ingredient', size: displayWidth(context) * 0.05),
+        iconTheme: const IconThemeData(
+          color: const Color(0xFF4D4D4D), //change your color here
+        ),
+        leading: GestureDetector(
+            child: Icon(Icons.arrow_back, color: Color(0xFF4D4D4D)),
+            onTap: () {
+              Navigator.pushAndRemoveUntil(
+                context,
+                MaterialPageRoute(
+                  builder: (BuildContext context) => MyBottomAppBar(),
+                ),
+                    (route) => false,
+              );
+            }),
+        actions: [
+          Padding(
+            padding: EdgeInsets.only(
+                right: displayWidth(context) * 0.05,
+                top: displayHeight(context) * 0.005),
+            child: Image(
+                image: AssetImage('assets/dots for app dev.png'),
+                fit: BoxFit.fill,
+                height: displayHeight(context) * 1,
+                width: displayWidth(context) * 0.1),
+          ),
+        ],
+      ),
       body: _getOcrScreen(context),
     );
   }
