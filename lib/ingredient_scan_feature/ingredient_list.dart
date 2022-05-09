@@ -124,6 +124,23 @@ class _IngredientsListState extends State<IngredientsList> {
                   }
                 }
                 ),
+            ElevatedButton(
+              onPressed: () {
+                // Navigator.of(context).push(MaterialPageRoute(
+                //     builder: (context) => CategoriesAndSearch()));
+              },
+              style: ElevatedButton.styleFrom(
+                side: BorderSide(width: displayWidth(context) * 0.2),
+                padding: EdgeInsets.symmetric(horizontal: 20, vertical: 10),
+                primary: Color(0xFF283618),
+                shape: RoundedRectangleBorder(
+                  borderRadius: BorderRadius.circular(25.0),
+                ),
+              ),
+              child: Text('Browse Categories',
+                  style: GoogleFonts.reemKufi(
+                      color: Colors.white, fontSize: 20)),
+            ),
           ],
         ),
       ),

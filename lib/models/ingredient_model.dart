@@ -11,7 +11,7 @@ class IngredientModel{
     required this.ingredientDescription,
   });
 
-  static IngredientModel fromJson(Map<String, dynamic> json) {
+  static fromJson(Map<String, dynamic> json) {
     return IngredientModel(
         ingredientName: json['name'],
         ingredientRating: json['rating'],
