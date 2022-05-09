@@ -11,13 +11,6 @@ class Ingredient {
     required this.ingredientDescription,
   });
 
-  Map<String, dynamic> toJson() {
-    final Map<String, dynamic> ingredient = {};
-    ingredient['name'] = ingredientName;
-    ingredient['rating'] = ingredientRating;
-    ingredient['categories'] = ingredientCategory;
-    ingredient['description'] = ingredientDescription;
-    return ingredient;
-  }
+
 
 }
