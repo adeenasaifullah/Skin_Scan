@@ -20,11 +20,6 @@ class IngredientsList extends StatefulWidget {
 class _IngredientsListState extends State<IngredientsList> {
   List<Ingredient> ingredientList = [];
 
-  // void initState() {
-  //   super.initState();
-  //   ExtractIngredientInfo(context, widget.ingredientName);
-  //
-  // }
 
   Future<List<Ingredient>> ExtractIngredientInfo(context, List<String> ingredientName) async {
     Provider.of<IngredientProvider>(context,listen: false).ingredientList.clear();
@@ -128,7 +123,7 @@ class _IngredientsListState extends State<IngredientsList> {
                     );
                   }
                 }
-                )
+                ),
           ],
         ),
       ),
