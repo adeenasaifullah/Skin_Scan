@@ -8,6 +8,7 @@ import 'package:skin_scan/entities/ingredient_entities.dart';
 import 'package:skin_scan/main.dart';
 import 'package:skin_scan/utilities/utility.dart';
 import '../provider/ingredient_provider.dart';
+import '../utilities/bottom_app_bar.dart';
 import 'ingredient_list.dart';
 import 'ocr_text_detail.dart';
 
@@ -271,7 +272,39 @@ class _OcrScanState extends State<OcrScan> {
   Widget build(BuildContext context) {
     return Scaffold(
       backgroundColor: const Color(0xFFFFFDF4),
-      appBar: AppBarDetails(screenName: 'Scan Ingredient List',),
+      appBar: AppBar(
+        elevation: 0,
+        backgroundColor: const Color(0xFFFFFDF4),
+        centerTitle: false,
+        title: ReemKufi_Grey(
+            textValue: 'Scan Ingredient', size: displayWidth(context) * 0.05),
+        iconTheme: const IconThemeData(
+          color: const Color(0xFF4D4D4D), //change your color here
+        ),
+        leading: GestureDetector(
+            child: Icon(Icons.arrow_back, color: Color(0xFF4D4D4D)),
+            onTap: () {
+              Navigator.pushAndRemoveUntil(
+                context,
+                MaterialPageRoute(
+                  builder: (BuildContext context) => MyBottomAppBar(),
+                ),
+                    (route) => false,
+              );
+            }),
+        actions: [
+          Padding(
+            padding: EdgeInsets.only(
+                right: displayWidth(context) * 0.05,
+                top: displayHeight(context) * 0.005),
+            child: Image(
+                image: AssetImage('assets/dots for app dev.png'),
+                fit: BoxFit.fill,
+                height: displayHeight(context) * 1,
+                width: displayWidth(context) * 0.1),
+          ),
+        ],
+      ),
       body: _getOcrScreen(context),
     );
   }

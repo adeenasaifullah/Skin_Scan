@@ -28,7 +28,7 @@ class _IngredientsListState extends State<IngredientsList> {
       await Provider.of<IngredientProvider>(context,listen: false).getIngredientInfo(name);
     }
     ingredientList = await Provider.of<IngredientProvider>(context,listen: false).ingredientList;
-    //print("here");
+    print("here");
     return ingredientList;
   }
 

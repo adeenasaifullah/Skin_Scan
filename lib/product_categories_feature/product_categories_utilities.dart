@@ -66,7 +66,7 @@ class _RatingState extends State<Rating> {
 
 class FavouriteButton extends StatefulWidget {
 
-  bool isFavourite = false;
+  //bool isFavourite = false;
   var prodID;
   FavouriteButton({Key? key, this.prodID}) : super(key: key);
 
@@ -80,7 +80,8 @@ class _FavouriteButtonState extends State<FavouriteButton> {
 
   @override
   Widget build(BuildContext context) {
-    return !widget.isFavourite ?
+    return !context.read<UserProvider>().checkUserFavouriteProduct(widget.prodID) ?
+    //return !widget.isFavourite ?
     IconButton(
 
       //icon: !widget.isFavourite ? Icon(CupertinoIcons.suit_heart) : Icon(CupertinoIcons.suit_heart_fill),
@@ -113,7 +114,7 @@ class _FavouriteButtonState extends State<FavouriteButton> {
                               onPressed: () {
                                 //favouriteIcon =CupertinoIcons.suit_heart_fill;
                                 //Provider.of<UserProvider>(context, listen: false).addProductToFavourites(widget.prodID);
-                                widget.isFavourite = !widget.isFavourite;
+                                //widget.isFavourite = !widget.isFavourite;
                                 //UnFavouriteButton(prodID: widget.prodID);
                                 context.read<UserProvider>().addProductToFavourites(widget.prodID);
                                 setState(() {
@@ -170,7 +171,7 @@ class _FavouriteButtonState extends State<FavouriteButton> {
                               textValue: 'Yes',
                               size: displayHeight(context) * 0.03),
                           onPressed: () {
-                            widget.isFavourite = !widget.isFavourite;
+                            //widget.isFavourite = !widget.isFavourite;
 
                             //FavouriteButton(prodID: widget.prodID);
                             //favouriteIcon = CupertinoIcons.suit_heart;
