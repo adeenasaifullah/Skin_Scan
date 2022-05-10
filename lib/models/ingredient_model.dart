@@ -13,12 +13,13 @@ class IngredientModel{
 
   static IngredientModel fromJson(Map<String, dynamic> json) {
     return IngredientModel(
-        ingredientName: json['name'],
-        ingredientRating: json['rating'],
-        ingredientCategory: json['categories'],
-        ingredientDescription: json['description'],
+      ingredientName: json['name'],
+      ingredientRating: json['rating'],
+      ingredientCategory: json['categories'],
+      ingredientDescription: json['description'],
     );
   }
+
   Map<String, dynamic> toJson() {
     final Map<String, dynamic> ingredient = {};
     ingredient['name'] = ingredientName;
