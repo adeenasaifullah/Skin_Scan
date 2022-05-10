@@ -19,7 +19,6 @@ class IngredientModel{
         ingredientDescription: json['description'],
     );
   }
-
   Map<String, dynamic> toJson() {
     final Map<String, dynamic> ingredient = {};
     ingredient['name'] = ingredientName;
