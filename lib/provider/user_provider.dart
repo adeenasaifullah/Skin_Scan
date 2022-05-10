@@ -21,6 +21,7 @@ class UserProvider extends ChangeNotifier {
   List<RoutineProducts> AMlist =[];
   List<RoutineProducts> PMlist = [];
   List<Product> FavouriteLists = [];
+
   List<String> getCurrentUserList() {
     return currentUserFavList;
   }

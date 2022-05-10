@@ -58,10 +58,31 @@ Future<void> main() async {
 
 
 
-class MyApp extends StatelessWidget {
+class MyApp extends StatefulWidget {
   const MyApp({Key? key}) : super(key: key);
 
+  @override
+  State<MyApp> createState() => _MyAppState();
+}
+
+class _MyAppState extends State<MyApp> {
   // This widget is the root of your application.
+
+  void initModified() async {
+
+    await context.read<CategoryProvider>().getCategoriesFromDb();
+    await context.read<ProductProvider>().getProductsFromDatabase();
+    await context.watch<UserProvider>().getUsersfromDB();
+    await context.watch<UserProvider>().getUserFavouriteProducts(context.read<ProductProvider>().productsList);
+
+  }
+
+  @override
+  void initState() {
+    initModified();
+    super.initState();
+  }
+
   @override
   Widget build(BuildContext context) {
 
