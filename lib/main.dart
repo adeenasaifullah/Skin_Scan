@@ -6,6 +6,7 @@ import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 import 'package:google_fonts/google_fonts.dart';
 import 'package:provider/provider.dart';
+import 'package:skin_scan/provider/scanned_product_provider.dart';
 import 'package:skin_scan/provider/user_provider.dart';
 import 'package:skin_scan/provider/categories_provider.dart';
 import 'package:skin_scan/provider/google_sign_in.dart';
@@ -47,6 +48,7 @@ Future<void> main() async {
       ChangeNotifierProvider(create: (_) => GoogleSignInProvider()),
       ChangeNotifierProvider(create: (_) => IngredientProvider()),
       ChangeNotifierProvider(create: (_) => LocationProvider()),
+      ChangeNotifierProvider(create: (_) => ScannedProductProvider()),
       //Provider<AuthService>(create: (_) => AuthService(FirebaseAuth.instance)),
       //StreamProvider(create: (context) => context.read<AuthService>().authStateChanges, initialData: null,),
     ],
@@ -64,6 +66,7 @@ class MyApp extends StatelessWidget {
   Widget build(BuildContext context) {
 
     //Load all your data from firebase over here:
+
     context.read<CategoryProvider>().getCategoriesFromDb();
     context.read<ProductProvider>().getProductsFromDatabase();
     context.watch<UserProvider>().getUsersfromDB();
