@@ -3,6 +3,7 @@ import 'dart:io';
 
 import 'package:flutter/material.dart';
 import 'package:flutter_mobile_vision_2/flutter_mobile_vision_2.dart';
+import 'package:google_fonts/google_fonts.dart';
 import 'package:provider/provider.dart';
 import 'package:skin_scan/entities/ingredient_entities.dart';
 import 'package:skin_scan/main.dart';
@@ -318,6 +319,8 @@ class OcrTextWidget extends StatelessWidget {
   List<Ingredient> ingredientList = [];
 
   OcrTextWidget(this.ocrText);
+  final _formKey = GlobalKey<FormState>();
+  late TextEditingController productName_controller= TextEditingController();
 
   CommaSeparateIngredients(String ocrText){
     List ing = ocrText.split(',');
@@ -345,20 +348,103 @@ class OcrTextWidget extends StatelessWidget {
       title: Text(ocrText.value),
       subtitle: Text(ocrText.language),
       trailing: const Icon(Icons.arrow_forward),
-      onTap: (){
-        CommaSeparateIngredients(ocrText.value);
-        //ExtractIngredientInfo(context, ingredientName);
+      onTap: () async{
+         CommaSeparateIngredients(ocrText.value);
+        // //ExtractIngredientInfo(context, ingredientName);
         Navigator.of(context).push(
           MaterialPageRoute(
             builder: (context) => IngredientsList(ingredientName: ingredientName),
           ),
         );
+        // return showDialog(
+        //     barrierDismissible: false,
+        //     context: context, // user must tap button!
+        //     builder: (context) {
+        //       return  Form(
+        //         key: _formKey,
+        //         child: AlertDialog(
+        //           backgroundColor: const Color(0xff283618),
+        //           title: ReemKufiOffwhite(textValue: 'Enter product name',
+        //             size: displayHeight(context) * 0.04,),
+        //           content: TextFormField(
+        //             controller: productName_controller,
+        //             validator:  (productName){
+        //               if (productName_controller.text.isEmpty) {
+        //                 print("validated");
+        //                 return "* Required";
+        //               }
+        //               else {
+        //                 return null;
+        //               }
+        //             },
+        //
+        //             autofocus: false,
+        //             decoration: InputDecoration(
+        //               hintText: 'Enter product name',
+        //               hintStyle: GoogleFonts.reemKufi(
+        //                   color: Color(0xffFFFDF4),
+        //                   fontSize: displayHeight(context) * 0.03),
+        //             ),
+        //             style: GoogleFonts.reemKufi(
+        //                 color: Color(0xffFFFDF4),
+        //                 fontSize: displayHeight(context) * 0.03),
+        //           ),
+        //           actions: <Widget>[
+        //             Padding(
+        //               padding:
+        //               EdgeInsets.all(displayHeight(context) * 0.03),
+        //               child: Row(
+        //                 mainAxisAlignment: MainAxisAlignment.spaceEvenly,
+        //                 children: [
+        //                   TextButton(
+        //                     style: TextButton.styleFrom(
+        //                         backgroundColor: Color(0xffBBBD88)),
+        //                     child: ReemKufi_Black(textValue: 'Continue',
+        //                       size: displayHeight(context) * 0.03,),
+        //                     onPressed: () async {
+        //                       if (_formKey.currentState!.validate()) {
+        //                         //CommaSeparateIngredients(ocrText.value);
+        //                         Navigator.of(context).push(
+        //                           MaterialPageRoute(
+        //                             builder: (context) => IngredientsList(ingredientName: ingredientName),
+        //                           ),
+        //                         );
+        //                       }
+        //
+        //                     },
+        //                   ),
+        //                   TextButton(
+        //                     style: TextButton.styleFrom(
+        //                         backgroundColor: Color(0xffBBBD88)),
+        //                     child: ReemKufi_Black(textValue: 'Cancel',
+        //                       size: displayHeight(context) * 0.03,),
+        //                     onPressed: () {
+        //                       Navigator.pushAndRemoveUntil(
+        //                         context,
+        //                         MaterialPageRoute(
+        //                           builder: (BuildContext context) =>
+        //                               OcrScan(),
+        //                         ),
+        //                             (route) => false,
+        //                       );
+        //                     },
+        //                   ),
+        //                 ],
+        //               ),
+        //             ),
+        //           ],
+        //         ),
+        //       );
+        //     }
+        // );
+
         // Navigator.of(context).push(
         //   MaterialPageRoute(
         //     builder: (context) => OcrTextDetail(ocrText),
         //   ),
         // );
       }
+
       // onTap: () => Navigator.of(context).push(
       //   MaterialPageRoute(
       //     builder: (context) => OcrTextDetail(ocrText),
