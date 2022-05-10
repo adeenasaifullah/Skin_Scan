@@ -18,6 +18,8 @@ import '../entities/user_entities.dart';
 class UserProvider extends ChangeNotifier {
   final List<Users> allUsers = [];
   List<String> currentUserFavList = [];
+  List<RoutineProducts> AMlist =[];
+  List<RoutineProducts> PMlist = [];
   List<Product> FavouriteLists = [];
   List<String> getCurrentUserList() {
     return currentUserFavList;
@@ -91,6 +93,125 @@ class UserProvider extends ChangeNotifier {
     databaseuser.userID = docref.id;
   }
 
+  addProductToRoutine(RoutineProducts newProduct, String name) {
+    //getUsersfromDB();
+
+    int index = allUsers.indexWhere((user) => user.userID == currentUser.uid);
+
+    if(name == 'Morning') {
+
+      if(allUsers[index].UserRoutines[0].listofproducts.isNotEmpty) {
+
+        AMlist = allUsers[index].UserRoutines[0].listofproducts;
+
+      }
+
+      AMlist.add(newProduct);
+      allUsers[index].UserRoutines[0].listofproducts = AMlist;
+      allUsers[index].UserRoutines[0].numofproducts++;
+
+    }
+
+    if(name == 'Night') {
+
+      if(allUsers[index].UserRoutines[1].listofproducts.isNotEmpty) {
+
+        PMlist = allUsers[index].UserRoutines[1].listofproducts;
+
+      }
+
+      PMlist.add(newProduct);
+      allUsers[index].UserRoutines[1].listofproducts = PMlist;
+      allUsers[index].UserRoutines[1].numofproducts++;
+
+    }
+
+
+    var userroutine = allUsers[index]
+        .UserRoutines
+        .map((e) =>
+        RoutineModel(
+            RoutineName: e.RoutineName,
+            listofproducts: e.listofproducts
+                .map((p) =>
+                RoutineProductsModel(
+                    productname: p.productname,
+                    category: p.category,
+                    days: p.days))
+                .toList()))
+        .toList();
+
+    UserModel updatedUser = UserModel(
+      userID: allUsers[index].userID,
+      UserName: allUsers[index].UserName,
+      UserEmail: allUsers[index].UserEmail,
+      UserRoutines: userroutine,
+      UserFavouriteProducts: allUsers[index].UserFavouriteProducts,
+    );
+
+    updateUserRoutine(updatedUser);
+
+    //allUsers[index].UserFavouriteProducts.add(prodID);
+    print('firestore id ' + allUsers[index].userID);
+    print('auth id ' + currentUser.uid);
+
+    print("Product has been added to Routine");
+
+    notifyListeners();
+  }
+
+
+  void updateUserRoutine(UserModel user) async {
+    CollectionReference database =
+    FirebaseFirestore.instance.collection('users');
+    await database.doc(user.userID).update(user.toJson());
+    print('Routine has been updated.');
+    notifyListeners();
+  }
+
+
+  Future removeProductFromRoutine(RoutineProducts removeProduct, String name) async {
+    // getUsersfromDB();
+    int index = allUsers.indexWhere((user) => user.userID == currentUser.uid);
+
+    if(name =='Morning')
+    {
+      AMlist.removeWhere((element) => element.productname == removeProduct.productname);
+      allUsers[index].UserRoutines[0].listofproducts = AMlist;
+    }
+
+    if(name =='Night')
+    {
+      PMlist.removeWhere((element) => element.productname == removeProduct.productname);
+      allUsers[index].UserRoutines[1].listofproducts = PMlist;
+    }
+
+
+    var userroutine = allUsers[index]
+        .UserRoutines
+        .map((e) => RoutineModel(
+        RoutineName: e.RoutineName,
+        listofproducts: e.listofproducts
+            .map((p) => RoutineProductsModel(
+            productname: p.productname,
+            category: p.category,
+            days: p.days))
+            .toList()))
+        .toList();
+
+    UserModel updatedUser = UserModel(
+      userID: allUsers[index].userID,
+      UserName: allUsers[index].UserName,
+      UserEmail: allUsers[index].UserEmail,
+      UserRoutines: userroutine,
+      UserFavouriteProducts: allUsers[index].UserFavouriteProducts,
+    );
+
+    updateUserRoutine(updatedUser);
+
+    notifyListeners();
+  }
+
   void updateUserFavouriteProducts(UserModel user) async {
     CollectionReference database =
         FirebaseFirestore.instance.collection('users');
@@ -155,7 +276,7 @@ class UserProvider extends ChangeNotifier {
   }
 
   addProductToFavourites(var prodID) {
-    //getUsersfromDB();
+
 
     int index = allUsers.indexWhere((user) => user.userID == currentUser.uid);
     print("current id " + currentUser.uid);
@@ -200,6 +321,7 @@ class UserProvider extends ChangeNotifier {
 
       notifyListeners();
     }
+    getUsersfromDB();
   }
 
   Future removeProductFromFavourites(var prodID) async {

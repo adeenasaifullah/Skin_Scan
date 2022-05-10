@@ -16,4 +16,12 @@ class ScannedProductModel{
         ingredientList: (json['ingredientList'] as List).map((e) => IngredientModel.fromJson(e as Map<String, dynamic>)).toList(),
     );
   }
+
+  Map<String, dynamic> toJson() {
+    final Map<String, dynamic> scannedProduct = {};
+    scannedProduct['name'] = productName;
+    scannedProduct['ingredientList'] = ingredientList.map((v) => v.toJson()).toList();
+    return scannedProduct;
+  }
+
 }

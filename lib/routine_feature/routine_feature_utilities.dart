@@ -3,47 +3,47 @@ import 'package:flutter/material.dart';
 import 'package:google_fonts/google_fonts.dart';
 import 'package:skin_scan/utilities/utility.dart';
 
-class Routine extends StatefulWidget {
-  Routine({Key? key, required this.RoutineName, required this.time})
-      : super(key: key);
-
-  final String RoutineName;
-  List<Product> listofproducts = [];
-  final String time;
-  int numofproducts = 0;
-
-  @override
-  _RoutineState createState() => _RoutineState();
-}
-
-class _RoutineState extends State<Routine> {
-  @override
-  Widget build(BuildContext context) {
-    return Container();
-  }
-}
-
-class Product extends StatefulWidget {
-  Product(
-      {Key? key,
-        required this.productname,
-        required this.category,
-        required this.days})
-      : super(key: key);
-
-  final String productname;
-  final String category;
-  List<String> days = [];
-  @override
-  _ProductState createState() => _ProductState();
-}
-
-class _ProductState extends State<Product> {
-  @override
-  Widget build(BuildContext context) {
-    return Container();
-  }
-}
+// class Routine extends StatefulWidget {
+//   Routine({Key? key, required this.RoutineName, required this.time})
+//       : super(key: key);
+//
+//   final String RoutineName;
+//   List<Product> listofproducts = [];
+//   final String time;
+//   int numofproducts = 0;
+//
+//   @override
+//   _RoutineState createState() => _RoutineState();
+// }
+//
+// class _RoutineState extends State<Routine> {
+//   @override
+//   Widget build(BuildContext context) {
+//     return Container();
+//   }
+// }
+//
+// class Product extends StatefulWidget {
+//   Product(
+//       {Key? key,
+//         required this.productname,
+//         required this.category,
+//         required this.days})
+//       : super(key: key);
+//
+//   final String productname;
+//   final String category;
+//   List<String> days = [];
+//   @override
+//   _ProductState createState() => _ProductState();
+// }
+//
+// class _ProductState extends State<Product> {
+//   @override
+//   Widget build(BuildContext context) {
+//     return Container();
+//   }
+// }
 
 class AppBarDetails extends StatefulWidget implements PreferredSizeWidget {
   final String screenName;

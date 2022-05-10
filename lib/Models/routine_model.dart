@@ -8,7 +8,7 @@ class RoutineModel{
   final String RoutineName;
   List<RoutineProductsModel> listofproducts = [];
  // final String time;
-  int numofproducts = 0;
+  //int numofproducts;
 
   RoutineModel({
     required this.RoutineName,

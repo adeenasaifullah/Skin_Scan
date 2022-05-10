@@ -1,11 +1,16 @@
-import 'package:flutter/cupertino.dart';
+import 'package:firebase_auth/firebase_auth.dart';
 import 'package:flutter/material.dart';
 import 'package:google_fonts/google_fonts.dart';
 import 'package:provider/provider.dart';
+import 'package:skin_scan/entities/product_entities.dart';
+import 'package:skin_scan/entities/routine_product_entities.dart';
+import 'package:skin_scan/provider/user_provider.dart';
 import 'package:skin_scan/routine_feature/routine_feature_utilities.dart';
 import 'package:skin_scan/utilities/utility.dart';
+import '../entities/routine_entities.dart';
 import '../provider/routine_provider.dart';
 import 'build_routine.dart';
+
 
 class AddProduct extends StatefulWidget {
   const AddProduct({Key? key, required this.currentroutine}) : super(key: key);
@@ -23,9 +28,11 @@ class _AddProductState extends State<AddProduct> {
   var boolvalues = [false, false, false, false, false, false, false];
 
   bool mastercheckbox = false;
+  final currentUser = FirebaseAuth.instance.currentUser!;
 
   @override
   Widget build(BuildContext context) {
+    int ind = context.read<UserProvider>().allUsers.indexWhere((user) => user.userID == currentUser.uid);
     TextEditingController productcontroller = TextEditingController();
     // Initial Selected Value
     String? dropdownvalue = 'Choose';
@@ -310,26 +317,37 @@ class _AddProductState extends State<AddProduct> {
                               pdays.add(days[i]);
                             }
                           }
-                          Product newproduct = Product(
+                          RoutineProducts newproduct = RoutineProducts(
                               productname: pname,
                               category: category,
                               days: pdays);
-                          Provider.of<RoutineProvider>(context, listen: false)
-                              .addproductToRoutine(
-                              widget.currentroutine, newproduct);
-                          int j = context
-                              .read<RoutineProvider>()
-                              .routine_list
+                          Provider.of<UserProvider>(context, listen: false)
+                              .addProductToRoutine(
+                              newproduct, widget.currentroutine.RoutineName);
+
+                          int j = context.read<UserProvider>().allUsers[ind].UserRoutines
                               .indexWhere((routine) =>
                           routine.RoutineName ==
                               widget.currentroutine.RoutineName);
+
+
+
+
+                          // Navigator.pushAndRemoveUntil(
+                          //   context,
+                          //   MaterialPageRoute(
+                          //     builder: (BuildContext context) =>
+                          //         BuildRoutine(
+                          //             selectedroutine: context.read<UserProvider>().allUsers[ind].UserRoutines[j]),
+                          //   ),
+                          //       (route) => false,
+                          // );
                           Navigator.of(context).pop(true);
                           Navigator.of(context).pop(true);
                           Navigator.of(context).push(MaterialPageRoute(
                               builder: (context) => BuildRoutine(
-                                  selectedroutine: context
-                                      .read<RoutineProvider>()
-                                      .routine_list[j])));
+                                  selectedroutine: context.read<UserProvider>().allUsers[ind].UserRoutines[j])));
+                          setState((){});
                         },
                       );
                     }),

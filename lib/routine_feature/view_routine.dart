@@ -1,25 +1,37 @@
+
+import 'package:firebase_auth/firebase_auth.dart';
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 import 'package:google_fonts/google_fonts.dart';
 import 'package:provider/provider.dart';
+import 'package:skin_scan/provider/user_provider.dart';
 import 'package:skin_scan/routine_feature/routine_feature_utilities.dart';
 import 'package:skin_scan/utilities/bottom_app_bar.dart';
 import 'package:skin_scan/utilities/utility.dart';
+import '../entities/routine_entities.dart';
 import '../provider/routine_provider.dart';
 import 'build_routine.dart';
-
 
 class ViewRoutine extends StatefulWidget {
   ViewRoutine({Key? key}) : super(key: key);
 
-  List<Routine> allroutines = [];
+
+  final currentUser = FirebaseAuth.instance.currentUser!;
   @override
   _ViewRoutineState createState() => _ViewRoutineState();
 }
 
 class _ViewRoutineState extends State<ViewRoutine> {
   @override
+  void initState() {
+    setState(() {
+
+    });
+    super.initState();
+  }
+  @override
   Widget build(BuildContext context) {
+    int i = context.read<UserProvider>().allUsers.indexWhere((user) => user.userID == widget.currentUser.uid);
     return Scaffold(
         appBar: AppBar(
           elevation: 0,
@@ -60,8 +72,9 @@ class _ViewRoutineState extends State<ViewRoutine> {
           ],
         ),
         backgroundColor: const Color(0xFFFFFDF4),
-        body: (context.read<RoutineProvider>().routine_list.isEmpty)
+        body: (context.read<UserProvider>().allUsers[i].UserRoutines.isEmpty)
             ? Column(
+          mainAxisAlignment: MainAxisAlignment.center,
           children: [
             // const TextValue(
             //     text: "Click here to build a routine",
@@ -73,7 +86,8 @@ class _ViewRoutineState extends State<ViewRoutine> {
                 color: Color(0xFFFFFDF4),
               ),
               onPressed: () {
-                //print("adding routine");
+
+
               },
               backgroundColor: const Color(0x000453e2),
             )
@@ -84,10 +98,7 @@ class _ViewRoutineState extends State<ViewRoutine> {
             Expanded(
                 child: ListView.builder(
                     scrollDirection: Axis.vertical,
-                    itemCount: context
-                        .read<RoutineProvider>()
-                        .routine_list
-                        .length,
+                    itemCount: context.read<UserProvider>().allUsers[i].UserRoutines.length,
                     itemBuilder: (context, index) {
                       return Padding(
                         padding:
@@ -110,11 +121,9 @@ class _ViewRoutineState extends State<ViewRoutine> {
                             child: Column(
                               children: [
                                 // relevant icon
-                                (context
-                                    .read<RoutineProvider>()
-                                    .routine_list[index]
-                                    .time ==
-                                    "AM")
+                                (context.read<UserProvider>().allUsers[i]
+                                    .UserRoutines[index].RoutineName==
+                                    "Morning")
                                     ? const Padding(
                                   padding: EdgeInsets.only(top: 10),
                                   child: Align(
@@ -138,13 +147,12 @@ class _ViewRoutineState extends State<ViewRoutine> {
                                           color:
                                           Color(0xFF283618))),
                                 ),
-                                ReemKufi_Green(textValue: context
-                                    .read<RoutineProvider>()
-                                    .routine_list[index]
-                                    .RoutineName,size: displayHeight(context)*0.04, ),
+                                ReemKufi_Green(textValue: "${context.read<UserProvider>().allUsers[i].UserRoutines[index]
+                                    .RoutineName} Routine",size: displayHeight(context)*0.04, ),
 
-                                ReemKufi_Green(textValue: "Number of products: ${context.read<RoutineProvider>().routine_list[index].numofproducts.toString()}"
+                                ReemKufi_Green(textValue: "Number of products: ${context.read<UserProvider>().allUsers[i].UserRoutines[index].listofproducts.length.toString()}"
                                   ,size: displayHeight(context)*0.02, ),
+
 
 
                                 Divider(
@@ -155,9 +163,7 @@ class _ViewRoutineState extends State<ViewRoutine> {
                                   onTap: () {
                                     Navigator.of(context).push(MaterialPageRoute(
                                         builder: (context) => BuildRoutine(
-                                            selectedroutine: context
-                                                .read<RoutineProvider>()
-                                                .routine_list[index])));
+                                            selectedroutine: context.read<UserProvider>().allUsers[i].UserRoutines[index])));
                                     setState(() {});
                                   },
                                 ),
@@ -173,9 +179,7 @@ class _ViewRoutineState extends State<ViewRoutine> {
                           onTap: () {
                             Navigator.of(context).push(MaterialPageRoute(
                                 builder: (context) => BuildRoutine(
-                                    selectedroutine: context
-                                        .read<RoutineProvider>()
-                                        .routine_list[index])));
+                                    selectedroutine: context.read<UserProvider>().allUsers[i].UserRoutines[index])));
                             setState(() {});
                           },
                         ),

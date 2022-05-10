@@ -1,4 +1,4 @@
-import 'package:skin_scan/Models/product_model.dart';
+import 'package:skin_scan/models/product_model.dart';
 import 'package:skin_scan/entities/routine_entities.dart';
 import 'routine_model.dart';
 import '../entities/product_entities.dart';

@@ -1,17 +1,20 @@
+import 'package:firebase_auth/firebase_auth.dart';
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 import 'package:provider/provider.dart';
 import 'package:skin_scan/routine_feature/routine_feature_utilities.dart';
 import 'package:skin_scan/utilities/utility.dart';
 
+import '../entities/routine_entities.dart';
 import '../provider/routine_provider.dart';
+import '../provider/user_provider.dart';
 import 'add_product.dart';
-
 
 
 class BuildRoutine extends StatefulWidget {
   BuildRoutine({Key? key, required this.selectedroutine}) : super(key: key);
   Routine selectedroutine;
+  final currentUser = FirebaseAuth.instance.currentUser!;
 
   @override
   _BuildRoutineState createState() => _BuildRoutineState();
@@ -20,34 +23,37 @@ class BuildRoutine extends StatefulWidget {
 class _BuildRoutineState extends State<BuildRoutine> {
   @override
   Widget build(BuildContext context) {
-    int index = context.read<RoutineProvider>().routine_list.indexWhere(
+    int ind = context.read<UserProvider>().allUsers.indexWhere((user) => user.userID == widget.currentUser.uid);
+    int index = context.read<UserProvider>().allUsers[ind].UserRoutines.indexWhere(
             (routine) => routine.RoutineName == widget.selectedroutine.RoutineName);
     return Scaffold(
       appBar: AppBarDetails(
         screenName:
-        "Your ${context.read<RoutineProvider>().routine_list[index].RoutineName}",
+        "Your ${context.read<UserProvider>().allUsers[ind].UserRoutines[index].RoutineName} Routine",
         subtitle: "",
       ),
       backgroundColor: const Color(0xFFFFFDF4),
-      body: (context
-          .read<RoutineProvider>()
-          .routine_list[index]
+      body: (context.read<UserProvider>().allUsers[ind].UserRoutines[index]
           .listofproducts
           .isEmpty)
           ? Center(
         child: Column(
+          mainAxisAlignment: MainAxisAlignment.center,
           children: [
-            // const TextValue(
-            //     text: "Add a product to your routine",
-            //     textSize: 20,
-            //     bold: true),
+            ReemKufi_Green_Italic(textValue: "Add products to your routine",
+              size: displayHeight(context)*0.023, ),
             FloatingActionButton(
               child: const Icon(
                 Icons.add,
                 color: Color(0xFFFFFDF4),
               ),
               onPressed: () {
-                //print("adding routine");
+                Navigator.of(context).push(MaterialPageRoute(
+                    builder: (context) => AddProduct(
+                        currentroutine: Provider.of<UserProvider>(context, listen:false).allUsers[ind].UserRoutines[index])));
+                setState(() {
+
+                });
               },
               backgroundColor: const Color(0x000453e2),
             )
@@ -68,9 +74,7 @@ class _BuildRoutineState extends State<BuildRoutine> {
         Expanded(
             child: ListView.builder(
               scrollDirection: Axis.vertical,
-              itemCount: context
-                  .read<RoutineProvider>()
-                  .routine_list[index]
+              itemCount: context.read<UserProvider>().allUsers[ind].UserRoutines[index]
                   .listofproducts
                   .length,
               itemBuilder: (context, i) {
@@ -101,9 +105,7 @@ class _BuildRoutineState extends State<BuildRoutine> {
                             child: const VerticalDivider(
                                 color: const Color(0xFF283618))),
                         (i ==
-                            context
-                                .read<RoutineProvider>()
-                                .routine_list[index]
+                            context.read<UserProvider>().allUsers[ind].UserRoutines[index]
                                 .listofproducts
                                 .length -
                                 1)
@@ -120,9 +122,7 @@ class _BuildRoutineState extends State<BuildRoutine> {
                               Navigator.of(context).push(
                                   MaterialPageRoute(
                                       builder: (context) => AddProduct(
-                                          currentroutine: context
-                                              .read<RoutineProvider>()
-                                              .routine_list[index])));
+                                          currentroutine: context.read<UserProvider>().allUsers[ind].UserRoutines[index])));
                             },
                           ),
                         )
@@ -152,9 +152,7 @@ class _BuildRoutineState extends State<BuildRoutine> {
                           ),
                         ),
                         (i ==
-                            context
-                                .read<RoutineProvider>()
-                                .routine_list[index]
+                            context.read<UserProvider>().allUsers[ind].UserRoutines[index]
                                 .listofproducts
                                 .length -
                                 1)
@@ -183,10 +181,8 @@ class _BuildRoutineState extends State<BuildRoutine> {
                             height: displayHeight(context) * 0.04,
                             width: displayWidth(context) * 0.18,
                             child: Center(
-                              child: ReemKufi_Green_Bold(textValue: context
-                                  .read<RoutineProvider>()
-                                  .routine_list[index]
-                                  .listofproducts[i]
+                              child: ReemKufi_Green_Bold(textValue: context.read<UserProvider>().allUsers[ind].UserRoutines[index]
+                                  .listofproducts[i] // there are two i indexes being used. correct this and replace second index with another name
                                   .category , size: displayHeight(context) * 0.02,),
 
                             ),
@@ -218,18 +214,14 @@ class _BuildRoutineState extends State<BuildRoutine> {
                                   bottomRight: Radius.circular(11.0),
                                 )),
                             child: Center(
-                              child: ReemKufi_Green_Bold(textValue: context
-                                  .read<RoutineProvider>()
-                                  .routine_list[index]
+                              child: ReemKufi_Green_Bold(textValue: context.read<UserProvider>().allUsers[ind].UserRoutines[index]
                                   .listofproducts[i]
                                   .productname , size:displayHeight(context) * 0.018),
                             ),
                           ),
                         ),
                         (i ==
-                            context
-                                .read<RoutineProvider>()
-                                .routine_list[index]
+                            context.read<UserProvider>().allUsers[ind].UserRoutines[index]
                                 .listofproducts
                                 .length -
                                 1)

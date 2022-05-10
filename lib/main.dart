@@ -40,7 +40,7 @@ Future<void> main() async {
   Provider.debugCheckInvalidValueType = null;
   runApp(MultiProvider(
     providers: [
-      Provider<RoutineProvider>(create: (_) => RoutineProvider()),
+     // Provider<RoutineProvider>(create: (_) => RoutineProvider()),
       Provider<UserProvider>(create: (_) => UserProvider()),
       ChangeNotifierProvider(create: (_) => CategoryProvider()),
       ChangeNotifierProvider(create: (_) => ProductProvider()),
@@ -66,8 +66,8 @@ class MyApp extends StatelessWidget {
     //Load all your data from firebase over here:
     context.read<CategoryProvider>().getCategoriesFromDb();
     context.read<ProductProvider>().getProductsFromDatabase();
-    context.watch<UserProvider>().getUsersfromDB();
-    context.watch<UserProvider>().getUserFavouriteProducts(context.read<ProductProvider>().productsList);
+     context.watch<UserProvider>().getUsersfromDB();
+     context.watch<UserProvider>().getUserFavouriteProducts(context.read<ProductProvider>().productsList);
     //Provider.of<UserProvider>(context, listen: false).getUsersfromDB();
 
     //FocusScope.of(context).unfocus();
@@ -256,6 +256,9 @@ class _AppBarDetailsState extends State<AppBarDetails> {
           child: Icon(Icons.arrow_back, color: Color(0xFF4D4D4D)),
           onTap: () {
             Navigator.pop(context);
+            setState(() {
+
+            });
           }),
       actions: [
         Padding(
