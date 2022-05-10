@@ -17,7 +17,6 @@ class AuthService {
   AuthenticateUser? _userFromFirebaseUser(User? user) {
     return user != null ? AuthenticateUser(userID: user.uid) : null;
   }
-
 //   Users _userFromUser(User user){
 //   return  user!= null ? Users(userID: user.userID) : null;
 // }
@@ -153,14 +152,20 @@ class AuthService {
   }
 
   //sign out
-  Future signOut() async {
-    try {
-      return await _auth.signOut();
+  // Future signOut() async {
+  //   try {
+  //
+  //     return await _auth.signOut();
+  //
+  //   } catch (e) {
+  //     print(e.toString());
+  //     return null;
+  //   }
+  // }
 
-    } catch (e) {
-      print(e.toString());
-      return null;
-    }
+  Future<void> signOut() async {
+    await FirebaseAuth.instance.signOut();
+
   }
 
   //sign in with google

@@ -42,7 +42,7 @@ class _FavouriteProductsState extends State<FavouriteProducts> {
             SizedBox(height: displayHeight(context) * 0.02),
             FavouriteProductsCard(
                 FavouriteLists: context
-                    .read<UserProvider>()
+                    .watch<UserProvider>()
                     .getUserFavouriteProducts(productsList))
           ],
         ),

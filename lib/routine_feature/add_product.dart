@@ -338,15 +338,14 @@ class _AddProductState extends State<AddProduct> {
                           //   MaterialPageRoute(
                           //     builder: (BuildContext context) =>
                           //         BuildRoutine(
-                          //             selectedroutine: context.read<UserProvider>().allUsers[ind].UserRoutines[j]),
+                          //             selectedroutine: context.watch<UserProvider>().allUsers[ind].UserRoutines[j]),
                           //   ),
                           //       (route) => false,
                           // );
                           Navigator.of(context).pop(true);
                           Navigator.of(context).pop(true);
                           Navigator.of(context).push(MaterialPageRoute(
-                              builder: (context) => BuildRoutine(
-                                  selectedroutine: context.read<UserProvider>().allUsers[ind].UserRoutines[j])));
+                              builder: (context) => BuildRoutine(selectedroutine: context.watch<UserProvider>().allUsers[ind].UserRoutines[j])));
                           setState((){});
                         },
                       );

@@ -18,7 +18,7 @@ import '../entities/user_entities.dart';
 class UserProvider extends ChangeNotifier {
   final List<Users> allUsers = [];
   List<String> currentUserFavList = [];
-  List<RoutineProducts> AMlist =[];
+  List<RoutineProducts> AMlist = [];
   List<RoutineProducts> PMlist = [];
   List<Product> FavouriteLists = [];
 
@@ -62,7 +62,6 @@ class UserProvider extends ChangeNotifier {
 
         //print(allUsers);
         //print(allUsers[0].UserName);
-        notifyListeners();
       });
 
       notifyListeners();
@@ -71,6 +70,7 @@ class UserProvider extends ChangeNotifier {
   }
 
   Future storeUserinDB(Users thisuser) async {
+    final currentUser = FirebaseAuth.instance.currentUser!;
     var userroutine = thisuser.UserRoutines.map((e) => RoutineModel(
         RoutineName: e.RoutineName,
         listofproducts: e.listofproducts
@@ -92,50 +92,39 @@ class UserProvider extends ChangeNotifier {
     print(test);
     DocumentReference docref = await database.add(test);
     databaseuser.userID = docref.id;
+    notifyListeners();
   }
 
   addProductToRoutine(RoutineProducts newProduct, String name) {
-    //getUsersfromDB();
-
+    final currentUser = FirebaseAuth.instance.currentUser!;
     int index = allUsers.indexWhere((user) => user.userID == currentUser.uid);
 
-    if(name == 'Morning') {
-
-      if(allUsers[index].UserRoutines[0].listofproducts.isNotEmpty) {
-
+    if (name == 'Morning') {
+      if (allUsers[index].UserRoutines[0].listofproducts.isNotEmpty) {
         AMlist = allUsers[index].UserRoutines[0].listofproducts;
-
       }
 
       AMlist.add(newProduct);
       allUsers[index].UserRoutines[0].listofproducts = AMlist;
       allUsers[index].UserRoutines[0].numofproducts++;
-
     }
 
-    if(name == 'Night') {
-
-      if(allUsers[index].UserRoutines[1].listofproducts.isNotEmpty) {
-
+    if (name == 'Night') {
+      if (allUsers[index].UserRoutines[1].listofproducts.isNotEmpty) {
         PMlist = allUsers[index].UserRoutines[1].listofproducts;
-
       }
 
       PMlist.add(newProduct);
       allUsers[index].UserRoutines[1].listofproducts = PMlist;
       allUsers[index].UserRoutines[1].numofproducts++;
-
     }
-
 
     var userroutine = allUsers[index]
         .UserRoutines
-        .map((e) =>
-        RoutineModel(
+        .map((e) => RoutineModel(
             RoutineName: e.RoutineName,
             listofproducts: e.listofproducts
-                .map((p) =>
-                RoutineProductsModel(
+                .map((p) => RoutineProductsModel(
                     productname: p.productname,
                     category: p.category,
                     days: p.days))
@@ -158,46 +147,44 @@ class UserProvider extends ChangeNotifier {
 
     print("Product has been added to Routine");
 
-    notifyListeners();
   }
 
-
   void updateUserRoutine(UserModel user) async {
+    final currentUser = FirebaseAuth.instance.currentUser!;
     CollectionReference database =
-    FirebaseFirestore.instance.collection('users');
+        FirebaseFirestore.instance.collection('users');
     await database.doc(user.userID).update(user.toJson());
     print('Routine has been updated.');
     notifyListeners();
   }
 
-
-  Future removeProductFromRoutine(RoutineProducts removeProduct, String name) async {
-    // getUsersfromDB();
+  Future removeProductFromRoutine(
+      RoutineProducts removeProduct, String name) async {
+    final currentUser = FirebaseAuth.instance.currentUser!;
     int index = allUsers.indexWhere((user) => user.userID == currentUser.uid);
 
-    if(name =='Morning')
-    {
-      AMlist.removeWhere((element) => element.productname == removeProduct.productname);
+    if (name == 'Morning') {
+      AMlist.removeWhere(
+          (element) => element.productname == removeProduct.productname);
       allUsers[index].UserRoutines[0].listofproducts = AMlist;
     }
 
-    if(name =='Night')
-    {
-      PMlist.removeWhere((element) => element.productname == removeProduct.productname);
+    if (name == 'Night') {
+      PMlist.removeWhere(
+          (element) => element.productname == removeProduct.productname);
       allUsers[index].UserRoutines[1].listofproducts = PMlist;
     }
-
 
     var userroutine = allUsers[index]
         .UserRoutines
         .map((e) => RoutineModel(
-        RoutineName: e.RoutineName,
-        listofproducts: e.listofproducts
-            .map((p) => RoutineProductsModel(
-            productname: p.productname,
-            category: p.category,
-            days: p.days))
-            .toList()))
+            RoutineName: e.RoutineName,
+            listofproducts: e.listofproducts
+                .map((p) => RoutineProductsModel(
+                    productname: p.productname,
+                    category: p.category,
+                    days: p.days))
+                .toList()))
         .toList();
 
     UserModel updatedUser = UserModel(
@@ -209,19 +196,15 @@ class UserProvider extends ChangeNotifier {
     );
 
     updateUserRoutine(updatedUser);
-
     notifyListeners();
   }
 
   void updateUserFavouriteProducts(UserModel user) async {
+    final currentUser = FirebaseAuth.instance.currentUser!;
     CollectionReference database =
         FirebaseFirestore.instance.collection('users');
 
-    print("bhjjkkello");
     await database.doc(user.userID).update(user.toJson());
-    //inOrder();
-    //await getTasksFromFirebase();
-    //getUsersfromDB();
     print('fav product has been updated');
     notifyListeners();
   }
@@ -241,6 +224,7 @@ class UserProvider extends ChangeNotifier {
   // }
 
   bool checkUserFavouriteProduct(var prodID) {
+    final currentUser = FirebaseAuth.instance.currentUser!;
     int index = allUsers.indexWhere((user) => user.userID == currentUser.uid);
     if (allUsers[index].UserFavouriteProducts.contains(prodID)) {
       return true;
@@ -248,37 +232,35 @@ class UserProvider extends ChangeNotifier {
       return false;
   }
 
-  List<Product> getUserFavouriteProducts(List<Product> productsList){
+  List<Product> getUserFavouriteProducts(List<Product> productsList) {
     FavouriteLists.clear();
+    final currentUser = FirebaseAuth.instance.currentUser!;
     int index = allUsers.indexWhere((user) => user.userID == currentUser.uid);
+    print('Firebase user ${allUsers[index].userID}');
+    print('Current user ${currentUser.uid}');
     print(productsList);
     print('hello fav list');
 
-
     for (int i = 0; i < productsList.length; i++) {
-      for(int j =0; j< allUsers[index].UserFavouriteProducts.length; j++){
-        if ( allUsers[index].UserFavouriteProducts[j]== productsList[i].prodID) {
+      for (int j = 0; j < allUsers[index].UserFavouriteProducts.length; j++) {
+        if (allUsers[index].UserFavouriteProducts[j] ==
+            productsList[i].prodID) {
           FavouriteLists.add(productsList[i]);
           print("This is the product list");
           print(productsList[i]);
-
         }
       }
-      //print('snoop');
-
-
     }
+
     notifyListeners();
     print("Fav list");
     print(FavouriteLists);
     return FavouriteLists;
     //currentUserFavList;
-
   }
 
   addProductToFavourites(var prodID) {
-
-
+    final currentUser = FirebaseAuth.instance.currentUser!;
     int index = allUsers.indexWhere((user) => user.userID == currentUser.uid);
     print("current id " + currentUser.uid);
     print(index);
@@ -320,13 +302,11 @@ class UserProvider extends ChangeNotifier {
 
       print("Product has been added to favourites");
 
-      notifyListeners();
     }
-    getUsersfromDB();
   }
 
   Future removeProductFromFavourites(var prodID) async {
-    getUsersfromDB();
+    final currentUser = FirebaseAuth.instance.currentUser!;
     int index = allUsers.indexWhere((user) => user.userID == currentUser.uid);
 
     print("The product id is " + prodID);
@@ -355,7 +335,5 @@ class UserProvider extends ChangeNotifier {
     );
 
     updateUserFavouriteProducts(updatedUser);
-
-    notifyListeners();
   }
 }

@@ -72,8 +72,8 @@ class _MyAppState extends State<MyApp> {
 
     await context.read<CategoryProvider>().getCategoriesFromDb();
     await context.read<ProductProvider>().getProductsFromDatabase();
-    await context.watch<UserProvider>().getUsersfromDB();
-    await context.watch<UserProvider>().getUserFavouriteProducts(context.read<ProductProvider>().productsList);
+    await context.read<UserProvider>().getUsersfromDB();
+    await context.read<UserProvider>().getUserFavouriteProducts(context.read<ProductProvider>().productsList);
 
   }
 
@@ -87,12 +87,7 @@ class _MyAppState extends State<MyApp> {
   Widget build(BuildContext context) {
 
     //Load all your data from firebase over here:
-
-    context.read<CategoryProvider>().getCategoriesFromDb();
-    context.read<ProductProvider>().getProductsFromDatabase();
-     context.watch<UserProvider>().getUsersfromDB();
-     context.watch<UserProvider>().getUserFavouriteProducts(context.read<ProductProvider>().productsList);
-    //Provider.of<UserProvider>(context, listen: false).getUsersfromDB();
+    // //Provider.of<UserProvider>(context, listen: false).getUsersfromDB();
 
     //FocusScope.of(context).unfocus();
     return StreamProvider<AuthenticateUser?>.value(
