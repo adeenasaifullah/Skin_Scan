@@ -26,7 +26,7 @@ class UserProvider extends ChangeNotifier {
     return currentUserFavList;
   }
 
-  final currentUser = FirebaseAuth.instance.currentUser!;
+  //final currentUser = FirebaseAuth.instance.currentUser!;
 
   Future getUsersfromDB() async {
     await FirebaseFirestore.instance
@@ -146,6 +146,7 @@ class UserProvider extends ChangeNotifier {
     print('auth id ' + currentUser.uid);
 
     print("Product has been added to Routine");
+
 
   }
 

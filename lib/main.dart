@@ -16,6 +16,7 @@ import 'package:skin_scan/provider/product_provider.dart';
 import 'package:skin_scan/provider/routine_provider.dart';
 import 'package:skin_scan/register_feature/account_created.dart';
 import 'package:skin_scan/services/auth.dart';
+import 'package:skin_scan/skin_quiz_feature/skinQuizAlgo.dart';
 import 'package:skin_scan/utilities/utility.dart';
 import 'package:camera/camera.dart';
 import 'package:page_transition/page_transition.dart';
@@ -49,6 +50,8 @@ Future<void> main() async {
       ChangeNotifierProvider(create: (_) => IngredientProvider()),
       ChangeNotifierProvider(create: (_) => LocationProvider()),
       ChangeNotifierProvider(create: (_) => ScannedProductProvider()),
+      ChangeNotifierProvider(create: (_) => skinQuizProvider())
+
       //Provider<AuthService>(create: (_) => AuthService(FirebaseAuth.instance)),
       //StreamProvider(create: (context) => context.read<AuthService>().authStateChanges, initialData: null,),
     ],
@@ -77,6 +80,7 @@ class _MyAppState extends State<MyApp> {
 
   }
 
+
   @override
   void initState() {
     initModified();
@@ -85,6 +89,10 @@ class _MyAppState extends State<MyApp> {
 
   @override
   Widget build(BuildContext context) {
+    // context.read<CategoryProvider>().getCategoriesFromDb();
+    // context.read<ProductProvider>().getProductsFromDatabase();
+    // //context.watch<UserProvider>().getUsersfromDB();
+    // context.watch<UserProvider>().getUserFavouriteProducts(context.read<ProductProvider>().productsList);
 
     //Load all your data from firebase over here:
     // //Provider.of<UserProvider>(context, listen: false).getUsersfromDB();
