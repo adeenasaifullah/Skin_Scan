@@ -317,6 +317,8 @@ class UserProvider extends ChangeNotifier {
   }
 
   Future removeProductFromFavourites(var prodID) async {
+    final currentUser = FirebaseAuth.instance.currentUser!;
+    int index = allUsers.indexWhere((user) => user.userID == currentUser.uid);
 
     Users user = getCurrentUser();
     print("The product id is " + prodID);

@@ -1,11 +1,12 @@
 
 
 import 'package:animated_splash_screen/animated_splash_screen.dart';
+import 'package:firebase_auth/firebase_auth.dart';
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
+import 'package:google_fonts/google_fonts.dart';
 import 'package:provider/provider.dart';
 import 'package:skin_scan/provider/scanned_product_provider.dart';
-import 'package:skin_scan/provider/search_provider.dart';
 import 'package:skin_scan/provider/user_provider.dart';
 import 'package:skin_scan/provider/categories_provider.dart';
 import 'package:skin_scan/provider/google_sign_in.dart';
