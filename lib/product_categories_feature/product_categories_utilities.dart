@@ -4,7 +4,6 @@ import 'package:flutter_rating_bar/flutter_rating_bar.dart';
 import 'package:provider/provider.dart';
 //import 'package:skin_scan/provider/UserProvider.dart';
 import 'package:skin_scan/utilities/utility.dart';
-
 import '../entities/product_entities.dart';
 import '../provider/product_provider.dart';
 import '../provider/user_provider.dart';
@@ -20,8 +19,6 @@ class Rating extends StatefulWidget {
 
 class _RatingState extends State<Rating> {
   double rating = 0;
-
-  //final double initialRating = widget.product.productRating.toDouble()
 
   @override
   Widget build(BuildContext context) {
@@ -47,15 +44,10 @@ class _RatingState extends State<Rating> {
       ),
       itemPadding: EdgeInsets.symmetric(horizontal: 4.0),
       onRatingUpdate: (rating) {
-        //rating = (rating + widget.product.productRating)/2;
-        //_rating = rating;
-        //print(_rating);
-        //context.watch()<ProductProvider>().updateRating(widget.product, rating);
         Provider.of<ProductProvider>(context, listen: false)
             .updateRating(widget.product, rating);
         setState(() {
           this.rating = rating;
-          //context.watch()<ProductProvider>().updateRating(widget.product, rating);
         });
 
         print(rating);
@@ -66,7 +58,6 @@ class _RatingState extends State<Rating> {
 
 class FavouriteButton extends StatefulWidget {
 
-  //bool isFavourite = false;
   var prodID;
   FavouriteButton({Key? key, this.prodID}) : super(key: key);
 
@@ -77,19 +68,12 @@ class FavouriteButton extends StatefulWidget {
 class _FavouriteButtonState extends State<FavouriteButton> {
 
 
-
   @override
   Widget build(BuildContext context) {
     return !context.read<UserProvider>().checkUserFavouriteProduct(widget.prodID) ?
-    //return !widget.isFavourite ?
     IconButton(
-
-      //icon: !widget.isFavourite ? Icon(CupertinoIcons.suit_heart) : Icon(CupertinoIcons.suit_heart_fill),
       icon:Icon(CupertinoIcons.suit_heart),
       onPressed: () async {
-        //!widget.isFavourite
-        //favouriteIcon == CupertinoIcons.suit_heart
-           // ?
         await showDialog(
                 barrierDismissible: false,
                 context: context, // user must tap button!
@@ -112,10 +96,6 @@ class _FavouriteButtonState extends State<FavouriteButton> {
                                   textValue: 'Yes',
                                   size: displayHeight(context) * 0.03),
                               onPressed: () {
-                                //favouriteIcon =CupertinoIcons.suit_heart_fill;
-                                //Provider.of<UserProvider>(context, listen: false).addProductToFavourites(widget.prodID);
-                                //widget.isFavourite = !widget.isFavourite;
-                                //UnFavouriteButton(prodID: widget.prodID);
                                 context.read<UserProvider>().addProductToFavourites(widget.prodID);
                                 setState(() {
 

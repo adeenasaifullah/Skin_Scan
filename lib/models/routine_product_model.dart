@@ -16,7 +16,6 @@ class RoutineProductsModel {
 
     //JSON METHOD HERE
 
-
   static RoutineProductsModel fromJson(Map<String, dynamic> json) {
     return RoutineProductsModel(
         category: json['Category'],

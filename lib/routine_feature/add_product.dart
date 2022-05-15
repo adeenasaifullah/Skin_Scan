@@ -8,6 +8,7 @@ import 'package:skin_scan/provider/user_provider.dart';
 import 'package:skin_scan/routine_feature/routine_feature_utilities.dart';
 import 'package:skin_scan/utilities/utility.dart';
 import '../entities/routine_entities.dart';
+import '../entities/user_entities.dart';
 import '../provider/routine_provider.dart';
 import 'build_routine.dart';
 
@@ -32,7 +33,8 @@ class _AddProductState extends State<AddProduct> {
 
   @override
   Widget build(BuildContext context) {
-    int ind = context.read<UserProvider>().allUsers.indexWhere((user) => user.userID == currentUser.uid);
+    //int ind = context.read<UserProvider>().allUsers.indexWhere((user) => user.userID == currentUser.uid);
+    Users user = context.watch<UserProvider>().getCurrentUser();
     TextEditingController productcontroller = TextEditingController();
     // Initial Selected Value
     String? dropdownvalue = 'Choose';
@@ -325,7 +327,7 @@ class _AddProductState extends State<AddProduct> {
                               .addProductToRoutine(
                               newproduct, widget.currentroutine.RoutineName);
 
-                          int j = context.read<UserProvider>().allUsers[ind].UserRoutines
+                          int j = user.UserRoutines
                               .indexWhere((routine) =>
                           routine.RoutineName ==
                               widget.currentroutine.RoutineName);
@@ -345,7 +347,7 @@ class _AddProductState extends State<AddProduct> {
                           Navigator.of(context).pop(true);
                           Navigator.of(context).pop(true);
                           Navigator.of(context).push(MaterialPageRoute(
-                              builder: (context) => BuildRoutine(selectedroutine: context.watch<UserProvider>().allUsers[ind].UserRoutines[j])));
+                              builder: (context) => BuildRoutine(selectedroutine: user.UserRoutines[j])));
                           setState((){});
                         },
                       );

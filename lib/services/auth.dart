@@ -3,11 +3,11 @@ import 'package:firebase_auth/firebase_auth.dart';
 import 'package:flutter/material.dart';
 import 'package:fluttertoast/fluttertoast.dart';
 import 'package:google_sign_in/google_sign_in.dart';
-import '../Models/routine_model.dart';
-import '../Models/routine_product_model.dart';
+import '../models/routine_model.dart';
+import '../models/routine_product_model.dart';
 import '../entities/routine_entities.dart';
 import '../entities/user_entities.dart';
-import 'package:skin_scan/Models/users_adeena_model.dart';
+import 'package:skin_scan/models/users_adeena_model.dart';
 
 
 class AuthService {
@@ -15,8 +15,9 @@ class AuthService {
 
   //create user object based on firebase user
   AuthenticateUser? _userFromFirebaseUser(User? user) {
-    return user != null ? AuthenticateUser(userID: user.uid) : null;
+    return user != null ? AuthenticateUser(userID: user.uid,  email: user.email!, name: user.displayName ?? "",) : null;
   }
+
 //   Users _userFromUser(User user){
 //   return  user!= null ? Users(userID: user.userID) : null;
 // }
@@ -33,6 +34,7 @@ class AuthService {
       User user = result.user!;
 
       return _userFromFirebaseUser(user);
+
     } on FirebaseAuthException catch (e) {
       switch (e.code) {
         case "invalid-email":
@@ -74,25 +76,15 @@ class AuthService {
       User user = result.user!;
       String authID = user.uid;
 
-      // String name = (user.displayName!);
-      // print(user.displayName);
-      // print(name);
-
-      //DocumentReference documentReferencer = userCollection.doc(uid);
       Routine AMroutine = Routine(RoutineName: "Morning", listofproducts: []);
       Routine PMroutine = Routine(RoutineName: "Night", listofproducts: []);
 
       List<String> favourite_products = [];
-      //favourite_products.add("");
-
       List<Routine> routine_list = [];
       routine_list.add(AMroutine);
       routine_list.add(PMroutine);
-
       Users obj = Users(
-          //uid: uid,
-
-          UserName: "Hello",
+          UserName: user.displayName ?? "",
           UserEmail: email,
           UserRoutines: routine_list,
          UserFavouriteProducts: favourite_products,
@@ -127,11 +119,6 @@ class AuthService {
       await documentReferencer.set(test).whenComplete(() {
         print("User data added");
       });
-      //DocumentReference docref = await database.add(test);
-
-      //databaseuser.userID = authID;
-
-      //await Database(uid: user.uid).storeUserData(name: user.displayName!, email: user.email!);
       return _userFromFirebaseUser(user);
     } catch (e) {
       //Fluttertoast.showToast(msg: e!.message);
@@ -150,18 +137,6 @@ class AuthService {
         textColor: Colors.white,
         fontSize: 14);
   }
-
-  //sign out
-  // Future signOut() async {
-  //   try {
-  //
-  //     return await _auth.signOut();
-  //
-  //   } catch (e) {
-  //     print(e.toString());
-  //     return null;
-  //   }
-  // }
 
   Future<void> signOut() async {
     await FirebaseAuth.instance.signOut();
@@ -184,13 +159,7 @@ class AuthService {
       User user = result.user!;
       String authID = user.uid;
 
-      // String name = (user.displayName!);
-      // print(user.displayName);
-      // print(name);
-
       List<String> favourite_products = [];
-      //favourite_products.add("");
-      //DocumentReference documentReferencer = userCollection.doc(uid);
       Routine AMroutine = Routine(RoutineName: "Morning", listofproducts: []);
       Routine PMroutine = Routine(RoutineName: "Night", listofproducts: []);
 
@@ -199,14 +168,10 @@ class AuthService {
       routine_list.add(PMroutine);
 
       Users obj = Users(
-        //uid: uid,
           UserName: account.displayName!,
           UserEmail: account.email,
           UserRoutines: routine_list,
         UserFavouriteProducts: favourite_products,
-          //UserFavouriteProducts: favourite_products
-        //routine_list.map((e) => e.toJson()).toList();
-        //this.UserRoutines.map((v) => v.toJson()).toList();
       );
       obj.userID = authID;
       var userroutine = obj.UserRoutines.map((e) => RoutineModel(

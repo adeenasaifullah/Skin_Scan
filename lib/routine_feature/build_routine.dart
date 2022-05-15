@@ -6,6 +6,7 @@ import 'package:skin_scan/routine_feature/routine_feature_utilities.dart';
 import 'package:skin_scan/utilities/utility.dart';
 
 import '../entities/routine_entities.dart';
+import '../entities/user_entities.dart';
 import '../provider/routine_provider.dart';
 import '../provider/user_provider.dart';
 import 'add_product.dart';
@@ -22,26 +23,17 @@ class BuildRoutine extends StatefulWidget {
 class _BuildRoutineState extends State<BuildRoutine> {
   @override
   Widget build(BuildContext context) {
-    int ind = context
-        .read<UserProvider>()
-        .allUsers
-        .indexWhere((user) => user.userID == widget.currentUser.uid);
-    int index = context
-        .read<UserProvider>()
-        .allUsers[ind]
-        .UserRoutines
-        .indexWhere((routine) =>
-            routine.RoutineName == widget.selectedroutine.RoutineName);
+    Users user = context.watch<UserProvider>().getCurrentUser();
+    //int ind = context.read<UserProvider>().allUsers.indexWhere((user) => user.userID == widget.currentUser.uid);
+    int index = user.UserRoutines.indexWhere((routine) => routine.RoutineName == widget.selectedroutine.RoutineName);
     return Scaffold(
       appBar: AppBarDetails(
         screenName:
-            "Your ${context.read<UserProvider>().allUsers[ind].UserRoutines[index].RoutineName} Routine",
+            "Your $user.UserRoutines[index].RoutineName} Routine",
         subtitle: "",
       ),
       backgroundColor: const Color(0xFFFFFDF4),
-      body: (context
-              .watch<UserProvider>()
-              .allUsers[ind]
+      body: (user
               .UserRoutines[index]
               .listofproducts
               .isEmpty)
@@ -61,9 +53,7 @@ class _BuildRoutineState extends State<BuildRoutine> {
                     onPressed: () {
                       Navigator.of(context).push(MaterialPageRoute(
                           builder: (context) => AddProduct(
-                              currentroutine: context
-                                  .read<UserProvider>()
-                                  .allUsers[ind]
+                              currentroutine: user
                                   .UserRoutines[index])));
                       setState(() {});
                     },
@@ -88,9 +78,7 @@ class _BuildRoutineState extends State<BuildRoutine> {
               Expanded(
                   child: ListView.builder(
                 scrollDirection: Axis.vertical,
-                itemCount: context
-                    .watch<UserProvider>()
-                    .allUsers[ind]
+                itemCount: user
                     .UserRoutines[index]
                     .listofproducts
                     .length,
@@ -122,14 +110,7 @@ class _BuildRoutineState extends State<BuildRoutine> {
                               height: 80,
                               child: const VerticalDivider(
                                   color: const Color(0xFF283618))),
-                          (i ==
-                                  context
-                                          .watch<UserProvider>()
-                                          .allUsers[ind]
-                                          .UserRoutines[index]
-                                          .listofproducts
-                                          .length -
-                                      1)
+                          (i == user.UserRoutines[index].listofproducts.length - 1)
                               ? Padding(
                                   padding: EdgeInsets.fromLTRB(
                                       8, displayHeight(context) * 0.002, 8, 24),
@@ -143,10 +124,7 @@ class _BuildRoutineState extends State<BuildRoutine> {
                                       Navigator.of(context).push(
                                           MaterialPageRoute(
                                               builder: (context) => AddProduct(
-                                                  currentroutine: context
-                                                      .read<UserProvider>()
-                                                      .allUsers[ind]
-                                                      .UserRoutines[index])));
+                                                  currentroutine: user.UserRoutines[index])));
                                     },
                                   ),
                                 )
@@ -175,14 +153,7 @@ class _BuildRoutineState extends State<BuildRoutine> {
                                   )),
                             ),
                           ),
-                          (i ==
-                                  context
-                                          .watch<UserProvider>()
-                                          .allUsers[ind]
-                                          .UserRoutines[index]
-                                          .listofproducts
-                                          .length -
-                                      1)
+                          (i ==user.UserRoutines[index].listofproducts.length - 1)
                               ? Padding(
                                   padding: EdgeInsets.fromLTRB(
                                       8, displayHeight(context) * 0.002, 8, 24),
@@ -209,13 +180,7 @@ class _BuildRoutineState extends State<BuildRoutine> {
                               width: displayWidth(context) * 0.18,
                               child: Center(
                                 child: ReemKufi_Green_Bold(
-                                  textValue: context
-                                      .read<UserProvider>()
-                                      .allUsers[ind]
-                                      .UserRoutines[index]
-                                      .listofproducts[
-                                          i] // there are two i indexes being used. correct this and replace second index with another name
-                                      .category,
+                                  textValue: user.UserRoutines[index].listofproducts[i].category,
                                   size: displayHeight(context) * 0.02,
                                 ),
                               ),
@@ -248,9 +213,7 @@ class _BuildRoutineState extends State<BuildRoutine> {
                               )),
                               child: Center(
                                 child: ReemKufi_Green_Bold(
-                                    textValue: context
-                                        .watch<UserProvider>()
-                                        .allUsers[ind]
+                                    textValue: user
                                         .UserRoutines[index]
                                         .listofproducts[i]
                                         .productname,
@@ -258,14 +221,7 @@ class _BuildRoutineState extends State<BuildRoutine> {
                               ),
                             ),
                           ),
-                          (i ==
-                                  context
-                                          .watch<UserProvider>()
-                                          .allUsers[ind]
-                                          .UserRoutines[index]
-                                          .listofproducts
-                                          .length -
-                                      1)
+                          (i ==user.UserRoutines[index].listofproducts.length - 1)
                               ? Padding(
                                   padding: EdgeInsets.fromLTRB(
                                       8, displayHeight(context) * 0.002, 8, 24),

@@ -1,20 +1,17 @@
 
 
 import 'package:animated_splash_screen/animated_splash_screen.dart';
-import 'package:firebase_auth/firebase_auth.dart';
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
-import 'package:google_fonts/google_fonts.dart';
 import 'package:provider/provider.dart';
 import 'package:skin_scan/provider/scanned_product_provider.dart';
+import 'package:skin_scan/provider/search_provider.dart';
 import 'package:skin_scan/provider/user_provider.dart';
 import 'package:skin_scan/provider/categories_provider.dart';
 import 'package:skin_scan/provider/google_sign_in.dart';
 import 'package:skin_scan/provider/ingredient_provider.dart';
 import 'package:skin_scan/provider/location_provider.dart';
 import 'package:skin_scan/provider/product_provider.dart';
-import 'package:skin_scan/provider/routine_provider.dart';
-import 'package:skin_scan/register_feature/account_created.dart';
 import 'package:skin_scan/services/auth.dart';
 import 'package:skin_scan/utilities/utility.dart';
 import 'package:camera/camera.dart';
@@ -23,11 +20,8 @@ import 'dart:ui';
 import 'package:liquid_progress_indicator/liquid_progress_indicator.dart';
 import 'dart:async';
 import 'package:firebase_core/firebase_core.dart';
-import 'package:custom_top_navigator/custom_top_navigator.dart';
-
 import 'dart:math' as math;
-
-import 'Models/users_adeena_model.dart';
+import 'models/users_adeena_model.dart';
 import 'log_in_sign_up_feature/log_in_register_screen.dart';
 import 'services/auth.dart';
 
@@ -41,7 +35,6 @@ Future<void> main() async {
   Provider.debugCheckInvalidValueType = null;
   runApp(MultiProvider(
     providers: [
-     // Provider<RoutineProvider>(create: (_) => RoutineProvider()),
       Provider<UserProvider>(create: (_) => UserProvider()),
       ChangeNotifierProvider(create: (_) => CategoryProvider()),
       ChangeNotifierProvider(create: (_) => ProductProvider()),
@@ -49,14 +42,11 @@ Future<void> main() async {
       ChangeNotifierProvider(create: (_) => IngredientProvider()),
       ChangeNotifierProvider(create: (_) => LocationProvider()),
       ChangeNotifierProvider(create: (_) => ScannedProductProvider()),
-      //Provider<AuthService>(create: (_) => AuthService(FirebaseAuth.instance)),
-      //StreamProvider(create: (context) => context.read<AuthService>().authStateChanges, initialData: null,),
-    ],
+      ChangeNotifierProvider(create: (_) => SearchProvider()),
+      ],
     child: const MyApp(),
   ));
 }
-
-
 
 class MyApp extends StatefulWidget {
   const MyApp({Key? key}) : super(key: key);
@@ -69,10 +59,9 @@ class _MyAppState extends State<MyApp> {
   // This widget is the root of your application.
 
   void initModified() async {
-
+    await context.read<UserProvider>().getCurrentUserFromDb();
     await context.read<CategoryProvider>().getCategoriesFromDb();
     await context.read<ProductProvider>().getProductsFromDatabase();
-    await context.read<UserProvider>().getUsersfromDB();
     await context.read<UserProvider>().getUserFavouriteProducts(context.read<ProductProvider>().productsList);
 
   }
@@ -86,21 +75,9 @@ class _MyAppState extends State<MyApp> {
   @override
   Widget build(BuildContext context) {
 
-    //Load all your data from firebase over here:
-    // //Provider.of<UserProvider>(context, listen: false).getUsersfromDB();
-
-    //FocusScope.of(context).unfocus();
     return StreamProvider<AuthenticateUser?>.value(
       value: AuthService().user,
       initialData: null,
-      //GestureDetector(
-      // onTap: () {
-      //   FocusScopeNode currentFocus = FocusScope.of(context);
-      //
-      //   if (!currentFocus.hasPrimaryFocus) {
-      //     currentFocus.unfocus();
-      //   }
-      // },
       child: MaterialApp(
         //scaffoldMessengerKey: Utils.messengerKey,
         title: 'Skin Scan',

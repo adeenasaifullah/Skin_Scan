@@ -6,6 +6,7 @@ import 'package:skin_scan/utilities/utility.dart';
 import '../routine_feature/view_routine.dart';
 import '../services/auth.dart';
 import 'log_in_screen.dart';
+import 'package:intl/intl.dart';
 
 class HomePageScreen extends StatefulWidget {
   const HomePageScreen({Key? key}) : super(key: key);
@@ -18,7 +19,7 @@ class _HomePageScreenState extends State<HomePageScreen> {
 
   final AuthService _auth = AuthService();
   final user = FirebaseAuth.instance.currentUser!;
-
+  DateTime time = DateTime.now();
   @override
   Widget build(BuildContext context) {
     return Scaffold(
@@ -42,7 +43,7 @@ class _HomePageScreenState extends State<HomePageScreen> {
                       padding: const EdgeInsets.fromLTRB(16, 32, 16, 32),
                       child: Column(
                         children: [
-                          Text("Hello, Afzal!",
+                          Text("Hello",
                               style: GoogleFonts.reemKufi(
                                   color: Color(0xffFFFDF4),
                                   fontSize: displayHeight(context) * 0.05)),
@@ -232,12 +233,12 @@ class _HomePageScreenState extends State<HomePageScreen> {
                     Column(
                       crossAxisAlignment: CrossAxisAlignment.center,
                       children: [
-                        Text('20th',
+                        Text('${DateFormat('dd').format(time)}',
                             style: GoogleFonts.reemKufi(
                                 color: Color(0xff283618),
-                                fontSize: displayHeight(context) * 0.025,
+                                fontSize: displayHeight(context) * 0.05,
                                 fontWeight: FontWeight.bold)),
-                        Text('March,2022',
+                        Text('${DateFormat.MMMM().format(time)} ${DateFormat('yyyy').format(time)}',
                             style: GoogleFonts.reemKufi(
                                 color: Color(0xff283618),
                                 fontSize: displayHeight(context) * 0.025,

@@ -1,4 +1,4 @@
-import 'package:skin_scan/Models/routine_product_model.dart';
+import 'package:skin_scan/models/routine_product_model.dart';
 
 import '../entities/routine_entities.dart';
 import '../entities/routine_product_entities.dart';
@@ -7,14 +7,11 @@ class RoutineModel{
 
   final String RoutineName;
   List<RoutineProductsModel> listofproducts = [];
- // final String time;
-  //int numofproducts;
+
 
   RoutineModel({
     required this.RoutineName,
-    //required this.time,
-  required this.listofproducts,
- // required this.numofproducts
+    required this.listofproducts,
   });
 
 

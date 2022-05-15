@@ -8,6 +8,7 @@ import 'package:skin_scan/routine_feature/routine_feature_utilities.dart';
 import 'package:skin_scan/utilities/bottom_app_bar.dart';
 import 'package:skin_scan/utilities/utility.dart';
 import '../entities/routine_entities.dart';
+import '../entities/user_entities.dart';
 import '../provider/routine_provider.dart';
 import 'build_routine.dart';
 
@@ -28,10 +29,11 @@ class _ViewRoutineState extends State<ViewRoutine> {
 
   @override
   Widget build(BuildContext context) {
-    int i = context
-        .read<UserProvider>()
-        .allUsers
-        .indexWhere((user) => user.userID == widget.currentUser.uid);
+    Users user = context.watch<UserProvider>().getCurrentUser();
+    // int i = context
+    //     .read<UserProvider>()
+    //     .allUsers
+    //     .indexWhere((user) => user.userID == widget.currentUser.uid);
     return Scaffold(
         appBar: AppBar(
           elevation: 0,
@@ -71,7 +73,7 @@ class _ViewRoutineState extends State<ViewRoutine> {
           ],
         ),
         backgroundColor: const Color(0xFFFFFDF4),
-        body: (context.watch<UserProvider>().allUsers[i].UserRoutines.isEmpty)
+        body: (user.UserRoutines.isEmpty)
             ? Column(
                 mainAxisAlignment: MainAxisAlignment.center,
                 children: [
@@ -94,11 +96,7 @@ class _ViewRoutineState extends State<ViewRoutine> {
                   Expanded(
                       child: ListView.builder(
                           scrollDirection: Axis.vertical,
-                          itemCount: context
-                              .watch<UserProvider>()
-                              .allUsers[i]
-                              .UserRoutines
-                              .length,
+                          itemCount: user.UserRoutines.length,
                           itemBuilder: (context, index) {
                             return Padding(
                               padding:
@@ -121,11 +119,7 @@ class _ViewRoutineState extends State<ViewRoutine> {
                                   child: Column(
                                     children: [
                                       // relevant icon
-                                      (context
-                                                  .read<UserProvider>()
-                                                  .allUsers[i]
-                                                  .UserRoutines[index]
-                                                  .RoutineName ==
+                                      (user.UserRoutines[index].RoutineName ==
                                               "Morning")
                                           ? const Padding(
                                               padding: EdgeInsets.only(top: 10),
@@ -152,13 +146,13 @@ class _ViewRoutineState extends State<ViewRoutine> {
                                             ),
                                       ReemKufi_Green(
                                         textValue:
-                                            "${context.read<UserProvider>().allUsers[i].UserRoutines[index].RoutineName} Routine",
+                                            "${user.UserRoutines[index].RoutineName} Routine",
                                         size: displayHeight(context) * 0.04,
                                       ),
 
                                       ReemKufi_Green(
                                         textValue:
-                                            "Number of products: ${context.watch<UserProvider>().allUsers[i].UserRoutines[index].listofproducts.length.toString()}",
+                                            "Number of products: ${user.UserRoutines[index].listofproducts.length.toString()}",
                                         size: displayHeight(context) * 0.02,
                                       ),
 
@@ -174,10 +168,7 @@ class _ViewRoutineState extends State<ViewRoutine> {
                                           Navigator.of(context).push(
                                               MaterialPageRoute(
                                                   builder: (context) => BuildRoutine(
-                                                      selectedroutine: context
-                                                          .watch<UserProvider>()
-                                                          .allUsers[i]
-                                                          .UserRoutines[index])));
+                                                      selectedroutine: user.UserRoutines[index])));
                                           setState(() {});
                                         },
                                       ),
@@ -193,10 +184,7 @@ class _ViewRoutineState extends State<ViewRoutine> {
                                 onTap: () {
                                   Navigator.of(context).push(MaterialPageRoute(
                                       builder: (context) => BuildRoutine(
-                                          selectedroutine: context
-                                              .read<UserProvider>()
-                                              .allUsers[i]
-                                              .UserRoutines[index])));
+                                          selectedroutine: user.UserRoutines[index])));
                                   setState(() {});
                                 },
                               ),

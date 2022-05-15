@@ -26,8 +26,6 @@ class _FavouriteProductsState extends State<FavouriteProducts> {
   Widget build(BuildContext context) {
 
     productsList = context.read<ProductProvider>().getProducts;
-    print("product");
-    print(productsList);
     return Scaffold(
       appBar: AppBarDetails(screenName: 'Favourite Products'),
       backgroundColor: Color(0xFFFFFDF4),
