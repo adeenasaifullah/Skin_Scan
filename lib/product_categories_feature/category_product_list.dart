@@ -3,6 +3,7 @@ import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 import 'package:google_fonts/google_fonts.dart';
 import 'package:provider/provider.dart';
+import 'package:skin_scan/product_categories_feature/categories_list.dart';
 import 'package:skin_scan/product_categories_feature/product_categories_utilities.dart';
 import 'package:skin_scan/product_categories_feature/product_detail.dart';
 import 'package:skin_scan/product_categories_feature/product_filter.dart';
@@ -20,12 +21,33 @@ class CategoryProducts extends StatefulWidget {
 
   @override
   _CategoryProductsState createState() => _CategoryProductsState();
+
+
 }
 
 class _CategoryProductsState extends State<CategoryProducts> {
+
+  late List<Product> currentFilteredList;
+
+  @override
+  void initState() {
+    // TODO: implement initState
+   setState(() {
+
+   });
+    super.initState();
+  }
+
+
    @override
   Widget build(BuildContext context) {
-    //var currentCategory = widget.categoryTitle;
+     Widget emptycontainer() {
+       setState(() {
+       });
+       return Container();
+     }
+     currentFilteredList = Provider.of<SearchProvider>(context, listen: false).filteredList;
+     print("Current filtered list: $currentFilteredList");
     return Scaffold(
         appBar: AppBarDetails(screenName: widget.categoryTitle),
         backgroundColor: Color(0xFFFFFDF4),
@@ -41,17 +63,24 @@ class _CategoryProductsState extends State<CategoryProducts> {
                     top: displayHeight(context) * 0.02,
                     left: displayWidth(context) * 0.04),
                 child: Rambla_Green_Italic(
-                  textValue: ' Found ${context.read<ProductProvider>().getProductsOfCategory(widget.categoryTitle).length} results',
+
+                  textValue: (currentFilteredList.isNotEmpty)
+                    ?  'Found ${currentFilteredList.length} result(s)'
+                    : ' Found ${context.read<ProductProvider>().getProductsOfCategory(widget.categoryTitle).length} results',
                   size: displayWidth(context) * 0.045,
                 ),
               ),
               SizedBox(height: displayHeight(context) * 0.02),
-              //(Provider.of<SearchProvider>(context, listen: false).isFilter) ?
-              DisplayProducts(listOfCategoryProducts: context.read<ProductProvider>().getProductsOfCategory(widget.categoryTitle)),
+              ((Provider.of<SearchProvider>(context, listen: false).dropdownvalue)!='No filter')
+                ?DisplayProducts(listOfCategoryProducts: currentFilteredList)
+              :DisplayProducts(listOfCategoryProducts: Provider.of<ProductProvider>(context, listen: false).getProductsOfCategory(widget.categoryTitle)),
+              emptycontainer(),
+
               //DisplayProducts(listOfCategoryProducts: Provider.of<SearchProvider>(context, listen: false).filteredList)
             ]),
         );
   }
+
 }
 
 class SearchandFilter extends StatefulWidget {
@@ -107,7 +136,7 @@ class _SearchandFilterState extends State<SearchandFilter> {
                   Navigator.push(
                       context,
                       MaterialPageRoute(
-                        builder: (context) => Filter(listOfCategoryProducts: context.read<ProductProvider>().getProductsOfCategory(widget.categoryTitle)),
+                        builder: (context) => Filter(listOfCategoryProducts: context.read<ProductProvider>().getProductsOfCategory(widget.categoryTitle), categoryTitle:widget.categoryTitle ,),
                       ));
                 },
                 icon: Image.asset('assets/filter.png',

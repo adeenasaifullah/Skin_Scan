@@ -180,24 +180,24 @@ class _AddProductState extends State<AddProduct> {
                       child: ListView(
                             scrollDirection: Axis.vertical,
                             children: [
-                               StatefulBuilder(
-                                 builder: (context, setState) {
-                                   return CheckboxListTile(
-                                      title: const Text('Choose all'),
-                                      checkColor: Colors.black,
-                                      activeColor: Colors.lightGreen,
-                                      value: mastercheckbox,
-                                      onChanged: (value) {
-                                        setState(() {
-                                          mastercheckbox = value!;
-                                          boolvalues.forEach((boolvalue) {
-                                            boolvalue = mastercheckbox;
-                                          });
-                                        });
-                                      },
-                                    );
-                                 }
-                               ),
+                               // StatefulBuilder(
+                               //   builder: (context, setState) {
+                               //     return CheckboxListTile(
+                               //        title: const Text('Choose all'),
+                               //        checkColor: Colors.black,
+                               //        activeColor: Colors.lightGreen,
+                               //        value: mastercheckbox,
+                               //        onChanged: (value) {
+                               //          setState(() {
+                               //            mastercheckbox = value!;
+                               //            boolvalues.forEach((boolvalue) {
+                               //              boolvalue = mastercheckbox;
+                               //            });
+                               //          });
+                               //        },
+                               //      );
+                               //   }
+                               // ),
                               StatefulBuilder(
                                 builder: (context,setState) {
                                   return CheckboxListTile(

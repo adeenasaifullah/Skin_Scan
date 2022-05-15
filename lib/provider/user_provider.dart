@@ -67,6 +67,10 @@ class UserProvider extends ChangeNotifier {
           );
         }
         currUser = user;
+
+        AMlist = user.UserRoutines[0].listofproducts;
+        PMlist = user.UserRoutines[1].listofproducts;
+
         notifyListeners();
       });
     }
@@ -198,15 +202,19 @@ class UserProvider extends ChangeNotifier {
     // int index = allUsers.indexWhere((user) => user.userID == currentUser.uid);
 
     if (name == 'Morning') {
-      AMlist.removeWhere(
-          (element) => element.productname == removeProduct.productname);
-      user.UserRoutines[0].listofproducts = AMlist;
+      user.UserRoutines[0].listofproducts.removeWhere((element) => element.productname == removeProduct.productname);
+      // AMlist.removeWhere(
+      //     (element) => element.productname == removeProduct.productname);
+      // user.UserRoutines[0].listofproducts = AMlist;
+      AMlist = user.UserRoutines[0].listofproducts;
     }
 
     if (name == 'Night') {
-      PMlist.removeWhere(
-          (element) => element.productname == removeProduct.productname);
-      user.UserRoutines[1].listofproducts = PMlist;
+      user.UserRoutines[1].listofproducts.removeWhere((element) => element.productname == removeProduct.productname);
+      // PMlist.removeWhere(
+      //     (element) => element.productname == removeProduct.productname);
+      // user.UserRoutines[1].listofproducts = PMlist;
+      PMlist = user.UserRoutines[1].listofproducts;
     }
 
     var userroutine = user

@@ -10,8 +10,11 @@ class SearchProvider extends ChangeNotifier {
   List<Product> filteredList = [];
   List<Product> get search => searchProductList;
   bool isFilter = false;
+  String dropdownvalue = 'No filter';
+
 
   void makeCopy(List<Product> categoryProductList) {
+    searchProductList.clear();
     searchProductList.addAll(categoryProductList);
     print(searchProductList);
     notifyListeners();
@@ -21,7 +24,7 @@ class SearchProvider extends ChangeNotifier {
     filteredList.clear();
     setIsFilter();
     if (value.contains('<=3000')) {
-      filteredList.clear();
+      //filteredList.clear();
       for (var product in searchProductList) {
         if (int.parse(product.productPrice) <= 3000) {
           filteredList.add(product);
@@ -32,7 +35,7 @@ class SearchProvider extends ChangeNotifier {
     }
 
     else if (value.contains('>3000 & <=5000')) {
-      filteredList.clear();
+      //filteredList.clear();
       for (var product in searchProductList) {
         if (int.parse(product.productPrice) > 3000 && int.parse(product.productPrice) <= 5000) {
           filteredList.add(product);
@@ -41,7 +44,7 @@ class SearchProvider extends ChangeNotifier {
       print(filteredList);
     }
     else {
-      filteredList.clear();
+     // filteredList.clear();
       for (var product in searchProductList) {
         if (int.parse(product.productPrice) > 5000) {
           filteredList.add(product);
@@ -52,6 +55,13 @@ class SearchProvider extends ChangeNotifier {
     }
     notifyListeners();
   }
+
+  String changeDropDownValue(String value) {
+    dropdownvalue = value;
+    notifyListeners();
+    return dropdownvalue;
+  }
+
 
   setIsFilter() {
     isFilter = true;

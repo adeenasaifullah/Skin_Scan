@@ -1,6 +1,7 @@
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 import 'package:provider/provider.dart';
+import 'package:skin_scan/product_categories_feature/category_product_list.dart';
 import 'package:skin_scan/utilities/utility.dart';
 
 import '../entities/product_entities.dart';
@@ -8,18 +9,18 @@ import '../main.dart';
 import '../provider/search_provider.dart';
 
 class Filter extends StatefulWidget {
+  String categoryTitle;
+  List<Product> listOfCategoryProducts;
 
-  List<Product> listOfCategoryProducts = [];
-
-  Filter({Key? key, required this.listOfCategoryProducts}) : super(key: key);
+  Filter({Key? key, required this.listOfCategoryProducts, required this.categoryTitle}) : super(key: key);
 
   @override
   _FilterState createState() => _FilterState();
 }
 
 class _FilterState extends State<Filter> {
-  String dropdownValue = '<=3000';
-  var items = ['<=3000', '>3000 & <=5000', '>5000'];
+
+  var items = ['No filter','<=3000', '>3000 & <=5000', '>5000'];
   @override
   Widget build(BuildContext context) {
     Provider.of<SearchProvider>(context, listen: false).makeCopy(widget.listOfCategoryProducts);
@@ -59,7 +60,7 @@ class _FilterState extends State<Filter> {
                       menuMaxHeight: displayHeight(context) * 0.2,
                       isExpanded: true,
                       dropdownColor: Color(0xffDADBC6),
-                      value: dropdownValue,
+                      value: Provider.of<SearchProvider>(context, listen:false).dropdownvalue,
                       borderRadius: BorderRadius.all(Radius.circular(20.0)),
                       icon: const Icon(Icons.arrow_downward_sharp),
                       underline: DecoratedBox(
@@ -78,7 +79,7 @@ class _FilterState extends State<Filter> {
                       }).toList(),
                       onChanged: (String? newValue) {
                         setState(() {
-                          dropdownValue = newValue!;
+                          Provider.of<SearchProvider>(context, listen:false).changeDropDownValue(newValue!);
                         });
                       },
                     ),
@@ -147,8 +148,12 @@ class _FilterState extends State<Filter> {
                                   ),
                                   onPressed: () {
                                     Navigator.of(context).pop(true);
-                                    Provider.of<SearchProvider>(context, listen: false).filterAccToPrice(dropdownValue);
-                                    print(dropdownValue);
+                                    Navigator.of(context).pop(true);
+                                    Navigator.of(context).pop(true);
+                                    Provider.of<SearchProvider>(context, listen: false).filterAccToPrice(Provider.of<SearchProvider>(context, listen:false).dropdownvalue);
+                                    Navigator.of(context).push(MaterialPageRoute(
+                                        builder: (context) => CategoryProducts(categoryTitle: widget.categoryTitle ,)));
+                                    print(Provider.of<SearchProvider>(context, listen:false).dropdownvalue);
                                   },
                                 ),
                                 TextButton(

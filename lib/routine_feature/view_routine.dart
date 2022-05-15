@@ -22,13 +22,15 @@ class ViewRoutine extends StatefulWidget {
 
 class _ViewRoutineState extends State<ViewRoutine> {
   @override
-  void initState() {
-    setState(() {});
-    super.initState();
-  }
+
 
   @override
   Widget build(BuildContext context) {
+    Widget emptycontainer() {
+      setState(() {
+      });
+      return Container();
+    }
     Users user = context.watch<UserProvider>().getCurrentUser();
     // int i = context
     //     .read<UserProvider>()
@@ -151,8 +153,10 @@ class _ViewRoutineState extends State<ViewRoutine> {
                                       ),
 
                                       ReemKufi_Green(
-                                        textValue:
-                                            "Number of products: ${user.UserRoutines[index].listofproducts.length.toString()}",
+                                        textValue: (user.UserRoutines[index].RoutineName ==
+                                            "Morning")
+                                            ?"Number of products: ${Provider.of<UserProvider>(context, listen: false).AMlist.length.toString()}"
+                                            :"Number of products: ${Provider.of<UserProvider>(context, listen: false).PMlist.length.toString()}",
                                         size: displayHeight(context) * 0.02,
                                       ),
 
