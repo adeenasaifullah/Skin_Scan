@@ -1,5 +1,3 @@
-
-
 import 'package:animated_splash_screen/animated_splash_screen.dart';
 import 'package:firebase_auth/firebase_auth.dart';
 import 'package:flutter/cupertino.dart';
@@ -13,7 +11,9 @@ import 'package:skin_scan/provider/google_sign_in.dart';
 import 'package:skin_scan/provider/ingredient_provider.dart';
 import 'package:skin_scan/provider/location_provider.dart';
 import 'package:skin_scan/provider/product_provider.dart';
+import 'package:skin_scan/provider/search_provider.dart';
 import 'package:skin_scan/services/auth.dart';
+import 'package:skin_scan/skin_quiz_feature/skinQuizAlgo.dart';
 import 'package:skin_scan/utilities/utility.dart';
 import 'package:camera/camera.dart';
 import 'package:page_transition/page_transition.dart';
@@ -44,6 +44,7 @@ Future<void> main() async {
       ChangeNotifierProvider(create: (_) => LocationProvider()),
       ChangeNotifierProvider(create: (_) => ScannedProductProvider()),
       ChangeNotifierProvider(create: (_) => SearchProvider()),
+      ChangeNotifierProvider(create: (_) => SkinQuizProvider()),
       ],
     child: const MyApp(),
   ));

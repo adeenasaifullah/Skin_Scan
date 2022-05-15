@@ -3,58 +3,55 @@ import 'package:flutter/material.dart';
 import 'package:provider/provider.dart';
 import 'package:skin_scan/skin_quiz_feature/skinQuizAlgo.dart';
 import 'package:skin_scan/skin_quiz_feature/skin_quiz_feature_utility.dart';
-
-//import 'skin_quiz_feature/skin_quiz_feature_utility.dart';
+import 'package:skin_scan/skin_quiz_feature/skin_type_quiz_e.dart';
 import '../utilities/utility.dart';
-import 'skin_type_quiz_b.dart';
-import '../main.dart';
 
 
-
-class skinTypeQuiz extends StatefulWidget {
-  const skinTypeQuiz({Key? key}) : super(key: key);
+class skinTypeQuizd extends StatefulWidget {
+  const skinTypeQuizd({Key? key}) : super(key: key);
 
   @override
-  _skinTypeQuizState createState() => _skinTypeQuizState();
+  _skinTypeQuizdState createState() => _skinTypeQuizdState();
 }
 
-class _skinTypeQuizState extends State<skinTypeQuiz> {
+class _skinTypeQuizdState extends State<skinTypeQuizd> {
   @override
   Widget build(BuildContext context) {
     return Scaffold(
       backgroundColor: const Color(0xFFFFFDF4),
-      appBar: AppBarDetails(screenName: ""),
+      appBar: AppBar(),
       body: SingleChildScrollView(
         child: Padding(
           padding: EdgeInsets.only(
               left: displayWidth(context) * 0.03,
               right: displayWidth(context) * 0.03),
           child: Column(
-            mainAxisAlignment: MainAxisAlignment.start,
+            mainAxisAlignment: MainAxisAlignment.center,
             children: <Widget>[
               questions(
-                  qnumber: 'Question 1',
-                  question: 'Which closely describes the look of your pores?',
-                  description: ''),
+                  qnumber: 'Question 4',
+                  question: 'How does it feel when you touch your skin?',
+                  description:
+                  ''),
               SizedBox(height: displayHeight(context) * 0.05),
               Row(
                 mainAxisAlignment: MainAxisAlignment.center,
                 children: [
-                  const selectAge(ageBracket: 'Large and Visible'),
+                  const selectAge(ageBracket: 'Rough and scaly'),
                   SizedBox(width: displayWidth(context) * 0.1),
-                  const selectAge(ageBracket: 'Medium Sized'),
+                  const selectAge(ageBracket: 'Oily in places & dry in others'),
                 ],
               ),
               SizedBox(height: displayHeight(context) * 0.07),
               Row(
                 mainAxisAlignment: MainAxisAlignment.center,
                 children: [
-                  const selectAge(ageBracket: 'Small/ Not noticeable'),
+                  const selectAge(ageBracket: 'Irritated and angry'),
                   SizedBox(width: displayWidth(context) * 0.1),
-                  const selectAge(ageBracket: 'Visible only in T-zone'),
+                  const selectAge(ageBracket: 'Slick and greasy'),
                 ],
               ),
-              //SizedBox(height: displayHeight(context) * 0.07),
+              SizedBox(height: displayHeight(context) * 0.07),
               // Padding(
               //   padding: EdgeInsets.only(
               //       left: displayWidth(context) * 0.2,
@@ -68,7 +65,7 @@ class _skinTypeQuizState extends State<skinTypeQuiz> {
               //     ],
               //   ),
               // ),
-              // SizedBox(height: displayHeight(context) * 0.03),
+              SizedBox(height: displayHeight(context) * 0.03),
             ],
           ),
         ),
@@ -87,13 +84,13 @@ class selectAge extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    return LightGreenButton(buttonWidth:displayWidth(context) * 0.30 ,
+    return LightGreenButton(buttonWidth:displayWidth(context) * 0.25 ,
         buttonHeight: displayHeight(context) * 0.15,
-        textSize: displayHeight(context) * 0.025, buttonText: ageBracket,
-        onPressed: () {
+        textSize: displayHeight(context) * 0.025, buttonText: ageBracket, onPressed: () {
           Navigator.of(context)
-              .push(MaterialPageRoute(builder: (context) => skinTypeQuizb()));
+              .push(MaterialPageRoute(builder: (context) => skinTypeQuize()));
           Provider.of<SkinQuizProvider>(context, listen: false).options.add(ageBracket);
         });
+
   }
 }
