@@ -216,7 +216,7 @@ class _HomePageScreenState extends State<HomePageScreen> {
                                   ),
                                   InkWell(
                                     child: Icon(Icons.add_circle_outline, color: Colors.black,
-                                      size: 45,),
+                                      size: displayHeight(context) * 0.05,),
                                     onTap: (){
                                       Navigator.of(context).push(MaterialPageRoute(
                                           builder: (context) => ViewRoutine()));

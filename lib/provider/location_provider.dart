@@ -32,6 +32,12 @@ class LocationProvider extends ChangeNotifier {
         //print("Location retrieved");
       });
     });
+    SortList();
     notifyListeners();
   }
+
+  void SortList(){
+    locationList.sort((a,b) => a.areaName.substring(0,1).compareTo(b.areaName.substring(0,1)));
+  }
 }
+

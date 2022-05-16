@@ -24,6 +24,9 @@ class _DermaPopUpState extends State<DermaPopUp> {
   void initState() {
     super.initState();
     derma_controller = TextEditingController();
+    // WidgetsBinding.instance?.addPostFrameCallback((_){
+    //   getLocations();
+    // });
     getLocations();
   }
 
@@ -33,7 +36,9 @@ class _DermaPopUpState extends State<DermaPopUp> {
         .locationList;
     for (var area in locationList) {
       areaList.add(area.areaName);
+      //print(area.areaName);
     }
+    //return areaList;
   }
 
   void dispose() {
@@ -63,6 +68,52 @@ class _DermaPopUpState extends State<DermaPopUp> {
               //color: Color(0xffDADBC6),
               child: ButtonTheme(
                 alignedDropdown: true,
+                // child: FutureBuilder(
+                //     future: getLocations(context),
+                //     builder: (context, AsyncSnapshot<List> snapshot) {
+                //       if (snapshot.hasData) {
+                //         return DropdownButton(
+                //           menuMaxHeight: displayHeight(context) * 0.2,
+                //           isExpanded: true,
+                //           dropdownColor: Color(0xffDADBC6),
+                //           value: dropdownValue,
+                //           borderRadius: BorderRadius.all(Radius.circular(20.0)),
+                //           icon: const Icon(Icons.arrow_downward_sharp),
+                //           underline: DecoratedBox(
+                //             decoration: BoxDecoration(color: Color(0xffDADBC6)),
+                //           ),
+                //           // items: snapshot.data?.map<DropdownMenuItem<String>>((var areaList) {
+                //           //   return DropdownMenuItem(
+                //           //       child: Text(areaList), value: areaList);
+                //           // }).toList(),
+                //           items: snapshot.data
+                //               ?.map((areaList) => DropdownMenuItem<String>(
+                //             child: Text(areaList),
+                //             value: areaList,
+                //           ))
+                //               .toList(),
+                //           // items: areaList.map((String items) {
+                //           //   return DropdownMenuItem(
+                //           //     value: items,
+                //           //     child: Padding(
+                //           //       padding: const EdgeInsets.all(8.0),
+                //           //       child: ReemKufi_Green(
+                //           //           textValue: items,
+                //           //           size: displayHeight(context) * 0.03),
+                //           //     ),
+                //           //   );
+                //           // }).toList(),
+                //           onChanged: (String? newValue) {
+                //             setState(() {
+                //               selectedIndex = areaList.indexOf(newValue!);
+                //               dropdownValue = newValue!;
+                //             });
+                //           },
+                //         );
+                //       } else {
+                //         return CircularProgressIndicator();
+                //       }
+                //     }),
                 child: StatefulBuilder(builder: (context, setState) {
                     return DropdownButton(
                       menuMaxHeight: displayHeight(context) * 0.2,
@@ -145,14 +196,15 @@ class _DermaPopUpState extends State<DermaPopUp> {
                                                         0.03)),
                                       ),
                                       onPressed: () {
-                                        Navigator.pushAndRemoveUntil(
-                                          context,
-                                          MaterialPageRoute(
-                                            builder: (BuildContext context) =>
-                                                DermaPopUp(),
-                                          ),
-                                          (route) => false,
-                                        );
+                                        Navigator.pop(context);
+                                        // Navigator.pushAndRemoveUntil(
+                                        //   context,
+                                        //   MaterialPageRoute(
+                                        //     builder: (BuildContext context) =>
+                                        //         DermaPopUp(),
+                                        //   ),
+                                        //   (route) => false,
+                                        // );
                                       },
                                     ),
                                   ],

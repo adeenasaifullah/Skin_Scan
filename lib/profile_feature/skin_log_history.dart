@@ -15,6 +15,7 @@ class _SkinLogHistoryState extends State<SkinLogHistory> {
   @override
   Widget build(BuildContext context) {
     return Scaffold(
+      backgroundColor: const Color(0xFFFFFDF4),
       appBar: AppBarDetails(screenName: "Skin Log History"),
       body: Padding(
         padding: const EdgeInsets.all(8.0),

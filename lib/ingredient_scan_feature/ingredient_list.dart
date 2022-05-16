@@ -10,11 +10,13 @@ import 'package:skin_scan/utilities/utility.dart';
 import '../ingredient_search_feature/ingredient_details.dart';
 import '../main.dart';
 import '../provider/ingredient_provider.dart';
+import '../provider/user_provider.dart';
 import '../utilities/bottom_app_bar.dart';
 
 class IngredientsList extends StatefulWidget {
-  final List<String> ingredientName;
-  const IngredientsList({Key? key, required this.ingredientName})
+  //final List<String> ingredientName;
+  final List<Ingredient> IngredientList;
+  const IngredientsList({Key? key, required this.IngredientList})
       : super(key: key);
 
   @override
@@ -29,6 +31,7 @@ class _IngredientsListState extends State<IngredientsList> {
   @override
   Widget build(BuildContext context) {
     return Scaffold(
+      backgroundColor: const Color(0xFFFFFDF4),
       appBar: AppBarDetails(screenName: 'Ingredient List'),
       // bottomNavigationBar: BottomBar(),
       body: Container(
@@ -69,22 +72,111 @@ class _IngredientsListState extends State<IngredientsList> {
                           EdgeInsets.all(displayHeight(context) * 0.01),
                     )),
               ),
-
               ReemKufi_Green_Bold(
                   textValue: 'Ingredients:',
                   size: displayHeight(context) * 0.04),
-              IngredientListView(
-                  ingredientName: widget.ingredientName,
-                  ingredientList: (value) {
-                    ingredientList = value;
-                  }),
+              // IngredientListView(
+              //     ingredientName: widget.ingredientName,
+              //     ingredientList: (value) {
+              //       ingredientList = value;
+              //     }),
+              Expanded(
+                child: ListView.builder(
+                    itemCount: widget.IngredientList.length,
+                    itemBuilder: (context, index) {
+                      return InkWell(
+                        onTap: () {
+                          Navigator.of(context).push(MaterialPageRoute(
+                              builder: (context) => IngredientDetails(
+                                  ingredient: widget.IngredientList[index])));
+                        },
+                        child: Container(
+                            alignment: Alignment.center,
+                            margin: EdgeInsets.fromLTRB(8, 8, 8, 8),
+                            width: double.infinity,
+                            decoration: BoxDecoration(
+                              color: const Color(0xFFDADBC6),
+                              borderRadius: BorderRadius.circular(
+                                  20), //border corner radius
+                            ),
+                            child: Padding(
+                              padding: const EdgeInsets.all(8.0),
+                              child: Row(
+                                mainAxisAlignment: MainAxisAlignment.spaceBetween,
+                                children: [
+                                  ReemKufi_Green_Italic(
+                                      textValue: widget.IngredientList[index].ingredientName,
+                                      size: displayHeight(context) * 0.02),
+                                  IconButton(
+                                      onPressed: () {
+                                        Navigator.push(
+                                            context,
+                                            MaterialPageRoute(
+                                              builder: (context) =>
+                                                  IngredientDetails(
+                                                      ingredient:
+                                                      widget.IngredientList[index]),
+                                            ));
+                                      },
+                                      icon: Icon(Icons.arrow_forward_rounded)),
+                                ],
+                              ),
+                            )),
+                      );
+                    }),
+              ),
               ElevatedButton(
                 onPressed: () {
                   if (_formKey.currentState!.validate()) {
-                    Provider.of<ScannedProductProvider>(context, listen: false)
+                    Provider.of<UserProvider>(context, listen: false)
                         .storeScannedProduct(ScannedProduct(
                             productName: productName_controller.text,
-                            ingredientList: ingredientList));
+                            ingredientList: widget.IngredientList));
+                    showDialog(
+                      barrierDismissible: false,
+                      context: context, // user must tap button!
+                      builder: (context) {
+                        return AlertDialog(
+                          backgroundColor: const Color(0xff283618),
+                          title: Column(
+                            children: [
+                              ReemKufiOffwhite(textValue: 'Product Added', size: displayHeight(context) * 0.04),
+                            ],
+                          ),
+                          actions: <Widget>[
+                            Padding(
+                              padding: const EdgeInsets.all(8.0),
+                              child: Row(
+                                mainAxisAlignment:
+                                MainAxisAlignment.spaceEvenly,
+                                children: [
+                                  TextButton(
+                                    style: TextButton.styleFrom(
+                                        backgroundColor: Color(0xffFFFDF4)),
+                                    child: Padding(
+                                      padding: const EdgeInsets.symmetric(
+                                          horizontal: 18.0),
+                                      child: Text('OK',
+                                          style: GoogleFonts.reemKufi(
+                                              color: Colors.black,
+                                              fontSize:
+                                              displayHeight(context) *
+                                                  0.03)),
+                                    ),
+                                    onPressed: () {
+                                      Navigator.pop(context);
+                                      Navigator.pop(context);
+                                      Navigator.pop(context);
+                                    },
+                                  ),
+                                ],
+                              ),
+                            ),
+                          ],
+                        );
+                      },
+                    );
+
                   }
                   // showDialog(
                   //   barrierDismissible: false,
@@ -172,13 +264,19 @@ class IngredientListView extends StatefulWidget {
 
 class _IngredientListViewState extends State<IngredientListView> {
   late List<Ingredient> ingredientList;
+  List<String> distinctIngredientName= [];
 
-  Future<List<Ingredient>> ExtractIngredientInfo(
-      context, List<String> ingredientName) async {
+  void RemoveDuplicates(){
+    print('length:'  + widget.ingredientName.length.toString());
+    distinctIngredientName = widget.ingredientName.toSet().toList();
+    print('length:' + distinctIngredientName.length.toString());
+  }
+  Future<List<Ingredient>> ExtractIngredientInfo(context, List<String> ingredientName) async {
+    RemoveDuplicates();
     Provider.of<IngredientProvider>(context, listen: false)
         .ingredientList
         .clear();
-    for (String name in ingredientName) {
+    for (String name in distinctIngredientName) {
       //print(name);
       await Provider.of<IngredientProvider>(context, listen: false)
           .getIngredientInfo(name);
@@ -186,7 +284,7 @@ class _IngredientListViewState extends State<IngredientListView> {
     ingredientList =
         await Provider.of<IngredientProvider>(context, listen: false)
             .ingredientList;
-    print("here");
+    //print("here");
     return ingredientList;
   }
 
@@ -198,6 +296,7 @@ class _IngredientListViewState extends State<IngredientListView> {
           if (!snapshot.hasData) {
             return Center(child: CircularProgressIndicator());
           } else {
+            print("Extraction Complete");
             //print("here ak lle");
             print(snapshot.data?.length);
             return Expanded(
