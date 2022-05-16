@@ -17,6 +17,7 @@ class _ScannedProductsState extends State<ScannedProducts> {
   @override
   Widget build(BuildContext context) {
     return Scaffold(
+      backgroundColor: const Color(0xFFFFFDF4),
       appBar: AppBarDetails(screenName: "Scanned Products"),
       body: Padding(
         padding: const EdgeInsets.all(8.0),

@@ -6,6 +6,7 @@ import 'package:flutter_mobile_vision_2/flutter_mobile_vision_2.dart';
 import 'package:google_fonts/google_fonts.dart';
 import 'package:provider/provider.dart';
 import 'package:skin_scan/entities/ingredient_entities.dart';
+import 'package:skin_scan/ingredient_scan_feature/analyzing_screen.dart';
 import 'package:skin_scan/main.dart';
 import 'package:skin_scan/utilities/utility.dart';
 import '../provider/ingredient_provider.dart';
@@ -32,6 +33,11 @@ class _OcrScanState extends State<OcrScan> {
   // bool _lineSeparated = false;
   Size? _previewOcr;
   List<OcrText> _textsOcr = [];
+  List<String> ingredientName = [];
+  List<String> distinctIngredientName = [];
+  late List<Ingredient> ingredientList;
+  final _formKey = GlobalKey<FormState>();
+  late TextEditingController productName_controller= TextEditingController();
 
   @override
   void initState() {
@@ -41,6 +47,42 @@ class _OcrScanState extends State<OcrScan> {
       _previewOcr = previewSizes[_cameraOcr]!.first;
       //_previewFace = previewSizes[_cameraFace].first;
     }));
+  }
+
+  void CommaSeparateIngredients(String ocrText){
+    List ing = ocrText.split(',');
+    List second = ocrText.split(' ');
+    ing.addAll(second);
+    for(String value in ing){
+      value = value.replaceAll(',', "");
+      if(value.length>4){
+        ingredientName.add(value.trim());
+        print(value);
+      }
+    }
+  }
+
+  void RemoveDuplicates(){
+    print('length:'  + ingredientName.length.toString());
+    distinctIngredientName = ingredientName.toSet().toList();
+    print('length:' + distinctIngredientName.length.toString());
+  }
+
+  Future<List<Ingredient>> ExtractIngredientInfo(List<String> ingredientName) async {
+    RemoveDuplicates();
+    Provider.of<IngredientProvider>(context, listen: false)
+        .ingredientList
+        .clear();
+    for (String name in distinctIngredientName) {
+      //print(name);
+      await Provider.of<IngredientProvider>(context, listen: false)
+          .getIngredientInfo(name);
+    }
+    ingredientList =
+    await Provider.of<IngredientProvider>(context, listen: false)
+        .ingredientList;
+    print("here");
+    return ingredientList;
   }
 
 
@@ -64,8 +106,154 @@ class _OcrScanState extends State<OcrScan> {
         camera: _cameraOcr ?? FlutterMobileVision.CAMERA_BACK,
         fps: 2.0,
       );
+      //ingredientName.clear();
+      for(OcrText list in texts){
+        //print(list.value);
+        if(list.value.length > 30){
+          //print("separating");
+          CommaSeparateIngredients(list.value);
+        }
+      }
+      //ingredientList = ExtractIngredientInfo(ingredientName) as List<Ingredient>;
+
+      //texts.clear();
+      // return showDialog(
+      //     barrierDismissible: false,
+      //     context: context, // user must tap button!
+      //     builder: (context) {
+      //       return  Form(
+      //         key: _formKey,
+      //         child: AlertDialog(
+      //           backgroundColor: const Color(0xff283618),
+      //           title: ReemKufiOffwhite(textValue: 'Enter product name',
+      //             size: displayHeight(context) * 0.04,),
+      //           content: TextFormField(
+      //             controller: productName_controller,
+      //             validator:  (productName){
+      //               if (productName_controller.text.isEmpty) {
+      //                 print("validated");
+      //                 return "* Required";
+      //               }
+      //               else {
+      //                 return null;
+      //               }
+      //             },
+      //
+      //             autofocus: false,
+      //             decoration: InputDecoration(
+      //               hintText: 'Enter product name',
+      //               hintStyle: GoogleFonts.reemKufi(
+      //                   color: Color(0xffFFFDF4),
+      //                   fontSize: displayHeight(context) * 0.03),
+      //             ),
+      //             style: GoogleFonts.reemKufi(
+      //                 color: Color(0xffFFFDF4),
+      //                 fontSize: displayHeight(context) * 0.03),
+      //           ),
+      //           actions: <Widget>[
+      //             Padding(
+      //               padding:
+      //               EdgeInsets.all(displayHeight(context) * 0.03),
+      //               child: Row(
+      //                 mainAxisAlignment: MainAxisAlignment.spaceEvenly,
+      //                 children: [
+      //                   TextButton(
+      //                     style: TextButton.styleFrom(
+      //                         backgroundColor: Color(0xffBBBD88)),
+      //                     child: ReemKufi_Black(textValue: 'Continue',
+      //                       size: displayHeight(context) * 0.03,),
+      //                     onPressed: () async {
+      //                       if (_formKey.currentState!.validate()) {
+      //                         //CommaSeparateIngredients(ocrText.value);
+      //                         Navigator.of(context).push(
+      //                           MaterialPageRoute(
+      //                             builder: (context) => IngredientsList(ingredientName: ingredientName),
+      //                           ),
+      //                         );
+      //                       }
+      //
+      //                     },
+      //                   ),
+      //                   TextButton(
+      //                     style: TextButton.styleFrom(
+      //                         backgroundColor: Color(0xffBBBD88)),
+      //                     child: ReemKufi_Black(textValue: 'Cancel',
+      //                       size: displayHeight(context) * 0.03,),
+      //                     onPressed: () {
+      //                       Navigator.pushAndRemoveUntil(
+      //                         context,
+      //                         MaterialPageRoute(
+      //                           builder: (BuildContext context) =>
+      //                               OcrScan(),
+      //                         ),
+      //                             (route) => false,
+      //                       );
+      //                     },
+      //                   ),
+      //                 ],
+      //               ),
+      //             ),
+      //           ],
+      //         ),
+      //       );
+      //     }
+      // );
+
+      // ExtractIngredientInfo(ingredientName).then((value) => Navigator.of(context).push(
+      //   MaterialPageRoute(
+      //     builder: (context) => IngredientsList(IngredientList: ingredientList),
+      //   ),
+      // ));
+      Navigator.of(context).push(
+        MaterialPageRoute(
+          builder: (context) => AnalyzingScreen(ingredientName: ingredientName),
+        ),
+      );
     } on Exception {
-      texts.add(OcrText('Failed to recognize text.'));
+      showDialog(
+        barrierDismissible: false,
+        context: context, // user must tap button!
+        builder: (context) {
+          return AlertDialog(
+            backgroundColor: const Color(0xff283618),
+            title: Column(
+              children: [
+                ReemKufiOffwhite(textValue: 'Failed to recognize text', size: displayHeight(context) * 0.04),
+              ],
+            ),
+            actions: <Widget>[
+              Padding(
+                padding: const EdgeInsets.all(8.0),
+                child: Row(
+                  mainAxisAlignment:
+                  MainAxisAlignment.spaceEvenly,
+                  children: [
+                    TextButton(
+                      style: TextButton.styleFrom(
+                          backgroundColor: Color(0xffFFFDF4)),
+                      child: Padding(
+                        padding: const EdgeInsets.symmetric(
+                            horizontal: 18.0),
+                        child: Text('OK',
+                            style: GoogleFonts.reemKufi(
+                                color: Colors.black,
+                                fontSize:
+                                displayHeight(context) *
+                                    0.03)),
+                      ),
+                      onPressed: () {
+                        Navigator.pop(context);
+
+                      },
+                    ),
+                  ],
+                ),
+              ),
+            ],
+          );
+        },
+      );
+      //texts.add(OcrText('Failed to recognize text.'));
     }
 
     if (!mounted) return;
@@ -250,16 +438,16 @@ class _OcrScanState extends State<OcrScan> {
       ),
     );
 
-    items.addAll(
-      ListTile.divideTiles(
-        context: context,
-        tiles: _textsOcr
-            .map(
-              (ocrText) => OcrTextWidget(ocrText),
-        )
-            .toList(),
-      ),
-    );
+    // items.addAll(
+    //   ListTile.divideTiles(
+    //     context: context,
+    //     tiles: _textsOcr
+    //         .map(
+    //           (ocrText) => OcrTextWidget(ocrText),
+    //     )
+    //         .toList(),
+    //   ),
+    // );
 
     return ListView(
       padding: const EdgeInsets.only(
@@ -349,13 +537,13 @@ class OcrTextWidget extends StatelessWidget {
       subtitle: Text(ocrText.language),
       trailing: const Icon(Icons.arrow_forward),
       onTap: () async{
-         CommaSeparateIngredients(ocrText.value);
+         //CommaSeparateIngredients(ocrText.value);
         // //ExtractIngredientInfo(context, ingredientName);
-        Navigator.of(context).push(
-          MaterialPageRoute(
-            builder: (context) => IngredientsList(ingredientName: ingredientName),
-          ),
-        );
+        // Navigator.of(context).push(
+        //   MaterialPageRoute(
+        //     builder: (context) => IngredientsList(ingredientName: ingredientName),
+        //   ),
+        // );
         // return showDialog(
         //     barrierDismissible: false,
         //     context: context, // user must tap button!
