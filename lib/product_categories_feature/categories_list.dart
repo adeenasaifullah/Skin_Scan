@@ -1,5 +1,3 @@
-import 'package:cached_network_image/cached_network_image.dart';
-import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:flutter/material.dart';
 import 'package:provider/provider.dart';
 import 'package:skin_scan/provider/product_provider.dart';
@@ -7,6 +5,7 @@ import 'package:skin_scan/utilities/utility.dart';
 import '../main.dart';
 import '../provider/categories_provider.dart';
 import 'category_product_list.dart';
+import 'package:firebase_image/firebase_image.dart';
 
 class CategoriesAndSearch extends StatefulWidget {
   const CategoriesAndSearch({Key? key}) : super(key: key);
@@ -69,110 +68,6 @@ class _CategoriesAndSearchState extends State<CategoriesAndSearch> {
                         .watch<CategoryProvider>()
                         .getCategories()[index]
                         .categoryImage
-                    // Text(context.watch<CategoryProvider>().getCategories()[index].categoryName)
-                    // child: Column(
-                    //   mainAxisSize: MainAxisSize.min,
-                    //   //crossAxisAlignment: CrossAxisAlignment.center,
-                    //
-                    //   children: <Widget>[
-                    //     InkWell(
-                    //       onTap: () {
-                    //         Navigator.push(
-                    //           context,
-                    //           MaterialPageRoute(
-                    //             builder: (context) =>
-                    //                 CategoryProducts(
-                    //                   categoryTitle: 'Serums',
-                    //                 ),
-                    //           ),
-                    //         );
-                    //       },
-                    //       child: Category(
-                    //           categoryName: context.watch<CategoryProvider>().categoriesList[index].categoryName,
-                    //           categoryImage: 'assets/serumbottle.png'),
-                    //     ),
-                    //     InkWell(
-                    //       onTap: () {
-                    //         Navigator.push(
-                    //           context,
-                    //           MaterialPageRoute(
-                    //             builder: (context) =>
-                    //                 CategoryProducts(
-                    //                   categoryTitle: 'Moisturizers',
-                    //                 ),
-                    //           ),
-                    //         );
-                    //       },
-                    //       child: Category(
-                    //           categoryName: context.watch<CategoryProvider>().categoriesList[index].categoryName,
-                    //           categoryImage: 'assets/moisturizerbottle.png'),
-                    //     ),
-                    //     InkWell(
-                    //       onTap: () {
-                    //         Navigator.push(
-                    //           context,
-                    //           MaterialPageRoute(
-                    //             builder: (context) =>
-                    //                 CategoryProducts(
-                    //                   categoryTitle: 'Toners',
-                    //                 ),
-                    //           ),
-                    //         );
-                    //       },
-                    //       child: Category(
-                    //           categoryName: context.watch<CategoryProvider>().categoriesList[index].categoryName,
-                    //           categoryImage: 'assets/tonerbottle.png'),
-                    //     ),
-                    //     InkWell(
-                    //       onTap: () {
-                    //         Navigator.push(
-                    //           context,
-                    //           MaterialPageRoute(
-                    //             builder: (context) =>
-                    //                 CategoryProducts(
-                    //                   categoryTitle: 'Suncare',
-                    //                 ),
-                    //           ),
-                    //         );
-                    //       },
-                    //       child: Category(
-                    //           categoryName: context.watch<CategoryProvider>().categoriesList[index].categoryName,
-                    //           categoryImage: 'assets/Suncare.png'),
-                    //     ),
-                    //     InkWell(
-                    //       onTap: () {
-                    //         Navigator.push(
-                    //           context,
-                    //           MaterialPageRoute(
-                    //             builder: (context) =>
-                    //                 CategoryProducts(
-                    //                   categoryTitle: 'Masks',
-                    //                 ),
-                    //           ),
-                    //         );
-                    //       },
-                    //       child: Category(
-                    //           categoryName: context.watch<CategoryProvider>().categoriesList[index].categoryName,
-                    //           categoryImage: 'assets/Masks.png'),
-                    //     ),
-                    //     InkWell(
-                    //       onTap: () {
-                    //         Navigator.push(
-                    //           context,
-                    //           MaterialPageRoute(
-                    //             builder: (context) =>
-                    //                 CategoryProducts(
-                    //                   categoryTitle: 'Exfoliators',
-                    //                 ),
-                    //           ),
-                    //         );
-                    //       },
-                    //       child: Category(
-                    //           categoryName: context.watch<CategoryProvider>().categoriesList[index].categoryName,
-                    //           categoryImage: 'assets/exfoliators.png'),
-                    //     )
-                    //   ],
-                    // ),
                     );
               },
             ),
@@ -222,17 +117,13 @@ class Category extends StatelessWidget {
           child: Column(
               mainAxisAlignment: MainAxisAlignment.center,
               children: <Widget>[
-                CachedNetworkImage(
-                    imageUrl: categoryImage,
-                    fit: BoxFit.contain,
-                    height: displayHeight(context) * 0.125,
-                    width: displayWidth(context) * 0.25
-                    // child: Image(
-                    //     image: NetworkImage(categoryImage),
-                    //     fit: BoxFit.contain,
-                    //     height: displayHeight(context) * 0.125,
-                    //     width: displayWidth(context) * 0.25, ),
-                    ),
+                Image(
+                  image: FirebaseImage(categoryImage, cacheRefreshStrategy:
+                  CacheRefreshStrategy.NEVER),
+                  fit: BoxFit.contain,
+                  height: displayHeight(context) * 0.125,
+                  width: displayWidth(context) * 0.25, ),
+
                 ReemKufi_Green(
                   textValue: categoryName,
                   size: displayWidth(context) * 0.045,

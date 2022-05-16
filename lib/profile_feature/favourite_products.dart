@@ -1,3 +1,4 @@
+import 'package:firebase_image/firebase_image.dart';
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_rating_bar/flutter_rating_bar.dart';
@@ -97,19 +98,16 @@ class _FavouriteProductsCardState extends State<FavouriteProductsCard> {
                               prodID: widget.FavouriteLists[index].prodID),
                         ),
                         Image(
-                            image: NetworkImage(
-                                "https://drive.google.com/uc?export=view&id=1pN_AcjbZfXgBznRfl13vGBgCSCpoVASz"),
-                            fit: BoxFit.fill,
-                            height: displayHeight(context) * 0.1,
-                            width: displayWidth(context) * 0.1),
+                          image: FirebaseImage(widget.FavouriteLists[index].productImage, cacheRefreshStrategy:
+                          CacheRefreshStrategy.NEVER),
+                          fit: BoxFit.fill,
+                          height: displayHeight(context) * 0.1,
+                          width: displayWidth(context) * 0.15, ),
                         SizedBox(height: displayHeight(context) * 0.005),
                         ReemKufi_Green(
                             textValue: widget.FavouriteLists[index].productName,
                             size: displayHeight(context) * 0.025),
                         SizedBox(height: displayHeight(context) * 0.005),
-                        // Rating(
-                        //   productRating: widget.productRating,
-                        // ),
                       ],
                     )),
                 onTap: () {

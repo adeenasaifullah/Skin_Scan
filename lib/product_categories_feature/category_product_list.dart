@@ -1,4 +1,5 @@
 import 'package:cloud_firestore/cloud_firestore.dart';
+import 'package:firebase_image/firebase_image.dart';
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 import 'package:google_fonts/google_fonts.dart';
@@ -201,10 +202,11 @@ class _DisplayProductsState extends State<DisplayProducts> {
                   ),
 
                   Image(
-                      image: AssetImage('assets/dermatologistIcon.png'),
-                      fit: BoxFit.fill,
-                      height: displayHeight(context) * 0.1,
-                      width: displayWidth(context) * 0.1),
+                    image: FirebaseImage(widget.listOfCategoryProducts[index].productImage, cacheRefreshStrategy:
+                    CacheRefreshStrategy.NEVER),
+                    fit: BoxFit.contain,
+                    height: displayHeight(context) * 0.10,
+                    width: displayWidth(context) * 0.25, ),
                   SizedBox(height: displayHeight(context) * 0.005),
                   Padding(
                     padding:  EdgeInsets.all(displayWidth(context)*0.03),

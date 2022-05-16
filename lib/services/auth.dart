@@ -64,8 +64,6 @@ class AuthService {
     }
   }
 
-
-
   //register with email and password
   Future registerWithEmailAndPassword(String email, String password) async {
     try {
@@ -88,11 +86,7 @@ class AuthService {
           UserEmail: email,
           UserRoutines: routine_list,
          UserFavouriteProducts: favourite_products,
-          //UserFavouriteProducts: favourite_products
-          //routine_list.map((e) => e.toJson()).toList();
-          //this.UserRoutines.map((v) => v.toJson()).toList();
-
-          );
+      );
       obj.userID = authID;
             var userroutine = obj.UserRoutines.map((e) => RoutineModel(
           RoutineName: e.RoutineName,

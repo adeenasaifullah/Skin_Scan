@@ -8,6 +8,7 @@ class Product {
    String productName;
    String productPrice;
    String skinType;
+   String productImage;
    num productRating;
 
   Product({
@@ -19,6 +20,7 @@ class Product {
     required this.productName,
     required this.productPrice,
     required this.skinType,
+    required this.productImage,
     required this.productRating,
   });
 
@@ -32,6 +34,7 @@ class Product {
     data['Name'] = productName;
     data['Skin Type'] = skinType;
     data['How to use'] = howToUse;
+    data['Image'] = productImage;
     data['Rating'] = productRating;
     return data;
   }

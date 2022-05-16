@@ -1,3 +1,4 @@
+import 'package:firebase_image/firebase_image.dart';
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 import 'package:provider/provider.dart';
@@ -41,10 +42,12 @@ class _ProductDetailState extends State<ProductDetail> {
                   child: Card(
                     color: const Color(0xffDADBC6),
                     child: Image(
-                        image: AssetImage('assets/moisturizerbottle.png'),
-                        fit: BoxFit.fill,
-                        height: displayHeight(context) * 0.15,
-                        width: displayWidth(context) * 0.15),
+                      image: FirebaseImage(widget.product.productImage, cacheRefreshStrategy:
+                      CacheRefreshStrategy.NEVER),
+                      fit: BoxFit.contain,
+                      height: displayHeight(context) * 0.125,
+                      width: displayWidth(context) * 0.25, ),
+
                   ),
                 ),
 

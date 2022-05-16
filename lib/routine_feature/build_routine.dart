@@ -160,13 +160,12 @@ class _BuildRoutineState extends State<BuildRoutine> {
                                       : (user.UserRoutines[index].listofproducts[i].category == "Moisturizer")
                                          ? Padding(
                                            padding: const EdgeInsets.all(16),
-                                           child: Image.asset("assets/moisturierbottle.png"),
+                                           child: Image.asset("assets/moisturizerbottle.png"),
                                          )
                                          : Padding(
                                            padding: const EdgeInsets.all(16),
                                            child: Image.asset("assets/Suncare.png"),
                                          ) ,
-
 
                               height: displayHeight(context) * 0.16,
                               width: displayHeight(context) * 0.18,
