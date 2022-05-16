@@ -1,13 +1,12 @@
 import 'package:skin_scan/entities/product_entities.dart';
 import 'package:skin_scan/entities/routine_entities.dart';
 
-import '../Models/product_model.dart';
+import '../models/product_model.dart';
 
 class Users {
   var userID;
   final String UserName;
   final String UserEmail;
-  //String UserPassword;
   List<Routine> UserRoutines = [];
   List<String> UserFavouriteProducts =[];
 

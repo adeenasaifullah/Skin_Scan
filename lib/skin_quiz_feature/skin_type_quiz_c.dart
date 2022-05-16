@@ -4,12 +4,10 @@ import 'package:provider/provider.dart';
 import 'package:skin_scan/skin_quiz_feature/skinQuizAlgo.dart';
 import 'package:skin_scan/skin_quiz_feature/skin_quiz_feature_utility.dart';
 import 'package:skin_scan/skin_quiz_feature/skin_type_quiz_d.dart';
-
 //import 'skin_quiz_feature/skin_quiz_feature_utility.dart';
 import '../utilities/utility.dart';
 import 'skin_type_quiz_b.dart';
 import '../main.dart';
-
 
 
 class skinTypeQuizc extends StatefulWidget {
@@ -93,7 +91,7 @@ class selectAge extends StatelessWidget {
         textSize: displayHeight(context) * 0.025, buttonText: ageBracket, onPressed: (){
           Navigator.of(context)
               .push(MaterialPageRoute(builder: (context) => skinTypeQuizd()));
-          Provider.of<skinQuizProvider>(context, listen: false).options.add(ageBracket);
+          Provider.of<SkinQuizProvider>(context, listen: false).options.add(ageBracket);
         });
 
   }

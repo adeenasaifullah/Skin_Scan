@@ -93,7 +93,7 @@ class selectAge extends StatelessWidget {
         onPressed: () {
           Navigator.of(context)
               .push(MaterialPageRoute(builder: (context) => skinTypeQuizb()));
-          Provider.of<skinQuizProvider>(context, listen: false).options.add(ageBracket);
+          Provider.of<SkinQuizProvider>(context, listen: false).options.add(ageBracket);
         });
   }
 }

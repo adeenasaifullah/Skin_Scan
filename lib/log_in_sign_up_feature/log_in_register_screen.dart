@@ -9,7 +9,7 @@ import 'package:skin_scan/entities/user_entities.dart';
 import 'package:skin_scan/provider/user_provider.dart';
 import 'package:skin_scan/register_feature/create_account.dart';
 import 'package:flutter_signin_button/flutter_signin_button.dart';
-import '../Models/users_adeena_model.dart';
+import '../models/users_adeena_model.dart';
 import '../entities/product_entities.dart';
 import '../entities/routine_entities.dart';
 import '../entities/routine_product_entities.dart';

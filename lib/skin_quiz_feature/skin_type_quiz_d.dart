@@ -23,7 +23,8 @@ class _skinTypeQuizdState extends State<skinTypeQuizd> {
   Widget build(BuildContext context) {
     return Scaffold(
       backgroundColor: const Color(0xFFFFFDF4),
-      appBar: AppBarDetails(screenName: ''),
+      appBar: AppBar(),
+      //appBar: AppBarDetails(screenName: ''),
       body: SingleChildScrollView(
         child: Padding(
           padding: EdgeInsets.only(
@@ -93,7 +94,7 @@ class selectAge extends StatelessWidget {
         textSize: displayHeight(context) * 0.025, buttonText: ageBracket, onPressed: () {
           Navigator.of(context)
               .push(MaterialPageRoute(builder: (context) => skinTypeQuize()));
-          Provider.of<skinQuizProvider>(context, listen: false).options.add(ageBracket);
+          Provider.of<SkinQuizProvider>(context, listen: false).options.add(ageBracket);
         });
 
   }

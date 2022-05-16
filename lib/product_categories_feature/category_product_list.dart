@@ -3,33 +3,51 @@ import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 import 'package:google_fonts/google_fonts.dart';
 import 'package:provider/provider.dart';
+import 'package:skin_scan/product_categories_feature/categories_list.dart';
 import 'package:skin_scan/product_categories_feature/product_categories_utilities.dart';
 import 'package:skin_scan/product_categories_feature/product_detail.dart';
 import 'package:skin_scan/product_categories_feature/product_filter.dart';
+import 'package:skin_scan/provider/search_provider.dart';
 import 'package:skin_scan/utilities/utility.dart';
-
 import '../entities/product_entities.dart';
 import '../main.dart';
 import '../provider/product_provider.dart';
 
 
-
-
-
 class CategoryProducts extends StatefulWidget {
   final String categoryTitle;
-  //final List<Product> productsOfCategory;
   const CategoryProducts({Key? key, required this.categoryTitle, })
       : super(key: key);
 
   @override
   _CategoryProductsState createState() => _CategoryProductsState();
+
+
 }
 
 class _CategoryProductsState extends State<CategoryProducts> {
+
+  late List<Product> currentFilteredList;
+
+  @override
+  void initState() {
+    // TODO: implement initState
+   setState(() {
+
+   });
+    super.initState();
+  }
+
+
    @override
   Widget build(BuildContext context) {
-    //var currentCategory = widget.categoryTitle;
+     Widget emptycontainer() {
+       setState(() {
+       });
+       return Container();
+     }
+     currentFilteredList = Provider.of<SearchProvider>(context, listen: false).filteredList;
+     print("Current filtered list: $currentFilteredList");
     return Scaffold(
         appBar: AppBarDetails(screenName: widget.categoryTitle),
         backgroundColor: Color(0xFFFFFDF4),
@@ -38,30 +56,27 @@ class _CategoryProductsState extends State<CategoryProducts> {
             crossAxisAlignment: CrossAxisAlignment.start,
             children: [
               SizedBox(height: displayHeight(context) * 0.02),
-              SearchandFilter(),
+              SearchandFilter(categoryTitle: widget.categoryTitle),
               SizedBox(height: displayHeight(context) * 0.01),
               Padding(
                 padding: EdgeInsets.only(
                     top: displayHeight(context) * 0.02,
                     left: displayWidth(context) * 0.04),
                 child: Rambla_Green_Italic(
-                  textValue: ' Found ${context.read<ProductProvider>().getProductsOfCategory(widget.categoryTitle).length} results',
+
+                  textValue: (currentFilteredList.isNotEmpty)
+                    ?  'Found ${currentFilteredList.length} result(s)'
+                    : ' Found ${context.read<ProductProvider>().getProductsOfCategory(widget.categoryTitle).length} results',
                   size: displayWidth(context) * 0.045,
                 ),
               ),
               SizedBox(height: displayHeight(context) * 0.02),
-              DisplayProducts(listOfCategoryProducts: context.read<ProductProvider>().getProductsOfCategory(widget.categoryTitle)),
+              ((Provider.of<SearchProvider>(context, listen: false).dropdownvalue)!='No filter')
+                ?DisplayProducts(listOfCategoryProducts: currentFilteredList)
+              :DisplayProducts(listOfCategoryProducts: Provider.of<ProductProvider>(context, listen: false).getProductsOfCategory(widget.categoryTitle)),
+              emptycontainer(),
 
-
-
-              // children: List.generate(
-              //     ProductsLists.length,
-              //         (index) => DisplayProducts(
-              //         productImage: ProductsLists[index].productImage,
-              //         productName: ProductsLists[index].productName,
-              //         price: ProductsLists[index].price)),
-
-              //] )
+              //DisplayProducts(listOfCategoryProducts: Provider.of<SearchProvider>(context, listen: false).filteredList)
             ]),
         );
   }
@@ -69,7 +84,10 @@ class _CategoryProductsState extends State<CategoryProducts> {
 }
 
 class SearchandFilter extends StatefulWidget {
-  const SearchandFilter({Key? key}) : super(key: key);
+
+  final String categoryTitle;
+  SearchandFilter({Key? key, required this.categoryTitle,
+  }) : super(key: key);
 
   @override
   _SearchandFilterState createState() => _SearchandFilterState();
@@ -101,12 +119,7 @@ class _SearchandFilterState extends State<SearchandFilter> {
                           width: displayWidth(context) * 0.03,
                           style: BorderStyle.solid)),
                   filled: true,
-                  // border: OutlineInputBorder(
-                  //   borderRadius: BorderRadius.circular(10.0),
-                  // ),
-
                   contentPadding: EdgeInsets.all(displayHeight(context) * 0.01),
-
                   suffixIcon: Icon(Icons.search),
                 )),
           ),
@@ -114,7 +127,7 @@ class _SearchandFilterState extends State<SearchandFilter> {
         Padding(
           padding: EdgeInsets.only(right: displayWidth(context) * 0.03),
           child: Container(
-            decoration: BoxDecoration(
+            decoration: const BoxDecoration(
               borderRadius: BorderRadius.all(Radius.circular(10)),
               color: Color(0xffDADBC6),
             ),
@@ -123,7 +136,7 @@ class _SearchandFilterState extends State<SearchandFilter> {
                   Navigator.push(
                       context,
                       MaterialPageRoute(
-                        builder: (context) => Filter(),
+                        builder: (context) => Filter(listOfCategoryProducts: context.read<ProductProvider>().getProductsOfCategory(widget.categoryTitle), categoryTitle:widget.categoryTitle ,),
                       ));
                 },
                 icon: Image.asset('assets/filter.png',
@@ -140,17 +153,11 @@ class _SearchandFilterState extends State<SearchandFilter> {
 
 class DisplayProducts extends StatefulWidget {
   final List<Product> listOfCategoryProducts;
-  // final String productImage;
-  // final String productName;
-  // final int price;
-  //var prodID;
 
   DisplayProducts(
       {Key? key,
         required this.listOfCategoryProducts})
       : super(key: key);
-
-
 
   @override
   _DisplayProductsState createState() => _DisplayProductsState();
@@ -175,11 +182,11 @@ class _DisplayProductsState extends State<DisplayProducts> {
           return
 
     Padding(
-        padding: EdgeInsets.fromLTRB(4, 4, 4, 4),
+        padding: const EdgeInsets.fromLTRB(4, 4, 4, 4),
         child: InkWell(
           child: Card(
               elevation: 2,
-              color: Color(0xffBFC2A4),
+              color: const Color(0xffBFC2A4),
               shape: RoundedRectangleBorder(
                   borderRadius: BorderRadius.circular(30)),
               child: Column(
@@ -219,8 +226,6 @@ class _DisplayProductsState extends State<DisplayProducts> {
               MaterialPageRoute(
                 builder: (context) => ProductDetail(
                   product: widget.listOfCategoryProducts[index]
-
-
                 ),
               ),
             );

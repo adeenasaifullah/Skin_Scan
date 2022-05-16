@@ -1,7 +1,7 @@
 import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:flutter/cupertino.dart';
 import 'package:skin_scan/entities/ingredient_entities.dart';
-import '../Models/ingredient_model.dart';
+import '../models/ingredient_model.dart';
 
 class IngredientProvider extends ChangeNotifier {
 

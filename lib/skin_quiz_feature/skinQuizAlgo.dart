@@ -1,7 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:provider/provider.dart';
 
-class skinQuizProvider with ChangeNotifier {
+class SkinQuizProvider with ChangeNotifier {
 
   List<String> options = [];
   String skinType = "";

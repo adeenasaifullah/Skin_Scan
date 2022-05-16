@@ -69,7 +69,7 @@ class place extends StatelessWidget {
         buttonText: typeOfPlace, onPressed: () {
           Navigator.of(context)
               .push(MaterialPageRoute(builder: (context) => skinTypeQuizc()));
-          Provider.of<skinQuizProvider>(context, listen: false).options.add(typeOfPlace);
+          Provider.of<SkinQuizProvider>(context, listen: false).options.add(typeOfPlace);
         });
 
   }

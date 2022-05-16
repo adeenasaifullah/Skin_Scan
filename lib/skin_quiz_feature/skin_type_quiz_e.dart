@@ -1,6 +1,11 @@
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 import 'package:provider/provider.dart';
+import 'package:skin_scan/log_in_sign_up_feature/home_page_screen.dart';
+import 'package:skin_scan/skin_quiz_feature/skinQuizAlgo.dart';
+import 'package:skin_scan/skin_quiz_feature/skin_quiz_feature_utility.dart';
+import 'package:skin_scan/utilities/bottom_app_bar.dart';
+import '../utilities/utility.dart';
 import 'package:skin_scan/skin_quiz_feature/skinQuizAlgo.dart';
 import 'package:skin_scan/skin_quiz_feature/skin_quiz_feature_utility.dart';
 
@@ -24,7 +29,8 @@ class _skinTypeQuizeState extends State<skinTypeQuize> {
   Widget build(BuildContext context) {
     return Scaffold(
       backgroundColor: const Color(0xFFFFFDF4),
-      appBar: AppBarDetails(screenName: ''),
+      //appBar: AppBarDetails(screenName: ''),
+      appBar: AppBar(),
       body: SingleChildScrollView(
         child: Padding(
           padding: EdgeInsets.only(
@@ -81,8 +87,8 @@ class selectAge extends StatelessWidget {
         onPressed: () async
         {
 
-          Provider.of<skinQuizProvider>(context, listen: false).options.add(ageBracket);
-          String skinType = context.read<skinQuizProvider>().determineSkinType();
+          Provider.of<SkinQuizProvider>(context, listen: false).options.add(ageBracket);
+          String skinType = context.read<SkinQuizProvider>().determineSkinType();
 
           return showDialog(
             barrierDismissible: false,
@@ -106,9 +112,14 @@ class selectAge extends StatelessWidget {
                               textValue: 'OK',
                               size: displayHeight(context) * 0.03),
                           onPressed: () {
-                            Navigator.of(context).push(MaterialPageRoute(
-                                builder: (context) => MyBottomAppBar()));
-
+                            Navigator.pushAndRemoveUntil(
+                              context,
+                              MaterialPageRoute(
+                                builder: (BuildContext context) =>
+                                    MyBottomAppBar(),
+                              ),
+                                  (route) => false,
+                            );
                           },
                         ),
                       ],

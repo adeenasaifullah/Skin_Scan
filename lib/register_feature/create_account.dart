@@ -6,7 +6,7 @@ import 'package:form_field_validator/form_field_validator.dart';
 import 'package:google_fonts/google_fonts.dart';
 import 'package:provider/provider.dart';
 import 'package:skin_scan/services/auth.dart';
-import '../Models/users_adeena_model.dart';
+import '../models/users_adeena_model.dart';
 import '../log_in_sign_up_feature/log_in_screen.dart';
 import '../main.dart';
 //import '../provider/UserProvider.dart';

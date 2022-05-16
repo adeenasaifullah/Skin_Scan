@@ -1,21 +1,29 @@
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
+import 'package:provider/provider.dart';
+import 'package:skin_scan/product_categories_feature/category_product_list.dart';
 import 'package:skin_scan/utilities/utility.dart';
 
+import '../entities/product_entities.dart';
 import '../main.dart';
+import '../provider/search_provider.dart';
 
 class Filter extends StatefulWidget {
-  const Filter({Key? key}) : super(key: key);
+  String categoryTitle;
+  List<Product> listOfCategoryProducts;
+
+  Filter({Key? key, required this.listOfCategoryProducts, required this.categoryTitle}) : super(key: key);
 
   @override
   _FilterState createState() => _FilterState();
 }
 
 class _FilterState extends State<Filter> {
-  //String dropdownValue = '15-25';
-  //var items = ['15-25', '26-35', '36-45', '46-55', '56+'];
+
+  var items = ['No filter','<=3000', '>3000 & <=5000', '>5000'];
   @override
   Widget build(BuildContext context) {
+    Provider.of<SearchProvider>(context, listen: false).makeCopy(widget.listOfCategoryProducts);
     return Scaffold(
         appBar: AppBarDetails(screenName: 'Filter'),
         backgroundColor: Color(0xFFFFFDF4),
@@ -34,108 +42,50 @@ class _FilterState extends State<Filter> {
                     textValue: 'Price Range',
                     size: displayHeight(context) * 0.04),
               ),
-              Row(
-                //DADBC6
-                mainAxisAlignment: MainAxisAlignment.spaceEvenly,
-                children: <Widget>[
-                  FilterButtons(
-                      widthSize: 0.22,
-                      heightSize: 0.08,
-                      buttonText: '<1000',
-                      textSize: 0.02),
-                  FilterButtons(
-                      widthSize: 0.22,
-                      heightSize: 0.08,
-                      buttonText: '>1000 <5000',
-                      textSize: 0.02),
-                  FilterButtons(
-                      widthSize: 0.22,
-                      heightSize: 0.08,
-                      buttonText: '>5000',
-                      textSize: 0.02),
-                ],
+              SizedBox(height: displayHeight(context) * 0.02),
+              Padding(
+                padding: EdgeInsets.symmetric(
+                    horizontal: displayWidth(context) * 0.06),
+                child: Container(
+                  decoration: BoxDecoration(
+                    borderRadius: BorderRadius.all(Radius.circular(20.0)),
+                    color: Color(0xffDADBC6),
+                  ),
+                  width: displayWidth(context) * 0.8,
+                  //color: Color(0xffDADBC6),
+                  child: ButtonTheme(
+                    alignedDropdown: true,
+                    child: DropdownButton(
+                      //menuMargin: EdgeInsets.zero,
+                      menuMaxHeight: displayHeight(context) * 0.2,
+                      isExpanded: true,
+                      dropdownColor: Color(0xffDADBC6),
+                      value: Provider.of<SearchProvider>(context, listen:false).dropdownvalue,
+                      borderRadius: BorderRadius.all(Radius.circular(20.0)),
+                      icon: const Icon(Icons.arrow_downward_sharp),
+                      underline: DecoratedBox(
+                        decoration: BoxDecoration(color: Color(0xffDADBC6)),
+                      ),
+                      items: items.map((String items) {
+                        return DropdownMenuItem(
+                          value: items,
+                          child: Padding(
+                            padding: const EdgeInsets.all(8.0),
+                            child: ReemKufi_Green(
+                                textValue: items,
+                                size: displayHeight(context) * 0.03),
+                          ),
+                        );
+                      }).toList(),
+                      onChanged: (String? newValue) {
+                        setState(() {
+                          Provider.of<SearchProvider>(context, listen:false).changeDropDownValue(newValue!);
+                        });
+                      },
+                    ),
+                  ),
+                ),
               ),
-              //SizedBox(height: displayHeight(context) * 0.02),
-              // Padding(
-              //   padding: EdgeInsets.symmetric(
-              //       horizontal: displayWidth(context) * 0.06),
-              //   child: ReemKufi_Green(
-              //       textValue: 'Age', size: displayHeight(context) * 0.04),
-              // ),
-              // Padding(
-              //   padding: EdgeInsets.symmetric(
-              //       horizontal: displayWidth(context) * 0.06),
-              //   child: Container(
-              //     decoration: BoxDecoration(
-              //       borderRadius: BorderRadius.all(Radius.circular(20.0)),
-              //       color: Color(0xffDADBC6),
-              //     ),
-              //
-              //     width: displayWidth(context) * 0.3,
-              //     //color: Color(0xffDADBC6),
-              //     child: ButtonTheme(
-              //       alignedDropdown: true,
-              //       child: DropdownButton(
-              //         //menuMargin: EdgeInsets.zero,
-              //         menuMaxHeight: displayHeight(context) * 0.2,
-              //
-              //         isExpanded: true,
-              //         dropdownColor: Color(0xffDADBC6),
-              //         value: dropdownValue,
-              //         borderRadius: BorderRadius.all(Radius.circular(20.0)),
-              //         icon: const Icon(Icons.arrow_downward_sharp),
-              //
-              //         underline: DecoratedBox(
-              //           decoration: BoxDecoration(color: Color(0xffDADBC6)),
-              //         ),
-              //         items: items.map((String items) {
-              //           return DropdownMenuItem(
-              //             value: items,
-              //             child: Padding(
-              //               padding: const EdgeInsets.all(8.0),
-              //               child: ReemKufi_Green(
-              //                   textValue: items,
-              //                   size: displayHeight(context) * 0.03),
-              //             ),
-              //           );
-              //         }).toList(),
-              //         onChanged: (String? newValue) {
-              //           setState(() {
-              //             dropdownValue = newValue!;
-              //           });
-              //         },
-              //       ),
-              //     ),
-              //   ),
-              // ),
-              SizedBox(height: displayHeight(context) * 0.03),
-              // Padding(
-              //   padding: EdgeInsets.symmetric(
-              //       horizontal: displayWidth(context) * 0.06),
-              //   child: ReemKufi_Green(
-              //       textValue: 'Gender', size: displayHeight(context) * 0.04),
-              // ),
-              // Padding(
-              //   padding: EdgeInsets.symmetric(
-              //       horizontal: displayWidth(context) * 0.06),
-              //   child: Row(
-              //     //DADBC6
-              //     //mainAxisAlignment: MainAxisAlignment.spaceEvenly,
-              //     children: <Widget>[
-              //       FilterButtons(
-              //           widthSize: 0.25,
-              //           heightSize: 0.06,
-              //           buttonText: 'Male',
-              //           textSize: 0.03),
-              //       SizedBox(width: displayWidth(context) * 0.06),
-              //       FilterButtons(
-              //           widthSize: 0.28,
-              //           heightSize: 0.06,
-              //           buttonText: 'Female',
-              //           textSize: 0.03),
-              //     ],
-              //   ),
-              // ),
               SizedBox(height: displayHeight(context) * 0.03),
               Padding(
                 padding: EdgeInsets.symmetric(
@@ -167,7 +117,9 @@ class _FilterState extends State<Filter> {
                 alignment: Alignment.bottomCenter,
                 child: GreenButton(buttonHeight: displayHeight(context) * 0.06,
                   buttonWidth: displayWidth(context) * 0.25, buttonText:"Save" ,
-                  textSize:displayHeight(context) * 0.03 , onPressed: () async {return showDialog(
+                  textSize:displayHeight(context) * 0.03 ,
+                  onPressed: () async {
+                  return showDialog(
                     barrierDismissible: false,
                     context: context, // user must tap button!
                     builder: (context) {
@@ -196,6 +148,12 @@ class _FilterState extends State<Filter> {
                                   ),
                                   onPressed: () {
                                     Navigator.of(context).pop(true);
+                                    Navigator.of(context).pop(true);
+                                    Navigator.of(context).pop(true);
+                                    Provider.of<SearchProvider>(context, listen: false).filterAccToPrice(Provider.of<SearchProvider>(context, listen:false).dropdownvalue);
+                                    Navigator.of(context).push(MaterialPageRoute(
+                                        builder: (context) => CategoryProducts(categoryTitle: widget.categoryTitle ,)));
+                                    print(Provider.of<SearchProvider>(context, listen:false).dropdownvalue);
                                   },
                                 ),
                                 TextButton(

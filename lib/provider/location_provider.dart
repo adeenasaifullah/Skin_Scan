@@ -1,7 +1,7 @@
 import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:flutter/cupertino.dart';
 import 'package:skin_scan/entities/location_entities.dart';
-import '../Models/location_model.dart';
+import '../models/location_model.dart';
 
 class LocationProvider extends ChangeNotifier {
   List<Location> locationList = [];
