@@ -108,9 +108,6 @@ class _FavouriteProductsCardState extends State<FavouriteProductsCard> {
                             textValue: widget.FavouriteLists[index].productName,
                             size: displayHeight(context) * 0.025),
                         SizedBox(height: displayHeight(context) * 0.005),
-                        // Rating(
-                        //   productRating: widget.productRating,
-                        // ),
                       ],
                     )),
                 onTap: () {

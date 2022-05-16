@@ -27,30 +27,27 @@ class ProductProvider extends ChangeNotifier {
           productPrice: productModel.productPrice,
           skinType: productModel.skinType,
           nameOfCategory: productModel.nameOfCategory,
+          productImage: productModel.productImage,
           productIngredients: productModel.productIngredients,
-          productImage: productModel.productImage
-
         );
         product.prodID = doc.id;
+        print(product.productName);
         productsList.add(product);
       });
     });
-    //print('hello product list $productsList');
     notifyListeners();
   }
 
-
-
   List<Product> getProductsOfCategory(String name) {
     List<Product> productsOfCategory = [];
-
+    print("product list length ${productsList.length}");
     for (int i = 0; i < productsList.length; i++) {
-      //print('snoop');
       if (productsList[i].nameOfCategory == name) {
         productsOfCategory.add(productsList[i]);
       }
     }
     print("get category products + $productsOfCategory");
+    print("product category list length ${productsOfCategory.length}");
     return productsOfCategory;
   }
 

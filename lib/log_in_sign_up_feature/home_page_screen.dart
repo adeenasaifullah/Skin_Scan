@@ -1,8 +1,11 @@
 import 'package:firebase_auth/firebase_auth.dart';
 import 'package:flutter/material.dart';
 import 'package:google_fonts/google_fonts.dart';
+import 'package:provider/provider.dart';
 import 'package:skin_scan/product_categories_feature/categories_list.dart';
+import 'package:skin_scan/provider/user_provider.dart';
 import 'package:skin_scan/utilities/utility.dart';
+import '../entities/user_entities.dart';
 import '../routine_feature/view_routine.dart';
 import '../services/auth.dart';
 import 'log_in_screen.dart';
@@ -18,10 +21,10 @@ class HomePageScreen extends StatefulWidget {
 class _HomePageScreenState extends State<HomePageScreen> {
 
   final AuthService _auth = AuthService();
-  final user = FirebaseAuth.instance.currentUser!;
   DateTime time = DateTime.now();
   @override
   Widget build(BuildContext context) {
+    String name = context.watch<UserProvider>().getCurrentUser().UserName;
     return Scaffold(
       body: SingleChildScrollView(
         child: Center(
@@ -43,10 +46,10 @@ class _HomePageScreenState extends State<HomePageScreen> {
                       padding: const EdgeInsets.fromLTRB(16, 32, 16, 32),
                       child: Column(
                         children: [
-                          Text("Hello!",
+                          Text("Hello ${name}",
                               style: GoogleFonts.reemKufi(
                                   color: Color(0xffFFFDF4),
-                                  fontSize: displayHeight(context) * 0.05)),
+                                  fontSize: displayHeight(context) * 0.035)),
                           Text(' Give your skin a little love!',
                               style: GoogleFonts.reemKufi(
                                   color: Color(0xffFFFDF4),
@@ -213,7 +216,7 @@ class _HomePageScreenState extends State<HomePageScreen> {
                                   ),
                                   InkWell(
                                     child: Icon(Icons.add_circle_outline, color: Colors.black,
-                                      size: 45,),
+                                      size: displayHeight(context) * 0.05,),
                                     onTap: (){
                                       Navigator.of(context).push(MaterialPageRoute(
                                           builder: (context) => ViewRoutine()));

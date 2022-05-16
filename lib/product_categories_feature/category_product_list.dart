@@ -75,7 +75,7 @@ class _CategoryProductsState extends State<CategoryProducts> {
               ((Provider.of<SearchProvider>(context, listen: false).dropdownvalue)!='No filter')
                 ?DisplayProducts(listOfCategoryProducts: currentFilteredList)
               :DisplayProducts(listOfCategoryProducts: Provider.of<ProductProvider>(context, listen: false).getProductsOfCategory(widget.categoryTitle)),
-              //emptycontainer(),
+              emptycontainer(),
 
               //DisplayProducts(listOfCategoryProducts: Provider.of<SearchProvider>(context, listen: false).filteredList)
             ]),

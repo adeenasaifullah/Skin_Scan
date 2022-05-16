@@ -1,6 +1,3 @@
-import 'package:cached_network_image/cached_network_image.dart';
-import 'package:cloud_firestore/cloud_firestore.dart';
-import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 import 'package:provider/provider.dart';
 import 'package:skin_scan/provider/product_provider.dart';
@@ -8,9 +5,7 @@ import 'package:skin_scan/utilities/utility.dart';
 import '../main.dart';
 import '../provider/categories_provider.dart';
 import 'category_product_list.dart';
-import 'package:firebase_storage/firebase_storage.dart';
 import 'package:firebase_image/firebase_image.dart';
-
 
 class CategoriesAndSearch extends StatefulWidget {
   const CategoriesAndSearch({Key? key}) : super(key: key);
@@ -31,16 +26,6 @@ class _CategoriesAndSearchState extends State<CategoriesAndSearch> {
   @override
   Widget build(BuildContext context) {
 
-    // Future<Widget> _getImage(BuildContext context, String imageName) async {
-    //   Image? image;
-    //   await FireStorageService.loadImage(context, imageName).then((value) {
-    //     image = Image.network(
-    //         value.toString(),
-    //         fit: BoxFit.fill,
-    //     );
-    //   });
-    //   return image!;
-    // }
 
     return Scaffold(
       appBar: AppBarDetails(screenName: 'Categories'),
@@ -72,7 +57,8 @@ class _CategoriesAndSearchState extends State<CategoriesAndSearch> {
                     categoryImage: context
                         .watch<CategoryProvider>()
                         .getCategories()[index]
-                        .categoryImage);
+                        .categoryImage
+                    );
               },
             ),
           ),
@@ -121,27 +107,13 @@ class Category extends StatelessWidget {
           child: Column(
               mainAxisAlignment: MainAxisAlignment.center,
               children: <Widget>[
-                // FutureBuilder(
-                // future: _getImage(context, ""),
-                //   builder: (BuildContext context, AsyncSnapshot<dynamic> snapshot) {  },
-                // ),
                 Image(
-                    image: FirebaseImage(categoryImage, cacheRefreshStrategy:
-                    CacheRefreshStrategy.NEVER),
-                    fit: BoxFit.contain,
-                    height: displayHeight(context) * 0.125,
-                    width: displayWidth(context) * 0.25, ),
-                // CachedNetworkImage(
-                //     imageUrl: categoryImage,
-                //     fit: BoxFit.contain,
-                //     height: displayHeight(context) * 0.125,
-                //     width: displayWidth(context) * 0.25
-                //     // child: Image(
-                //     //     image: NetworkImage(categoryImage),
-                //     //     fit: BoxFit.contain,
-                //     //     height: displayHeight(context) * 0.125,
-                //     //     width: displayWidth(context) * 0.25, ),
-                //     ),
+                  image: FirebaseImage(categoryImage, cacheRefreshStrategy:
+                  CacheRefreshStrategy.NEVER),
+                  fit: BoxFit.contain,
+                  height: displayHeight(context) * 0.125,
+                  width: displayWidth(context) * 0.25, ),
+
                 ReemKufi_Green(
                   textValue: categoryName,
                   size: displayWidth(context) * 0.045,
@@ -150,10 +122,3 @@ class Category extends StatelessWidget {
     );
   }
 }
-
-// class FireStorageService extends ChangeNotifier {
-//   FireStorageService();
-//   static Future<dynamic> loadImage(BuildContext context, String Image) async {
-//     return await FirebaseStorage.instance.ref().child(Image).getDownloadURL();
-//   }
-// }

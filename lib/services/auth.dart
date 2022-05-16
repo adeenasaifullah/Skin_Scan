@@ -3,11 +3,15 @@ import 'package:firebase_auth/firebase_auth.dart';
 import 'package:flutter/material.dart';
 import 'package:fluttertoast/fluttertoast.dart';
 import 'package:google_sign_in/google_sign_in.dart';
+import 'package:skin_scan/entities/scanned_product_entities.dart';
+import '../models/ingredient_model.dart';
 import '../models/routine_model.dart';
 import '../models/routine_product_model.dart';
 import '../entities/routine_entities.dart';
 import '../entities/user_entities.dart';
 import 'package:skin_scan/models/users_adeena_model.dart';
+
+import '../models/scanned_product_model.dart';
 
 
 class AuthService {
@@ -83,11 +87,13 @@ class AuthService {
       List<Routine> routine_list = [];
       routine_list.add(AMroutine);
       routine_list.add(PMroutine);
+      List<ScannedProduct> ScannedProducts = [];
       Users obj = Users(
           UserName: user.displayName ?? "",
           UserEmail: email,
           UserRoutines: routine_list,
          UserFavouriteProducts: favourite_products,
+          ScannedProducts: ScannedProducts
           //UserFavouriteProducts: favourite_products
           //routine_list.map((e) => e.toJson()).toList();
           //this.UserRoutines.map((v) => v.toJson()).toList();
@@ -102,12 +108,24 @@ class AuthService {
                   category: p.category,
                   days: p.days))
               .toList())).toList();
+
+      var scannedProd = obj.ScannedProducts.map((e) => ScannedProductModel(
+          productName: e.productName,
+          ingredientList:  e.ingredientList
+              .map((p) => IngredientModel(
+            ingredientName: p.ingredientName,
+            ingredientCategory: p.ingredientCategory,
+            ingredientDescription: p.ingredientDescription,
+            ingredientRating: p.ingredientRating,
+          ))
+              .toList())).toList();
       UserModel databaseuser = UserModel(
           userID: obj.userID,
           UserName: obj.UserName,
           UserEmail: obj.UserEmail,
           UserRoutines: userroutine,
         UserFavouriteProducts: obj.UserFavouriteProducts,
+        ScannedProducts: scannedProd
 
           );
 
@@ -166,12 +184,14 @@ class AuthService {
       List<Routine> routine_list = [];
       routine_list.add(AMroutine);
       routine_list.add(PMroutine);
+      List<ScannedProduct> scannedprod_list = [];
 
       Users obj = Users(
           UserName: account.displayName!,
           UserEmail: account.email,
           UserRoutines: routine_list,
         UserFavouriteProducts: favourite_products,
+        ScannedProducts: scannedprod_list
       );
       obj.userID = authID;
       var userroutine = obj.UserRoutines.map((e) => RoutineModel(
@@ -182,12 +202,23 @@ class AuthService {
               category: p.category,
               days: p.days))
               .toList())).toList();
+      var scannedProd = obj.ScannedProducts.map((e) => ScannedProductModel(
+          productName: e.productName,
+          ingredientList:  e.ingredientList
+              .map((p) => IngredientModel(
+            ingredientName: p.ingredientName,
+            ingredientCategory: p.ingredientCategory,
+            ingredientDescription: p.ingredientDescription,
+            ingredientRating: p.ingredientRating,
+          ))
+              .toList())).toList();
       UserModel databaseuser = UserModel(
           userID: obj.userID,
           UserName: obj.UserName,
           UserEmail: obj.UserEmail,
           UserRoutines: userroutine,
         UserFavouriteProducts: obj.UserFavouriteProducts,
+          ScannedProducts: scannedProd
           //UserFavouriteProducts: obj.UserFavouriteProducts
           );
 

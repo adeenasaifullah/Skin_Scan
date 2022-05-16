@@ -7,6 +7,7 @@ class ProductModel {
   String productName;
   String productPrice;
   String skinType;
+  String productImage;
   num productRating;
   String productImage;
 
@@ -19,6 +20,7 @@ class ProductModel {
     required this.productName,
     required this.productPrice,
     required this.skinType,
+    required this.productImage,
     required this.productRating,
     required this.productImage
   });
@@ -33,6 +35,7 @@ class ProductModel {
       productName: json['Name'],
       skinType: json['Skin Type'],
       howToUse: json['How to use'],
+      productImage: json['Image'] as String,
       productRating: json['Rating'],
       productImage: json['Image']
     );
@@ -48,6 +51,7 @@ class ProductModel {
     data['Name'] = productName;
     data['Skin Type'] = skinType;
     data['How to use'] = howToUse;
+    data['Image'] = productImage;
     data['Rating'] = productRating;
     data['Image'] = productImage;
     return data;

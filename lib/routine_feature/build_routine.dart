@@ -167,7 +167,6 @@ class _BuildRoutineState extends State<BuildRoutine> {
                                            child: Image.asset("assets/Suncare.png"),
                                          ) ,
 
-
                               height: displayHeight(context) * 0.16,
                               width: displayHeight(context) * 0.18,
                               decoration: const BoxDecoration(

@@ -42,8 +42,11 @@ class IngredientProvider extends ChangeNotifier {
     String changeIngredient = "";
     List<String> arr = ingredient.split(" ");
     for(var word in arr){
-      changeIngredient = changeIngredient + word.substring(0,1).toUpperCase();
-      changeIngredient = changeIngredient + word.substring(1) + " " ;
+      print(word);
+      if(word.length>2){
+        changeIngredient = changeIngredient + word.substring(0,1).toUpperCase();
+        changeIngredient = changeIngredient + word.substring(1) + " " ;
+      }
     }
     //print(changeIngredient);
     return changeIngredient;

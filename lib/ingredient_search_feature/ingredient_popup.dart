@@ -111,13 +111,14 @@ class _IngredientPopUpState extends State<IngredientPopUp> {
                                                       0.03)),
                                         ),
                                         onPressed: () {
-                                          Navigator.pushAndRemoveUntil(
-                                            context,
-                                            MaterialPageRoute(
-                                              builder: (BuildContext context) => IngredientPopUp(),
-                                            ),
-                                                (route) => false,
-                                          );
+                                          Navigator.pop(context);
+                                          // Navigator.pushAndRemoveUntil(
+                                          //   context,
+                                          //   MaterialPageRoute(
+                                          //     builder: (BuildContext context) => IngredientPopUp(),
+                                          //   ),
+                                          //       (route) => false,
+                                          // );
                                         },
                                       ),
                                     ],
