@@ -29,8 +29,8 @@ class _skinTypeQuizeState extends State<skinTypeQuize> {
   Widget build(BuildContext context) {
     return Scaffold(
       backgroundColor: const Color(0xFFFFFDF4),
-      //appBar: AppBarDetails(screenName: ''),
-      appBar: AppBar(),
+      appBar: AppBarDetails(screenName: ''),
+      //appBar: AppBar(),
       body: SingleChildScrollView(
         child: Padding(
           padding: EdgeInsets.only(

@@ -43,7 +43,7 @@ class _HomePageScreenState extends State<HomePageScreen> {
                       padding: const EdgeInsets.fromLTRB(16, 32, 16, 32),
                       child: Column(
                         children: [
-                          Text("Hello",
+                          Text("Hello!",
                               style: GoogleFonts.reemKufi(
                                   color: Color(0xffFFFDF4),
                                   fontSize: displayHeight(context) * 0.05)),

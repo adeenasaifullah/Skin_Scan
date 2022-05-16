@@ -281,6 +281,8 @@ class UserProvider extends ChangeNotifier {
     //currentUserFavList;
   }
 
+
+
   addProductToFavourites(var prodID) {
     Users user = getCurrentUser();
 

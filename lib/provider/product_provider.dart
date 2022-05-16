@@ -28,6 +28,7 @@ class ProductProvider extends ChangeNotifier {
           skinType: productModel.skinType,
           nameOfCategory: productModel.nameOfCategory,
           productIngredients: productModel.productIngredients,
+          productImage: productModel.productImage
 
         );
         product.prodID = doc.id;

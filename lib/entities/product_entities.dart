@@ -9,6 +9,7 @@ class Product {
    String productPrice;
    String skinType;
    num productRating;
+   String productImage;
 
   Product({
     required this.productBrand,
@@ -20,6 +21,7 @@ class Product {
     required this.productPrice,
     required this.skinType,
     required this.productRating,
+    required this.productImage
   });
 
   Map<String, dynamic> toJson() {
@@ -33,6 +35,7 @@ class Product {
     data['Skin Type'] = skinType;
     data['How to use'] = howToUse;
     data['Rating'] = productRating;
+    data['Image'] = productImage;
     return data;
   }
 }
