@@ -33,7 +33,9 @@ class UserProvider extends ChangeNotifier {
   }
 
   Future<void> getCurrentUserFromDb() async {
+
       var currentUser = FirebaseAuth.instance.currentUser!;
+      //ScannedProductlist.clear();
       Users user;
       await FirebaseFirestore.instance
           .collection('users')
@@ -86,11 +88,12 @@ class UserProvider extends ChangeNotifier {
             ScannedProducts: []
           );
         }
-        currUser = user;
+
 
         AMlist = user.UserRoutines[0].listofproducts;
         PMlist = user.UserRoutines[1].listofproducts;
         ScannedProductlist = user.ScannedProducts;
+        currUser = user;
 
 
         notifyListeners();
@@ -98,10 +101,12 @@ class UserProvider extends ChangeNotifier {
     }
 
     Users getCurrentUser() {
+
     return currUser;
     }
 
   Future getUsersfromDB() async {
+    //ScannedProductlist.clear();
     await FirebaseFirestore.instance
         .collection('users')
         .get()
@@ -410,7 +415,7 @@ class UserProvider extends ChangeNotifier {
 
   Future removeProductFromFavourites(var prodID) async {
     final currentUser = FirebaseAuth.instance.currentUser!;
-    int index = allUsers.indexWhere((user) => user.userID == currentUser.uid);
+
 
     Users user = getCurrentUser();
     print("The product id is " + prodID);
@@ -452,6 +457,7 @@ class UserProvider extends ChangeNotifier {
 
 
   storeScannedProduct(ScannedProduct product) {
+    //ScannedProductlist.clear();
     Users user = getCurrentUser();
     //int index = allUsers.indexWhere((user) => user.userID == currentUser.uid);
 
@@ -496,6 +502,7 @@ class UserProvider extends ChangeNotifier {
     print('firestore id ' + user.userID);
     print('auth id ' + FirebaseAuth.instance.currentUser!.uid);
     print("Scanned product added");
+
 
   }
 

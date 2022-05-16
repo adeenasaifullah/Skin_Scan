@@ -9,7 +9,7 @@ class ProductModel {
   String skinType;
   String productImage;
   num productRating;
-  String productImage;
+
 
   ProductModel({
     required this.productBrand,
@@ -22,7 +22,7 @@ class ProductModel {
     required this.skinType,
     required this.productImage,
     required this.productRating,
-    required this.productImage
+
   });
 
   static fromJson(Map<String, dynamic> json) {
@@ -37,7 +37,7 @@ class ProductModel {
       howToUse: json['How to use'],
       productImage: json['Image'] as String,
       productRating: json['Rating'],
-      productImage: json['Image']
+
     );
   }
 
@@ -53,7 +53,7 @@ class ProductModel {
     data['How to use'] = howToUse;
     data['Image'] = productImage;
     data['Rating'] = productRating;
-    data['Image'] = productImage;
+
     return data;
   }
 

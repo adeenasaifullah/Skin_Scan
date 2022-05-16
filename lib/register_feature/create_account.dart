@@ -24,19 +24,10 @@ class createAccount extends StatefulWidget {
 }
 
 class _createAccountState extends State<createAccount> {
-  // bool _obscureText = true;
-  // void _toggle(){
-  //   setState(() {
-  //     _obscureText = !_obscureText;
-  //   });
-  // }
+
   final AuthService _auth = AuthService();
   final _formKey = GlobalKey<FormState>();
-  // String name = "";
-  // String email = "";
-  // String phone = "";
-  // String password = "";
-  // String confirmPassword = "";
+
   String error = "";
   final TextEditingController emailController = TextEditingController();
   final TextEditingController passwordController = TextEditingController();
@@ -99,12 +90,7 @@ class _createAccountState extends State<createAccount> {
                   prefixIcon: Icon(Icons.email_sharp, color: Color(0xFF283618)),
                   //validateInput: (email) => EmailValidator(errorText: 'Please enter valid email!') ,
                   validateInput: (email) {
-                    // if (email!.isEmpty) {
-                    //   return "* Required";
-                    // }
-                    //EmailValidator(errorText: "Enter valid email id");
-                    //PatternValidator(r"^[a-zA-Z0-9.a-zA-Z0-9.!#$%&'*+-/=?^_`{|}~]+@[a-zA-Z0-9]+\.[a-zA-Z]+",
-                    // errorText: 'passwords must have at least one special character');
+
                     if (emailController.text.isEmpty) {
                       return "* Required";
                     }
@@ -181,7 +167,7 @@ class _createAccountState extends State<createAccount> {
                   textSize: displayHeight(context) * 0.03,
                   buttonText: 'Create Account',
                   onPressed: () async {
-                    bool isValid = _formKey.currentState!.validate();
+
                     if (_formKey.currentState!.validate()) {
                       print(emailController.text);
                       print(passwordController.text);
@@ -190,7 +176,7 @@ class _createAccountState extends State<createAccount> {
                           passwordController.text.trim());
 
                       if (result is AuthenticateUser) {
-                        Provider.of<UserProvider>(context, listen: false).getUsersfromDB();
+                        Provider.of<UserProvider>(context, listen: false).getCurrentUser();
                         Navigator.push(
                             context,
                             MaterialPageRoute(
