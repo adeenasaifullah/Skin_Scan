@@ -4,6 +4,7 @@ import 'package:provider/provider.dart';
 import 'package:skin_scan/profile_feature/scanned_products.dart';
 import 'package:skin_scan/profile_feature/skin_log_history.dart';
 import '../entities/product_entities.dart';
+import '../entities/scanned_product_entities.dart';
 import '../provider/product_provider.dart';
 import '../provider/user_provider.dart';
 import '../utilities/bottom_app_bar.dart';
@@ -21,6 +22,7 @@ class MyProfile extends StatefulWidget {
 class _MyProfileState extends State<MyProfile> {
   List<Product> productsList = [];
   List<Product> FavouriteLists = [];
+  List <ScannedProduct> scannedProducts = [];
 
   @override
   Widget build(BuildContext context) {
@@ -28,7 +30,7 @@ class _MyProfileState extends State<MyProfile> {
     FavouriteLists= context
         .watch<UserProvider>()
         .getUserFavouriteProducts(productsList);
-
+    scannedProducts = context.read<UserProvider>().ScannedProductlist;
 
     return Scaffold(
       backgroundColor: const Color(0xFFFFFDF4),
@@ -201,17 +203,19 @@ class _MyProfileState extends State<MyProfile> {
                           height: displayHeight(context) * 0.075,
                           child: ListView.builder(
                             scrollDirection: Axis.horizontal,
-                            itemCount: 10,
+                            itemCount: scannedProducts.length,
                             itemBuilder: (context, index) {
                               return CircleAvatar(
                                   radius: 33,
                                   backgroundColor: Color(0xffC4C4C4),
-                                  child: Image(
-                                    image: AssetImage('assets/Favourite.png'),
-                                    fit: BoxFit.fill,
-                                    height: displayHeight(context) * 0.065,
-                                    width: displayWidth(context) * 0.065,
-                                  ));
+                                  child: ReemKufi_Green(size: displayHeight(context) * 0.0125, textValue: scannedProducts[index].productName,)
+                                  // child: Image(
+                                  //   image: AssetImage('assets/Favourite.png'),
+                                  //   fit: BoxFit.fill,
+                                  //   height: displayHeight(context) * 0.065,
+                                  //   width: displayWidth(context) * 0.065,
+                                  // )
+                              );
                             },
                           ),
                         ),
