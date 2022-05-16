@@ -10,7 +10,7 @@ class ScannedProductModel{
     required this.ingredientList
   });
 
-  static fromJson(Map<String, dynamic> json) {
+  static ScannedProductModel fromJson(Map<String, dynamic> json) {
     return ScannedProductModel(
         productName: json['name'],
       ingredientList: (json['ingredientList'] as List).map((e) => IngredientModel.fromJson(e as Map<String, dynamic>)).toList(),

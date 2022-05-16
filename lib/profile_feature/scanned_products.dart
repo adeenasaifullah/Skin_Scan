@@ -1,5 +1,9 @@
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
+import 'package:provider/provider.dart';
+import 'package:skin_scan/ingredient_scan_feature/ingredient_list.dart';
+import 'package:skin_scan/provider/user_provider.dart';
+import '../entities/scanned_product_entities.dart';
 import '../main.dart';
 import '../product_categories_feature/product_detail.dart';
 import '../utilities/utility.dart';
@@ -13,9 +17,10 @@ class ScannedProducts extends StatefulWidget {
 }
 
 class _ScannedProductsState extends State<ScannedProducts> {
-  List products =["Product A","Product B","Product C","Product D","Product E","Product F","Product G","Product H",];
+  List <ScannedProduct> products = [];
   @override
   Widget build(BuildContext context) {
+    products = context.read<UserProvider>().ScannedProductlist;
     return Scaffold(
       backgroundColor: const Color(0xFFFFFDF4),
       appBar: AppBarDetails(screenName: "Scanned Products"),
@@ -33,7 +38,7 @@ class _ScannedProductsState extends State<ScannedProducts> {
                     return InkWell(
                       onTap: (){
                         Navigator.of(context).push(MaterialPageRoute(
-                            builder: (context) => ProductDetail(product: products[index])));
+                            builder: (context) => IngredientsList(IngredientList: products[index].ingredientList)));
                       },
                       child: Container(
                           alignment: Alignment.center,
@@ -58,7 +63,7 @@ class _ScannedProductsState extends State<ScannedProducts> {
                                   minRadius: 35,
                                   backgroundColor: Color(0xffC4C4C4),
                                 ),
-                                ReemKufi_Green(textValue: products[index], size: displayHeight(context)*0.0225),
+                                ReemKufi_Green(textValue: products[index].productName, size: displayHeight(context)*0.0225),
                                 Container(
                                   height: displayHeight(context)*0.07,
                                   width: displayWidth(context)*0.15,

@@ -10,6 +10,7 @@ import 'package:skin_scan/utilities/utility.dart';
 import '../ingredient_search_feature/ingredient_details.dart';
 import '../main.dart';
 import '../provider/ingredient_provider.dart';
+import '../provider/user_provider.dart';
 import '../utilities/bottom_app_bar.dart';
 
 class IngredientsList extends StatefulWidget {
@@ -127,7 +128,7 @@ class _IngredientsListState extends State<IngredientsList> {
               ElevatedButton(
                 onPressed: () {
                   if (_formKey.currentState!.validate()) {
-                    Provider.of<ScannedProductProvider>(context, listen: false)
+                    Provider.of<UserProvider>(context, listen: false)
                         .storeScannedProduct(ScannedProduct(
                             productName: productName_controller.text,
                             ingredientList: widget.IngredientList));
