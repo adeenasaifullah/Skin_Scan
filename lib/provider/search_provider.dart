@@ -11,6 +11,7 @@ class SearchProvider extends ChangeNotifier {
   bool isFilter = false;
   String dropdownvalue = 'No filter';
   List<Product> searchBarList = [];
+  bool searchBarActive = false;
 
   void makeCopy(List<Product> categoryProductList) {
     searchProductList.clear();
@@ -19,23 +20,25 @@ class SearchProvider extends ChangeNotifier {
     notifyListeners();
   }
 
-  void searchBar(String searchText, List<Product> categoryProductList) {
+  List<Product> searchBar(String searchText, List<Product> categoryProductList) {
     searchBarList.clear();
-    //makeCopy(categoryTitle);
-
+    searchBarActive = true;
     print("search product list is ${categoryProductList.length}");
     for (int i = 0; i < categoryProductList.length; i++) {
       if (categoryProductList[i].productName.toLowerCase().contains(searchText)) {
         searchBarList.add(categoryProductList[i]);
         print("In the list we have added ${categoryProductList[i].productName}");
-        //print("In the product list we had ${categoryProductList[i].productName}");
       }
           }
-    for(int j=0; j <searchBarList.length; j++){
+    for(int j=0; j <searchBarList.length; j++) {
       print("The search bar list contains ${searchBarList[j].productName}");
-
     }
     notifyListeners();
+    return searchBarList;
+  }
+
+  List<Product> getSearchList() {
+    return searchBarList;
   }
 
   String changeDropDownValue(String value) {
@@ -43,11 +46,17 @@ class SearchProvider extends ChangeNotifier {
     return dropdownvalue;
   }
 
-  void filterAccToPrice(String value) {
+  List<Product> filterAccToPrice(String value, List<Product> categoryProductList) {
     filteredList.clear();
     setIsFilter();
 
-    if (value.contains('<=3000')) {
+    if (value == 'No filter') {
+      filteredList.clear();
+      filteredList.addAll(categoryProductList);
+      print('Filtered list ${filteredList}');
+    }
+
+    else if (value.contains('<=3000')) {
       filteredList.clear();
       for (var product in searchProductList) {
         if (int.parse(product.productPrice) <= 3000) {
@@ -76,6 +85,7 @@ class SearchProvider extends ChangeNotifier {
       print(filteredList);
     }
     notifyListeners();
+    return filteredList;
   }
 
   setIsFilter() {

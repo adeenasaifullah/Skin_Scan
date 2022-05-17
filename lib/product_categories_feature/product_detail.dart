@@ -12,8 +12,6 @@ import '../main.dart';
 class ProductDetail extends StatefulWidget {
 
   final Product product;
-
-
   const ProductDetail({
     Key? key,
 

@@ -37,13 +37,9 @@ class _CategoryProductsState extends State<CategoryProducts> {
 
   @override
   Widget build(BuildContext context) {
-    Widget emptycontainer() {
-      setState(() {});
-      return Container();
-    }
-
-    currentFilteredList = Provider.of<SearchProvider>(context, listen: false).filteredList;
-    print("Current filtered list: $currentFilteredList");
+    String dropDownVal = Provider.of<SearchProvider>(context, listen: false).dropdownvalue;
+    List<Product> categoryProdList = Provider.of<ProductProvider>(context, listen: false).getProductsOfCategory(widget.categoryTitle);
+    currentFilteredList = Provider.of<SearchProvider>(context, listen: false).filterAccToPrice(dropDownVal, categoryProdList);
     return Scaffold(
       appBar: AppBarCategories(screenName: widget.categoryTitle),
       backgroundColor: Color(0xFFFFFDF4),
@@ -66,17 +62,10 @@ class _CategoryProductsState extends State<CategoryProducts> {
               ),
             ),
             SizedBox(height: displayHeight(context) * 0.02),
-            ((Provider.of<SearchProvider>(context, listen: false)
-                        .dropdownvalue) !=
-                    'No filter')
-                ? DisplayProducts(listOfCategoryProducts: currentFilteredList)
-                : DisplayProducts(
-                    listOfCategoryProducts:
-                        Provider.of<ProductProvider>(context, listen: false)
-                            .getProductsOfCategory(widget.categoryTitle)),
-            emptycontainer(),
-
-            //DisplayProducts(listOfCategoryProducts: Provider.of<SearchProvider>(context, listen: false).filteredList)
+            (Provider.of<SearchProvider>(context, listen: false).searchBarActive) ?
+            DisplayProducts(
+                    listOfCategoryProducts: Provider.of<SearchProvider>(context, listen: false).getSearchList())
+            : DisplayProducts(listOfCategoryProducts: currentFilteredList)
           ]),
     );
   }
@@ -95,7 +84,7 @@ class SearchandFilter extends StatefulWidget {
 
 class _SearchandFilterState extends State<SearchandFilter> {
   TextEditingController searchController = TextEditingController();
-  bool searchBarActive = false;
+  List<Product> currentFilteredList = [];
   @override
   Widget build(BuildContext context) {
     return Row(
@@ -126,14 +115,19 @@ class _SearchandFilterState extends State<SearchandFilter> {
                 suffixIcon: Icon(Icons.search),
               ),
               onChanged: (value) {
-                searchBarActive = true;
+                if (searchController.text.isEmpty) {
+                  Provider.of<SearchProvider>(context, listen: false).searchBarActive = false;
+                  String dropDownVal = Provider.of<SearchProvider>(context, listen: false).dropdownvalue;
+                  List<Product> categoryProdList = Provider.of<ProductProvider>(context, listen: false).getProductsOfCategory(widget.categoryTitle);
+                  currentFilteredList = Provider.of<SearchProvider>(context, listen: false).filterAccToPrice(dropDownVal, categoryProdList);
+                }
                 print("Value of search bar $value");
-                List<Product> categoryProductList =
-                    Provider.of<ProductProvider>(context, listen: false)
-                        .getProductsOfCategory(widget.categoryTitle);
+                List<Product> filteredCategoryList =
+                    Provider.of<SearchProvider>(context, listen: false).getFilteredList();
                 Provider.of<SearchProvider>(context, listen: false)
-                    .searchBar(value, categoryProductList);
-                setState(() {});
+                    .searchBar(value, filteredCategoryList);
+                setState(() {
+                });
               },
             ),
           ),
@@ -184,6 +178,7 @@ class _DisplayProductsState extends State<DisplayProducts> {
   late int _rating;
   @override
   Widget build(BuildContext context) {
+    print('inside display product length ${widget.listOfCategoryProducts.length}');
     return Expanded(
       child: GridView.builder(
         primary: false,

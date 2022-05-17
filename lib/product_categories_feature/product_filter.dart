@@ -2,6 +2,7 @@ import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 import 'package:provider/provider.dart';
 import 'package:skin_scan/product_categories_feature/category_product_list.dart';
+import 'package:skin_scan/provider/product_provider.dart';
 import 'package:skin_scan/utilities/utility.dart';
 
 import '../entities/product_entities.dart';
@@ -19,8 +20,6 @@ class Filter extends StatefulWidget {
 }
 
 class _FilterState extends State<Filter> {
-
-
   var items = ['No filter','<=3000', '>3000 & <=5000', '>5000'];
   @override
   Widget build(BuildContext context) {
@@ -151,7 +150,8 @@ class _FilterState extends State<Filter> {
                                     Navigator.of(context).pop(true);
                                     Navigator.of(context).pop(true);
                                     Navigator.of(context).pop(true);
-                                    Provider.of<SearchProvider>(context, listen: false).filterAccToPrice(Provider.of<SearchProvider>(context, listen:false).dropdownvalue);
+                                    Provider.of<SearchProvider>(context, listen: false).filterAccToPrice(Provider.of<SearchProvider>(context, listen:false).dropdownvalue,
+                                        Provider.of<ProductProvider>(context, listen:false).getProductsOfCategory(widget.categoryTitle));
                                     Navigator.of(context).push(MaterialPageRoute(
                                         builder: (context) => CategoryProducts(categoryTitle: widget.categoryTitle ,)));
                                     print(Provider.of<SearchProvider>(context, listen:false).dropdownvalue);
