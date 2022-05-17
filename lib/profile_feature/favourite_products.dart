@@ -13,8 +13,6 @@ import '../provider/user_provider.dart';
 import '../utilities/utility.dart';
 
 class FavouriteProducts extends StatefulWidget {
-
-
    FavouriteProducts({Key? key}) : super(key: key);
 
   @override
@@ -25,7 +23,6 @@ class _FavouriteProductsState extends State<FavouriteProducts> {
   List<Product> productsList = [];
   @override
   Widget build(BuildContext context) {
-
     productsList = context.read<ProductProvider>().getProducts;
     return Scaffold(
       appBar: AppBarDetails(screenName: 'Favourite Products'),
@@ -64,8 +61,6 @@ class FavouriteProductsCard extends StatefulWidget {
 }
 
 class _FavouriteProductsCardState extends State<FavouriteProductsCard> {
-  late int _rating;
-
   @override
   Widget build(BuildContext context) {
     return Expanded(
@@ -124,5 +119,3 @@ class _FavouriteProductsCardState extends State<FavouriteProductsCard> {
     );
   }
 }
-
-

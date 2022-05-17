@@ -88,5 +88,4 @@ class SearchProvider extends ChangeNotifier {
     return filteredList;
   }
 
-  void searchProductsWithinCategory(String query) {}
 }

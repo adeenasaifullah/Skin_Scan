@@ -88,20 +88,16 @@ class UserProvider extends ChangeNotifier {
             ScannedProducts: []
           );
         }
-
-
         AMlist = user.UserRoutines[0].listofproducts;
         PMlist = user.UserRoutines[1].listofproducts;
         ScannedProductlist = user.ScannedProducts;
         currUser = user;
-
-
+        getCurrentUser();
         notifyListeners();
       });
     }
 
     Users getCurrentUser() {
-
     return currUser;
     }
 
@@ -244,7 +240,7 @@ class UserProvider extends ChangeNotifier {
       ScannedProducts: scannedProd
     );
 
-    updateUserRoutine(updatedUser);
+    updateUserDetails(updatedUser);
     print('firestore id ' + user.userID);
     print('auth id ' + FirebaseAuth.instance.currentUser!.uid);
 
@@ -252,10 +248,9 @@ class UserProvider extends ChangeNotifier {
 
   }
 
-  void updateUserRoutine(UserModel user) async {
+  void updateUserDetails(UserModel user) async {
     CollectionReference database = FirebaseFirestore.instance.collection('users');
     await database.doc(user.userID).update(user.toJson());
-    print('Routine has been updated.');
     notifyListeners();
   }
 
@@ -312,7 +307,7 @@ class UserProvider extends ChangeNotifier {
       ScannedProducts: scannedProd
     );
 
-    updateUserRoutine(updatedUser);
+    updateUserDetails(updatedUser);
     notifyListeners();
   }
 
@@ -348,12 +343,8 @@ class UserProvider extends ChangeNotifier {
         }
       }
     }
-
     notifyListeners();
-    print("Fav list");
-    print(FavouriteLists);
     return FavouriteLists;
-    //currentUserFavList;
   }
 
 
@@ -457,9 +448,8 @@ class UserProvider extends ChangeNotifier {
 
 
   storeScannedProduct(ScannedProduct product) {
-    //ScannedProductlist.clear();
+
     Users user = getCurrentUser();
-    //int index = allUsers.indexWhere((user) => user.userID == currentUser.uid);
 
       ScannedProductlist = user.ScannedProducts;
       ScannedProductlist.add(product);
@@ -498,7 +488,7 @@ class UserProvider extends ChangeNotifier {
         ScannedProducts: scannedProd
     );
 
-    updateUserRoutine(updatedUser);
+    updateUserDetails(updatedUser);
     print('firestore id ' + user.userID);
     print('auth id ' + FirebaseAuth.instance.currentUser!.uid);
     print("Scanned product added");
@@ -506,10 +496,8 @@ class UserProvider extends ChangeNotifier {
 
   }
 
-  editProfile(String name, String email){
-
+  editProfile(String name){
     Users user = getCurrentUser();
-    //int index = allUsers.indexWhere((user) => user.userID == currentUser.uid);
 
     var userroutine = user
         .UserRoutines
@@ -542,21 +530,10 @@ class UserProvider extends ChangeNotifier {
         UserFavouriteProducts: user.UserFavouriteProducts,
         ScannedProducts: scannedProd
     );
-
-    updateUserRoutine(updatedUser);
+    updateUserDetails(updatedUser);
     print('firestore id ' + user.userID);
     print('auth id ' + FirebaseAuth.instance.currentUser!.uid);
     print("Scanned product added");
-
-
+    notifyListeners();
   }
-
-
-
-
-
-
-
-
-
 }

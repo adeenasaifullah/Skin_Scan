@@ -59,9 +59,6 @@ class _createAccountState extends State<createAccount> {
               children: <Widget>[
                 field(
                   textController: nameController,
-                  // onChanged: (val) {
-                  //   setState(() => name = val);
-                  // },
                   labelText: 'Name',
                   hintText: 'Enter your name',
                   prefixIcon:
@@ -116,9 +113,6 @@ class _createAccountState extends State<createAccount> {
                       return null;
                     }
                   },
-                  // onChanged: (val) {
-                  //   setState(() => phone = val);
-                  // },
                   labelText: 'Phone',
                   hintText: 'Enter your phone number',
                   prefixIcon:
@@ -167,7 +161,6 @@ class _createAccountState extends State<createAccount> {
                   textSize: displayHeight(context) * 0.03,
                   buttonText: 'Create Account',
                   onPressed: () async {
-
                     if (_formKey.currentState!.validate()) {
                       print(emailController.text);
                       print(passwordController.text);
@@ -176,7 +169,7 @@ class _createAccountState extends State<createAccount> {
                           passwordController.text.trim());
 
                       if (result is AuthenticateUser) {
-                        Provider.of<UserProvider>(context, listen: false).getCurrentUser();
+                        Provider.of<UserProvider>(context, listen: false).getCurrentUserFromDb();
                         Navigator.push(
                             context,
                             MaterialPageRoute(

@@ -42,11 +42,10 @@ class _CategoryProductsState extends State<CategoryProducts> {
       return Container();
     }
 
-    currentFilteredList =
-        Provider.of<SearchProvider>(context, listen: false).filteredList;
+    currentFilteredList = Provider.of<SearchProvider>(context, listen: false).filteredList;
     print("Current filtered list: $currentFilteredList");
     return Scaffold(
-      appBar: AppBarDetails(screenName: widget.categoryTitle),
+      appBar: AppBarCategories(screenName: widget.categoryTitle),
       backgroundColor: Color(0xFFFFFDF4),
       body: Column(
           mainAxisAlignment: MainAxisAlignment.start,
@@ -95,10 +94,10 @@ class SearchandFilter extends StatefulWidget {
 }
 
 class _SearchandFilterState extends State<SearchandFilter> {
-  final TextEditingController searchController = TextEditingController();
+  TextEditingController searchController = TextEditingController();
+  bool searchBarActive = false;
   @override
   Widget build(BuildContext context) {
-    
     return Row(
       mainAxisAlignment: MainAxisAlignment.spaceEvenly,
       children: <Widget>[
@@ -127,10 +126,11 @@ class _SearchandFilterState extends State<SearchandFilter> {
                 suffixIcon: Icon(Icons.search),
               ),
               onChanged: (value) {
-
+                searchBarActive = true;
                 print("Value of search bar $value");
-                List<Product> categoryProductList = Provider.of<ProductProvider>(context, listen: false).getProductsOfCategory(widget.categoryTitle);
-
+                List<Product> categoryProductList =
+                    Provider.of<ProductProvider>(context, listen: false)
+                        .getProductsOfCategory(widget.categoryTitle);
                 Provider.of<SearchProvider>(context, listen: false)
                     .searchBar(value, categoryProductList);
                 setState(() {});
@@ -256,6 +256,42 @@ class _DisplayProductsState extends State<DisplayProducts> {
               ));
         },
       ),
+    );
+  }
+}
+
+class AppBarCategories extends StatefulWidget implements PreferredSizeWidget {
+  final String screenName;
+  const AppBarCategories({Key? key, required this.screenName}) : super(key: key);
+
+  @override
+  _AppBarCategoriesState createState() => _AppBarCategoriesState();
+
+  @override
+  // TODO: implement preferredSize
+  Size get preferredSize => const Size.fromHeight(50);
+}
+
+class _AppBarCategoriesState extends State<AppBarCategories> {
+  @override
+  Widget build(BuildContext context) {
+    return PreferredSize(
+      preferredSize: const Size.fromHeight(100),
+      child: AppBar(
+          elevation: 0,
+          backgroundColor: const Color(0xFFFFFDF4),
+          centerTitle: false,
+          leading: InkWell(
+              child: const Icon(Icons.arrow_back),
+              onTap: () {
+                Navigator.pop(context);
+                Provider.of<SearchProvider>(context, listen: false).dropdownvalue = 'No filter';
+              }),
+          title: ReemKufi_Grey(
+          textValue: widget.screenName, size: displayHeight(context) * 0.03),
+          iconTheme: const IconThemeData(
+            color: Color(0xFF4D4D4D), //change your color here
+          )),
     );
   }
 }

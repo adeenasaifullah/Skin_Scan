@@ -14,8 +14,6 @@ class editProfile extends StatefulWidget {
 }
 
 class _editProfileState extends State<editProfile> {
-  final emailController = TextEditingController();
-
   final nameController = TextEditingController();
 
   void initState() {
@@ -23,12 +21,7 @@ class _editProfileState extends State<editProfile> {
     nameController.text = Provider.of<UserProvider>(context, listen: false)
         .getCurrentUser()
         .UserName;
-    emailController.text = Provider.of<UserProvider>(context, listen: false)
-        .getCurrentUser()
-        .UserEmail;
-
     super.initState();
-    //   myTask = widget.myTask;
   }
 
   @override
@@ -36,10 +29,6 @@ class _editProfileState extends State<editProfile> {
     String currentName = Provider.of<UserProvider>(context, listen: false)
         .getCurrentUser()
         .UserName;
-    print("Current name is $currentName");
-    String currentEmail = Provider.of<UserProvider>(context, listen: false)
-        .getCurrentUser()
-        .UserEmail;
 
     return Scaffold(
       backgroundColor: const Color(0xFFFFFDF4),
@@ -52,15 +41,7 @@ class _editProfileState extends State<editProfile> {
               child: Padding(
                 padding: const EdgeInsets.all(4.0),
                 child: Column(
-                  //mainAxisAlignment: MainAxisAlignment.center,
-                  //crossAxisAlignment: CrossAxisAlignment.start,
                   children: [
-                    // CircleAvatar(
-                    //   radius: displayHeight(context) * 0.1,
-                    //   backgroundImage: NetworkImage(
-                    //       'https://media-exp1.licdn.com/dms/image/C4D03AQG8yHAYB2QZXg/profile-displayphoto-shrink_800_800/0/1604240249734?e=1652313600&v=beta&t=hqULr3Z0MtiRav1pRBW4zCPRWgIC9XPD0m5an6C1SoI'),
-                    //   backgroundColor: Colors.transparent,
-                    // ),
                     Container(
                       width: displayHeight(context) * 0.7,
                       child: Column(
@@ -132,30 +113,8 @@ class _editProfileState extends State<editProfile> {
                               contentPadding: EdgeInsets.only(
                                   left: 15, bottom: 11, top: 11, right: 15),
                             ),
-                            controller: emailController,
                           ),
                           SizedBox(height: displayHeight(context) * 0.20),
-                          // Row(
-                          //   mainAxisAlignment: MainAxisAlignment.start,
-                          //   children: [
-                          //     ReemKufi_Green(textValue: "Date of birth", size: displayHeight(context)*0.03)
-                          //
-                          //   ],
-                          // ),
-                          // TextFormField(
-                          //   autofocus: false,
-                          //   initialValue: "12/04/2004",
-                          //   cursorColor: Colors.black,
-                          //   decoration: const InputDecoration(
-                          //     enabledBorder: UnderlineInputBorder(
-                          //       borderSide: BorderSide(color: Colors.black),
-                          //     ),
-                          //     focusedBorder: InputBorder.none,
-                          //     contentPadding: EdgeInsets.only(
-                          //         left: 15, bottom: 11, top: 11, right: 15),
-                          //   ),
-                          // ),
-                          //SizedBox(height: displayHeight(context) * 0.03),
                         ],
                       ),
                     ),
@@ -168,7 +127,8 @@ class _editProfileState extends State<editProfile> {
                             buttonHeight: displayHeight(context) * 0.07,
                             textSize: displayHeight(context) * 0.03,
                             onPressed: () async {
-                              Provider.of<UserProvider>(context, listen: false).editProfile(nameController.text, emailController.text);
+                              context.watch<UserProvider>().editProfile(nameController.text);
+                              //Provider.of<UserProvider>(context, listen: false).editProfile(nameController.text);
                               showDialog(
                                 barrierDismissible: false,
                                 context: context, // user must tap button!
