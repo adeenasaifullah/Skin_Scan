@@ -6,34 +6,30 @@ import 'package:skin_scan/utilities/utility.dart';
 import '../ingredient_search_feature/ingredient_details.dart';
 import '../main.dart';
 
-
 class IngredientListScannedProduct extends StatefulWidget {
   final List<Ingredient> IngredientList;
   final String productName;
-  const IngredientListScannedProduct({Key? key, required this.IngredientList, required this.productName}) : super(key: key);
+  const IngredientListScannedProduct(
+      {Key? key, required this.IngredientList, required this.productName})
+      : super(key: key);
 
   @override
-  _IngredientListScannedProductState createState() => _IngredientListScannedProductState();
+  _IngredientListScannedProductState createState() =>
+      _IngredientListScannedProductState();
 }
 
-class _IngredientListScannedProductState extends State<IngredientListScannedProduct> {
+class _IngredientListScannedProductState
+    extends State<IngredientListScannedProduct> {
   @override
   Widget build(BuildContext context) {
     return Scaffold(
       backgroundColor: const Color(0xFFFFFDF4),
-      appBar: AppBarDetails(screenName: 'Ingredient List'),
-      // bottomNavigationBar: BottomBar(),
+      appBar: const AppBarDetails(screenName: 'Ingredient List'),
       body: Container(
         child: Column(
           mainAxisAlignment: MainAxisAlignment.start,
           crossAxisAlignment: CrossAxisAlignment.center,
           children: [
-            // ReemKufi_Green(
-            //     textValue: 'Product Name: ' + widget.productName,
-            //     size: displayHeight(context) * 0.035),
-            // ReemKufi_Green_Bold(
-            //     textValue: 'Ingredients:',
-            //     size: displayHeight(context) * 0.04),
             Expanded(
               child: ListView.builder(
                   itemCount: widget.IngredientList.length,
@@ -59,7 +55,8 @@ class _IngredientListScannedProductState extends State<IngredientListScannedProd
                               mainAxisAlignment: MainAxisAlignment.spaceBetween,
                               children: [
                                 ReemKufi_Green_Italic(
-                                    textValue: widget.IngredientList[index].ingredientName,
+                                    textValue: widget
+                                        .IngredientList[index].ingredientName,
                                     size: displayHeight(context) * 0.02),
                                 IconButton(
                                     onPressed: () {
@@ -68,8 +65,8 @@ class _IngredientListScannedProductState extends State<IngredientListScannedProd
                                           MaterialPageRoute(
                                             builder: (context) =>
                                                 IngredientDetails(
-                                                    ingredient:
-                                                    widget.IngredientList[index]),
+                                                    ingredient: widget
+                                                        .IngredientList[index]),
                                           ));
                                     },
                                     icon: Icon(Icons.arrow_forward_rounded)),

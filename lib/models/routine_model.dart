@@ -1,8 +1,5 @@
 import 'package:skin_scan/models/routine_product_model.dart';
 
-import '../entities/routine_entities.dart';
-import '../entities/routine_product_entities.dart';
-
 class RoutineModel{
 
   final String RoutineName;
@@ -13,8 +10,6 @@ class RoutineModel{
     required this.RoutineName,
     required this.listofproducts,
   });
-
-
 
   static RoutineModel fromJson(Map<String, dynamic> json) {
     return RoutineModel(
@@ -30,6 +25,4 @@ class RoutineModel{
     data['RoutineProducts'] = this.listofproducts.map((v) => v.toJson()).toList();
     return data;
   }
-
-
 }

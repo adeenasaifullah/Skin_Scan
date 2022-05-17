@@ -13,23 +13,28 @@ class Filter extends StatefulWidget {
   String categoryTitle;
   List<Product> listOfCategoryProducts;
 
-  Filter({Key? key, required this.listOfCategoryProducts, required this.categoryTitle}) : super(key: key);
+  Filter(
+      {Key? key,
+      required this.listOfCategoryProducts,
+      required this.categoryTitle})
+      : super(key: key);
 
   @override
   _FilterState createState() => _FilterState();
 }
 
 class _FilterState extends State<Filter> {
-  var items = ['No filter','<=3000', '>3000 & <=5000', '>5000'];
+  var items = ['No filter', '<=3000', '>3000 & <=5000', '>5000'];
   @override
   Widget build(BuildContext context) {
-    Provider.of<SearchProvider>(context, listen: false).makeCopy(widget.listOfCategoryProducts);
+    Provider.of<SearchProvider>(context, listen: false)
+        .makeCopy(widget.listOfCategoryProducts);
     return Scaffold(
-        appBar: AppBarDetails(screenName: 'Filter'),
+        appBar: const AppBarDetails(screenName: 'Filter'),
         backgroundColor: Color(0xFFFFFDF4),
         body: Padding(
           padding:
-          EdgeInsets.symmetric(horizontal: displayWidth(context) * 0.08),
+              EdgeInsets.symmetric(horizontal: displayWidth(context) * 0.08),
           child: Column(
             mainAxisAlignment: MainAxisAlignment.start,
             crossAxisAlignment: CrossAxisAlignment.start,
@@ -47,7 +52,7 @@ class _FilterState extends State<Filter> {
                 padding: EdgeInsets.symmetric(
                     horizontal: displayWidth(context) * 0.06),
                 child: Container(
-                  decoration: BoxDecoration(
+                  decoration: const BoxDecoration(
                     borderRadius: BorderRadius.all(Radius.circular(20.0)),
                     color: Color(0xffDADBC6),
                   ),
@@ -60,10 +65,12 @@ class _FilterState extends State<Filter> {
                       menuMaxHeight: displayHeight(context) * 0.2,
                       isExpanded: true,
                       dropdownColor: Color(0xffDADBC6),
-                      value: Provider.of<SearchProvider>(context, listen:false).dropdownvalue,
-                      borderRadius: BorderRadius.all(Radius.circular(20.0)),
+                      value: Provider.of<SearchProvider>(context, listen: false)
+                          .dropdownvalue,
+                      borderRadius:
+                          const BorderRadius.all(Radius.circular(20.0)),
                       icon: const Icon(Icons.arrow_downward_sharp),
-                      underline: DecoratedBox(
+                      underline: const DecoratedBox(
                         decoration: BoxDecoration(color: Color(0xffDADBC6)),
                       ),
                       items: items.map((String items) {
@@ -79,7 +86,8 @@ class _FilterState extends State<Filter> {
                       }).toList(),
                       onChanged: (String? newValue) {
                         setState(() {
-                          Provider.of<SearchProvider>(context, listen:false).changeDropDownValue(newValue!);
+                          Provider.of<SearchProvider>(context, listen: false)
+                              .changeDropDownValue(newValue!);
                         });
                       },
                     ),
@@ -98,13 +106,13 @@ class _FilterState extends State<Filter> {
                     horizontal: displayWidth(context) * 0.06),
                 child: Row(
                   children: <Widget>[
-                    FilterButtons(
+                    const FilterButtons(
                         widthSize: 0.25,
                         heightSize: 0.06,
                         buttonText: 'Rating',
                         textSize: 0.03),
                     SizedBox(width: displayWidth(context) * 0.06),
-                    FilterButtons(
+                    const FilterButtons(
                         widthSize: 0.25,
                         heightSize: 0.06,
                         buttonText: 'Price',
@@ -115,66 +123,84 @@ class _FilterState extends State<Filter> {
               SizedBox(height: displayHeight(context) * 0.15),
               Align(
                 alignment: Alignment.bottomCenter,
-                child: GreenButton(buttonHeight: displayHeight(context) * 0.06,
-                  buttonWidth: displayWidth(context) * 0.25, buttonText:"Save" ,
-                  textSize:displayHeight(context) * 0.03 ,
+                child: GreenButton(
+                  buttonHeight: displayHeight(context) * 0.06,
+                  buttonWidth: displayWidth(context) * 0.25,
+                  buttonText: "Save",
+                  textSize: displayHeight(context) * 0.03,
                   onPressed: () async {
-                  return showDialog(
-                    barrierDismissible: false,
-                    context: context, // user must tap button!
-                    builder: (context) {
-                      return AlertDialog(
-                        backgroundColor: const Color(0xff283618),
-                        title: ReemKufiOffwhite(
-                            textValue: 'Do you want to save changes?',
-                            size: displayHeight(context) * 0.04),
-                        actions: <Widget>[
-                          Padding(
-                            padding: const EdgeInsets.all(8.0),
-                            child: Row(
-                              mainAxisAlignment:
-                              MainAxisAlignment.spaceEvenly,
-                              children: [
-                                TextButton(
-                                  style: TextButton.styleFrom(
-                                      backgroundColor: Color(0xffFFFDF4)),
-                                  child: Padding(
-                                    padding: const EdgeInsets.symmetric(
-                                        horizontal: 18.0),
-                                    child: ReemKufi_Black(
-                                        textValue: 'Yes',
-                                        size:
-                                        displayHeight(context) * 0.03),
+                    return showDialog(
+                      barrierDismissible: false,
+                      context: context, // user must tap button!
+                      builder: (context) {
+                        return AlertDialog(
+                          backgroundColor: const Color(0xff283618),
+                          title: ReemKufiOffwhite(
+                              textValue: 'Do you want to save changes?',
+                              size: displayHeight(context) * 0.04),
+                          actions: <Widget>[
+                            Padding(
+                              padding: const EdgeInsets.all(8.0),
+                              child: Row(
+                                mainAxisAlignment:
+                                    MainAxisAlignment.spaceEvenly,
+                                children: [
+                                  TextButton(
+                                    style: TextButton.styleFrom(
+                                        backgroundColor: Color(0xffFFFDF4)),
+                                    child: Padding(
+                                      padding: const EdgeInsets.symmetric(
+                                          horizontal: 18.0),
+                                      child: ReemKufi_Black(
+                                          textValue: 'Yes',
+                                          size: displayHeight(context) * 0.03),
+                                    ),
+                                    onPressed: () {
+                                      Navigator.of(context).pop(true);
+                                      Navigator.of(context).pop(true);
+                                      Navigator.of(context).pop(true);
+                                      Provider.of<SearchProvider>(context, listen: false)
+                                          .filterAccToPrice(
+                                              Provider.of<SearchProvider>(
+                                                      context,
+                                                      listen: false)
+                                                  .dropdownvalue,
+                                              Provider.of<ProductProvider>(
+                                                      context,
+                                                      listen: false)
+                                                  .getProductsOfCategory(
+                                                      widget.categoryTitle));
+                                      Navigator.of(context).push(
+                                          MaterialPageRoute(
+                                              builder: (context) =>
+                                                  CategoryProducts(
+                                                    categoryTitle:
+                                                        widget.categoryTitle,
+                                                  )));
+                                      print(Provider.of<SearchProvider>(context,
+                                              listen: false)
+                                          .dropdownvalue);
+                                    },
                                   ),
-                                  onPressed: () {
-                                    Navigator.of(context).pop(true);
-                                    Navigator.of(context).pop(true);
-                                    Navigator.of(context).pop(true);
-                                    Provider.of<SearchProvider>(context, listen: false).filterAccToPrice(Provider.of<SearchProvider>(context, listen:false).dropdownvalue,
-                                        Provider.of<ProductProvider>(context, listen:false).getProductsOfCategory(widget.categoryTitle));
-                                    Navigator.of(context).push(MaterialPageRoute(
-                                        builder: (context) => CategoryProducts(categoryTitle: widget.categoryTitle ,)));
-                                    print(Provider.of<SearchProvider>(context, listen:false).dropdownvalue);
-                                  },
-                                ),
-                                TextButton(
-                                  style: TextButton.styleFrom(
-                                      backgroundColor: Color(0xffBBBD88)),
-                                  child: ReemKufi_Black(
-                                      textValue: 'Cancel',
-                                      size: displayHeight(context) * 0.03),
-                                  onPressed: () {
-                                    Navigator.of(context).pop(false);
-                                  },
-                                ),
-                              ],
+                                  TextButton(
+                                    style: TextButton.styleFrom(
+                                        backgroundColor: Color(0xffBBBD88)),
+                                    child: ReemKufi_Black(
+                                        textValue: 'Cancel',
+                                        size: displayHeight(context) * 0.03),
+                                    onPressed: () {
+                                      Navigator.of(context).pop(false);
+                                    },
+                                  ),
+                                ],
+                              ),
                             ),
-                          ),
-                        ],
-                      );
-                    },
-                  ); },),
-
+                          ],
+                        );
+                      },
+                    );
+                  },
+                ),
               ),
             ],
           ),
@@ -189,10 +215,10 @@ class FilterButtons extends StatefulWidget {
   final double heightSize;
   const FilterButtons(
       {Key? key,
-        required this.widthSize,
-        required this.heightSize,
-        required this.buttonText,
-        required this.textSize})
+      required this.widthSize,
+      required this.heightSize,
+      required this.buttonText,
+      required this.textSize})
       : super(key: key);
 
   @override

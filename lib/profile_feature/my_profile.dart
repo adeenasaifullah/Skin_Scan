@@ -22,7 +22,7 @@ class MyProfile extends StatefulWidget {
 class _MyProfileState extends State<MyProfile> {
   List<Product> productsList = [];
   List<Product> FavouriteLists = [];
-  List <ScannedProduct> scannedProducts = [];
+  List<ScannedProduct> scannedProducts = [];
 
   @override
   Widget build(BuildContext context) {
@@ -30,9 +30,8 @@ class _MyProfileState extends State<MyProfile> {
         .getCurrentUser()
         .UserName;
     productsList = context.read<ProductProvider>().getProducts;
-    FavouriteLists= context
-        .watch<UserProvider>()
-        .getUserFavouriteProducts(productsList);
+    FavouriteLists =
+        context.watch<UserProvider>().getUserFavouriteProducts(productsList);
     scannedProducts = context.read<UserProvider>().ScannedProductlist;
 
     return Scaffold(
@@ -41,24 +40,22 @@ class _MyProfileState extends State<MyProfile> {
         elevation: 0,
         backgroundColor: const Color(0xFFFFFDF4),
         centerTitle: false,
-        title: ReemKufi_Grey(textValue:"My Profile", size: displayHeight(context) * 0.04),
-
+        title: ReemKufi_Grey(
+            textValue: "My Profile", size: displayHeight(context) * 0.04),
         iconTheme: const IconThemeData(
           color: const Color(0xFF4D4D4D), //change your color here
         ),
         leading: GestureDetector(
-            child: Icon(Icons.arrow_back, color: Color(0xFF4D4D4D)),
-            onTap:() {
+            child: const Icon(Icons.arrow_back, color: Color(0xFF4D4D4D)),
+            onTap: () {
               Navigator.pushAndRemoveUntil(
                 context,
                 MaterialPageRoute(
-                  builder: (BuildContext context) => MyBottomAppBar(),
+                  builder: (BuildContext context) => const MyBottomAppBar(),
                 ),
-                    (route) => false,
+                (route) => false,
               );
-
-            }
-        ),
+            }),
         actions: [
           Padding(
             padding: EdgeInsets.only(
@@ -73,7 +70,11 @@ class _MyProfileState extends State<MyProfile> {
         ],
       ),
       body: Padding(
-        padding: EdgeInsets.fromLTRB(displayWidth(context)*0.01, displayWidth(context)*0.01, displayWidth(context)*0.01, displayWidth(context)*0.01),
+        padding: EdgeInsets.fromLTRB(
+            displayWidth(context) * 0.01,
+            displayWidth(context) * 0.01,
+            displayWidth(context) * 0.01,
+            displayWidth(context) * 0.01),
         child: SingleChildScrollView(
           child: Column(
             mainAxisAlignment: MainAxisAlignment.center,
@@ -84,12 +85,17 @@ class _MyProfileState extends State<MyProfile> {
                   Column(
                     mainAxisAlignment: MainAxisAlignment.spaceAround,
                     children: [
-                      currentName == "" ?
-                      ReemKufi_Green_Bold(textValue:  "", size: displayHeight(context) * 0.04)
-                      :
-                      ReemKufi_Green_Bold(textValue:currentName, size: displayHeight(context) * 0.04),
+                      currentName == ""
+                          ? ReemKufi_Green_Bold(
+                              textValue: "",
+                              size: displayHeight(context) * 0.04)
+                          : ReemKufi_Green_Bold(
+                              textValue: currentName,
+                              size: displayHeight(context) * 0.04),
                       Row(children: [
-                        ReemKufi_Green_Bold(textValue: "Edit Profile", size: displayHeight(context) * 0.025),
+                        ReemKufi_Green_Bold(
+                            textValue: "Edit Profile",
+                            size: displayHeight(context) * 0.025),
                         InkWell(
                           child: Icon(Icons.create_rounded),
                           onTap: () {
@@ -105,7 +111,7 @@ class _MyProfileState extends State<MyProfile> {
                   ),
                   CircleAvatar(
                     radius: displayHeight(context) * 0.075,
-                    backgroundImage: NetworkImage(
+                    backgroundImage: const NetworkImage(
                         'https://media-exp1.licdn.com/dms/image/C4D03AQG8yHAYB2QZXg/profile-displayphoto-shrink_800_800/0/1604240249734?e=1652313600&v=beta&t=hqULr3Z0MtiRav1pRBW4zCPRWgIC9XPD0m5an6C1SoI'),
                     backgroundColor: Colors.transparent,
                   )
@@ -117,12 +123,11 @@ class _MyProfileState extends State<MyProfile> {
               Container(
                   alignment: Alignment.center,
                   margin: EdgeInsets.fromLTRB(16, 0, 16, 8),
-                  //height: 200,
                   width: double.infinity,
                   decoration: BoxDecoration(
                     color: const Color(0xFFDADBC6),
                     borderRadius:
-                    BorderRadius.circular(15), //border corner radius
+                        BorderRadius.circular(15), //border corner radius
                   ),
                   child: Padding(
                     padding: EdgeInsets.all(16),
@@ -134,9 +139,13 @@ class _MyProfileState extends State<MyProfile> {
                           children: [
                             Icon(Icons.favorite, color: Colors.black),
                             Expanded(
-                                child: ReemKufi_Green_Bold(textValue: "Favourite Products", size: displayHeight(context) * 0.0225)),
+                                child: ReemKufi_Green_Bold(
+                                    textValue: "Favourite Products",
+                                    size: displayHeight(context) * 0.0225)),
                             InkWell(
-                              child: ReemKufi_Green_Bold(textValue: "View All", size: displayHeight(context) * 0.0225),
+                              child: ReemKufi_Green_Bold(
+                                  textValue: "View All",
+                                  size: displayHeight(context) * 0.0225),
                               onTap: () {
                                 Navigator.of(context).push(MaterialPageRoute(
                                     builder: (context) => FavouriteProducts()));
@@ -156,15 +165,11 @@ class _MyProfileState extends State<MyProfile> {
                               return CircleAvatar(
                                   radius: 33,
                                   backgroundColor: Color(0xffC4C4C4),
-                                  child: ReemKufi_Green(size: displayHeight(context) * 0.0125, textValue: FavouriteLists[index].productName,)
-
-                                  // child: Image(
-                                  //   image: AssetImage('assets/Favourite.png'),
-                                  //   fit: BoxFit.fill,
-                                  //   height: displayHeight(context) * 0.065,
-                                  //   width: displayWidth(context) * 0.065,
-                                  // )
-                              );
+                                  child: ReemKufi_Green(
+                                    size: displayHeight(context) * 0.0125,
+                                    textValue:
+                                        FavouriteLists[index].productName,
+                                  ));
                             },
                           ),
                         ),
@@ -180,7 +185,7 @@ class _MyProfileState extends State<MyProfile> {
                   decoration: BoxDecoration(
                     color: const Color(0xFFDADBC6),
                     borderRadius:
-                    BorderRadius.circular(15), //border corner radius
+                        BorderRadius.circular(15), //border corner radius
                   ),
                   child: Padding(
                     padding: EdgeInsets.all(16),
@@ -190,11 +195,15 @@ class _MyProfileState extends State<MyProfile> {
                         Row(
                           mainAxisAlignment: MainAxisAlignment.spaceAround,
                           children: [
-                            Icon(Icons.history, color: Colors.black),
+                            const Icon(Icons.history, color: Colors.black),
                             Expanded(
-                                child: ReemKufi_Green_Bold(textValue: "Scanned Products", size: displayHeight(context) * 0.0225)),
+                                child: ReemKufi_Green_Bold(
+                                    textValue: "Scanned Products",
+                                    size: displayHeight(context) * 0.0225)),
                             InkWell(
-                              child: ReemKufi_Green_Bold(textValue: "View All", size: displayHeight(context) * 0.0225),
+                              child: ReemKufi_Green_Bold(
+                                  textValue: "View All",
+                                  size: displayHeight(context) * 0.0225),
                               onTap: () {
                                 Navigator.of(context).push(MaterialPageRoute(
                                     builder: (context) => ScannedProducts()));
@@ -214,14 +223,11 @@ class _MyProfileState extends State<MyProfile> {
                               return CircleAvatar(
                                   radius: 33,
                                   backgroundColor: Color(0xffC4C4C4),
-                                  child: ReemKufi_Green(size: displayHeight(context) * 0.0125, textValue: scannedProducts[index].productName,)
-                                  // child: Image(
-                                  //   image: AssetImage('assets/Favourite.png'),
-                                  //   fit: BoxFit.fill,
-                                  //   height: displayHeight(context) * 0.065,
-                                  //   width: displayWidth(context) * 0.065,
-                                  // )
-                              );
+                                  child: ReemKufi_Green(
+                                    size: displayHeight(context) * 0.0125,
+                                    textValue:
+                                        scannedProducts[index].productName,
+                                  ));
                             },
                           ),
                         ),
@@ -236,7 +242,7 @@ class _MyProfileState extends State<MyProfile> {
                   decoration: BoxDecoration(
                     color: const Color(0xFFDADBC6),
                     borderRadius:
-                    BorderRadius.circular(15), //border corner radius
+                        BorderRadius.circular(15), //border corner radius
                   ),
                   child: Padding(
                     padding: EdgeInsets.all(16),
@@ -248,9 +254,13 @@ class _MyProfileState extends State<MyProfile> {
                           children: [
                             Icon(Icons.history, color: Colors.black),
                             Expanded(
-                                child: ReemKufi_Green_Bold(textValue: "Skin Log History", size: displayHeight(context) * 0.0225)),
+                                child: ReemKufi_Green_Bold(
+                                    textValue: "Skin Log History",
+                                    size: displayHeight(context) * 0.0225)),
                             InkWell(
-                              child: ReemKufi_Green_Bold(textValue: "View All", size: displayHeight(context) * 0.0225),
+                              child: ReemKufi_Green_Bold(
+                                  textValue: "View All",
+                                  size: displayHeight(context) * 0.0225),
                               onTap: () {
                                 Navigator.of(context).push(MaterialPageRoute(
                                     builder: (context) => SkinLogHistory()));
@@ -266,7 +276,9 @@ class _MyProfileState extends State<MyProfile> {
                           children: [
                             Icon(Icons.calendar_today_outlined,
                                 color: Colors.black),
-                            ReemKufi_Green_Bold(textValue: "Not so good", size: displayHeight(context) * 0.0225),
+                            ReemKufi_Green_Bold(
+                                textValue: "Not so good",
+                                size: displayHeight(context) * 0.0225),
                             Icon(Icons.tag_faces, color: Colors.black)
                           ],
                         ),
@@ -278,7 +290,9 @@ class _MyProfileState extends State<MyProfile> {
                           children: [
                             Icon(Icons.calendar_today_outlined,
                                 color: Colors.black),
-                            ReemKufi_Green_Bold(textValue: "Not so good", size: displayHeight(context) * 0.0225),
+                            ReemKufi_Green_Bold(
+                                textValue: "Not so good",
+                                size: displayHeight(context) * 0.0225),
                             Icon(Icons.tag_faces, color: Colors.black)
                           ],
                         ),

@@ -1,22 +1,16 @@
 import 'package:firebase_image/firebase_image.dart';
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
-import 'package:provider/provider.dart';
 import 'package:skin_scan/product_categories_feature/product_categories_utilities.dart';
-import 'package:skin_scan/provider/product_provider.dart';
 import 'package:skin_scan/utilities/utility.dart';
-
 import '../entities/product_entities.dart';
 import '../main.dart';
 
 class ProductDetail extends StatefulWidget {
-
   final Product product;
   const ProductDetail({
     Key? key,
-
     required this.product,
-
   }) : super(key: key);
 
   @override
@@ -40,20 +34,17 @@ class _ProductDetailState extends State<ProductDetail> {
                   child: Card(
                     color: const Color(0xffDADBC6),
                     child: Image(
-                      image: FirebaseImage(widget.product.productImage, cacheRefreshStrategy:
-                      CacheRefreshStrategy.NEVER),
+                      image: FirebaseImage(widget.product.productImage,
+                          cacheRefreshStrategy: CacheRefreshStrategy.NEVER),
                       fit: BoxFit.contain,
                       height: displayHeight(context) * 0.125,
-                      width: displayWidth(context) * 0.25, ),
+                      width: displayWidth(context) * 0.25,
+                    ),
                   ),
                 ),
-
-
-                    ReemKufi_Green(
-                        textValue: widget.product.productBrand,
-                        size: displayHeight(context) * 0.025),
-
-
+                ReemKufi_Green(
+                    textValue: widget.product.productBrand,
+                    size: displayHeight(context) * 0.025),
                 Row(
                   mainAxisAlignment: MainAxisAlignment.center,
                   children: <Widget>[
@@ -72,13 +63,12 @@ class _ProductDetailState extends State<ProductDetail> {
                     ReemKufi_Green(
                         textValue: 'Suitable for your skin type',
                         size: displayHeight(context) * 0.03),
-                    Icon(
+                    const Icon(
                       CupertinoIcons.checkmark_circle,
                       color: Color(0xff283618),
                     )
                   ],
                 ),
-
                 Rating(product: widget.product),
                 //RatingButton(product: widget.product),
                 SizedBox(height: displayHeight(context) * 0.02),
@@ -126,10 +116,13 @@ class _ProductDetailState extends State<ProductDetail> {
                           ReemKufi_Grey(
                               textValue: widget.product.howToUse,
                               size: displayHeight(context) * 0.025),
-                        ]),
+                        ]
+                    ),
                   ),
                 ),
-              ]),
-        ));
+              ]
+          ),
+        )
+    );
   }
 }

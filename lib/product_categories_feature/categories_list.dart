@@ -1,6 +1,5 @@
 import 'package:flutter/material.dart';
 import 'package:provider/provider.dart';
-import 'package:skin_scan/provider/product_provider.dart';
 import 'package:skin_scan/utilities/utility.dart';
 import '../main.dart';
 import '../provider/categories_provider.dart';
@@ -15,7 +14,6 @@ class CategoriesAndSearch extends StatefulWidget {
 }
 
 class _CategoriesAndSearchState extends State<CategoriesAndSearch> {
-
   late TextEditingController ingredient_controller;
 
   void initState() {
@@ -25,10 +23,8 @@ class _CategoriesAndSearchState extends State<CategoriesAndSearch> {
 
   @override
   Widget build(BuildContext context) {
-
-
     return Scaffold(
-      appBar: AppBarDetails(screenName: 'Categories'),
+      appBar: const AppBarDetails(screenName: 'Categories'),
       backgroundColor: const Color(0xFFFFFDF4),
 
       body: Column(
@@ -43,7 +39,7 @@ class _CategoriesAndSearchState extends State<CategoriesAndSearch> {
               primary: false,
               padding: const EdgeInsets.all(20),
               itemCount: context.watch<CategoryProvider>().getCategoryLength(),
-              gridDelegate: SliverGridDelegateWithFixedCrossAxisCount(
+              gridDelegate: const SliverGridDelegateWithFixedCrossAxisCount(
                 crossAxisSpacing: 12,
                 mainAxisSpacing: 12,
                 crossAxisCount: 2,
@@ -57,8 +53,7 @@ class _CategoriesAndSearchState extends State<CategoriesAndSearch> {
                     categoryImage: context
                         .watch<CategoryProvider>()
                         .getCategories()[index]
-                        .categoryImage
-                    );
+                        .categoryImage);
               },
             ),
           ),
@@ -97,7 +92,7 @@ class Category extends StatelessWidget {
         );
       },
       child: Container(
-          decoration: BoxDecoration(
+          decoration: const BoxDecoration(
             borderRadius: BorderRadius.all(Radius.circular(20.0)),
             color: Color(0xffDADBC6),
           ),
@@ -108,12 +103,12 @@ class Category extends StatelessWidget {
               mainAxisAlignment: MainAxisAlignment.center,
               children: <Widget>[
                 Image(
-                  image: FirebaseImage(categoryImage, cacheRefreshStrategy:
-                  CacheRefreshStrategy.NEVER),
+                  image: FirebaseImage(categoryImage,
+                      cacheRefreshStrategy: CacheRefreshStrategy.NEVER),
                   fit: BoxFit.contain,
                   height: displayHeight(context) * 0.125,
-                  width: displayWidth(context) * 0.25, ),
-
+                  width: displayWidth(context) * 0.25,
+                ),
                 ReemKufi_Green(
                   textValue: categoryName,
                   size: displayWidth(context) * 0.045,

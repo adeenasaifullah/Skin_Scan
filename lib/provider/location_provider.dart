@@ -29,7 +29,6 @@ class LocationProvider extends ChangeNotifier {
             areas: area
         );
         locationList.add(location);
-        //print("Location retrieved");
       });
     });
     SortList();

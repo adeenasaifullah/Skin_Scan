@@ -8,7 +8,7 @@ import 'package:provider/provider.dart';
 import 'package:skin_scan/password_reset_feature/forgot_password.dart';
 import 'package:skin_scan/main.dart';
 import 'package:skin_scan/services/auth.dart';
-import '../models/users_adeena_model.dart';
+import '../models/users_model.dart';
 import '../provider/product_provider.dart';
 import '../provider/user_provider.dart';
 import '../register_feature/account_created.dart';

@@ -128,7 +128,6 @@ class _editProfileState extends State<editProfile> {
                             textSize: displayHeight(context) * 0.03,
                             onPressed: () async {
                               context.watch<UserProvider>().editProfile(nameController.text);
-                              //Provider.of<UserProvider>(context, listen: false).editProfile(nameController.text);
                               showDialog(
                                 barrierDismissible: false,
                                 context: context, // user must tap button!

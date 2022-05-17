@@ -1,8 +1,6 @@
 import 'package:firebase_image/firebase_image.dart';
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
-import 'package:flutter_rating_bar/flutter_rating_bar.dart';
-import 'package:google_fonts/google_fonts.dart';
 import 'package:provider/provider.dart';
 import 'package:skin_scan/product_categories_feature/product_categories_utilities.dart';
 import '../entities/product_entities.dart';
@@ -25,8 +23,8 @@ class _FavouriteProductsState extends State<FavouriteProducts> {
   Widget build(BuildContext context) {
     productsList = context.read<ProductProvider>().getProducts;
     return Scaffold(
-      appBar: AppBarDetails(screenName: 'Favourite Products'),
-      backgroundColor: Color(0xFFFFFDF4),
+      appBar: const AppBarDetails(screenName: 'Favourite Products'),
+      backgroundColor: const Color(0xFFFFFDF4),
       //body: SingleChildScrollView(
       //child: Column(
       body: Padding(
@@ -43,7 +41,6 @@ class _FavouriteProductsState extends State<FavouriteProducts> {
           ],
         ),
       ),
-      //bottomNavigationBar: BottomBar(),
     );
   }
 }
@@ -76,11 +73,11 @@ class _FavouriteProductsCardState extends State<FavouriteProductsCard> {
         ),
         itemBuilder: (BuildContext context, int index) {
           return Padding(
-              padding: EdgeInsets.fromLTRB(8, 8, 8, 8),
+              padding: const EdgeInsets.fromLTRB(8, 8, 8, 8),
               child: InkWell(
                 child: Card(
                     elevation: 2,
-                    color: Color(0xFFDADBC6),
+                    color: const Color(0xFFDADBC6),
                     shape: RoundedRectangleBorder(
                         borderRadius: BorderRadius.circular(30)),
                     child: Column(
