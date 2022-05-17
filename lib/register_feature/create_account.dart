@@ -1,20 +1,15 @@
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 import 'package:form_field_validator/form_field_validator.dart';
-import 'package:form_field_validator/form_field_validator.dart';
-import 'package:form_field_validator/form_field_validator.dart';
 import 'package:google_fonts/google_fonts.dart';
 import 'package:provider/provider.dart';
 import 'package:skin_scan/services/auth.dart';
 import '../models/users_adeena_model.dart';
 import '../log_in_sign_up_feature/log_in_screen.dart';
 import '../main.dart';
-//import '../provider/UserProvider.dart';
 import '../provider/user_provider.dart';
 import '../utilities/utility.dart';
 import 'account_created.dart';
-import 'package:firebase_auth/firebase_auth.dart';
-import 'package:skin_scan/services/auth.dart';
 
 class createAccount extends StatefulWidget {
   const createAccount({Key? key}) : super(key: key);
@@ -24,7 +19,6 @@ class createAccount extends StatefulWidget {
 }
 
 class _createAccountState extends State<createAccount> {
-
   final AuthService _auth = AuthService();
   final _formKey = GlobalKey<FormState>();
 
@@ -36,9 +30,7 @@ class _createAccountState extends State<createAccount> {
   final TextEditingController confirmPasswordController =
       TextEditingController();
 
-  //r"^[a-zA-Z0-9.a-zA-Z0-9.!#$%&'*+-/=?^_`{|}~]+@[a-zA-Z0-9]+\.[a-zA-Z]+"
   final validators = MultiValidator([
-    //EmailValidator(errorText: "Enter valid email id"),
     RequiredValidator(errorText: 'password is required'),
     MinLengthValidator(8, errorText: 'password must be at least 8 digits long'),
     PatternValidator(r'(?=.*?[#?!@$%^&*-])',
@@ -68,7 +60,6 @@ class _createAccountState extends State<createAccount> {
                       return "* Required";
                     }
                     if (!RegExp(r'^[a-z A-Z]+$').hasMatch(name!)) {
-                      //allow upper and lower case alphabets and space
                       return "Enter correct name";
                     } else {
                       return null;
@@ -79,15 +70,10 @@ class _createAccountState extends State<createAccount> {
                 SizedBox(height: displayHeight(context) * 0.05),
                 field(
                   textController: emailController,
-                  // onChanged: (val) {
-                  //   setState(() => email = val);
-                  // },
                   labelText: 'Email',
                   hintText: 'Enter your email',
                   prefixIcon: Icon(Icons.email_sharp, color: Color(0xFF283618)),
-                  //validateInput: (email) => EmailValidator(errorText: 'Please enter valid email!') ,
                   validateInput: (email) {
-
                     if (emailController.text.isEmpty) {
                       return "* Required";
                     }
@@ -107,7 +93,6 @@ class _createAccountState extends State<createAccount> {
                     if (phone!.isEmpty) {
                       return "* Required";
                     } else if (!RegExp(r'^[0-9]{11}$').hasMatch(phone)) {
-                      //  r'^[0-9]{10}$' pattern plain match number with length 11
                       return "Enter correct phone number";
                     } else {
                       return null;
@@ -117,7 +102,8 @@ class _createAccountState extends State<createAccount> {
                   hintText: 'Enter your phone number',
                   prefixIcon:
                       Icon(Icons.smartphone_rounded, color: Color(0xFF283618)),
-                  textController: phoneController, autoFocus: false,
+                  textController: phoneController,
+                  autoFocus: false,
                 ),
                 SizedBox(height: displayHeight(context) * 0.05),
                 field(
@@ -169,7 +155,8 @@ class _createAccountState extends State<createAccount> {
                           passwordController.text.trim());
 
                       if (result is AuthenticateUser) {
-                        Provider.of<UserProvider>(context, listen: false).getCurrentUserFromDb();
+                        Provider.of<UserProvider>(context, listen: false)
+                            .getCurrentUserFromDb();
                         Navigator.push(
                             context,
                             MaterialPageRoute(
@@ -193,10 +180,9 @@ class _createAccountState extends State<createAccount> {
                         Navigator.of(context).push(MaterialPageRoute(
                             builder: (context) => LogInScreen()));
                       },
-                      child: Text('Login',
-                          style: GoogleFonts.reemKufi(
-                              color: Color(0xFF4D4D4D), fontSize: 20)),
-                      //backgroundColor: Colors.white,
+                      child: ReemKufi_OffWhite_Center(
+                          textValue: 'Login',
+                          size: displayHeight(context) * 0.03),
                     ),
                   ],
                 ),

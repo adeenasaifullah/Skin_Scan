@@ -15,8 +15,6 @@ import '../log_in_sign_up_feature/log_in_screen.dart';
 import '../provider/ingredient_provider.dart';
 import '../routine_feature/view_routine.dart';
 
-
-
 class MyBottomAppBar extends StatefulWidget {
   const MyBottomAppBar({Key? key}) : super(key: key);
 
@@ -25,50 +23,50 @@ class MyBottomAppBar extends StatefulWidget {
 }
 
 class _MyBottomAppBarState extends State<MyBottomAppBar> {
-
   late TextEditingController ingredient_controller = TextEditingController();
 
   void initState() {
     super.initState();
     ingredient_controller = TextEditingController();
   }
-  void dispose()
-  {
+
+  void dispose() {
     ingredient_controller.dispose();
     super.dispose();
   }
+
   int curindex = 0;
 
-  List<Widget>screens =[ HomePageScreen(),
+  List<Widget> screens = [
+    HomePageScreen(),
     DermaPopUp(),
     ViewRoutine(),
     OcrScan(),
     IngredientPopUp(),
-    MyProfile()];
+    MyProfile()
+  ];
 
-
-  void ontapped (int index)
-  {
+  void ontapped(int index) {
     setState(() {
       curindex = index;
     });
   }
 
-
   @override
   Widget build(BuildContext context) {
     //FocusScope.of(context).unfocus();
     return Scaffold(
-      body:  SafeArea(child: IndexedStack(
-        index: curindex,
-        children: screens,
-      ),),
+      body: SafeArea(
+        child: IndexedStack(
+          index: curindex,
+          children: screens,
+        ),
+      ),
       bottomNavigationBar: BottomNavigationBar(
         type: BottomNavigationBarType.fixed,
         backgroundColor: const Color(0xff4D4D4D),
-        iconSize:  displayHeight(context) * 0.05,
+        iconSize: displayHeight(context) * 0.05,
         onTap: ontapped,
-
         currentIndex: curindex,
         items: [
           const BottomNavigationBarItem(
@@ -116,22 +114,15 @@ class _MyBottomAppBarState extends State<MyBottomAppBar> {
             label: 'Ingredient',
           ),
           const BottomNavigationBarItem(
-
             backgroundColor: const Color(0xff4D4D4D),
             icon: Icon(
               CupertinoIcons.person,
-
               color: Color(0xffDADBC6),
-
             ),
             label: 'Profile',
           ),
         ],
-
-
-
       ),
     );
   }
 }
-

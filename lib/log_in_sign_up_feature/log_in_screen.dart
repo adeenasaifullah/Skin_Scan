@@ -121,7 +121,6 @@ class _LogInScreenState extends State<LogInScreen> {
                             emailController.text.trim(),
                             passwordController.text.trim());
                         if (result is AuthenticateUser) {
-                          //await context.read<UserProvider>().getUserFavouriteProducts(context.read<ProductProvider>().productsList);
                           await context.read<UserProvider>().getCurrentUserFromDb();
                           await context.read<UserProvider>().getUserFavouriteProducts(context.read<ProductProvider>().productsList);
 

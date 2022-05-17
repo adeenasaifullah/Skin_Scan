@@ -1,8 +1,6 @@
 import 'package:animated_splash_screen/animated_splash_screen.dart';
-import 'package:firebase_auth/firebase_auth.dart';
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
-import 'package:google_fonts/google_fonts.dart';
 import 'package:provider/provider.dart';
 import 'package:skin_scan/provider/scanned_product_provider.dart';
 import 'package:skin_scan/provider/user_provider.dart';
@@ -29,8 +27,7 @@ import 'services/auth.dart';
 late List<CameraDescription> cameras;
 
 Future<void> main() async {
-  //Provider.debugCheckInvalidValueType = null;
-  WidgetsFlutterBinding.ensureInitialized();
+   WidgetsFlutterBinding.ensureInitialized();
   await Firebase.initializeApp();
   cameras = await availableCameras();
   Provider.debugCheckInvalidValueType = null;
@@ -82,7 +79,6 @@ class _MyAppState extends State<MyApp> {
       value: AuthService().user,
       initialData: null,
       child: MaterialApp(
-        //scaffoldMessengerKey: Utils.messengerKey,
         title: 'Skin Scan',
         debugShowCheckedModeBanner: false,
         theme: ThemeData(
@@ -107,7 +103,7 @@ class _LogoScreenState extends State<LogoScreen> {
   Widget build(BuildContext context) {
     return AnimatedSplashScreen(
       splash: Column(
-        //mainAxisAlignment: MainAxisAlignment.center,
+
         children: [
           Image.asset('assets/skinscanlogolight.png',
               width: displayWidth(context) * 0.4,

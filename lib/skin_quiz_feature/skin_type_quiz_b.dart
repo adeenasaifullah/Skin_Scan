@@ -4,10 +4,8 @@ import 'package:provider/provider.dart';
 import 'package:skin_scan/skin_quiz_feature/skinQuizAlgo.dart';
 import 'package:skin_scan/skin_quiz_feature/skin_quiz_feature_utility.dart';
 import 'package:skin_scan/skin_quiz_feature/skin_type_quiz_c.dart';
-
 import '../main.dart';
 import '../utilities/utility.dart';
-
 
 class skinTypeQuizb extends StatefulWidget {
   const skinTypeQuizb({Key? key}) : super(key: key);
@@ -33,7 +31,7 @@ class _skinTypeQuizbState extends State<skinTypeQuizb> {
                     qnumber: 'Question 2',
                     question: 'When does your skin look red?',
                     description:
-                    'Different climates and environments call for \n different approaches to skincare.'),
+                        'Different climates and environments call for \n different approaches to skincare.'),
               ],
             ),
             SizedBox(height: displayHeight(context) * 0.03),
@@ -45,8 +43,6 @@ class _skinTypeQuizbState extends State<skinTypeQuizb> {
             SizedBox(height: displayHeight(context) * 0.03),
             const place(typeOfPlace: 'Very often'),
             SizedBox(height: displayHeight(context) * 0.03),
-            //   const place(typeOfPlace: 'Rainy and Moist Weather'),
-            //   SizedBox(height: displayHeight(context) * 0.03),
           ],
         ),
       ),
@@ -64,13 +60,17 @@ class place extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    return LightGreenButton(buttonWidth:displayWidth(context) * 0.50, buttonHeight: displayHeight(context) * 0.09,
+    return LightGreenButton(
+        buttonWidth: displayWidth(context) * 0.50,
+        buttonHeight: displayHeight(context) * 0.09,
         textSize: displayHeight(context) * 0.025,
-        buttonText: typeOfPlace, onPressed: () {
+        buttonText: typeOfPlace,
+        onPressed: () {
           Navigator.of(context)
               .push(MaterialPageRoute(builder: (context) => skinTypeQuizc()));
-          Provider.of<SkinQuizProvider>(context, listen: false).options.add(typeOfPlace);
+          Provider.of<SkinQuizProvider>(context, listen: false)
+              .options
+              .add(typeOfPlace);
         });
-
   }
 }

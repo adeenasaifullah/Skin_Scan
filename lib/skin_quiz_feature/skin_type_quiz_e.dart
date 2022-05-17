@@ -1,18 +1,11 @@
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 import 'package:provider/provider.dart';
-import 'package:skin_scan/log_in_sign_up_feature/home_page_screen.dart';
 import 'package:skin_scan/skin_quiz_feature/skinQuizAlgo.dart';
 import 'package:skin_scan/skin_quiz_feature/skin_quiz_feature_utility.dart';
 import 'package:skin_scan/utilities/bottom_app_bar.dart';
 import '../utilities/utility.dart';
-import 'package:skin_scan/skin_quiz_feature/skinQuizAlgo.dart';
-import 'package:skin_scan/skin_quiz_feature/skin_quiz_feature_utility.dart';
-
-//import 'skin_quiz_feature/skin_quiz_feature_utility.dart';
 import '../utilities/bottom_app_bar.dart';
-import '../utilities/utility.dart';
-import 'skin_type_quiz_b.dart';
 import '../main.dart';
 
 

@@ -4,7 +4,6 @@ import 'package:google_fonts/google_fonts.dart';
 import '../utilities/utility.dart';
 //import 'utility.dart';
 
-
 class questions extends StatelessWidget {
   final String qnumber;
   final String question;
@@ -12,9 +11,9 @@ class questions extends StatelessWidget {
 
   const questions(
       {Key? key,
-        required this.qnumber,
-        required this.question,
-        required this.description})
+      required this.qnumber,
+      required this.question,
+      required this.description})
       : super(key: key);
 
   @override
