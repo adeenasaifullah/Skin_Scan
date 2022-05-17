@@ -1,4 +1,3 @@
-import 'dart:convert';
 import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
@@ -46,12 +45,8 @@ class ProductProvider extends ChangeNotifier {
         productsOfCategory.add(productsList[i]);
       }
     }
-    print("get category products + $productsOfCategory");
-    print("product category list length ${productsOfCategory.length}");
     return productsOfCategory;
   }
-
-
 
   int getProductListLength() {
     int length = productsList.length;
@@ -60,17 +55,12 @@ class ProductProvider extends ChangeNotifier {
 
   void updateRating(Product product, double userRating) async {
     userRating = (userRating + product.productRating) / 2;
-
     product.productRating = userRating;
-    print(product.productRating);
-
     updateRatinginDB(product);
     notifyListeners();
   }
 
-
   Future<void> updateRatinginDB(Product product) async {
-
     CollectionReference products =
         FirebaseFirestore.instance.collection('products');
 
@@ -85,9 +75,7 @@ class ProductProvider extends ChangeNotifier {
         howToUse: product.howToUse,
         productName: product.productName,
         productRating: product.productRating,
-        productBrand: product.productBrand
-
-    );
+        productBrand: product.productBrand);
 
     await products
         .doc(prod.prodID)

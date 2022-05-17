@@ -2,7 +2,6 @@ import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_rating_bar/flutter_rating_bar.dart';
 import 'package:provider/provider.dart';
-//import 'package:skin_scan/provider/UserProvider.dart';
 import 'package:skin_scan/utilities/utility.dart';
 import '../entities/product_entities.dart';
 import '../provider/product_provider.dart';
@@ -18,12 +17,10 @@ class Rating extends StatefulWidget {
 }
 
 class _RatingState extends State<Rating> {
-
   double rating = 0;
 
   @override
   Widget build(BuildContext context) {
-
     return RatingBar(
       itemSize: displayHeight(context) * 0.025,
       initialRating: widget.product.productRating.toDouble(),
@@ -31,35 +28,32 @@ class _RatingState extends State<Rating> {
       allowHalfRating: false,
       itemCount: 5,
       ratingWidget: RatingWidget(
-        full: Icon(
+        full: const Icon(
           Icons.star,
           color: Color(0xff283618),
         ),
-        half: Icon(
+        half: const Icon(
           Icons.star_border,
           color: Color(0xff283618),
         ),
-        empty: Icon(
+        empty: const Icon(
           Icons.star_border,
           color: Color(0xff283618),
         ),
       ),
-      itemPadding: EdgeInsets.symmetric(horizontal: 4.0),
+      itemPadding: const EdgeInsets.symmetric(horizontal: 4.0),
       onRatingUpdate: (rating) {
         Provider.of<ProductProvider>(context, listen: false)
             .updateRating(widget.product, rating);
         setState(() {
           this.rating = rating;
         });
-
-        print(rating);
       },
     );
   }
 }
 
 class FavouriteButton extends StatefulWidget {
-
   var prodID;
   FavouriteButton({Key? key, this.prodID}) : super(key: key);
 
@@ -68,15 +62,15 @@ class FavouriteButton extends StatefulWidget {
 }
 
 class _FavouriteButtonState extends State<FavouriteButton> {
-
-
   @override
   Widget build(BuildContext context) {
-    return !context.read<UserProvider>().checkUserFavouriteProduct(widget.prodID) ?
-    IconButton(
-      icon:Icon(CupertinoIcons.suit_heart),
-      onPressed: () async {
-        await showDialog(
+    return !context
+            .read<UserProvider>()
+            .checkUserFavouriteProduct(widget.prodID)
+        ? IconButton(
+            icon: const Icon(CupertinoIcons.suit_heart),
+            onPressed: () async {
+              await showDialog(
                 barrierDismissible: false,
                 context: context, // user must tap button!
                 builder: (context) {
@@ -93,15 +87,66 @@ class _FavouriteButtonState extends State<FavouriteButton> {
                           children: [
                             TextButton(
                               style: TextButton.styleFrom(
-                                  backgroundColor: Color(0xffFFFDF4)),
+                                  backgroundColor: const Color(0xffFFFDF4)),
                               child: ReemKufi_Black(
                                   textValue: 'Yes',
                                   size: displayHeight(context) * 0.03),
                               onPressed: () {
-                                context.read<UserProvider>().addProductToFavourites(widget.prodID);
-                                setState(() {
-
-                                });
+                                context
+                                    .read<UserProvider>()
+                                    .addProductToFavourites(widget.prodID);
+                                setState(() {});
+                                Navigator.of(context).pop(true);
+                              },
+                            ),
+                            TextButton(
+                              style: TextButton.styleFrom(
+                                  backgroundColor: const Color(0xffBBBD88)),
+                              child: ReemKufi_Black(
+                                  textValue: 'Cancel',
+                                  size: displayHeight(context) * 0.03),
+                              onPressed: () {
+                                Navigator.of(context).pop(false);
+                              },
+                            ),
+                          ],
+                        ),
+                      ),
+                    ],
+                  );
+                },
+              );
+            })
+        : IconButton(
+            icon: const Icon(CupertinoIcons.suit_heart_fill),
+            onPressed: () {
+              showDialog(
+                barrierDismissible: false,
+                context: context, // user must tap button!
+                builder: (context) {
+                  return AlertDialog(
+                    backgroundColor: const Color(0xff283618),
+                    title: ReemKufi_OffWhite_Center(
+                        textValue:
+                            'Are you sure you want to un-favourite this product?',
+                        size: displayHeight(context) * 0.04),
+                    actions: <Widget>[
+                      Padding(
+                        padding: EdgeInsets.all(displayHeight(context) * 0.03),
+                        child: Row(
+                          mainAxisAlignment: MainAxisAlignment.spaceEvenly,
+                          children: [
+                            TextButton(
+                              style: TextButton.styleFrom(
+                                  backgroundColor: const Color(0xffFFFDF4)),
+                              child: ReemKufi_Black(
+                                  textValue: 'Yes',
+                                  size: displayHeight(context) * 0.03),
+                              onPressed: () {
+                                context
+                                    .read<UserProvider>()
+                                    .removeProductFromFavourites(widget.prodID);
+                                setState(() {});
                                 Navigator.of(context).pop(true);
                               },
                             ),
@@ -122,75 +167,6 @@ class _FavouriteButtonState extends State<FavouriteButton> {
                   );
                 },
               );
-
-        //UnFavouriteButton(prodID: widget.prodID);
-
-      }
-    ):
-    IconButton(
-            icon:Icon(CupertinoIcons.suit_heart_fill),
-        onPressed: () {
-          showDialog(
-            barrierDismissible: false,
-            context: context, // user must tap button!
-            builder: (context) {
-              return AlertDialog(
-                backgroundColor: const Color(0xff283618),
-                title: ReemKufi_OffWhite_Center(
-                    textValue:
-                    'Are you sure you want to un-favourite this product?',
-                    size: displayHeight(context) * 0.04),
-                actions: <Widget>[
-                  Padding(
-                    padding: EdgeInsets.all(displayHeight(context) * 0.03),
-                    child: Row(
-                      mainAxisAlignment: MainAxisAlignment.spaceEvenly,
-                      children: [
-                        TextButton(
-                          style: TextButton.styleFrom(
-                              backgroundColor: Color(0xffFFFDF4)),
-                          child: ReemKufi_Black(
-                              textValue: 'Yes',
-                              size: displayHeight(context) * 0.03),
-                          onPressed: () {
-                            //widget.isFavourite = !widget.isFavourite;
-
-                            //FavouriteButton(prodID: widget.prodID);
-                            //favouriteIcon = CupertinoIcons.suit_heart;
-                            context.read<UserProvider>()
-                                .removeProductFromFavourites(widget.prodID);
-
-
-                            setState(() {});
-                            Navigator.of(context).pop(true);
-                          },
-                        ),
-                        TextButton(
-                          style: TextButton.styleFrom(
-                              backgroundColor: Color(0xffBBBD88)),
-                          child: ReemKufi_Black(
-                              textValue: 'Cancel',
-                              size: displayHeight(context) * 0.03),
-                          onPressed: () {
-                            Navigator.of(context).pop(false);
-                          },
-                        ),
-                      ],
-                    ),
-                  ),
-                ],
-              );
-            },
-          );
-
-        }
-
-        );
+            });
   }
 }
-
-//CupertinoIcons.suit_heart
-
-
-
-

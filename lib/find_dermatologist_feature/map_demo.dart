@@ -19,7 +19,6 @@ class _MapDemoState extends State<MapDemo> with AutomaticKeepAliveClientMixin {
     setState(() {
       _markers.clear();
       for (final office in widget.selectedLocation.areas) {
-        //print(widget.selectedLocation.areaName);
         final marker = Marker(
           markerId: MarkerId(office.id),
           position: LatLng(office.coords.lat, office.coords.lng),
@@ -29,7 +28,6 @@ class _MapDemoState extends State<MapDemo> with AutomaticKeepAliveClientMixin {
           ),
         );
         _markers[office.name] = marker;
-        //print(widget.selectedLocation.areaName);
       }
 
     });

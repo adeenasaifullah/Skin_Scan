@@ -1,7 +1,6 @@
 import 'package:skin_scan/models/ingredient_model.dart';
 
 class ScannedProductModel{
-
   String productName;
   List<IngredientModel> ingredientList;
 
@@ -24,5 +23,4 @@ class ScannedProductModel{
     scannedProduct['ingredientList'] = ingredientList.map((v) => v.toJson()).toList();
     return scannedProduct;
   }
-
 }

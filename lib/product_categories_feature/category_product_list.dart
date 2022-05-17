@@ -1,17 +1,14 @@
-import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:firebase_image/firebase_image.dart';
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 import 'package:google_fonts/google_fonts.dart';
 import 'package:provider/provider.dart';
-import 'package:skin_scan/product_categories_feature/categories_list.dart';
 import 'package:skin_scan/product_categories_feature/product_categories_utilities.dart';
 import 'package:skin_scan/product_categories_feature/product_detail.dart';
 import 'package:skin_scan/product_categories_feature/product_filter.dart';
 import 'package:skin_scan/provider/search_provider.dart';
 import 'package:skin_scan/utilities/utility.dart';
 import '../entities/product_entities.dart';
-import '../main.dart';
 import '../provider/product_provider.dart';
 
 class CategoryProducts extends StatefulWidget {
@@ -42,7 +39,7 @@ class _CategoryProductsState extends State<CategoryProducts> {
     currentFilteredList = Provider.of<SearchProvider>(context, listen: false).filterAccToPrice(dropDownVal, categoryProdList);
     return Scaffold(
       appBar: AppBarCategories(screenName: widget.categoryTitle),
-      backgroundColor: Color(0xFFFFFDF4),
+      backgroundColor: const Color(0xFFFFFDF4),
       body: Column(
           mainAxisAlignment: MainAxisAlignment.start,
           crossAxisAlignment: CrossAxisAlignment.start,
@@ -101,10 +98,10 @@ class _SearchandFilterState extends State<SearchandFilter> {
               decoration: InputDecoration(
                 hintText: 'Search for a product',
                 hintStyle: GoogleFonts.rambla(
-                    color: Color(0xff283618),
+                    color: const Color(0xff283618),
                     fontSize: displayHeight(context) * 0.025,
                     fontStyle: FontStyle.italic),
-                fillColor: Color(0xffDADBC6),
+                fillColor: const Color(0xffDADBC6),
                 border: OutlineInputBorder(
                     borderRadius: BorderRadius.circular(50.0),
                     borderSide: BorderSide(
@@ -112,7 +109,7 @@ class _SearchandFilterState extends State<SearchandFilter> {
                         style: BorderStyle.solid)),
                 filled: true,
                 contentPadding: EdgeInsets.all(displayHeight(context) * 0.01),
-                suffixIcon: Icon(Icons.search),
+                suffixIcon: const Icon(Icons.search),
               ),
               onChanged: (value) {
                 if (searchController.text.isEmpty) {
@@ -121,7 +118,6 @@ class _SearchandFilterState extends State<SearchandFilter> {
                   List<Product> categoryProdList = Provider.of<ProductProvider>(context, listen: false).getProductsOfCategory(widget.categoryTitle);
                   currentFilteredList = Provider.of<SearchProvider>(context, listen: false).filterAccToPrice(dropDownVal, categoryProdList);
                 }
-                print("Value of search bar $value");
                 List<Product> filteredCategoryList =
                     Provider.of<SearchProvider>(context, listen: false).getFilteredList();
                 Provider.of<SearchProvider>(context, listen: false)
@@ -156,7 +152,7 @@ class _SearchandFilterState extends State<SearchandFilter> {
                     height: displayHeight(context) * 0.05,
                     width: displayWidth(context) * 0.05,
                     fit: BoxFit.fill),
-                color: Color(0xff283618)),
+                color: const Color(0xff283618)),
           ),
         )
       ],
@@ -178,7 +174,6 @@ class _DisplayProductsState extends State<DisplayProducts> {
   late int _rating;
   @override
   Widget build(BuildContext context) {
-    print('inside display product length ${widget.listOfCategoryProducts.length}');
     return Expanded(
       child: GridView.builder(
         primary: false,

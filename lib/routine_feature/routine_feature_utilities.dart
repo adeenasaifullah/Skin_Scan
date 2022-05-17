@@ -2,9 +2,7 @@ import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 import 'package:google_fonts/google_fonts.dart';
 import 'package:skin_scan/utilities/utility.dart';
-
 import 'view_routine.dart';
-
 
 class AppBarDetails extends StatefulWidget implements PreferredSizeWidget {
   final String screenName;
@@ -58,11 +56,11 @@ class _AppBarDetailsState extends State<AppBarDetails> {
   }
 }
 
-
 class AppBar2 extends StatefulWidget implements PreferredSizeWidget {
   final String screenName;
   final String subtitle;
-  const AppBar2({Key? key, required this.screenName, required this.subtitle}) : super(key: key);
+  const AppBar2({Key? key, required this.screenName, required this.subtitle})
+      : super(key: key);
 
   @override
   _AppBar2State createState() => _AppBar2State();
@@ -86,8 +84,8 @@ class _AppBar2State extends State<AppBar2> {
               onTap: () {
                 Navigator.pop(context);
                 Navigator.pop(context);
-                Navigator.of(context).push(MaterialPageRoute(
-                    builder: (context) => ViewRoutine()));
+                Navigator.of(context).push(
+                    MaterialPageRoute(builder: (context) => ViewRoutine()));
               }),
           title: RichText(
               textAlign: TextAlign.start,

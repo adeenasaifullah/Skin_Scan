@@ -25,20 +25,4 @@ class Product {
     required this.productRating,
 
   });
-
-  Map<String, dynamic> toJson() {
-    final Map<String, dynamic> data = {};
-    data['Brand'] = productBrand;
-    data['Category'] = nameOfCategory;
-    data['Description'] = productDescription;
-    data['Ingredients'] = productIngredients;
-    data['Price'] = productPrice;
-    data['Name'] = productName;
-    data['Skin Type'] = skinType;
-    data['How to use'] = howToUse;
-    data['Image'] = productImage;
-    data['Rating'] = productRating;
-
-    return data;
-  }
 }

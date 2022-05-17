@@ -2,14 +2,12 @@ import 'package:firebase_auth/firebase_auth.dart';
 import 'package:flutter/material.dart';
 import 'package:google_fonts/google_fonts.dart';
 import 'package:provider/provider.dart';
-import 'package:skin_scan/entities/product_entities.dart';
 import 'package:skin_scan/entities/routine_product_entities.dart';
 import 'package:skin_scan/provider/user_provider.dart';
 import 'package:skin_scan/routine_feature/routine_feature_utilities.dart';
 import 'package:skin_scan/utilities/utility.dart';
 import '../entities/routine_entities.dart';
 import '../entities/user_entities.dart';
-import '../provider/routine_provider.dart';
 import 'build_routine.dart';
 
 

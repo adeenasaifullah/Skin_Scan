@@ -16,7 +16,7 @@ class _SkinLogHistoryState extends State<SkinLogHistory> {
   Widget build(BuildContext context) {
     return Scaffold(
       backgroundColor: const Color(0xFFFFFDF4),
-      appBar: AppBarDetails(screenName: "Skin Log History"),
+      appBar: const AppBarDetails(screenName: "Skin Log History"),
       body: Padding(
         padding: const EdgeInsets.all(8.0),
         child: Column(
@@ -43,7 +43,7 @@ class _SkinLogHistoryState extends State<SkinLogHistory> {
                             mainAxisAlignment: MainAxisAlignment.spaceAround,
                             children: [
                               ReemKufi_Green(textValue: "14 March", size: displayHeight(context)*0.025),
-                              Icon(Icons.tag_faces, color: Colors.black)
+                              const Icon(Icons.tag_faces, color: Colors.black)
                             ],
                           ),
                         ));
@@ -54,7 +54,7 @@ class _SkinLogHistoryState extends State<SkinLogHistory> {
             ),
             Container(
                 height: displayHeight(context) * 0.3,
-                child: _LineChart()),
+                child: const _LineChart()),
           ],
         ),
       ),

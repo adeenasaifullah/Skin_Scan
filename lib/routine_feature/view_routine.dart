@@ -4,12 +4,9 @@ import 'package:flutter/material.dart';
 import 'package:google_fonts/google_fonts.dart';
 import 'package:provider/provider.dart';
 import 'package:skin_scan/provider/user_provider.dart';
-import 'package:skin_scan/routine_feature/routine_feature_utilities.dart';
 import 'package:skin_scan/utilities/bottom_app_bar.dart';
 import 'package:skin_scan/utilities/utility.dart';
-import '../entities/routine_entities.dart';
 import '../entities/user_entities.dart';
-import '../provider/routine_provider.dart';
 import 'build_routine.dart';
 
 class ViewRoutine extends StatefulWidget {
@@ -26,16 +23,8 @@ class _ViewRoutineState extends State<ViewRoutine> {
 
   @override
   Widget build(BuildContext context) {
-    Widget emptycontainer() {
-      setState(() {
-      });
-      return Container();
-    }
+
     Users user = context.watch<UserProvider>().getCurrentUser();
-    // int i = context
-    //     .read<UserProvider>()
-    //     .allUsers
-    //     .indexWhere((user) => user.userID == widget.currentUser.uid);
     return Scaffold(
         appBar: AppBar(
           elevation: 0,
@@ -79,10 +68,6 @@ class _ViewRoutineState extends State<ViewRoutine> {
             ? Column(
                 mainAxisAlignment: MainAxisAlignment.center,
                 children: [
-                  // const TextValue(
-                  //     text: "Click here to build a routine",
-                  //     textSize: 20,
-                  //     bold: true),
                   FloatingActionButton(
                     child: const Icon(
                       Icons.add,
@@ -176,12 +161,6 @@ class _ViewRoutineState extends State<ViewRoutine> {
                                           setState(() {});
                                         },
                                       ),
-
-                                      // routine name
-                                      // number of products
-                                      // line
-                                      // view clickable text
-                                      // display routine information here
                                     ],
                                   ),
                                 ),
@@ -194,20 +173,6 @@ class _ViewRoutineState extends State<ViewRoutine> {
                               ),
                             );
                           })),
-                  // Padding(
-                  //   padding: const EdgeInsets.fromLTRB(8, 5, 8, 24),
-                  //   child: FloatingActionButton(
-                  //     child: const Icon(
-                  //       Icons.add,
-                  //       color: Color(0xFFFFFDF4),
-                  //     ),
-                  //     onPressed: () {
-                  //       //print("adding routine");
-                  //     },
-                  //     backgroundColor: const Color(0xFF283618),
-                  //   ),
-                  // ),
-                  // const BottomBar(),
                 ],
               ));
   }

@@ -28,14 +28,9 @@ class IngredientProvider extends ChangeNotifier {
             ingredientDescription: ingredientModel.ingredientDescription
         );
         ingredientList.add(ingredient);
-        print(ingredient.ingredientName);
-        print(ingredient.ingredientRating);
-        print(ingredient.ingredientDescription);
-        print(ingredient.ingredientCategory);
       });
     });
     notifyListeners();
-
   }
 
   String titleCase(String ingredient){
@@ -48,7 +43,6 @@ class IngredientProvider extends ChangeNotifier {
         changeIngredient = changeIngredient + word.substring(1) + " " ;
       }
     }
-    //print(changeIngredient);
     return changeIngredient;
   }
 

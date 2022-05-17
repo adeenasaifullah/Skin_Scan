@@ -3,7 +3,6 @@ import 'package:flutter/cupertino.dart';
 import 'package:skin_scan/entities/ingredient_entities.dart';
 import 'package:skin_scan/models/ingredient_model.dart';
 import 'package:skin_scan/models/scanned_product_model.dart';
-
 import '../entities/scanned_product_entities.dart';
 
 class ScannedProductProvider extends ChangeNotifier {

@@ -1,8 +1,6 @@
-import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 import '../entities/product_entities.dart';
-import '../models/product_model.dart';
 
 class SearchProvider extends ChangeNotifier {
   List<Product> searchProductList = [];
@@ -20,17 +18,22 @@ class SearchProvider extends ChangeNotifier {
     notifyListeners();
   }
 
-  List<Product> searchBar(String searchText, List<Product> categoryProductList) {
+  List<Product> searchBar(
+      String searchText, List<Product> categoryProductList) {
     searchBarList.clear();
     searchBarActive = true;
     print("search product list is ${categoryProductList.length}");
     for (int i = 0; i < categoryProductList.length; i++) {
-      if (categoryProductList[i].productName.toLowerCase().contains(searchText)) {
+      if (categoryProductList[i]
+          .productName
+          .toLowerCase()
+          .contains(searchText)) {
         searchBarList.add(categoryProductList[i]);
-        print("In the list we have added ${categoryProductList[i].productName}");
+        print(
+            "In the list we have added ${categoryProductList[i].productName}");
       }
-          }
-    for(int j=0; j <searchBarList.length; j++) {
+    }
+    for (int j = 0; j < searchBarList.length; j++) {
       print("The search bar list contains ${searchBarList[j].productName}");
     }
     notifyListeners();
@@ -46,25 +49,21 @@ class SearchProvider extends ChangeNotifier {
     return dropdownvalue;
   }
 
-  List<Product> filterAccToPrice(String value, List<Product> categoryProductList) {
+  List<Product> filterAccToPrice(
+      String value, List<Product> categoryProductList) {
     filteredList.clear();
     setIsFilter();
 
     if (value == 'No filter') {
       filteredList.clear();
       filteredList.addAll(categoryProductList);
-      print('Filtered list ${filteredList}');
-    }
-
-    else if (value.contains('<=3000')) {
+    } else if (value.contains('<=3000')) {
       filteredList.clear();
       for (var product in searchProductList) {
         if (int.parse(product.productPrice) <= 3000) {
           filteredList.add(product);
-          print(product.productName);
         }
       }
-      print(filteredList);
     } else if (value.contains('>3000 & <=5000')) {
       filteredList.clear();
       for (var product in searchProductList) {
@@ -73,16 +72,13 @@ class SearchProvider extends ChangeNotifier {
           filteredList.add(product);
         }
       }
-      print(filteredList);
     } else {
       filteredList.clear();
       for (var product in searchProductList) {
         if (int.parse(product.productPrice) > 5000) {
           filteredList.add(product);
-          print(product.productName);
         }
       }
-      print(filteredList);
     }
     notifyListeners();
     return filteredList;
@@ -97,5 +93,4 @@ class SearchProvider extends ChangeNotifier {
     notifyListeners();
     return filteredList;
   }
-
 }

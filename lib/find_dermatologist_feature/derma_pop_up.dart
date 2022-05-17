@@ -36,9 +36,7 @@ class _DermaPopUpState extends State<DermaPopUp> {
         .locationList;
     for (var area in locationList) {
       areaList.add(area.areaName);
-      //print(area.areaName);
     }
-    //return areaList;
   }
 
   void dispose() {
