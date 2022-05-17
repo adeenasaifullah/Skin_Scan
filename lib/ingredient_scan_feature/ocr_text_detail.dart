@@ -10,27 +10,26 @@ class OcrTextDetail extends StatefulWidget {
   _OcrTextDetailState createState() => _OcrTextDetailState();
 }
 
-
 class _OcrTextDetailState extends State<OcrTextDetail> {
-
   void initState() {
     super.initState();
     CommaSeparateIngredients(widget.ocrText.value);
   }
 
-  CommaSeparateIngredients(String ocrText){
-     List ing = ocrText.split(',');
-     print("here");
-     for(String value in ing){
-       print(value);
-     }
+  CommaSeparateIngredients(String ocrText) {
+    List ing = ocrText.split(',');
+    for (String value in ing) {
+      print(value);
+    }
   }
 
   @override
   Widget build(BuildContext context) {
     return Scaffold(
       backgroundColor: const Color(0xFFFFFDF4),
-      appBar: AppBarDetails(screenName: "OCR Detail",),
+      appBar: AppBarDetails(
+        screenName: "OCR Detail",
+      ),
       body: ListView(
         children: <Widget>[
           ListTile(
@@ -62,4 +61,3 @@ class _OcrTextDetailState extends State<OcrTextDetail> {
     );
   }
 }
-

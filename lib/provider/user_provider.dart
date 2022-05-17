@@ -12,7 +12,7 @@ import 'package:skin_scan/profile_feature/scanned_products.dart';
 import 'package:skin_scan/provider/product_provider.dart';
 import '../entities/ingredient_entities.dart';
 import '../models/routine_model.dart';
-import '../models/users_adeena_model.dart';
+import '../models/users_model.dart';
 import '../entities/product_entities.dart';
 import '../entities/routine_product_entities.dart';
 import '../entities/user_entities.dart';

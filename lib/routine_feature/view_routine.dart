@@ -22,20 +22,9 @@ class ViewRoutine extends StatefulWidget {
 
 class _ViewRoutineState extends State<ViewRoutine> {
   @override
-
-
   @override
   Widget build(BuildContext context) {
-    Widget emptycontainer() {
-      setState(() {
-      });
-      return Container();
-    }
     Users user = context.watch<UserProvider>().getCurrentUser();
-    // int i = context
-    //     .read<UserProvider>()
-    //     .allUsers
-    //     .indexWhere((user) => user.userID == widget.currentUser.uid);
     return Scaffold(
         appBar: AppBar(
           elevation: 0,
@@ -79,10 +68,6 @@ class _ViewRoutineState extends State<ViewRoutine> {
             ? Column(
                 mainAxisAlignment: MainAxisAlignment.center,
                 children: [
-                  // const TextValue(
-                  //     text: "Click here to build a routine",
-                  //     textSize: 20,
-                  //     bold: true),
                   FloatingActionButton(
                     child: const Icon(
                       Icons.add,
@@ -153,10 +138,11 @@ class _ViewRoutineState extends State<ViewRoutine> {
                                       ),
 
                                       ReemKufi_Green(
-                                        textValue: (user.UserRoutines[index].RoutineName ==
-                                            "Morning")
-                                            ?"Number of products: ${Provider.of<UserProvider>(context, listen: false).AMlist.length.toString()}"
-                                            :"Number of products: ${Provider.of<UserProvider>(context, listen: false).PMlist.length.toString()}",
+                                        textValue: (user.UserRoutines[index]
+                                                    .RoutineName ==
+                                                "Morning")
+                                            ? "Number of products: ${Provider.of<UserProvider>(context, listen: false).AMlist.length.toString()}"
+                                            : "Number of products: ${Provider.of<UserProvider>(context, listen: false).PMlist.length.toString()}",
                                         size: displayHeight(context) * 0.02,
                                       ),
 
@@ -171,43 +157,27 @@ class _ViewRoutineState extends State<ViewRoutine> {
                                         onTap: () {
                                           Navigator.of(context).push(
                                               MaterialPageRoute(
-                                                  builder: (context) => BuildRoutine(
-                                                      selectedroutine: user.UserRoutines[index])));
+                                                  builder: (context) =>
+                                                      BuildRoutine(
+                                                          selectedroutine:
+                                                              user.UserRoutines[
+                                                                  index])));
                                           setState(() {});
                                         },
                                       ),
-
-                                      // routine name
-                                      // number of products
-                                      // line
-                                      // view clickable text
-                                      // display routine information here
                                     ],
                                   ),
                                 ),
                                 onTap: () {
                                   Navigator.of(context).push(MaterialPageRoute(
                                       builder: (context) => BuildRoutine(
-                                          selectedroutine: user.UserRoutines[index])));
+                                          selectedroutine:
+                                              user.UserRoutines[index])));
                                   setState(() {});
                                 },
                               ),
                             );
                           })),
-                  // Padding(
-                  //   padding: const EdgeInsets.fromLTRB(8, 5, 8, 24),
-                  //   child: FloatingActionButton(
-                  //     child: const Icon(
-                  //       Icons.add,
-                  //       color: Color(0xFFFFFDF4),
-                  //     ),
-                  //     onPressed: () {
-                  //       //print("adding routine");
-                  //     },
-                  //     backgroundColor: const Color(0xFF283618),
-                  //   ),
-                  // ),
-                  // const BottomBar(),
                 ],
               ));
   }

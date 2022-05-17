@@ -3,7 +3,7 @@ import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 import 'package:skin_scan/register_feature/create_account.dart';
 import 'package:flutter_signin_button/flutter_signin_button.dart';
-import '../models/users_adeena_model.dart';
+import '../models/users_model.dart';
 import '../utilities/bottom_app_bar.dart';
 import '../utilities/progressIndicator.dart';
 import '../utilities/utility.dart';

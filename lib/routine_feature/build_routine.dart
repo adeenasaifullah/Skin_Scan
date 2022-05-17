@@ -4,10 +4,8 @@ import 'package:flutter/material.dart';
 import 'package:provider/provider.dart';
 import 'package:skin_scan/routine_feature/routine_feature_utilities.dart';
 import 'package:skin_scan/utilities/utility.dart';
-
 import '../entities/routine_entities.dart';
 import '../entities/user_entities.dart';
-import '../provider/routine_provider.dart';
 import '../provider/user_provider.dart';
 import 'add_product.dart';
 
@@ -24,15 +22,15 @@ class _BuildRoutineState extends State<BuildRoutine> {
   @override
   Widget build(BuildContext context) {
     Users user = context.watch<UserProvider>().getCurrentUser();
-    //int ind = context.read<UserProvider>().allUsers.indexWhere((user) => user.userID == widget.currentUser.uid);
-    int index = user.UserRoutines.indexWhere((routine) => routine.RoutineName == widget.selectedroutine.RoutineName);
+    int index = user.UserRoutines.indexWhere(
+        (routine) => routine.RoutineName == widget.selectedroutine.RoutineName);
     return Scaffold(
-      appBar: AppBar2(screenName:"Your ${user.UserRoutines[index].RoutineName} Routine" , subtitle: "",),
+      appBar: AppBar2(
+        screenName: "Your ${user.UserRoutines[index].RoutineName} Routine",
+        subtitle: "",
+      ),
       backgroundColor: const Color(0xFFFFFDF4),
-      body: (user
-              .UserRoutines[index]
-              .listofproducts
-              .isEmpty)
+      body: (user.UserRoutines[index].listofproducts.isEmpty)
           ? Center(
               child: Column(
                 mainAxisAlignment: MainAxisAlignment.center,
@@ -49,8 +47,7 @@ class _BuildRoutineState extends State<BuildRoutine> {
                     onPressed: () {
                       Navigator.of(context).push(MaterialPageRoute(
                           builder: (context) => AddProduct(
-                              currentroutine: user
-                                  .UserRoutines[index])));
+                              currentroutine: user.UserRoutines[index])));
                       setState(() {});
                     },
                     backgroundColor: const Color(0x000453e2),
@@ -74,10 +71,7 @@ class _BuildRoutineState extends State<BuildRoutine> {
               Expanded(
                   child: ListView.builder(
                 scrollDirection: Axis.vertical,
-                itemCount: user
-                    .UserRoutines[index]
-                    .listofproducts
-                    .length,
+                itemCount: user.UserRoutines[index].listofproducts.length,
                 itemBuilder: (context, i) {
                   return Row(
                     children: [
@@ -106,7 +100,10 @@ class _BuildRoutineState extends State<BuildRoutine> {
                               height: 80,
                               child: const VerticalDivider(
                                   color: const Color(0xFF283618))),
-                          (i == user.UserRoutines[index].listofproducts.length - 1)
+                          (i ==
+                                  user.UserRoutines[index].listofproducts
+                                          .length -
+                                      1)
                               ? Padding(
                                   padding: EdgeInsets.fromLTRB(
                                       8, displayHeight(context) * 0.002, 8, 24),
@@ -120,7 +117,8 @@ class _BuildRoutineState extends State<BuildRoutine> {
                                       Navigator.of(context).push(
                                           MaterialPageRoute(
                                               builder: (context) => AddProduct(
-                                                  currentroutine: user.UserRoutines[index])));
+                                                  currentroutine: user
+                                                      .UserRoutines[index])));
                                     },
                                   ),
                                 )
@@ -137,36 +135,61 @@ class _BuildRoutineState extends State<BuildRoutine> {
                                 displayWidth(context) * 0.08,
                                 1),
                             child: Container(
-                             child: (user.UserRoutines[index].listofproducts[i].category == "Mask")
-                              ?Padding(
-                                padding: const EdgeInsets.all(16),
-                                child: Image.asset("assets/Masks.png",),
-                              )
-                              :(user.UserRoutines[index].listofproducts[i].category == "Serum")
-                                 ?Padding(
-                                   padding: const EdgeInsets.all(16),
-                                   child: Image.asset("assets/serumbottle.png"),
-                                 )
-                                 :(user.UserRoutines[index].listofproducts[i].category == "Toner")
-                                   ? Padding(
-                                     padding: const EdgeInsets.all(16),
-                                     child: Image.asset("assets/tonerbottle.png"),
-                                   )
-                                   : (user.UserRoutines[index].listofproducts[i].category == "Exfoliator")
+                              child: (user.UserRoutines[index].listofproducts[i]
+                                          .category ==
+                                      "Mask")
+                                  ? Padding(
+                                      padding: const EdgeInsets.all(16),
+                                      child: Image.asset(
+                                        "assets/Masks.png",
+                                      ),
+                                    )
+                                  : (user.UserRoutines[index].listofproducts[i]
+                                              .category ==
+                                          "Serum")
                                       ? Padding(
-                                        padding: const EdgeInsets.all(16),
-                                        child: Image.asset("assets/exfoliators.png"),
-                                      )
-                                      : (user.UserRoutines[index].listofproducts[i].category == "Moisturizer")
-                                         ? Padding(
-                                           padding: const EdgeInsets.all(16),
-                                           child: Image.asset("assets/moisturizerbottle.png"),
-                                         )
-                                         : Padding(
-                                           padding: const EdgeInsets.all(16),
-                                           child: Image.asset("assets/Suncare.png"),
-                                         ) ,
-
+                                          padding: const EdgeInsets.all(16),
+                                          child: Image.asset(
+                                              "assets/serumbottle.png"),
+                                        )
+                                      : (user.UserRoutines[index]
+                                                  .listofproducts[i].category ==
+                                              "Toner")
+                                          ? Padding(
+                                              padding: const EdgeInsets.all(16),
+                                              child: Image.asset(
+                                                  "assets/tonerbottle.png"),
+                                            )
+                                          : (user
+                                                      .UserRoutines[index]
+                                                      .listofproducts[i]
+                                                      .category ==
+                                                  "Exfoliator")
+                                              ? Padding(
+                                                  padding:
+                                                      const EdgeInsets.all(16),
+                                                  child: Image.asset(
+                                                      "assets/exfoliators.png"),
+                                                )
+                                              : (user
+                                                          .UserRoutines[index]
+                                                          .listofproducts[i]
+                                                          .category ==
+                                                      "Moisturizer")
+                                                  ? Padding(
+                                                      padding:
+                                                          const EdgeInsets.all(
+                                                              16),
+                                                      child: Image.asset(
+                                                          "assets/moisturizerbottle.png"),
+                                                    )
+                                                  : Padding(
+                                                      padding:
+                                                          const EdgeInsets.all(
+                                                              16),
+                                                      child: Image.asset(
+                                                          "assets/Suncare.png"),
+                                                    ),
                               height: displayHeight(context) * 0.16,
                               width: displayHeight(context) * 0.18,
                               decoration: const BoxDecoration(
@@ -179,7 +202,10 @@ class _BuildRoutineState extends State<BuildRoutine> {
                                   )),
                             ),
                           ),
-                          (i ==user.UserRoutines[index].listofproducts.length - 1)
+                          (i ==
+                                  user.UserRoutines[index].listofproducts
+                                          .length -
+                                      1)
                               ? Padding(
                                   padding: EdgeInsets.fromLTRB(
                                       8, displayHeight(context) * 0.002, 8, 24),
@@ -208,7 +234,8 @@ class _BuildRoutineState extends State<BuildRoutine> {
                                   width: displayWidth(context) * 0.18,
                                   child: Center(
                                     child: ReemKufi_Green_Bold(
-                                      textValue: user.UserRoutines[index].listofproducts[i].category,
+                                      textValue: user.UserRoutines[index]
+                                          .listofproducts[i].category,
                                       size: displayHeight(context) * 0.02,
                                     ),
                                   ),
@@ -221,22 +248,26 @@ class _BuildRoutineState extends State<BuildRoutine> {
                                         bottomRight: Radius.circular(11.0),
                                       )),
                                 ),
-
-                              Padding(
-                                padding: const EdgeInsets.only(left: 8),
-                                child: InkWell(
-                                            child: Icon(Icons.remove_circle, color: Color(0xFF283618) , size: displayHeight(context) * 0.02,),
-                                            onTap: ()
-                                            {
-
-                                              Provider.of<UserProvider>(context, listen: false).removeProductFromRoutine(
-                                                  user.UserRoutines[index].listofproducts[i], user.UserRoutines[index].RoutineName);
-                                              setState(() {
-
-                                              });
-                                            },
-                                          ),
-                              )
+                                Padding(
+                                  padding: const EdgeInsets.only(left: 8),
+                                  child: InkWell(
+                                    child: Icon(
+                                      Icons.remove_circle,
+                                      color: Color(0xFF283618),
+                                      size: displayHeight(context) * 0.02,
+                                    ),
+                                    onTap: () {
+                                      Provider.of<UserProvider>(context,
+                                              listen: false)
+                                          .removeProductFromRoutine(
+                                              user.UserRoutines[index]
+                                                  .listofproducts[i],
+                                              user.UserRoutines[index]
+                                                  .RoutineName);
+                                      setState(() {});
+                                    },
+                                  ),
+                                )
                               ],
                             ),
                           ),
@@ -259,15 +290,16 @@ class _BuildRoutineState extends State<BuildRoutine> {
                               )),
                               child: Center(
                                 child: ReemKufi_Green_Bold(
-                                    textValue: user
-                                        .UserRoutines[index]
-                                        .listofproducts[i]
-                                        .productname,
+                                    textValue: user.UserRoutines[index]
+                                        .listofproducts[i].productname,
                                     size: displayHeight(context) * 0.018),
                               ),
                             ),
                           ),
-                          (i ==user.UserRoutines[index].listofproducts.length - 1)
+                          (i ==
+                                  user.UserRoutines[index].listofproducts
+                                          .length -
+                                      1)
                               ? Padding(
                                   padding: EdgeInsets.fromLTRB(
                                       8, displayHeight(context) * 0.002, 8, 24),
@@ -280,82 +312,6 @@ class _BuildRoutineState extends State<BuildRoutine> {
                               : Container(width: 0, height: 0),
                         ],
                       ),
-
-                      // Column(
-                      //   children: [
-                      //     Padding(
-                      //       padding: EdgeInsets.fromLTRB(
-                      //           0,
-                      //           displayHeight(context) * 0.04,
-                      //           displayWidth(context) * 0.1,
-                      //           0),
-                      //       child: Container(
-                      //         height: displayHeight(context) * 0.02,
-                      //         width: displayWidth(context) * 0.15,
-                      //         child: Center(
-                      //           child: InkWell(
-                      //             child: Icon(Icons.delete_outline, color: Color(0xFF283618) , size: 1,),
-                      //             onTap: ()
-                      //             {
-                      //
-                      //               Provider.of<UserProvider>(context, listen: false).removeProductFromRoutine(
-                      //                   user.UserRoutines[index].listofproducts[i], user.UserRoutines[index].RoutineName);
-                      //               setState(() {
-                      //
-                      //               });
-                      //             },
-                      //           )
-                      //         ),
-                      //         // decoration: const BoxDecoration(
-                      //         //     color: Color(0xFFDADBC6),
-                      //         //     borderRadius: BorderRadius.only(
-                      //         //       topLeft: Radius.circular(11.0),
-                      //         //       topRight: Radius.circular(11.0),
-                      //         //       bottomLeft: Radius.circular(11.0),
-                      //         //       bottomRight: Radius.circular(11.0),
-                      //         //     )),
-                      //       ),
-                      //     ),
-                      //     Padding(
-                      //       padding: EdgeInsets.fromLTRB(
-                      //           displayWidth(context) * 0.005,
-                      //           0.55,
-                      //           displayWidth(context) * 0.1,
-                      //           0.5),
-                      //       child: Container(
-                      //         height: displayHeight(context) * 0.12,
-                      //         width: displayWidth(context) * 0.17,
-                      //         decoration: const BoxDecoration(
-                      //           //color: Color(0xFFDADBC6),
-                      //             borderRadius: BorderRadius.only(
-                      //               topLeft: Radius.circular(11.0),
-                      //               topRight: Radius.circular(11.0),
-                      //               bottomLeft: Radius.circular(11.0),
-                      //               bottomRight: Radius.circular(11.0),
-                      //             )),
-                      //         // child: Center(
-                      //         //   child: ReemKufi_Green_Bold(
-                      //         //       textValue: user
-                      //         //           .UserRoutines[index]
-                      //         //           .listofproducts[i]
-                      //         //           .productname,
-                      //         //       size: displayHeight(context) * 0.018),
-                      //         // ),
-                      //       ),
-                      //     ),
-                      //     (i ==user.UserRoutines[index].listofproducts.length - 1)
-                      //         ? Padding(
-                      //       padding: EdgeInsets.fromLTRB(
-                      //           8, displayHeight(context) * 0.002, 8, 24),
-                      //       child: Icon(
-                      //         Icons.add,
-                      //         color: Colors.transparent,
-                      //         size: displayHeight(context) * 0.05,
-                      //       ),
-                      //     )
-                      //         : Container(width: 0, height: 0),
-                      //   ],
-                      // )
                     ],
                   );
                 },

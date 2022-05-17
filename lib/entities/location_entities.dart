@@ -1,16 +1,15 @@
-class Location{
+class Location {
   String areaName;
   LatitudeLongitude areaLocation;
   List<Area> areas;
 
-  Location({
-    required this.areaName,
-    required this.areaLocation,
-    required this.areas
-  });
+  Location(
+      {required this.areaName,
+      required this.areaLocation,
+      required this.areas});
 }
 
-class Area{
+class Area {
   String address;
   String id;
   String name;
@@ -24,10 +23,9 @@ class Area{
     required this.name,
     required this.phone,
   });
-
 }
 
-class LatitudeLongitude{
+class LatitudeLongitude {
   double lat;
   double lng;
 

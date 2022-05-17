@@ -11,7 +11,7 @@ class SearchProvider extends ChangeNotifier {
   bool isFilter = false;
   String dropdownvalue = 'No filter';
   List<Product> searchBarList = [];
-  bool searchBarActive = false;
+  late bool searchBarActive;
 
   void makeCopy(List<Product> categoryProductList) {
     searchProductList.clear();
