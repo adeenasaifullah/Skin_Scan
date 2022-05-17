@@ -1,4 +1,4 @@
-import 'dart:ffi';
+//import 'dart:ffi';
 import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:firebase_auth/firebase_auth.dart';
 import 'package:flutter/cupertino.dart';
@@ -492,6 +492,51 @@ class UserProvider extends ChangeNotifier {
     UserModel updatedUser = UserModel(
         userID: user.userID,
         UserName: user.UserName,
+        UserEmail: user.UserEmail,
+        UserRoutines: userroutine,
+        UserFavouriteProducts: user.UserFavouriteProducts,
+        ScannedProducts: scannedProd
+    );
+
+    updateUserRoutine(updatedUser);
+    print('firestore id ' + user.userID);
+    print('auth id ' + FirebaseAuth.instance.currentUser!.uid);
+    print("Scanned product added");
+
+
+  }
+
+  editProfile(String name, String email){
+
+    Users user = getCurrentUser();
+    //int index = allUsers.indexWhere((user) => user.userID == currentUser.uid);
+
+    var userroutine = user
+        .UserRoutines
+        .map((e) => RoutineModel(
+        RoutineName: e.RoutineName,
+        listofproducts: e.listofproducts
+            .map((p) => RoutineProductsModel(
+            productname: p.productname,
+            category: p.category,
+            days: p.days))
+            .toList()))
+        .toList();
+
+    var scannedProd = user.ScannedProducts.map((e) => ScannedProductModel(
+        productName: e.productName,
+        ingredientList:  e.ingredientList
+            .map((p) => IngredientModel(
+          ingredientName: p.ingredientName,
+          ingredientCategory: p.ingredientCategory,
+          ingredientDescription: p.ingredientDescription,
+          ingredientRating: p.ingredientRating,
+        ))
+            .toList())).toList();
+
+    UserModel updatedUser = UserModel(
+        userID: user.userID,
+        UserName: name,
         UserEmail: user.UserEmail,
         UserRoutines: userroutine,
         UserFavouriteProducts: user.UserFavouriteProducts,

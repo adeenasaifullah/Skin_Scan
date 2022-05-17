@@ -24,6 +24,9 @@ class _MyProfileState extends State<MyProfile> {
 
   @override
   Widget build(BuildContext context) {
+    String currentName = Provider.of<UserProvider>(context, listen: false)
+        .getCurrentUser()
+        .UserName;
     productsList = context.read<ProductProvider>().getProducts;
     FavouriteLists= context
         .watch<UserProvider>()
@@ -79,7 +82,10 @@ class _MyProfileState extends State<MyProfile> {
                   Column(
                     mainAxisAlignment: MainAxisAlignment.spaceAround,
                     children: [
-                      ReemKufi_Green_Bold(textValue: "Afzal     ", size: displayHeight(context) * 0.05),
+                      currentName == "" ?
+                      ReemKufi_Green_Bold(textValue:  "", size: displayHeight(context) * 0.05)
+                      :
+                      ReemKufi_Green_Bold(textValue:currentName, size: displayHeight(context) * 0.05),
                       Row(children: [
                         ReemKufi_Green_Bold(textValue: "Edit Profile", size: displayHeight(context) * 0.03),
                         InkWell(

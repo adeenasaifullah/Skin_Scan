@@ -68,14 +68,30 @@ class ProductProvider extends ChangeNotifier {
     notifyListeners();
   }
 
+
   Future<void> updateRatinginDB(Product product) async {
 
     CollectionReference products =
         FirebaseFirestore.instance.collection('products');
 
+    ProductModel prod = ProductModel(
+        prodID: product.prodID,
+        nameOfCategory: product.nameOfCategory,
+        skinType: product.skinType,
+        productPrice: product.productPrice,
+        productIngredients: product.productIngredients,
+        productImage: product.productImage,
+        productDescription: product.productDescription,
+        howToUse: product.howToUse,
+        productName: product.productName,
+        productRating: product.productRating,
+        productBrand: product.productBrand
+
+    );
+
     await products
-        .doc(product.prodID)
-        .update(product.toJson())
+        .doc(prod.prodID)
+        .update(prod.toJson())
         .whenComplete(() => print('rating updated'));
     notifyListeners();
   }

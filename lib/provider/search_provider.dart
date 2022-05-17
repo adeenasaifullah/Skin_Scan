@@ -5,17 +5,36 @@ import '../entities/product_entities.dart';
 import '../models/product_model.dart';
 
 class SearchProvider extends ChangeNotifier {
-
   List<Product> searchProductList = [];
   List<Product> filteredList = [];
   List<Product> get search => searchProductList;
   bool isFilter = false;
   String dropdownvalue = 'No filter';
+  List<Product> searchBarList = [];
 
   void makeCopy(List<Product> categoryProductList) {
     searchProductList.clear();
     searchProductList.addAll(categoryProductList);
     print(searchProductList);
+    notifyListeners();
+  }
+
+  void searchBar(String searchText, List<Product> categoryProductList) {
+    searchBarList.clear();
+    //makeCopy(categoryTitle);
+
+    print("search product list is ${categoryProductList.length}");
+    for (int i = 0; i < categoryProductList.length; i++) {
+      if (categoryProductList[i].productName.toLowerCase().contains(searchText)) {
+        searchBarList.add(categoryProductList[i]);
+        print("In the list we have added ${categoryProductList[i].productName}");
+        //print("In the product list we had ${categoryProductList[i].productName}");
+      }
+          }
+    for(int j=0; j <searchBarList.length; j++){
+      print("The search bar list contains ${searchBarList[j].productName}");
+
+    }
     notifyListeners();
   }
 
@@ -37,19 +56,17 @@ class SearchProvider extends ChangeNotifier {
         }
       }
       print(filteredList);
-    }
-
-    else if (value.contains('>3000 & <=5000')) {
+    } else if (value.contains('>3000 & <=5000')) {
       filteredList.clear();
       for (var product in searchProductList) {
-        if (int.parse(product.productPrice) > 3000 && int.parse(product.productPrice) <= 5000) {
+        if (int.parse(product.productPrice) > 3000 &&
+            int.parse(product.productPrice) <= 5000) {
           filteredList.add(product);
         }
       }
       print(filteredList);
-    }
-    else {
-     filteredList.clear();
+    } else {
+      filteredList.clear();
       for (var product in searchProductList) {
         if (int.parse(product.productPrice) > 5000) {
           filteredList.add(product);
@@ -71,8 +88,5 @@ class SearchProvider extends ChangeNotifier {
     return filteredList;
   }
 
-  void searchProductsWithinCategory(String query) {
-
-  }
-
+  void searchProductsWithinCategory(String query) {}
 }

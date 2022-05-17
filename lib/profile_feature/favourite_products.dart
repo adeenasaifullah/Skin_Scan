@@ -125,41 +125,4 @@ class _FavouriteProductsCardState extends State<FavouriteProductsCard> {
   }
 }
 
-class Rating extends StatefulWidget {
-  final int productRating;
-  const Rating({Key? key, required this.productRating}) : super(key: key);
 
-  @override
-  _RatingState createState() => _RatingState();
-}
-
-class _RatingState extends State<Rating> {
-  @override
-  Widget build(BuildContext context) {
-    return RatingBar(
-      itemSize: displayHeight(context) * 0.03,
-      initialRating: widget.productRating.toDouble(),
-      direction: Axis.horizontal,
-      allowHalfRating: false,
-      itemCount: 5,
-      ratingWidget: RatingWidget(
-        full: Icon(
-          Icons.star,
-          color: Color(0xff283618),
-        ),
-        half: Icon(
-          Icons.star_border,
-          color: Color(0xff283618),
-        ),
-        empty: Icon(
-          Icons.star_border,
-          color: Color(0xff283618),
-        ),
-      ),
-      itemPadding: EdgeInsets.symmetric(horizontal: 4.0),
-      onRatingUpdate: (rating) {
-        print(rating);
-      },
-    );
-  }
-}
