@@ -176,7 +176,7 @@ class _createAccountState extends State<createAccount> {
                           passwordController.text.trim());
 
                       if (result is AuthenticateUser) {
-                        Provider.of<UserProvider>(context, listen: false).getCurrentUser();
+                        Provider.of<UserProvider>(context, listen: false).getCurrentUserFromDb();
                         Navigator.push(
                             context,
                             MaterialPageRoute(

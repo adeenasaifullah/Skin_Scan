@@ -1,3 +1,5 @@
+import 'dart:math';
+
 import 'package:firebase_auth/firebase_auth.dart';
 import 'package:flutter/material.dart';
 import 'package:google_fonts/google_fonts.dart';
@@ -22,8 +24,19 @@ class _HomePageScreenState extends State<HomePageScreen> {
 
   final AuthService _auth = AuthService();
   DateTime time = DateTime.now();
+  dynamic currentTime = DateFormat.jm().format(DateTime.now());
+  List<String> quotes = ["Nature gives you the face you have at twenty; it is up to you to merit the face you have at fifty ― Coco Chanel.",
+  "It's not just what substances you put on your skin. Inappropriate inflammation is rooted in diet, how you handle stress, how you rest, and your exposure to environmental toxins ― Andrew Weil.",
+  "Invest in your skin. It is going to represent you for a very long time ― Linden Tyler", "What is your skin trying to tell you? Often the skin is a metaphor for deeper issues and a way for your body to send up a red flag to warn you that all is not well underneath ― Dr. Judyth Reichenberg."
+    , "Beauty comes in all shapes, colors, and sizes, and when we can accept this truth, we will no longer hurt ourselves or each other for the simple things that make us human ― Gregory Landsman",
+    "Beauty is about being comfortable in your own skin. It's about knowing and accepting who you are ― Ellen DeGeneres"
+  ];
+  Random random = new Random();
+
   @override
   Widget build(BuildContext context) {
+    print(time.hour.toInt());
+    //print(DateFormat('h:mm', 'en_US').parseLoose('2:00 PM'));
     String name = context.watch<UserProvider>().getCurrentUser().UserName;
     return Scaffold(
       body: SingleChildScrollView(
@@ -265,6 +278,7 @@ class _HomePageScreenState extends State<HomePageScreen> {
                   child: Padding(
                     padding: const EdgeInsets.fromLTRB(0, 16, 0, 16),
                     child: Column(
+                      mainAxisAlignment: MainAxisAlignment.start,
                       crossAxisAlignment: CrossAxisAlignment.start,
                       children: [
                         Text('Reminder',
@@ -272,16 +286,51 @@ class _HomePageScreenState extends State<HomePageScreen> {
                               color: Color(0xffFFFDF4),
                               fontSize: displayHeight(context) * 0.03,
                             )),
-                        Text('Don’t forget to follow your evening routine!',
-                            style: GoogleFonts.reemKufi(
-                                color: Color(0xff283618),
-                                fontSize: displayHeight(context) * 0.02,
-                                fontStyle: FontStyle.italic)),
-                        Text('Next step:  apply Caquina Beauty moisturizer',
-                            style: GoogleFonts.reemKufi(
-                                color: Color(0xff283618),
-                                fontSize: displayHeight(context) * 0.02,
-                                fontWeight: FontWeight.bold))
+                        (time.hour.toInt() <= 14 && time.hour.toInt() >= 9 && Provider.of<UserProvider>(context, listen:false).currUser.UserRoutines[0].listofproducts.isNotEmpty)
+                        ?
+                        Column(
+                          crossAxisAlignment: CrossAxisAlignment.start,
+                          children: [
+                            Text('Don’t forget to follow your morning routine!',
+                                style: GoogleFonts.reemKufi(
+                                    color: Color(0xff283618),
+                                    fontSize: displayHeight(context) * 0.02,
+                                    fontStyle: FontStyle.italic)),
+
+                            Text('Next step: apply ${Provider.of<UserProvider>(context, listen:false).currUser.UserRoutines[0].listofproducts[0].productname}',
+                                style: GoogleFonts.reemKufi(
+                                    color: Color(0xff283618),
+                                    fontSize: displayHeight(context) * 0.02,
+                                    fontWeight: FontWeight.bold))
+                          ],
+                        )
+
+                            :(time.hour.toInt() >= 20 && time.hour.toInt() <= 23 && Provider.of<UserProvider>(context, listen:false).currUser.UserRoutines[1].listofproducts.isNotEmpty)
+                        ?Column(
+
+                            crossAxisAlignment: CrossAxisAlignment.start,
+                          children: [
+                            Text('Don’t forget to follow your night routine!',
+                                style: GoogleFonts.reemKufi(
+                                    color: Color(0xff283618),
+                                    fontSize: displayHeight(context) * 0.02,
+                                    fontStyle: FontStyle.italic)),
+
+                            Text('Next step: apply ${Provider.of<UserProvider>(context, listen:false).currUser.UserRoutines[1].listofproducts[0].productname}',
+                                style: GoogleFonts.reemKufi(
+                                    color: Color(0xff283618),
+                                    fontSize: displayHeight(context) * 0.02,
+                                    fontWeight: FontWeight.bold))
+                          ],
+                        )
+                            : Padding(
+                              padding: EdgeInsets.all(displayWidth(context)*0.03),
+                              child: Text(quotes[random.nextInt(5)],
+                              style: GoogleFonts.reemKufi(
+                                  color: Color(0xff283618),
+                                  fontSize: displayHeight(context) * 0.02,
+                                  fontStyle: FontStyle.italic)),
+                            )
                       ],
                     ),
                   ),
