@@ -18,10 +18,12 @@ class Rating extends StatefulWidget {
 }
 
 class _RatingState extends State<Rating> {
+
   double rating = 0;
 
   @override
   Widget build(BuildContext context) {
+
     return RatingBar(
       itemSize: displayHeight(context) * 0.025,
       initialRating: widget.product.productRating.toDouble(),

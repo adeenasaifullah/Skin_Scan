@@ -329,7 +329,6 @@ class Rambla_Green_Italic extends StatelessWidget {
 }
 
 class field extends StatefulWidget {
-  //final bool? obscuredText;
   final String labelText;
   final String hintText;
   final Icon prefixIcon;
@@ -346,12 +345,9 @@ class field extends StatefulWidget {
     required this.hintText,
     required this.prefixIcon,
     this.suffixIcon,
-    //required this.onChanged,
     this.validateInput,
     required this.autoFocus,
     this.onPressed,
-    //this.obscuredText,
-    //this.onPressed
   }) : super(key: key);
 
   @override
@@ -390,14 +386,12 @@ class _fieldState extends State<field> {
           suffixIcon: IconButton(
               icon: Icon(widget.suffixIcon),
               onPressed: () {
-
                 if (_obscured == false) {
                   widget.suffixIcon = Icons.visibility_off;
                 } else {
                   widget.suffixIcon = Icons.visibility;
                 }
                 _obscured = !_obscured;
-
                 setState(() {});
               }),
         ),

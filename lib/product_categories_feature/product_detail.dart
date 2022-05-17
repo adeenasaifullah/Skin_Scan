@@ -80,6 +80,7 @@ class _ProductDetailState extends State<ProductDetail> {
                     )
                   ],
                 ),
+
                 Rating(product: widget.product),
                 //RatingButton(product: widget.product),
                 SizedBox(height: displayHeight(context) * 0.02),

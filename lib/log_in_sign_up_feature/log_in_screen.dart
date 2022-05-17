@@ -121,10 +121,9 @@ class _LogInScreenState extends State<LogInScreen> {
                             emailController.text.trim(),
                             passwordController.text.trim());
                         if (result is AuthenticateUser) {
+                          //await context.read<UserProvider>().getUserFavouriteProducts(context.read<ProductProvider>().productsList);
                           await context.read<UserProvider>().getCurrentUserFromDb();
-                          //await context.read<UserProvider>().getCurrentUser();
                           await context.read<UserProvider>().getUserFavouriteProducts(context.read<ProductProvider>().productsList);
-
 
                           Navigator.push(context,
                               MaterialPageRoute(
@@ -136,15 +135,6 @@ class _LogInScreenState extends State<LogInScreen> {
                       }
                     }
 
-                    // {
-                    //   bool isValid = _formKey.currentState!.validate();
-                    //   if (isValid) {
-                    //     Navigator.push(
-                    //         context,
-                    //         MaterialPageRoute(
-                    //             builder: (context) => MyBottomAppBar()));
-                    //   }
-                    // },
                     ),
                 SizedBox(height: displayHeight(context) * 0.02),
                 Row(mainAxisAlignment: MainAxisAlignment.center, children: [

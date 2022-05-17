@@ -14,80 +14,79 @@ import '../entities/product_entities.dart';
 import '../main.dart';
 import '../provider/product_provider.dart';
 
-
 class CategoryProducts extends StatefulWidget {
   final String categoryTitle;
-  const CategoryProducts({Key? key, required this.categoryTitle, })
-      : super(key: key);
+  const CategoryProducts({
+    Key? key,
+    required this.categoryTitle,
+  }) : super(key: key);
 
   @override
   _CategoryProductsState createState() => _CategoryProductsState();
-
-
 }
 
 class _CategoryProductsState extends State<CategoryProducts> {
-
   late List<Product> currentFilteredList;
 
   @override
   void initState() {
     // TODO: implement initState
-   setState(() {
-
-   });
+    setState(() {});
     super.initState();
   }
 
-
-   @override
+  @override
   Widget build(BuildContext context) {
-     Widget emptycontainer() {
-       setState(() {
-       });
-       return Container();
-     }
-     currentFilteredList = Provider.of<SearchProvider>(context, listen: false).filteredList;
-     print("Current filtered list: $currentFilteredList");
+    Widget emptycontainer() {
+      setState(() {});
+      return Container();
+    }
+
+    currentFilteredList = Provider.of<SearchProvider>(context, listen: false).filteredList;
+    print("Current filtered list: $currentFilteredList");
     return Scaffold(
-        appBar: AppBarDetails(screenName: widget.categoryTitle),
-        backgroundColor: Color(0xFFFFFDF4),
-        body: Column(
-            mainAxisAlignment: MainAxisAlignment.start,
-            crossAxisAlignment: CrossAxisAlignment.start,
-            children: [
-              SizedBox(height: displayHeight(context) * 0.02),
-              SearchandFilter(categoryTitle: widget.categoryTitle),
-              SizedBox(height: displayHeight(context) * 0.01),
-              Padding(
-                padding: EdgeInsets.only(
-                    top: displayHeight(context) * 0.02,
-                    left: displayWidth(context) * 0.04),
-                child: Rambla_Green_Italic(
-
-                  textValue: (currentFilteredList.isNotEmpty)
-                    ?  'Found ${currentFilteredList.length} result(s)'
+      appBar: AppBarCategories(screenName: widget.categoryTitle),
+      backgroundColor: Color(0xFFFFFDF4),
+      body: Column(
+          mainAxisAlignment: MainAxisAlignment.start,
+          crossAxisAlignment: CrossAxisAlignment.start,
+          children: [
+            SizedBox(height: displayHeight(context) * 0.02),
+            SearchandFilter(categoryTitle: widget.categoryTitle),
+            SizedBox(height: displayHeight(context) * 0.01),
+            Padding(
+              padding: EdgeInsets.only(
+                  top: displayHeight(context) * 0.02,
+                  left: displayWidth(context) * 0.04),
+              child: Rambla_Green_Italic(
+                textValue: (currentFilteredList.isNotEmpty)
+                    ? 'Found ${currentFilteredList.length} result(s)'
                     : ' Found ${context.read<ProductProvider>().getProductsOfCategory(widget.categoryTitle).length} results',
-                  size: displayWidth(context) * 0.045,
-                ),
+                size: displayWidth(context) * 0.045,
               ),
-              SizedBox(height: displayHeight(context) * 0.02),
-              ((Provider.of<SearchProvider>(context, listen: false).dropdownvalue)!='No filter')
-                ?DisplayProducts(listOfCategoryProducts: currentFilteredList)
-              :DisplayProducts(listOfCategoryProducts: Provider.of<ProductProvider>(context, listen: false).getProductsOfCategory(widget.categoryTitle)),
-              emptycontainer(),
+            ),
+            SizedBox(height: displayHeight(context) * 0.02),
+            ((Provider.of<SearchProvider>(context, listen: false)
+                        .dropdownvalue) !=
+                    'No filter')
+                ? DisplayProducts(listOfCategoryProducts: currentFilteredList)
+                : DisplayProducts(
+                    listOfCategoryProducts:
+                        Provider.of<ProductProvider>(context, listen: false)
+                            .getProductsOfCategory(widget.categoryTitle)),
+            emptycontainer(),
 
-              //DisplayProducts(listOfCategoryProducts: Provider.of<SearchProvider>(context, listen: false).filteredList)
-            ]),
-        );
+            //DisplayProducts(listOfCategoryProducts: Provider.of<SearchProvider>(context, listen: false).filteredList)
+          ]),
+    );
   }
-
 }
 
 class SearchandFilter extends StatefulWidget {
-
   final String categoryTitle;
-  SearchandFilter({Key? key, required this.categoryTitle,
+  SearchandFilter({
+    Key? key,
+    required this.categoryTitle,
   }) : super(key: key);
 
   @override
@@ -95,6 +94,8 @@ class SearchandFilter extends StatefulWidget {
 }
 
 class _SearchandFilterState extends State<SearchandFilter> {
+  TextEditingController searchController = TextEditingController();
+  bool searchBarActive = false;
   @override
   Widget build(BuildContext context) {
     return Row(
@@ -103,26 +104,38 @@ class _SearchandFilterState extends State<SearchandFilter> {
         Expanded(
           child: Padding(
             padding:
-            EdgeInsets.symmetric(horizontal: displayWidth(context) * 0.04),
+                EdgeInsets.symmetric(horizontal: displayWidth(context) * 0.04),
             child: TextField(
-                autofocus: false,
-                textAlign: TextAlign.center,
-                decoration: InputDecoration(
-                  hintText: 'Search for a product',
-                  hintStyle: GoogleFonts.rambla(
-                      color: Color(0xff283618),
-                      fontSize: displayHeight(context) * 0.025,
-                      fontStyle: FontStyle.italic),
-                  fillColor: Color(0xffDADBC6),
-                  border: OutlineInputBorder(
-                      borderRadius: BorderRadius.circular(50.0),
-                      borderSide: BorderSide(
-                          width: displayWidth(context) * 0.03,
-                          style: BorderStyle.solid)),
-                  filled: true,
-                  contentPadding: EdgeInsets.all(displayHeight(context) * 0.01),
-                  suffixIcon: Icon(Icons.search),
-                )),
+              controller: searchController,
+              autofocus: false,
+              textAlign: TextAlign.center,
+              decoration: InputDecoration(
+                hintText: 'Search for a product',
+                hintStyle: GoogleFonts.rambla(
+                    color: Color(0xff283618),
+                    fontSize: displayHeight(context) * 0.025,
+                    fontStyle: FontStyle.italic),
+                fillColor: Color(0xffDADBC6),
+                border: OutlineInputBorder(
+                    borderRadius: BorderRadius.circular(50.0),
+                    borderSide: BorderSide(
+                        width: displayWidth(context) * 0.03,
+                        style: BorderStyle.solid)),
+                filled: true,
+                contentPadding: EdgeInsets.all(displayHeight(context) * 0.01),
+                suffixIcon: Icon(Icons.search),
+              ),
+              onChanged: (value) {
+                searchBarActive = true;
+                print("Value of search bar $value");
+                List<Product> categoryProductList =
+                    Provider.of<ProductProvider>(context, listen: false)
+                        .getProductsOfCategory(widget.categoryTitle);
+                Provider.of<SearchProvider>(context, listen: false)
+                    .searchBar(value, categoryProductList);
+                setState(() {});
+              },
+            ),
           ),
         ),
         Padding(
@@ -137,7 +150,12 @@ class _SearchandFilterState extends State<SearchandFilter> {
                   Navigator.push(
                       context,
                       MaterialPageRoute(
-                        builder: (context) => Filter(listOfCategoryProducts: context.read<ProductProvider>().getProductsOfCategory(widget.categoryTitle), categoryTitle:widget.categoryTitle ,),
+                        builder: (context) => Filter(
+                          listOfCategoryProducts: context
+                              .read<ProductProvider>()
+                              .getProductsOfCategory(widget.categoryTitle),
+                          categoryTitle: widget.categoryTitle,
+                        ),
                       ));
                 },
                 icon: Image.asset('assets/filter.png',
@@ -155,9 +173,7 @@ class _SearchandFilterState extends State<SearchandFilter> {
 class DisplayProducts extends StatefulWidget {
   final List<Product> listOfCategoryProducts;
 
-  DisplayProducts(
-      {Key? key,
-        required this.listOfCategoryProducts})
+  DisplayProducts({Key? key, required this.listOfCategoryProducts})
       : super(key: key);
 
   @override
@@ -176,66 +192,106 @@ class _DisplayProductsState extends State<DisplayProducts> {
         itemCount: widget.listOfCategoryProducts.length,
         gridDelegate: SliverGridDelegateWithFixedCrossAxisCount(
           childAspectRatio:
-          displayWidth(context) / displayHeight(context) * 1.15,
+              displayWidth(context) / displayHeight(context) * 1.15,
           crossAxisCount: 2,
         ),
         itemBuilder: (BuildContext context, int index) {
-          return
+          return Padding(
+              padding: const EdgeInsets.fromLTRB(4, 4, 4, 4),
+              child: InkWell(
+                child: Card(
+                    elevation: 2,
+                    color: const Color(0xffBFC2A4),
+                    shape: RoundedRectangleBorder(
+                        borderRadius: BorderRadius.circular(30)),
+                    child: Column(
+                      mainAxisAlignment: MainAxisAlignment.start,
+                      children: [
+                        //SizedBox(height: displayHeight(context) * 0.005),
+                        Padding(
+                          padding: EdgeInsets.only(
+                            left: displayWidth(context) * 0.25,
+                          ),
+                          child: FavouriteButton(
+                              prodID:
+                                  widget.listOfCategoryProducts[index].prodID),
+                        ),
 
-    Padding(
-        padding: const EdgeInsets.fromLTRB(4, 4, 4, 4),
-        child: InkWell(
-          child: Card(
-              elevation: 2,
-              color: const Color(0xffBFC2A4),
-              shape: RoundedRectangleBorder(
-                  borderRadius: BorderRadius.circular(30)),
-              child: Column(
-                mainAxisAlignment: MainAxisAlignment.start,
-                children: [
-                  //SizedBox(height: displayHeight(context) * 0.005),
-                  Padding(
-                    padding: EdgeInsets.only(
-                      left: displayWidth(context) * 0.25,
+                        Image(
+                          image: FirebaseImage(
+                              widget.listOfCategoryProducts[index].productImage,
+                              cacheRefreshStrategy: CacheRefreshStrategy.NEVER),
+                          fit: BoxFit.contain,
+                          height: displayHeight(context) * 0.1,
+                          width: displayWidth(context) * 0.25,
+                        ),
+                        SizedBox(height: displayHeight(context) * 0.005),
+                        Padding(
+                          padding: EdgeInsets.all(displayWidth(context) * 0.03),
+                          child: ReemKufi_Green(
+                              textValue: widget
+                                  .listOfCategoryProducts[index].productName,
+                              size: displayHeight(context) * 0.025),
+                        ),
+                        SizedBox(height: displayHeight(context) * 0.005),
+                        Rating(product: widget.listOfCategoryProducts[index]),
+                        SizedBox(height: displayHeight(context) * 0.005),
+                        Rambla_Green_Italic(
+                            textValue: widget
+                                    .listOfCategoryProducts[index].productPrice
+                                    .toString() +
+                                ' PKR',
+                            size: displayHeight(context) * 0.025),
+                      ],
+                    )),
+                onTap: () {
+                  Navigator.push(
+                    context,
+                    MaterialPageRoute(
+                      builder: (context) => ProductDetail(
+                          product: widget.listOfCategoryProducts[index]),
                     ),
-                    child: FavouriteButton(prodID: widget.listOfCategoryProducts[index].prodID),
-                  ),
-
-                  Image(
-                    image: FirebaseImage(widget.listOfCategoryProducts[index].productImage, cacheRefreshStrategy:
-                    CacheRefreshStrategy.NEVER),
-                    fit: BoxFit.contain,
-                    height: displayHeight(context) * 0.1,
-                    width: displayWidth(context) * 0.25, ),
-                  SizedBox(height: displayHeight(context) * 0.005),
-                  Padding(
-                    padding:  EdgeInsets.all(displayWidth(context)*0.03),
-                    child: ReemKufi_Green(
-                        textValue: widget.listOfCategoryProducts[index].productName,
-                        size: displayHeight(context) * 0.025),
-                  ),
-                  SizedBox(height: displayHeight(context) * 0.005),
-                  Rating(product: widget.listOfCategoryProducts[index]),
-                  SizedBox(height: displayHeight(context) * 0.005),
-                  Rambla_Green_Italic(
-                      textValue: widget.listOfCategoryProducts[index].productPrice.toString() + ' PKR',
-                      size: displayHeight(context) * 0.025),
-                ],
-              )),
-          onTap: () {
-            Navigator.push(
-              context,
-              MaterialPageRoute(
-                builder: (context) => ProductDetail(
-                  product: widget.listOfCategoryProducts[index]
-                ),
-              ),
-            );
-          },
-        ));
+                  );
+                },
+              ));
         },
-
       ),
+    );
+  }
+}
+
+class AppBarCategories extends StatefulWidget implements PreferredSizeWidget {
+  final String screenName;
+  const AppBarCategories({Key? key, required this.screenName}) : super(key: key);
+
+  @override
+  _AppBarCategoriesState createState() => _AppBarCategoriesState();
+
+  @override
+  // TODO: implement preferredSize
+  Size get preferredSize => const Size.fromHeight(50);
+}
+
+class _AppBarCategoriesState extends State<AppBarCategories> {
+  @override
+  Widget build(BuildContext context) {
+    return PreferredSize(
+      preferredSize: const Size.fromHeight(100),
+      child: AppBar(
+          elevation: 0,
+          backgroundColor: const Color(0xFFFFFDF4),
+          centerTitle: false,
+          leading: InkWell(
+              child: const Icon(Icons.arrow_back),
+              onTap: () {
+                Navigator.pop(context);
+                Provider.of<SearchProvider>(context, listen: false).dropdownvalue = 'No filter';
+              }),
+          title: ReemKufi_Grey(
+          textValue: widget.screenName, size: displayHeight(context) * 0.03),
+          iconTheme: const IconThemeData(
+            color: Color(0xFF4D4D4D), //change your color here
+          )),
     );
   }
 }

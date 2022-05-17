@@ -26,6 +26,9 @@ class _MyProfileState extends State<MyProfile> {
 
   @override
   Widget build(BuildContext context) {
+    String currentName = Provider.of<UserProvider>(context, listen: false)
+        .getCurrentUser()
+        .UserName;
     productsList = context.read<ProductProvider>().getProducts;
     FavouriteLists= context
         .watch<UserProvider>()
@@ -70,7 +73,7 @@ class _MyProfileState extends State<MyProfile> {
         ],
       ),
       body: Padding(
-        padding: EdgeInsets.fromLTRB(0, 32, 0, 32),
+        padding: EdgeInsets.fromLTRB(displayWidth(context)*0.01, displayWidth(context)*0.01, displayWidth(context)*0.01, displayWidth(context)*0.01),
         child: SingleChildScrollView(
           child: Column(
             mainAxisAlignment: MainAxisAlignment.center,
@@ -81,9 +84,12 @@ class _MyProfileState extends State<MyProfile> {
                   Column(
                     mainAxisAlignment: MainAxisAlignment.spaceAround,
                     children: [
-                      ReemKufi_Green_Bold(textValue: "Afzal     ", size: displayHeight(context) * 0.05),
+                      currentName == "" ?
+                      ReemKufi_Green_Bold(textValue:  "", size: displayHeight(context) * 0.04)
+                      :
+                      ReemKufi_Green_Bold(textValue:currentName, size: displayHeight(context) * 0.04),
                       Row(children: [
-                        ReemKufi_Green_Bold(textValue: "Edit Profile", size: displayHeight(context) * 0.03),
+                        ReemKufi_Green_Bold(textValue: "Edit Profile", size: displayHeight(context) * 0.025),
                         InkWell(
                           child: Icon(Icons.create_rounded),
                           onTap: () {

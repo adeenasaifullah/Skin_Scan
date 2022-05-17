@@ -9,6 +9,7 @@ class ProductModel {
   String skinType;
   String productImage;
   num productRating;
+  var prodID;
 
 
   ProductModel({
@@ -22,6 +23,8 @@ class ProductModel {
     required this.skinType,
     required this.productImage,
     required this.productRating,
+    this.prodID,
+
 
   });
 
@@ -37,6 +40,7 @@ class ProductModel {
       howToUse: json['How to use'],
       productImage: json['Image'] as String,
       productRating: json['Rating'],
+      prodID: json['prodID'],
 
     );
   }
@@ -53,6 +57,7 @@ class ProductModel {
     data['How to use'] = howToUse;
     data['Image'] = productImage;
     data['Rating'] = productRating;
+    data['prodID'] = prodID;
 
     return data;
   }

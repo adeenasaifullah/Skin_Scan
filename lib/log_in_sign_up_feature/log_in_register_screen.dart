@@ -1,28 +1,14 @@
 import 'package:firebase_auth/firebase_auth.dart';
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
-import 'package:google_sign_in/google_sign_in.dart';
-import 'package:provider/provider.dart';
-import 'package:skin_scan/provider/google_sign_in.dart';
-import 'package:provider/provider.dart';
-import 'package:skin_scan/entities/user_entities.dart';
-import 'package:skin_scan/provider/user_provider.dart';
 import 'package:skin_scan/register_feature/create_account.dart';
 import 'package:flutter_signin_button/flutter_signin_button.dart';
 import '../models/users_adeena_model.dart';
-import '../entities/product_entities.dart';
-import '../entities/routine_entities.dart';
-import '../entities/routine_product_entities.dart';
-import '../main.dart';
-import '../register_feature/account_created.dart';
 import '../utilities/bottom_app_bar.dart';
 import '../utilities/progressIndicator.dart';
 import '../utilities/utility.dart';
-import 'home_page_screen.dart';
 import 'log_in_screen.dart';
 import 'package:skin_scan/services/auth.dart';
-import 'package:skin_scan/entities/user_entities.dart';
-
 
 class LogInRegisterScreen extends StatefulWidget {
   const LogInRegisterScreen({Key? key}) : super(key: key);
