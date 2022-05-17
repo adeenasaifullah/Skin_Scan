@@ -27,7 +27,6 @@ class _AppBarDetailsState extends State<AppBarDetails> {
       child: AppBar(
           elevation: 0,
           backgroundColor: const Color(0xFFFFFDF4),
-          //centerTitle: true,
           leading: InkWell(
               child: const Icon(Icons.arrow_back),
               onTap: () {
@@ -78,7 +77,6 @@ class _AppBar2State extends State<AppBar2> {
       child: AppBar(
           elevation: 0,
           backgroundColor: const Color(0xFFFFFDF4),
-          //centerTitle: true,
           leading: InkWell(
               child: const Icon(Icons.arrow_back),
               onTap: () {

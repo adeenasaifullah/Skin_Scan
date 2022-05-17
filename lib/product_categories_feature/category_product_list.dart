@@ -34,9 +34,13 @@ class _CategoryProductsState extends State<CategoryProducts> {
 
   @override
   Widget build(BuildContext context) {
-    String dropDownVal = Provider.of<SearchProvider>(context, listen: false).dropdownvalue;
-    List<Product> categoryProdList = Provider.of<ProductProvider>(context, listen: false).getProductsOfCategory(widget.categoryTitle);
-    currentFilteredList = Provider.of<SearchProvider>(context, listen: false).filterAccToPrice(dropDownVal, categoryProdList);
+    String dropDownVal =
+        Provider.of<SearchProvider>(context, listen: false).dropdownvalue;
+    List<Product> categoryProdList =
+        Provider.of<ProductProvider>(context, listen: false)
+            .getProductsOfCategory(widget.categoryTitle);
+    currentFilteredList = Provider.of<SearchProvider>(context, listen: false)
+        .filterAccToPrice(dropDownVal, categoryProdList);
     return Scaffold(
       appBar: AppBarCategories(screenName: widget.categoryTitle),
       backgroundColor: const Color(0xFFFFFDF4),
@@ -59,10 +63,13 @@ class _CategoryProductsState extends State<CategoryProducts> {
               ),
             ),
             SizedBox(height: displayHeight(context) * 0.02),
-            (Provider.of<SearchProvider>(context, listen: false).searchBarActive) ?
-            DisplayProducts(
-                    listOfCategoryProducts: Provider.of<SearchProvider>(context, listen: false).getSearchList())
-            : DisplayProducts(listOfCategoryProducts: currentFilteredList)
+            (Provider.of<SearchProvider>(context, listen: false)
+                    .searchBarActive)
+                ? DisplayProducts(
+                    listOfCategoryProducts:
+                        Provider.of<SearchProvider>(context, listen: false)
+                            .getSearchList())
+                : DisplayProducts(listOfCategoryProducts: currentFilteredList)
           ]),
     );
   }
@@ -113,17 +120,24 @@ class _SearchandFilterState extends State<SearchandFilter> {
               ),
               onChanged: (value) {
                 if (searchController.text.isEmpty) {
-                  Provider.of<SearchProvider>(context, listen: false).searchBarActive = false;
-                  String dropDownVal = Provider.of<SearchProvider>(context, listen: false).dropdownvalue;
-                  List<Product> categoryProdList = Provider.of<ProductProvider>(context, listen: false).getProductsOfCategory(widget.categoryTitle);
-                  currentFilteredList = Provider.of<SearchProvider>(context, listen: false).filterAccToPrice(dropDownVal, categoryProdList);
+                  Provider.of<SearchProvider>(context, listen: false)
+                      .searchBarActive = false;
+                  String dropDownVal =
+                      Provider.of<SearchProvider>(context, listen: false)
+                          .dropdownvalue;
+                  List<Product> categoryProdList =
+                      Provider.of<ProductProvider>(context, listen: false)
+                          .getProductsOfCategory(widget.categoryTitle);
+                  currentFilteredList =
+                      Provider.of<SearchProvider>(context, listen: false)
+                          .filterAccToPrice(dropDownVal, categoryProdList);
                 }
                 List<Product> filteredCategoryList =
-                    Provider.of<SearchProvider>(context, listen: false).getFilteredList();
+                    Provider.of<SearchProvider>(context, listen: false)
+                        .getFilteredList();
                 Provider.of<SearchProvider>(context, listen: false)
                     .searchBar(value, filteredCategoryList);
-                setState(() {
-                });
+                setState(() {});
               },
             ),
           ),
@@ -252,7 +266,8 @@ class _DisplayProductsState extends State<DisplayProducts> {
 
 class AppBarCategories extends StatefulWidget implements PreferredSizeWidget {
   final String screenName;
-  const AppBarCategories({Key? key, required this.screenName}) : super(key: key);
+  const AppBarCategories({Key? key, required this.screenName})
+      : super(key: key);
 
   @override
   _AppBarCategoriesState createState() => _AppBarCategoriesState();
@@ -275,10 +290,12 @@ class _AppBarCategoriesState extends State<AppBarCategories> {
               child: const Icon(Icons.arrow_back),
               onTap: () {
                 Navigator.pop(context);
-                Provider.of<SearchProvider>(context, listen: false).dropdownvalue = 'No filter';
+                Provider.of<SearchProvider>(context, listen: false)
+                    .dropdownvalue = 'No filter';
               }),
           title: ReemKufi_Grey(
-          textValue: widget.screenName, size: displayHeight(context) * 0.03),
+              textValue: widget.screenName,
+              size: displayHeight(context) * 0.03),
           iconTheme: const IconThemeData(
             color: Color(0xFF4D4D4D), //change your color here
           )),

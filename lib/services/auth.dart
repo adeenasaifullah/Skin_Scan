@@ -9,7 +9,7 @@ import '../models/routine_model.dart';
 import '../models/routine_product_model.dart';
 import '../entities/routine_entities.dart';
 import '../entities/user_entities.dart';
-import 'package:skin_scan/models/users_adeena_model.dart';
+import 'package:skin_scan/models/users_model.dart';
 
 import '../models/scanned_product_model.dart';
 

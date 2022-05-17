@@ -22,7 +22,7 @@ import 'package:liquid_progress_indicator/liquid_progress_indicator.dart';
 import 'dart:async';
 import 'package:firebase_core/firebase_core.dart';
 import 'dart:math' as math;
-import 'models/users_adeena_model.dart';
+import 'models/users_model.dart';
 import 'log_in_sign_up_feature/log_in_register_screen.dart';
 import 'services/auth.dart';
 

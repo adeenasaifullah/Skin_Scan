@@ -9,9 +9,8 @@ class Users {
   final String UserName;
   final String UserEmail;
   List<Routine> UserRoutines = [];
-  List<String> UserFavouriteProducts =[];
+  List<String> UserFavouriteProducts = [];
   List<ScannedProduct> ScannedProducts = [];
-
 
   Users(
       {required this.UserFavouriteProducts,

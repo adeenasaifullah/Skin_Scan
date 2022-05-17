@@ -1,16 +1,15 @@
 class Product {
   var prodID;
-   String productBrand;
-   String nameOfCategory;
-   String productDescription;
-   String howToUse;
-   String productIngredients;
-   String productName;
-   String productPrice;
-   String skinType;
-   String productImage;
-   num productRating;
-
+  String productBrand;
+  String nameOfCategory;
+  String productDescription;
+  String howToUse;
+  String productIngredients;
+  String productName;
+  String productPrice;
+  String skinType;
+  String productImage;
+  num productRating;
 
   Product({
     required this.productBrand,
@@ -23,6 +22,5 @@ class Product {
     required this.skinType,
     required this.productImage,
     required this.productRating,
-
   });
 }

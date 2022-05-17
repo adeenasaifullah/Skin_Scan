@@ -19,11 +19,8 @@ class ViewRoutine extends StatefulWidget {
 
 class _ViewRoutineState extends State<ViewRoutine> {
   @override
-
-
   @override
   Widget build(BuildContext context) {
-
     Users user = context.watch<UserProvider>().getCurrentUser();
     return Scaffold(
         appBar: AppBar(
@@ -138,10 +135,11 @@ class _ViewRoutineState extends State<ViewRoutine> {
                                       ),
 
                                       ReemKufi_Green(
-                                        textValue: (user.UserRoutines[index].RoutineName ==
-                                            "Morning")
-                                            ?"Number of products: ${Provider.of<UserProvider>(context, listen: false).AMlist.length.toString()}"
-                                            :"Number of products: ${Provider.of<UserProvider>(context, listen: false).PMlist.length.toString()}",
+                                        textValue: (user.UserRoutines[index]
+                                                    .RoutineName ==
+                                                "Morning")
+                                            ? "Number of products: ${Provider.of<UserProvider>(context, listen: false).AMlist.length.toString()}"
+                                            : "Number of products: ${Provider.of<UserProvider>(context, listen: false).PMlist.length.toString()}",
                                         size: displayHeight(context) * 0.02,
                                       ),
 
@@ -156,8 +154,11 @@ class _ViewRoutineState extends State<ViewRoutine> {
                                         onTap: () {
                                           Navigator.of(context).push(
                                               MaterialPageRoute(
-                                                  builder: (context) => BuildRoutine(
-                                                      selectedroutine: user.UserRoutines[index])));
+                                                  builder: (context) =>
+                                                      BuildRoutine(
+                                                          selectedroutine:
+                                                              user.UserRoutines[
+                                                                  index])));
                                           setState(() {});
                                         },
                                       ),
@@ -167,7 +168,8 @@ class _ViewRoutineState extends State<ViewRoutine> {
                                 onTap: () {
                                   Navigator.of(context).push(MaterialPageRoute(
                                       builder: (context) => BuildRoutine(
-                                          selectedroutine: user.UserRoutines[index])));
+                                          selectedroutine:
+                                              user.UserRoutines[index])));
                                   setState(() {});
                                 },
                               ),
