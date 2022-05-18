@@ -5,7 +5,6 @@ import 'package:google_fonts/google_fonts.dart';
 import 'package:provider/provider.dart';
 import 'package:skin_scan/entities/ingredient_entities.dart';
 import 'package:skin_scan/entities/scanned_product_entities.dart';
-import 'package:skin_scan/provider/scanned_product_provider.dart';
 import 'package:skin_scan/utilities/utility.dart';
 import '../ingredient_search_feature/ingredient_details.dart';
 import '../main.dart';
@@ -46,7 +45,6 @@ class _IngredientsListState extends State<IngredientsList> {
                     controller: productName_controller,
                     validator: (productName) {
                       if (productName_controller.text.isEmpty) {
-                        print("validated");
                         return "* Required";
                       } else {
                         return null;
@@ -213,9 +211,7 @@ class _IngredientListViewState extends State<IngredientListView> {
   List<String> distinctIngredientName = [];
 
   void RemoveDuplicates() {
-    print('length:' + widget.ingredientName.length.toString());
     distinctIngredientName = widget.ingredientName.toSet().toList();
-    print('length:' + distinctIngredientName.length.toString());
   }
 
   Future<List<Ingredient>> ExtractIngredientInfo(
@@ -242,13 +238,10 @@ class _IngredientListViewState extends State<IngredientListView> {
           if (!snapshot.hasData) {
             return Center(child: CircularProgressIndicator());
           } else {
-            print("Extraction Complete");
-            print(snapshot.data?.length);
             return Expanded(
               child: ListView.builder(
                   itemCount: snapshot.data?.length,
                   itemBuilder: (context, index) {
-                    print(snapshot.data?.length);
                     return InkWell(
                       onTap: () {
                         Navigator.of(context).push(MaterialPageRoute(

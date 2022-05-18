@@ -30,6 +30,6 @@ class CategoryProvider with ChangeNotifier {
       });
     });
     notifyListeners();
-    print('category list ${categoriesList}');
+
   }
 }

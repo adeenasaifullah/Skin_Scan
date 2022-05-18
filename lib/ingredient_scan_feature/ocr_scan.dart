@@ -6,12 +6,10 @@ import 'package:google_fonts/google_fonts.dart';
 import 'package:provider/provider.dart';
 import 'package:skin_scan/entities/ingredient_entities.dart';
 import 'package:skin_scan/ingredient_scan_feature/analyzing_screen.dart';
-import 'package:skin_scan/main.dart';
 import 'package:skin_scan/utilities/utility.dart';
 import '../provider/ingredient_provider.dart';
 import '../utilities/bottom_app_bar.dart';
-import 'ingredient_list.dart';
-import 'ocr_text_detail.dart';
+
 
 class OcrScan extends StatefulWidget {
   const OcrScan({Key? key}) : super(key: key);
@@ -51,15 +49,15 @@ class _OcrScanState extends State<OcrScan> {
       value = value.replaceAll(',', "");
       if (value.length > 4) {
         ingredientName.add(value.trim());
-        print(value);
+
       }
     }
   }
 
   void RemoveDuplicates() {
-    print('length:' + ingredientName.length.toString());
+
     distinctIngredientName = ingredientName.toSet().toList();
-    print('length:' + distinctIngredientName.length.toString());
+
   }
 
   Future<List<Ingredient>> ExtractIngredientInfo(
@@ -75,7 +73,7 @@ class _OcrScanState extends State<OcrScan> {
     ingredientList =
         await Provider.of<IngredientProvider>(context, listen: false)
             .ingredientList;
-    print("here");
+
     return ingredientList;
   }
 
@@ -396,7 +394,7 @@ class OcrTextWidget extends StatelessWidget {
     for (String value in ing) {
       value = value.replaceAll(',', "");
       ingredientName.add(value.trim());
-      print(value);
+
     }
   }
 

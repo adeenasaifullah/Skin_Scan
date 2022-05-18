@@ -7,6 +7,8 @@ import 'package:skin_scan/services/auth.dart';
 import '../models/users_model.dart';
 import '../log_in_sign_up_feature/log_in_screen.dart';
 import '../main.dart';
+import '../provider/categories_provider.dart';
+import '../provider/product_provider.dart';
 import '../provider/user_provider.dart';
 import '../utilities/utility.dart';
 import 'account_created.dart';
@@ -148,13 +150,14 @@ class _createAccountState extends State<createAccount> {
                   buttonText: 'Create Account',
                   onPressed: () async {
                     if (_formKey.currentState!.validate()) {
-                      print(emailController.text);
-                      print(passwordController.text);
+
                       dynamic result = await _auth.registerWithEmailAndPassword(
                           emailController.text.trim(),
                           passwordController.text.trim());
 
                       if (result is AuthenticateUser) {
+                        await context.read<CategoryProvider>().getCategoriesFromDb();
+                        await context.read<ProductProvider>().getProductsFromDatabase();
                         Provider.of<UserProvider>(context, listen: false)
                             .getCurrentUserFromDb();
                         Navigator.push(

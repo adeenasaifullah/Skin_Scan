@@ -9,12 +9,12 @@ class SearchProvider extends ChangeNotifier {
   bool isFilter = false;
   String dropdownvalue = 'No filter';
   List<Product> searchBarList = [];
-  late bool searchBarActive;
+  bool searchBarActive = false;
 
   void makeCopy(List<Product> categoryProductList) {
     searchProductList.clear();
     searchProductList.addAll(categoryProductList);
-    print(searchProductList);
+
     notifyListeners();
   }
 
@@ -22,20 +22,17 @@ class SearchProvider extends ChangeNotifier {
       String searchText, List<Product> categoryProductList) {
     searchBarList.clear();
     searchBarActive = true;
-    print("search product list is ${categoryProductList.length}");
+
     for (int i = 0; i < categoryProductList.length; i++) {
       if (categoryProductList[i]
           .productName
           .toLowerCase()
           .contains(searchText)) {
         searchBarList.add(categoryProductList[i]);
-        print(
-            "In the list we have added ${categoryProductList[i].productName}");
+
       }
     }
-    for (int j = 0; j < searchBarList.length; j++) {
-      print("The search bar list contains ${searchBarList[j].productName}");
-    }
+
     notifyListeners();
     return searchBarList;
   }
@@ -52,7 +49,7 @@ class SearchProvider extends ChangeNotifier {
   List<Product> filterAccToPrice(
       String value, List<Product> categoryProductList) {
     filteredList.clear();
-    setIsFilter();
+    //setIsFilter();
 
     if (value == 'No filter') {
       filteredList.clear();
@@ -84,13 +81,13 @@ class SearchProvider extends ChangeNotifier {
     return filteredList;
   }
 
-  setIsFilter() {
-    isFilter = true;
-    notifyListeners();
-  }
+  // setIsFilter() {
+  //   isFilter = true;
+  //   //notifyListeners();
+  // }
 
   List<Product> getFilteredList() {
-    notifyListeners();
+    //notifyListeners();
     return filteredList;
   }
 }

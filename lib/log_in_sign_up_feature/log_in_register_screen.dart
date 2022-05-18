@@ -130,9 +130,7 @@ class _LogInRegisterScreenState extends State<LogInRegisterScreen> {
                                 });
                               });
                             }
-                            // Provider.of<GoogleSignInProvider>(context, listen: false).googleSignIn;
-                            // print('im in method');
-                            // print('im below method');
+
                             dynamic result = await _auth.signInWithGoogle();
                             if (result is AuthenticateUser) {
                               Navigator.push(
@@ -148,16 +146,7 @@ class _LogInRegisterScreenState extends State<LogInRegisterScreen> {
                         ),
                       ),
                       SizedBox(height: displayHeight(context) * 0.02),
-                      // Padding(
-                      //   padding: EdgeInsets.only(
-                      //       left: displayHeight(context) * 0.05,
-                      //       right: displayHeight(context) * 0.05),
-                      //   child: SignInButton(
-                      //     Buttons.Facebook,
-                      //     text: "Sign up with Facebook",
-                      //     onPressed: () {},
-                      //   ),
-                      // ),
+
                     ],
                   ),
                 ),

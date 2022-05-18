@@ -36,7 +36,7 @@ class _HomePageScreenState extends State<HomePageScreen> {
 
   @override
   Widget build(BuildContext context) {
-    String name = context.watch<UserProvider>().getCurrentUser().UserName;
+    String name = context.read<UserProvider>().getCurrentUser().UserName;
     return Scaffold(
       body: SingleChildScrollView(
         child: Center(
@@ -149,10 +149,13 @@ class _HomePageScreenState extends State<HomePageScreen> {
                                                     0.03),
                                             onPressed: () async {
                                               await _auth.signOut();
-                                              Navigator.of(context).push(
-                                                  MaterialPageRoute(
-                                                      builder: (context) =>
-                                                          const LogInScreen()));
+                                              Navigator.pushAndRemoveUntil(
+                                                context,
+                                                MaterialPageRoute(
+                                                  builder: (BuildContext context) => LogInScreen(),
+                                                ),
+                                                    (route) => false,
+                                              );
                                             },
                                           ),
                                           TextButton(
@@ -273,14 +276,17 @@ class _HomePageScreenState extends State<HomePageScreen> {
                         BorderRadius.circular(20), //border corner radius
                   ),
                   child: Padding(
-                    padding: const EdgeInsets.fromLTRB(0, 16, 0, 16),
+                    padding:  EdgeInsets.fromLTRB(displayWidth(context)*0.03, displayHeight(context)*0.019, displayWidth(context)*0.03, 0),
                     child: Column(
                       mainAxisAlignment: MainAxisAlignment.start,
                       crossAxisAlignment: CrossAxisAlignment.start,
                       children: [
-                        ReemKufiOffwhite(
-                            textValue: 'Reminder',
-                            size: displayHeight(context) * 0.03),
+                        Padding(
+                          padding: EdgeInsets.fromLTRB(displayWidth(context)*0.03, 0, 0, 0),
+                          child: ReemKufiOffwhite(
+                              textValue: 'Reminder',
+                              size: displayHeight(context) * 0.03),
+                        ),
                         (time.hour.toInt() <= 14 &&
                                 time.hour.toInt() >= 9 &&
                                 Provider.of<UserProvider>(context,

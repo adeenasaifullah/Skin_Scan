@@ -9,6 +9,7 @@ import 'package:skin_scan/password_reset_feature/forgot_password.dart';
 import 'package:skin_scan/main.dart';
 import 'package:skin_scan/services/auth.dart';
 import '../models/users_model.dart';
+import '../provider/categories_provider.dart';
 import '../provider/product_provider.dart';
 import '../provider/user_provider.dart';
 import '../register_feature/account_created.dart';
@@ -123,6 +124,8 @@ class _LogInScreenState extends State<LogInScreen> {
                         if (result is AuthenticateUser) {
                           await context.read<UserProvider>().getCurrentUserFromDb();
                           await context.read<UserProvider>().getUserFavouriteProducts(context.read<ProductProvider>().productsList);
+                          await context.read<CategoryProvider>().getCategoriesFromDb();
+                          await context.read<ProductProvider>().getProductsFromDatabase();
 
                           Navigator.push(context,
                               MaterialPageRoute(

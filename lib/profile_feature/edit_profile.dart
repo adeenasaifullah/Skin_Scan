@@ -15,20 +15,14 @@ class editProfile extends StatefulWidget {
 
 class _editProfileState extends State<editProfile> {
   final nameController = TextEditingController();
-
-  void initState() {
-    //   // TODO: implement initState
-    nameController.text = Provider.of<UserProvider>(context, listen: false)
-        .getCurrentUser()
-        .UserName;
-    super.initState();
-  }
-
+  @override
   @override
   Widget build(BuildContext context) {
-    String currentName = Provider.of<UserProvider>(context, listen: false)
-        .getCurrentUser()
-        .UserName;
+    nameController.text =
+        context.watch<UserProvider>().getCurrentUser().UserName;
+
+    String currentName =
+        context.watch<UserProvider>().getCurrentUser().UserName;
 
     return Scaffold(
       backgroundColor: const Color(0xFFFFFDF4),
@@ -46,7 +40,7 @@ class _editProfileState extends State<editProfile> {
                       width: displayHeight(context) * 0.7,
                       child: Column(
                         children: [
-                          SizedBox(height: displayHeight(context) * 0.08),
+                          SizedBox(height: displayHeight(context) * 0.1),
                           Row(
                             mainAxisAlignment: MainAxisAlignment.start,
                             children: [
@@ -55,6 +49,7 @@ class _editProfileState extends State<editProfile> {
                                   size: displayHeight(context) * 0.03)
                             ],
                           ),
+                          SizedBox(height: displayHeight(context) * 0.03),
                           currentName != ""
                               ? TextFormField(
                                   autofocus: false,
@@ -91,30 +86,11 @@ class _editProfileState extends State<editProfile> {
                                   ),
                                   controller: nameController,
                                 ),
-
-                          SizedBox(height: displayHeight(context) * 0.03),
-                          Row(
-                            mainAxisAlignment: MainAxisAlignment.start,
-                            children: [
-                              ReemKufi_Green(
-                                  textValue: "Email",
-                                  size: displayHeight(context) * 0.03)
-                            ],
-                          ),
-                          TextFormField(
-                            autofocus: false,
-                            cursorColor: Colors.black,
-                            //initialValue: currentEmail,
-                            decoration: const InputDecoration(
-                              enabledBorder: UnderlineInputBorder(
-                                borderSide: BorderSide(color: Colors.black),
-                              ),
-                              focusedBorder: InputBorder.none,
-                              contentPadding: EdgeInsets.only(
-                                  left: 15, bottom: 11, top: 11, right: 15),
-                            ),
-                          ),
-                          SizedBox(height: displayHeight(context) * 0.20),
+                          SizedBox(height: displayHeight(context) * 0.06),
+                          ReemKufi_Green_Italic(
+                              textValue: "Add your name :)",
+                              size: displayHeight(context) * 0.025),
+                          SizedBox(height: displayHeight(context) * 0.09),
                         ],
                       ),
                     ),
@@ -126,8 +102,12 @@ class _editProfileState extends State<editProfile> {
                             buttonWidth: displayWidth(context) * 0.3,
                             buttonHeight: displayHeight(context) * 0.07,
                             textSize: displayHeight(context) * 0.03,
-                            onPressed: () async {
-                              context.watch<UserProvider>().editProfile(nameController.text);
+                            onPressed: () {
+                              String name = nameController.text;
+
+                              Provider.of<UserProvider>(context, listen: false)
+                                  .editProfile(name);
+
                               showDialog(
                                 barrierDismissible: false,
                                 context: context, // user must tap button!

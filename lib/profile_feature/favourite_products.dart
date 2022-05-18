@@ -25,8 +25,7 @@ class _FavouriteProductsState extends State<FavouriteProducts> {
     return Scaffold(
       appBar: const AppBarDetails(screenName: 'Favourite Products'),
       backgroundColor: const Color(0xFFFFFDF4),
-      //body: SingleChildScrollView(
-      //child: Column(
+
       body: Padding(
         padding: const EdgeInsets.all(8.0),
         child: Column(

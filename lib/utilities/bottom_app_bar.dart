@@ -7,7 +7,7 @@ import 'package:skin_scan/profile_feature/my_profile.dart';
 import 'package:skin_scan/utilities/utility.dart';
 import '../entities/ingredient_entities.dart';
 import '../find_dermatologist_feature/derma_pop_up.dart';
-import '../ingredient_scan_feature/ingredient_scan.dart';
+
 import '../ingredient_search_feature/ingredient_details.dart';
 import '../ingredient_search_feature/ingredient_popup.dart';
 import '../log_in_sign_up_feature/home_page_screen.dart';

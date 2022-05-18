@@ -30,7 +30,7 @@ class ProductProvider extends ChangeNotifier {
           productIngredients: productModel.productIngredients,
         );
         product.prodID = doc.id;
-        print(product.productName);
+
         productsList.add(product);
       });
     });
@@ -39,7 +39,7 @@ class ProductProvider extends ChangeNotifier {
 
   List<Product> getProductsOfCategory(String name) {
     List<Product> productsOfCategory = [];
-    print("product list length ${productsList.length}");
+
     for (int i = 0; i < productsList.length; i++) {
       if (productsList[i].nameOfCategory == name) {
         productsOfCategory.add(productsList[i]);

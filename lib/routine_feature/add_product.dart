@@ -74,7 +74,7 @@ class _AddProductState extends State<AddProduct> {
                 children: [
                   ReemKufi_Green(
                       textValue: "Product name: ",
-                      size: displayWidth(context) * 0.035),
+                      size: displayWidth(context) * 0.045),
                   SizedBox(
                     width: displayWidth(context) * 0.05,
                   ),
@@ -87,14 +87,14 @@ class _AddProductState extends State<AddProduct> {
                           //hintText: 'product',
                           hintStyle: GoogleFonts.reemKufi(
                               color: const Color(0xFF283618),
-                              fontSize: displayWidth(context) * 0.03),
+                              fontSize: displayWidth(context) * 0.045),
                         ),
                         style: GoogleFonts.reemKufi(
                             color: const Color(0xFF283618),
                             fontSize: displayWidth(context) * 0.03),
                         onChanged: (text) {
                           pname = productcontroller.text;
-                          print(pname);
+
                           setState(() {});
                         },
                       );
@@ -112,7 +112,7 @@ class _AddProductState extends State<AddProduct> {
                 children: [
                   ReemKufi_Green(
                       textValue: "Category: ",
-                      size: displayWidth(context) * 0.035),
+                      size: displayWidth(context) * 0.045),
                   SizedBox(
                     width: displayWidth(context) * 0.05,
                   ),
@@ -153,21 +153,15 @@ class _AddProductState extends State<AddProduct> {
               ),
             ),
             Expanded(
-              child: Row(
-                mainAxisAlignment: MainAxisAlignment.spaceBetween,
-                // mainAxisSize: MainAxisSize.,
-                children: [
-                  Padding(
-                    padding: const EdgeInsets.all(8.0),
-                    child: ReemKufi_Green(
-                        textValue: "Choose your days: ",
-                        size: displayWidth(context) * 0.04),
-                  ),
-                ],
+              child: Padding(
+                padding: EdgeInsets.fromLTRB(displayWidth(context)*0.05,displayWidth(context)*0.09 , displayWidth(context)*0.05, 0),
+                child: ReemKufi_Green(
+                    textValue: "Choose your days: ",
+                    size: displayWidth(context) * 0.05),
               ),
             ),
             Padding(
-              padding: const EdgeInsets.all(16.0),
+              padding: EdgeInsets.fromLTRB(displayWidth(context)*0.09, 0, displayWidth(context)*0.09, 0),
               child: SizedBox(
                 height: displayHeight(context) * 0.5,
                 child: Column(

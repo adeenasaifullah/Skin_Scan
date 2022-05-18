@@ -97,14 +97,13 @@ class _BuildRoutineState extends State<BuildRoutine> {
                                 )),
                           ),
                           Container(
-                              height: 80,
+                              height: displayHeight(context)*0.15,
                               child: const VerticalDivider(
                                   color: const Color(0xFF283618))),
                           (i == user.UserRoutines[index].listofproducts
                                           .length - 1)
                               ? Padding(
-                                  padding: EdgeInsets.fromLTRB(
-                                      8, displayHeight(context) * 0.002, 8, 24),
+                                  padding: EdgeInsets.symmetric(vertical: displayHeight(context)*0.03, horizontal: displayWidth(context)*0.03),
                                   child: InkWell(
                                     child: Icon(
                                       Icons.add,
@@ -130,8 +129,8 @@ class _BuildRoutineState extends State<BuildRoutine> {
                             padding: EdgeInsets.fromLTRB(
                                 displayWidth(context) * 0.03,
                                 displayHeight(context) * 0.04,
-                                displayWidth(context) * 0.08,
-                                1),
+                                displayWidth(context) * 0.06,
+                              displayWidth(context) * 0.04, ),
                             child: Container(
                               child: (user.UserRoutines[index].listofproducts[i]
                                           .category ==
@@ -231,20 +230,20 @@ class _BuildRoutineState extends State<BuildRoutine> {
                                     child: ReemKufi_Green_Bold(
                                       textValue: user.UserRoutines[index]
                                           .listofproducts[i].category,
-                                      size: displayHeight(context) * 0.02,
+                                      size: displayHeight(context) * 0.018,
                                     ),
                                   ),
                                   decoration: const BoxDecoration(
                                       color: Color(0xFFDADBC6),
                                       borderRadius: BorderRadius.only(
-                                        topLeft: Radius.circular(11.0),
-                                        topRight: Radius.circular(11.0),
-                                        bottomLeft: Radius.circular(11.0),
-                                        bottomRight: Radius.circular(11.0),
+                                        topLeft: Radius.circular(13),
+                                        topRight: Radius.circular(13),
+                                        bottomLeft: Radius.circular(13),
+                                        bottomRight: Radius.circular(13),
                                       )),
                                 ),
                                 Padding(
-                                  padding: const EdgeInsets.only(left: 8),
+                                  padding: EdgeInsets.only(left: displayWidth(context)*0.03),
                                   child: InkWell(
                                     child: Icon(
                                       Icons.remove_circle,

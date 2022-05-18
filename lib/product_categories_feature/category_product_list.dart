@@ -25,10 +25,13 @@ class CategoryProducts extends StatefulWidget {
 class _CategoryProductsState extends State<CategoryProducts> {
   late List<Product> currentFilteredList;
 
-  @override
-  void initState() {
-    // TODO: implement initState
-    setState(() {});
+
+  initModified(){
+    Provider.of<SearchProvider>(context, listen: false)
+        .searchBarActive = false;
+  }
+  initState(){
+    initModified();
     super.initState();
   }
 
@@ -41,6 +44,10 @@ class _CategoryProductsState extends State<CategoryProducts> {
             .getProductsOfCategory(widget.categoryTitle);
     currentFilteredList = Provider.of<SearchProvider>(context, listen: false)
         .filterAccToPrice(dropDownVal, categoryProdList);
+
+
+
+
     return Scaffold(
       appBar: AppBarCategories(screenName: widget.categoryTitle),
       backgroundColor: const Color(0xFFFFFDF4),
@@ -63,6 +70,7 @@ class _CategoryProductsState extends State<CategoryProducts> {
               ),
             ),
             SizedBox(height: displayHeight(context) * 0.02),
+
             (Provider.of<SearchProvider>(context, listen: false)
                     .searchBarActive)
                 ? DisplayProducts(
@@ -87,10 +95,30 @@ class SearchandFilter extends StatefulWidget {
 }
 
 class _SearchandFilterState extends State<SearchandFilter> {
+  initModified(){
+    Provider.of<SearchProvider>(context, listen: false)
+        .searchBarActive = false;
+  }
+  initState(){
+    initModified();
+    super.initState();
+  }
   TextEditingController searchController = TextEditingController();
   List<Product> currentFilteredList = [];
   @override
   Widget build(BuildContext context) {
+    String dropDownVal =
+        Provider.of<SearchProvider>(context, listen: false)
+            .dropdownvalue;
+    List<Product> categoryProdList =
+    Provider.of<ProductProvider>(context, listen: false)
+        .getProductsOfCategory(widget.categoryTitle);
+    if (searchController.text.isEmpty){
+      currentFilteredList = Provider.of<SearchProvider>(context, listen: false)
+          .filterAccToPrice(dropDownVal, categoryProdList);
+
+    }
+
     return Row(
       mainAxisAlignment: MainAxisAlignment.spaceEvenly,
       children: <Widget>[
@@ -119,6 +147,7 @@ class _SearchandFilterState extends State<SearchandFilter> {
                 suffixIcon: const Icon(Icons.search),
               ),
               onChanged: (value) {
+
                 if (searchController.text.isEmpty) {
                   Provider.of<SearchProvider>(context, listen: false)
                       .searchBarActive = false;

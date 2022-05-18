@@ -275,6 +275,7 @@ class UserProvider extends ChangeNotifier {
         FirebaseFirestore.instance.collection('users');
 
     await database.doc(user.userID).update(user.toJson());
+    //getCurrentUserFromDb();
     notifyListeners();
   }
 
@@ -296,14 +297,14 @@ class UserProvider extends ChangeNotifier {
         }
       }
     }
-    notifyListeners();
+    //notifyListeners();
     return FavouriteLists;
   }
 
   addProductToFavourites(var prodID) {
     Users user = getCurrentUser();
 
-    print("The product id is " + prodID);
+
     if (!user.UserFavouriteProducts.contains(prodID)) {
       if (user.UserFavouriteProducts.isNotEmpty) {
         currentUserFavList = user.UserFavouriteProducts;
@@ -441,6 +442,8 @@ class UserProvider extends ChangeNotifier {
         UserFavouriteProducts: user.UserFavouriteProducts,
         ScannedProducts: scannedProd);
     updateUserDetails(updatedUser);
+    getCurrentUserFromDb();
     notifyListeners();
+
   }
 }

@@ -73,8 +73,7 @@ class AuthService {
     try {
       UserCredential result = await _auth.createUserWithEmailAndPassword(
           email: email, password: password);
-      print(email);
-      print(password);
+
       User user = result.user!;
       String authID = user.uid;
 
@@ -123,10 +122,10 @@ class AuthService {
       CollectionReference database =
           FirebaseFirestore.instance.collection('users');
       var test = databaseuser.toJson();
-      print(test);
+
       DocumentReference documentReferencer = database.doc(authID);
       await documentReferencer.set(test).whenComplete(() {
-        print("User data added");
+
       });
       return _userFromFirebaseUser(user);
     } catch (e) {
@@ -213,10 +212,10 @@ class AuthService {
       CollectionReference database =
           FirebaseFirestore.instance.collection('users');
       var test = databaseuser.toJson();
-      print(test);
+
       DocumentReference documentReferencer = database.doc(authID);
       await documentReferencer.set(test).whenComplete(() {
-        print("User data added");
+
       });
       return _userFromFirebaseUser(user);
     } catch (e) {

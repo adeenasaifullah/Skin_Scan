@@ -20,9 +20,9 @@ class _AnalyzingScreenState extends State<AnalyzingScreen> {
   late List<Ingredient> ingredientList;
 
   void RemoveDuplicates() {
-    print('length:' + widget.ingredientName.length.toString());
+
     distinctIngredientName = widget.ingredientName.toSet().toList();
-    print('length:' + distinctIngredientName.length.toString());
+
   }
 
   Future<List<Ingredient>> ExtractIngredientInfo(

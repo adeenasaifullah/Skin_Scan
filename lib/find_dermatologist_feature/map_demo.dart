@@ -43,7 +43,7 @@ class _MapDemoState extends State<MapDemo> with AutomaticKeepAliveClientMixin {
           children: [
             ReemKufi_Green(
                 textValue:
-                    "Dermatoligist nearby " + widget.selectedLocation.areaName,
+                    "Dermatologist nearby " + widget.selectedLocation.areaName,
                 size: displayHeight(context) * 0.03),
             SizedBox(height: displayHeight(context) * 0.01),
             Expanded(

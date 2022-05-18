@@ -95,7 +95,7 @@ class _ForgotPasswordState extends State<ForgotPassword> {
                         },
                       );
                     } else {
-                      print("Supple a valid email.");
+                      print("Supply a valid email.");
                     }
                   },
                 ),

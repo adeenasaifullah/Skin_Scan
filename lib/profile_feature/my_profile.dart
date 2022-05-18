@@ -71,10 +71,10 @@ class _MyProfileState extends State<MyProfile> {
       ),
       body: Padding(
         padding: EdgeInsets.fromLTRB(
-            displayWidth(context) * 0.01,
-            displayWidth(context) * 0.01,
-            displayWidth(context) * 0.01,
-            displayWidth(context) * 0.01),
+            displayWidth(context) * 0.02,
+            displayWidth(context) * 0.02,
+            displayWidth(context) * 0.02,
+            displayWidth(context) * 0.02),
         child: SingleChildScrollView(
           child: Column(
             mainAxisAlignment: MainAxisAlignment.center,
@@ -109,12 +109,7 @@ class _MyProfileState extends State<MyProfile> {
                   SizedBox(
                     width: displayWidth(context) * 0.1,
                   ),
-                  CircleAvatar(
-                    radius: displayHeight(context) * 0.075,
-                    backgroundImage: const NetworkImage(
-                        'https://media-exp1.licdn.com/dms/image/C4D03AQG8yHAYB2QZXg/profile-displayphoto-shrink_800_800/0/1604240249734?e=1652313600&v=beta&t=hqULr3Z0MtiRav1pRBW4zCPRWgIC9XPD0m5an6C1SoI'),
-                    backgroundColor: Colors.transparent,
-                  )
+
                 ],
               ),
               SizedBox(
@@ -234,74 +229,7 @@ class _MyProfileState extends State<MyProfile> {
                       ],
                     ),
                   )),
-              Container(
-                  alignment: Alignment.center,
-                  margin: EdgeInsets.fromLTRB(16, 8, 16, 8),
-                  //height: 200,
-                  width: double.infinity,
-                  decoration: BoxDecoration(
-                    color: const Color(0xFFDADBC6),
-                    borderRadius:
-                        BorderRadius.circular(15), //border corner radius
-                  ),
-                  child: Padding(
-                    padding: EdgeInsets.all(16),
-                    child: Column(
-                      mainAxisAlignment: MainAxisAlignment.center,
-                      children: [
-                        Row(
-                          mainAxisAlignment: MainAxisAlignment.spaceAround,
-                          children: [
-                            Icon(Icons.history, color: Colors.black),
-                            Expanded(
-                                child: ReemKufi_Green_Bold(
-                                    textValue: "Skin Log History",
-                                    size: displayHeight(context) * 0.0225)),
-                            InkWell(
-                              child: ReemKufi_Green_Bold(
-                                  textValue: "View All",
-                                  size: displayHeight(context) * 0.0225),
-                              onTap: () {
-                                Navigator.of(context).push(MaterialPageRoute(
-                                    builder: (context) => SkinLogHistory()));
-                              },
-                            )
-                          ],
-                        ),
-                        SizedBox(
-                          height: displayHeight(context) * 0.005,
-                        ),
-                        Row(
-                          mainAxisAlignment: MainAxisAlignment.spaceAround,
-                          children: [
-                            Icon(Icons.calendar_today_outlined,
-                                color: Colors.black),
-                            ReemKufi_Green_Bold(
-                                textValue: "Not so good",
-                                size: displayHeight(context) * 0.0225),
-                            Icon(Icons.tag_faces, color: Colors.black)
-                          ],
-                        ),
-                        SizedBox(
-                          height: displayHeight(context) * 0.005,
-                        ),
-                        Row(
-                          mainAxisAlignment: MainAxisAlignment.spaceAround,
-                          children: [
-                            Icon(Icons.calendar_today_outlined,
-                                color: Colors.black),
-                            ReemKufi_Green_Bold(
-                                textValue: "Not so good",
-                                size: displayHeight(context) * 0.0225),
-                            Icon(Icons.tag_faces, color: Colors.black)
-                          ],
-                        ),
-                        SizedBox(
-                          height: displayHeight(context) * 0.005,
-                        ),
-                      ],
-                    ),
-                  )),
+
             ],
           ),
         ),

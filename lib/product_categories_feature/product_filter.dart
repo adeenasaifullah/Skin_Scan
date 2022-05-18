@@ -39,7 +39,7 @@ class _FilterState extends State<Filter> {
             mainAxisAlignment: MainAxisAlignment.start,
             crossAxisAlignment: CrossAxisAlignment.start,
             children: <Widget>[
-              SizedBox(height: displayHeight(context) * 0.04),
+              SizedBox(height: displayHeight(context) * 0.14),
               Padding(
                 padding: EdgeInsets.symmetric(
                     horizontal: displayWidth(context) * 0.08),
@@ -47,7 +47,7 @@ class _FilterState extends State<Filter> {
                     textValue: 'Price Range',
                     size: displayHeight(context) * 0.04),
               ),
-              SizedBox(height: displayHeight(context) * 0.02),
+              SizedBox(height: displayHeight(context) * 0.04),
               Padding(
                 padding: EdgeInsets.symmetric(
                     horizontal: displayWidth(context) * 0.06),
@@ -94,33 +94,8 @@ class _FilterState extends State<Filter> {
                   ),
                 ),
               ),
-              SizedBox(height: displayHeight(context) * 0.03),
-              Padding(
-                padding: EdgeInsets.symmetric(
-                    horizontal: displayWidth(context) * 0.06),
-                child: ReemKufi_Green(
-                    textValue: 'Sort By', size: displayHeight(context) * 0.04),
-              ),
-              Padding(
-                padding: EdgeInsets.symmetric(
-                    horizontal: displayWidth(context) * 0.06),
-                child: Row(
-                  children: <Widget>[
-                    const FilterButtons(
-                        widthSize: 0.25,
-                        heightSize: 0.06,
-                        buttonText: 'Rating',
-                        textSize: 0.03),
-                    SizedBox(width: displayWidth(context) * 0.06),
-                    const FilterButtons(
-                        widthSize: 0.25,
-                        heightSize: 0.06,
-                        buttonText: 'Price',
-                        textSize: 0.03),
-                  ],
-                ),
-              ),
-              SizedBox(height: displayHeight(context) * 0.15),
+
+              SizedBox(height: displayHeight(context) * 0.08),
               Align(
                 alignment: Alignment.bottomCenter,
                 child: GreenButton(
@@ -177,9 +152,7 @@ class _FilterState extends State<Filter> {
                                                     categoryTitle:
                                                         widget.categoryTitle,
                                                   )));
-                                      print(Provider.of<SearchProvider>(context,
-                                              listen: false)
-                                          .dropdownvalue);
+
                                     },
                                   ),
                                   TextButton(
