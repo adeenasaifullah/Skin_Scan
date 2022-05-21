@@ -44,7 +44,7 @@ class _CategoryProductsState extends State<CategoryProducts> {
             .getProductsOfCategory(widget.categoryTitle);
     currentFilteredList = Provider.of<SearchProvider>(context, listen: false)
         .filterAccToPrice(dropDownVal, categoryProdList);
-
+    print("in categ prod screen ${context.read<SearchProvider>().getSearchList().length}");
 
 
 
@@ -63,9 +63,11 @@ class _CategoryProductsState extends State<CategoryProducts> {
                   top: displayHeight(context) * 0.02,
                   left: displayWidth(context) * 0.04),
               child: Rambla_Green_Italic(
-                textValue: (currentFilteredList.isNotEmpty)
+                textValue: (currentFilteredList.isNotEmpty && Provider.of<SearchProvider>(context, listen: false)
+                    .getSearchList().isEmpty)
                     ? 'Found ${currentFilteredList.length} result(s)'
-                    : ' Found ${context.read<ProductProvider>().getProductsOfCategory(widget.categoryTitle).length} results',
+                    : ' Found ${Provider.of<SearchProvider>(context, listen: false)
+                    .getSearchList().length} result(s)',
                 size: displayWidth(context) * 0.045,
               ),
             ),
@@ -96,6 +98,9 @@ class SearchandFilter extends StatefulWidget {
 
 class _SearchandFilterState extends State<SearchandFilter> {
   initModified(){
+    //Provider.of<SearchProvider>(context, listen: false).clearSearchList();
+
+
     Provider.of<SearchProvider>(context, listen: false)
         .searchBarActive = false;
   }

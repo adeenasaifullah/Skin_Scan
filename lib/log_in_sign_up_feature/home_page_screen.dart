@@ -152,9 +152,11 @@ class _HomePageScreenState extends State<HomePageScreen> {
                                               Navigator.pushAndRemoveUntil(
                                                 context,
                                                 MaterialPageRoute(
-                                                  builder: (BuildContext context) => LogInScreen(),
+                                                  builder:
+                                                      (BuildContext context) =>
+                                                          LogInScreen(),
                                                 ),
-                                                    (route) => false,
+                                                (route) => false,
                                               );
                                             },
                                           ),
@@ -276,25 +278,30 @@ class _HomePageScreenState extends State<HomePageScreen> {
                         BorderRadius.circular(20), //border corner radius
                   ),
                   child: Padding(
-                    padding:  EdgeInsets.fromLTRB(displayWidth(context)*0.03, displayHeight(context)*0.019, displayWidth(context)*0.03, 0),
+                    padding: EdgeInsets.fromLTRB(
+                        displayWidth(context) * 0.03,
+                        displayHeight(context) * 0.019,
+                        displayWidth(context) * 0.03,
+                        0),
                     child: Column(
                       mainAxisAlignment: MainAxisAlignment.start,
                       crossAxisAlignment: CrossAxisAlignment.start,
                       children: [
                         Padding(
-                          padding: EdgeInsets.fromLTRB(displayWidth(context)*0.03, 0, 0, 0),
+                          padding: EdgeInsets.fromLTRB(
+                              displayWidth(context) * 0.005, 0, 0, 0),
                           child: ReemKufiOffwhite(
                               textValue: 'Reminder',
                               size: displayHeight(context) * 0.03),
                         ),
-                        (time.hour.toInt() <= 14 &&
-                                time.hour.toInt() >= 9 &&
-                                Provider.of<UserProvider>(context,
-                                        listen: false)
-                                    .currUser
-                                    .UserRoutines[0]
-                                    .listofproducts
-                                    .isNotEmpty)
+                        (time.hour.toInt() > 9 ||
+                                time.hour.toInt() < 14 &&
+                                    Provider.of<UserProvider>(context,
+                                            listen: false)
+                                        .currUser
+                                        .UserRoutines[0]
+                                        .listofproducts
+                                        .isNotEmpty)
                             ? Column(
                                 crossAxisAlignment: CrossAxisAlignment.start,
                                 children: [
@@ -302,20 +309,24 @@ class _HomePageScreenState extends State<HomePageScreen> {
                                       textValue:
                                           'Don’t forget to follow your morning routine!',
                                       size: displayHeight(context) * 0.02),
+
                                   ReemKufi_Green_Bold(
                                       textValue:
                                           'Next step: apply ${Provider.of<UserProvider>(context, listen: false).currUser.UserRoutines[0].listofproducts[0].productname}',
-                                      size: displayHeight(context) * 0.02)
+                                      size: displayHeight(context) * 0.02),
+                                  SizedBox(
+                                    height: displayHeight(context) * 0.025,
+                                  ),
                                 ],
                               )
-                            : (time.hour.toInt() >= 20 &&
-                                    time.hour.toInt() <= 23 &&
-                                    Provider.of<UserProvider>(context,
-                                            listen: false)
-                                        .currUser
-                                        .UserRoutines[1]
-                                        .listofproducts
-                                        .isNotEmpty)
+                            : (time.hour.toInt() > 19 ||
+                                    time.hour.toInt() < 02 &&
+                                        Provider.of<UserProvider>(context,
+                                                listen: false)
+                                            .currUser
+                                            .UserRoutines[1]
+                                            .listofproducts
+                                            .isNotEmpty)
                                 ? Column(
                                     crossAxisAlignment:
                                         CrossAxisAlignment.start,
@@ -324,10 +335,14 @@ class _HomePageScreenState extends State<HomePageScreen> {
                                           textValue:
                                               'Don’t forget to follow your night routine!',
                                           size: displayHeight(context) * 0.02),
+
                                       ReemKufi_Green_Bold(
                                           textValue:
                                               'Next step: apply ${Provider.of<UserProvider>(context, listen: false).currUser.UserRoutines[1].listofproducts[0].productname}',
                                           size: displayHeight(context) * 0.02),
+                                      SizedBox(
+                                        height: displayHeight(context) * 0.025,
+                                      ),
                                     ],
                                   )
                                 : Padding(

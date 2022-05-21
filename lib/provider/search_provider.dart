@@ -38,7 +38,12 @@ class SearchProvider extends ChangeNotifier {
   }
 
   List<Product> getSearchList() {
+    print("searchbar ${searchBarList.length}");
     return searchBarList;
+  }
+  clearSearchList(){
+    searchBarList.clear();
+    notifyListeners();
   }
 
   String changeDropDownValue(String value) {

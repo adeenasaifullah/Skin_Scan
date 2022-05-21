@@ -18,13 +18,19 @@ class SkinQuizProvider with ChangeNotifier {
     else if (options.contains('Rough and scaly') && options.contains('Loads of moisturizer') && options.contains('Small/ Not noticeable')) {
       skinType = "Dry";
     }
-    else if (options.contains('Visible only in T-zone') && options.contains('Shiny in my T-zone only') && options.contains('Blotting or powder on forehead/nose/chin')) {
+    else if (
+    options.contains('Visible only in T-zone') &&
+        options.contains('Shiny in my T-zone only') &&
+        options.contains('Blotting or powder on forehead/nose/chin')) {
       skinType = "Combination";
     }
     else {
       skinType = "Normal";
     }
+    notifyListeners();
     return skinType;
+
   }
+
 
 }

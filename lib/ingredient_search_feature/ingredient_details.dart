@@ -62,7 +62,7 @@ class _IngredientDetailsState extends State<IngredientDetails> {
               },
               if (descriptionCheck) ...{
                 ReemKufi_Green_Bold_Left(
-                    textValue: 'Descripion: ',
+                    textValue: 'Description: ',
                     size: displayHeight(context) * 0.035),
                 Raleway_Green_Bold_Left(
                     textValue: widget.ingredient.ingredientDescription.trim(),
