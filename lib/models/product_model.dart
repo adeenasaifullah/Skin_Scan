@@ -7,7 +7,10 @@ class ProductModel {
   String productName;
   String productPrice;
   String skinType;
+  String productImage;
   num productRating;
+  var prodID;
+
 
   ProductModel({
     required this.productBrand,
@@ -18,7 +21,11 @@ class ProductModel {
     required this.productName,
     required this.productPrice,
     required this.skinType,
+    required this.productImage,
     required this.productRating,
+    this.prodID,
+
+
   });
 
   static fromJson(Map<String, dynamic> json) {
@@ -31,7 +38,10 @@ class ProductModel {
       productName: json['Name'],
       skinType: json['Skin Type'],
       howToUse: json['How to use'],
+      productImage: json['Image'] as String,
       productRating: json['Rating'],
+      prodID: json['prodID'],
+
     );
   }
 
@@ -45,21 +55,12 @@ class ProductModel {
     data['Name'] = productName;
     data['Skin Type'] = skinType;
     data['How to use'] = howToUse;
+    data['Image'] = productImage;
     data['Rating'] = productRating;
+    data['prodID'] = prodID;
+
     return data;
   }
 
-// toJson(){
-//     return{
-//     'Brand':productBrand,
-//     'Category' : nameOfCategory,
-//     'Description': productDescription,
-//     'Ingredients': productIngredients,
-//     'Price': productPrice,
-//     'Name': productName,
-//     'Skin Type': skinType,
-//     'How to use' howToUse,
-//     'Rating' :productRating
-//     };
-// }
+
 }

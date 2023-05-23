@@ -1,28 +1,14 @@
 import 'package:firebase_auth/firebase_auth.dart';
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
-import 'package:google_sign_in/google_sign_in.dart';
-import 'package:provider/provider.dart';
-import 'package:skin_scan/provider/google_sign_in.dart';
-import 'package:provider/provider.dart';
-import 'package:skin_scan/entities/user_entities.dart';
-import 'package:skin_scan/provider/user_provider.dart';
 import 'package:skin_scan/register_feature/create_account.dart';
 import 'package:flutter_signin_button/flutter_signin_button.dart';
-import '../Models/users_adeena_model.dart';
-import '../entities/product_entities.dart';
-import '../entities/routine_entities.dart';
-import '../entities/routine_product_entities.dart';
-import '../main.dart';
-import '../register_feature/account_created.dart';
+import '../models/users_model.dart';
 import '../utilities/bottom_app_bar.dart';
 import '../utilities/progressIndicator.dart';
 import '../utilities/utility.dart';
-import 'home_page_screen.dart';
 import 'log_in_screen.dart';
 import 'package:skin_scan/services/auth.dart';
-import 'package:skin_scan/entities/user_entities.dart';
-
 
 class LogInRegisterScreen extends StatefulWidget {
   const LogInRegisterScreen({Key? key}) : super(key: key);
@@ -144,9 +130,7 @@ class _LogInRegisterScreenState extends State<LogInRegisterScreen> {
                                 });
                               });
                             }
-                            // Provider.of<GoogleSignInProvider>(context, listen: false).googleSignIn;
-                            // print('im in method');
-                            // print('im below method');
+
                             dynamic result = await _auth.signInWithGoogle();
                             if (result is AuthenticateUser) {
                               Navigator.push(
@@ -162,16 +146,7 @@ class _LogInRegisterScreenState extends State<LogInRegisterScreen> {
                         ),
                       ),
                       SizedBox(height: displayHeight(context) * 0.02),
-                      // Padding(
-                      //   padding: EdgeInsets.only(
-                      //       left: displayHeight(context) * 0.05,
-                      //       right: displayHeight(context) * 0.05),
-                      //   child: SignInButton(
-                      //     Buttons.Facebook,
-                      //     text: "Sign up with Facebook",
-                      //     onPressed: () {},
-                      //   ),
-                      // ),
+
                     ],
                   ),
                 ),

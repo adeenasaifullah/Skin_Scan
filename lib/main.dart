@@ -1,21 +1,16 @@
-
-
 import 'package:animated_splash_screen/animated_splash_screen.dart';
-import 'package:firebase_auth/firebase_auth.dart';
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
-import 'package:google_fonts/google_fonts.dart';
 import 'package:provider/provider.dart';
-import 'package:skin_scan/provider/scanned_product_provider.dart';
 import 'package:skin_scan/provider/user_provider.dart';
 import 'package:skin_scan/provider/categories_provider.dart';
 import 'package:skin_scan/provider/google_sign_in.dart';
 import 'package:skin_scan/provider/ingredient_provider.dart';
 import 'package:skin_scan/provider/location_provider.dart';
 import 'package:skin_scan/provider/product_provider.dart';
-import 'package:skin_scan/provider/routine_provider.dart';
-import 'package:skin_scan/register_feature/account_created.dart';
+import 'package:skin_scan/provider/search_provider.dart';
 import 'package:skin_scan/services/auth.dart';
+import 'package:skin_scan/skin_quiz_feature/skinQuizAlgo.dart';
 import 'package:skin_scan/utilities/utility.dart';
 import 'package:camera/camera.dart';
 import 'package:page_transition/page_transition.dart';
@@ -23,70 +18,83 @@ import 'dart:ui';
 import 'package:liquid_progress_indicator/liquid_progress_indicator.dart';
 import 'dart:async';
 import 'package:firebase_core/firebase_core.dart';
-import 'package:custom_top_navigator/custom_top_navigator.dart';
-
 import 'dart:math' as math;
-
-import 'Models/users_adeena_model.dart';
+import 'models/users_model.dart';
 import 'log_in_sign_up_feature/log_in_register_screen.dart';
 import 'services/auth.dart';
+import 'package:firebase_messaging/firebase_messaging.dart';
 
 late List<CameraDescription> cameras;
+Future<void> _firebaseMessagingBackgroundHandler(RemoteMessage message) async {
+  // If you're going to use other Firebase services in the background, such as Firestore,
+  // make sure you call `initializeApp` before using other Firebase services.
+  await Firebase.initializeApp();
+  print("Handling a background message: ${message.messageId}");
+}
 
 Future<void> main() async {
-  //Provider.debugCheckInvalidValueType = null;
   WidgetsFlutterBinding.ensureInitialized();
   await Firebase.initializeApp();
+  FirebaseMessaging.onBackgroundMessage(_firebaseMessagingBackgroundHandler);
+
+  FirebaseMessaging.onMessage.listen((RemoteMessage message) {
+    print('Got a message whilst in the foreground!');
+    print('Message data: ${message.data}');
+
+    if (message.notification != null) {
+      print('Message also contained a notification: ${message.notification}');
+    }
+  });
+
+  await FirebaseMessaging.instance.subscribeToTopic('topic');
   cameras = await availableCameras();
   Provider.debugCheckInvalidValueType = null;
   runApp(MultiProvider(
     providers: [
-      Provider<RoutineProvider>(create: (_) => RoutineProvider()),
-      Provider<UserProvider>(create: (_) => UserProvider()),
+      ChangeNotifierProvider(create: (_) => UserProvider()),
       ChangeNotifierProvider(create: (_) => CategoryProvider()),
       ChangeNotifierProvider(create: (_) => ProductProvider()),
       ChangeNotifierProvider(create: (_) => GoogleSignInProvider()),
       ChangeNotifierProvider(create: (_) => IngredientProvider()),
       ChangeNotifierProvider(create: (_) => LocationProvider()),
-      ChangeNotifierProvider(create: (_) => ScannedProductProvider()),
-      //Provider<AuthService>(create: (_) => AuthService(FirebaseAuth.instance)),
-      //StreamProvider(create: (context) => context.read<AuthService>().authStateChanges, initialData: null,),
+      ChangeNotifierProvider(create: (_) => SearchProvider()),
+      ChangeNotifierProvider(create: (_) => SkinQuizProvider()),
     ],
     child: const MyApp(),
   ));
 }
 
-
-
-class MyApp extends StatelessWidget {
+class MyApp extends StatefulWidget {
   const MyApp({Key? key}) : super(key: key);
 
+  @override
+  State<MyApp> createState() => _MyAppState();
+}
+
+class _MyAppState extends State<MyApp> {
   // This widget is the root of your application.
+
+  void initModified() async {
+    await context.read<UserProvider>().getCurrentUserFromDb();
+    await context.read<CategoryProvider>().getCategoriesFromDb();
+    await context.read<ProductProvider>().getProductsFromDatabase();
+    await context
+        .read<UserProvider>()
+        .getUserFavouriteProducts(context.read<ProductProvider>().productsList);
+  }
+
+  @override
+  void initState() {
+    initModified();
+    super.initState();
+  }
+
   @override
   Widget build(BuildContext context) {
-
-    //Load all your data from firebase over here:
-
-    context.read<CategoryProvider>().getCategoriesFromDb();
-    context.read<ProductProvider>().getProductsFromDatabase();
-    context.watch<UserProvider>().getUsersfromDB();
-    context.watch<UserProvider>().getUserFavouriteProducts(context.read<ProductProvider>().productsList);
-    //Provider.of<UserProvider>(context, listen: false).getUsersfromDB();
-
-    //FocusScope.of(context).unfocus();
     return StreamProvider<AuthenticateUser?>.value(
       value: AuthService().user,
       initialData: null,
-      //GestureDetector(
-      // onTap: () {
-      //   FocusScopeNode currentFocus = FocusScope.of(context);
-      //
-      //   if (!currentFocus.hasPrimaryFocus) {
-      //     currentFocus.unfocus();
-      //   }
-      // },
       child: MaterialApp(
-        //scaffoldMessengerKey: Utils.messengerKey,
         title: 'Skin Scan',
         debugShowCheckedModeBanner: false,
         theme: ThemeData(
@@ -106,17 +114,16 @@ class LogoScreen extends StatefulWidget {
 }
 
 class _LogoScreenState extends State<LogoScreen> {
-
   @override
   Widget build(BuildContext context) {
     return AnimatedSplashScreen(
       splash: Column(
-        //mainAxisAlignment: MainAxisAlignment.center,
         children: [
           Image.asset('assets/skinscanlogolight.png',
               width: displayWidth(context) * 0.4,
               height: displayHeight(context) * 0.3),
-          ReemKufiOffwhite(textValue: "Skin Scan", size: displayHeight(context) * 0.05),
+          ReemKufiOffwhite(
+              textValue: "Skin Scan", size: displayHeight(context) * 0.05),
           ReemKufiOffwhite_Italic(
               textValue: "Efficient and safe decisions for your skin!",
               size: displayWidth(context) * 0.03),
@@ -148,11 +155,8 @@ class _progressloaderState extends State<progressloader> {
 
   @override
   void initState() {
-
-
     Timer? timer;
     timer = Timer.periodic(const Duration(milliseconds: 30), (_) {
-      //print('Percent Update');
       setState(() {
         percent += 1;
         if (percent >= 100) {
@@ -228,7 +232,6 @@ class _progressloaderState extends State<progressloader> {
   }
 }
 
-
 class AppBarDetails extends StatefulWidget implements PreferredSizeWidget {
   final String screenName;
   const AppBarDetails({Key? key, required this.screenName}) : super(key: key);
@@ -246,7 +249,7 @@ class _AppBarDetailsState extends State<AppBarDetails> {
   Widget build(BuildContext context) {
     return Container(
         child: AppBar(
-          // automaticallyImplyLeading: widget.backOption!,
+      // automaticallyImplyLeading: widget.backOption!,
       elevation: 0,
       backgroundColor: const Color(0xFFFFFDF4),
       centerTitle: false,
@@ -259,6 +262,7 @@ class _AppBarDetailsState extends State<AppBarDetails> {
           child: Icon(Icons.arrow_back, color: Color(0xFF4D4D4D)),
           onTap: () {
             Navigator.pop(context);
+            setState(() {});
           }),
       actions: [
         Padding(

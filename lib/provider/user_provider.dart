@@ -1,29 +1,92 @@
-import 'dart:ffi';
-
 import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:firebase_auth/firebase_auth.dart';
 import 'package:flutter/cupertino.dart';
-import 'package:skin_scan/Models/product_model.dart';
-import 'package:skin_scan/Models/routine_product_model.dart';
+import 'package:skin_scan/entities/scanned_product_entities.dart';
+import 'package:skin_scan/models/ingredient_model.dart';
+import 'package:skin_scan/models/routine_product_model.dart';
 import 'package:skin_scan/entities/routine_entities.dart';
-import 'package:skin_scan/profile_feature/favourite_products.dart';
-import 'package:skin_scan/provider/product_provider.dart';
-
-import '../Models/routine_model.dart';
-import '../Models/users_adeena_model.dart';
+import 'package:skin_scan/models/scanned_product_model.dart';
+import '../entities/ingredient_entities.dart';
+import '../models/routine_model.dart';
+import '../models/users_model.dart';
 import '../entities/product_entities.dart';
 import '../entities/routine_product_entities.dart';
 import '../entities/user_entities.dart';
 
 class UserProvider extends ChangeNotifier {
   final List<Users> allUsers = [];
+  late Users currUser;
   List<String> currentUserFavList = [];
+  List<RoutineProducts> AMlist = [];
+  List<RoutineProducts> PMlist = [];
   List<Product> FavouriteLists = [];
+  List<ScannedProduct> ScannedProductlist = [];
+
   List<String> getCurrentUserList() {
     return currentUserFavList;
   }
 
-  final currentUser = FirebaseAuth.instance.currentUser!;
+  Future<void> getCurrentUserFromDb() async {
+    var currentUser = FirebaseAuth.instance.currentUser!;
+    Users user;
+    await FirebaseFirestore.instance
+        .collection('users')
+        .doc(currentUser.uid)
+        .get()
+        .then((doc) {
+      if (doc.exists) {
+        UserModel currentUser =
+            UserModel.fromJson(doc.data() as Map<String, dynamic>);
+        currentUser.userID = doc.id;
+        var routines = currentUser.UserRoutines.map((e) => Routine(
+            RoutineName: e.RoutineName,
+            listofproducts: e.listofproducts
+                .map((p) => RoutineProducts(
+                    productname: p.productname,
+                    category: p.category,
+                    days: p.days))
+                .toList())).toList();
+
+        var scannedProd = currentUser.ScannedProducts.map((e) => ScannedProduct(
+            productName: e.productName,
+            ingredientList: e.ingredientList
+                .map((p) => Ingredient(
+                      ingredientName: p.ingredientName,
+                      ingredientCategory: p.ingredientCategory,
+                      ingredientDescription: p.ingredientDescription,
+                      ingredientRating: p.ingredientRating,
+                    ))
+                .toList())).toList();
+
+        user = Users(
+            UserName: currentUser.UserName,
+            UserEmail: currentUser.UserEmail,
+            UserRoutines: routines,
+            UserFavouriteProducts: currentUser.UserFavouriteProducts,
+            ScannedProducts: scannedProd);
+        user.userID = currentUser.userID;
+      } else {
+        Routine AMroutine = Routine(RoutineName: "Morning", listofproducts: []);
+        Routine PMroutine = Routine(RoutineName: "Night", listofproducts: []);
+        user = Users(
+            UserName: '',
+            UserRoutines: [AMroutine, PMroutine],
+            UserFavouriteProducts: [],
+            UserEmail: '',
+            ScannedProducts: []);
+      }
+      AMlist = user.UserRoutines[0].listofproducts;
+      PMlist = user.UserRoutines[1].listofproducts;
+      ScannedProductlist = user.ScannedProducts;
+      currUser = user;
+      getCurrentUser();
+      notifyListeners();
+    });
+  }
+
+  Users getCurrentUser() {
+    return currUser;
+  }
 
   Future getUsersfromDB() async {
     await FirebaseFirestore.instance
@@ -34,8 +97,6 @@ class UserProvider extends ChangeNotifier {
         UserModel newuser =
             UserModel.fromJson(doc.data() as Map<String, dynamic>);
         newuser.userID = doc.id;
-        print(doc.id);
-        print(newuser.UserName);
         var routines = newuser.UserRoutines.map((e) => Routine(
             RoutineName: e.RoutineName,
             listofproducts: e.listofproducts
@@ -44,24 +105,26 @@ class UserProvider extends ChangeNotifier {
                     category: p.category,
                     days: p.days))
                 .toList())).toList();
+
+        var scannedProd = newuser.ScannedProducts.map((e) => ScannedProduct(
+            productName: e.productName,
+            ingredientList: e.ingredientList
+                .map((p) => Ingredient(
+                      ingredientName: p.ingredientName,
+                      ingredientCategory: p.ingredientCategory,
+                      ingredientDescription: p.ingredientDescription,
+                      ingredientRating: p.ingredientRating,
+                    ))
+                .toList())).toList();
         Users user = Users(
-          UserName: newuser.UserName,
-          UserEmail: newuser.UserEmail,
-          UserRoutines: routines,
-          UserFavouriteProducts: newuser.UserFavouriteProducts,
-        );
-
+            UserName: newuser.UserName,
+            UserEmail: newuser.UserEmail,
+            UserRoutines: routines,
+            UserFavouriteProducts: newuser.UserFavouriteProducts,
+            ScannedProducts: scannedProd);
         user.userID = newuser.userID;
-        //print(user.UserName);
-        print(user.UserRoutines[0].RoutineName);
-        print(user.UserEmail);
         allUsers.add(user);
-
-        //print(allUsers);
-        //print(allUsers[0].UserName);
-        notifyListeners();
       });
-
       notifyListeners();
       return allUsers;
     });
@@ -75,164 +138,312 @@ class UserProvider extends ChangeNotifier {
                 productname: p.productname, category: p.category, days: p.days))
             .toList())).toList();
 
+    var scannedProd = thisuser.ScannedProducts.map((e) => ScannedProductModel(
+        productName: e.productName,
+        ingredientList: e.ingredientList
+            .map((p) => IngredientModel(
+                  ingredientName: p.ingredientName,
+                  ingredientCategory: p.ingredientCategory,
+                  ingredientDescription: p.ingredientDescription,
+                  ingredientRating: p.ingredientRating,
+                ))
+            .toList())).toList();
+
     UserModel databaseuser = UserModel(
-      userID: thisuser.userID,
-      UserName: thisuser.UserName,
-      UserEmail: thisuser.UserEmail,
-      UserRoutines: userroutine,
-      UserFavouriteProducts: thisuser.UserFavouriteProducts,
-    );
+        userID: thisuser.userID,
+        UserName: thisuser.UserName,
+        UserEmail: thisuser.UserEmail,
+        UserRoutines: userroutine,
+        UserFavouriteProducts: thisuser.UserFavouriteProducts,
+        ScannedProducts: scannedProd);
 
     CollectionReference database =
         FirebaseFirestore.instance.collection('users');
     var test = databaseuser.toJson();
-    print(test);
     DocumentReference docref = await database.add(test);
     databaseuser.userID = docref.id;
+    notifyListeners();
+  }
+
+  addProductToRoutine(RoutineProducts newProduct, String name) {
+    Users user = getCurrentUser();
+
+    if (name == 'Morning') {
+      if (user.UserRoutines[0].listofproducts.isNotEmpty) {
+        AMlist = user.UserRoutines[0].listofproducts;
+      }
+
+      AMlist.add(newProduct);
+      user.UserRoutines[0].listofproducts = AMlist;
+      user.UserRoutines[0].numofproducts++;
+    }
+
+    if (name == 'Night') {
+      if (user.UserRoutines[1].listofproducts.isNotEmpty) {
+        PMlist = user.UserRoutines[1].listofproducts;
+      }
+
+      PMlist.add(newProduct);
+      user.UserRoutines[1].listofproducts = PMlist;
+      user.UserRoutines[1].numofproducts++;
+    }
+
+    var userroutine = user.UserRoutines.map((e) => RoutineModel(
+        RoutineName: e.RoutineName,
+        listofproducts: e.listofproducts
+            .map((p) => RoutineProductsModel(
+                productname: p.productname, category: p.category, days: p.days))
+            .toList())).toList();
+
+    var scannedProd = user.ScannedProducts.map((e) => ScannedProductModel(
+        productName: e.productName,
+        ingredientList: e.ingredientList
+            .map((p) => IngredientModel(
+                  ingredientName: p.ingredientName,
+                  ingredientCategory: p.ingredientCategory,
+                  ingredientDescription: p.ingredientDescription,
+                  ingredientRating: p.ingredientRating,
+                ))
+            .toList())).toList();
+
+    UserModel updatedUser = UserModel(
+        userID: user.userID,
+        UserName: user.UserName,
+        UserEmail: user.UserEmail,
+        UserRoutines: userroutine,
+        UserFavouriteProducts: user.UserFavouriteProducts,
+        ScannedProducts: scannedProd);
+
+    updateUserDetails(updatedUser);
+  }
+
+  void updateUserDetails(UserModel user) async {
+    CollectionReference database =
+        FirebaseFirestore.instance.collection('users');
+    await database.doc(user.userID).update(user.toJson());
+    notifyListeners();
+  }
+
+  Future removeProductFromRoutine(
+      RoutineProducts removeProduct, String name) async {
+    Users user = getCurrentUser();
+
+    if (name == 'Morning') {
+      user.UserRoutines[0].listofproducts.removeWhere(
+          (element) => element.productname == removeProduct.productname);
+      AMlist = user.UserRoutines[0].listofproducts;
+    }
+
+    if (name == 'Night') {
+      user.UserRoutines[1].listofproducts.removeWhere(
+          (element) => element.productname == removeProduct.productname);
+      PMlist = user.UserRoutines[1].listofproducts;
+    }
+
+    var userroutine = user.UserRoutines.map((e) => RoutineModel(
+        RoutineName: e.RoutineName,
+        listofproducts: e.listofproducts
+            .map((p) => RoutineProductsModel(
+                productname: p.productname, category: p.category, days: p.days))
+            .toList())).toList();
+
+    var scannedProd = user.ScannedProducts.map((e) => ScannedProductModel(
+        productName: e.productName,
+        ingredientList: e.ingredientList
+            .map((p) => IngredientModel(
+                  ingredientName: p.ingredientName,
+                  ingredientCategory: p.ingredientCategory,
+                  ingredientDescription: p.ingredientDescription,
+                  ingredientRating: p.ingredientRating,
+                ))
+            .toList())).toList();
+
+    UserModel updatedUser = UserModel(
+        userID: user.userID,
+        UserName: user.UserName,
+        UserEmail: user.UserEmail,
+        UserRoutines: userroutine,
+        UserFavouriteProducts: user.UserFavouriteProducts,
+        ScannedProducts: scannedProd);
+
+    updateUserDetails(updatedUser);
+    notifyListeners();
   }
 
   void updateUserFavouriteProducts(UserModel user) async {
     CollectionReference database =
         FirebaseFirestore.instance.collection('users');
 
-    print("bhjjkkello");
     await database.doc(user.userID).update(user.toJson());
-    //inOrder();
-    //await getTasksFromFirebase();
-    //getUsersfromDB();
-    print('fav product has been updated');
+    //getCurrentUserFromDb();
     notifyListeners();
   }
 
-  // List<Product> getUserFavouriteProducts(String name) {
-  //   int index = allUsers.indexWhere((user) => user.userID == currentUser.uid);
-  //   List<Product> productsOfCategory = [];
-  //
-  //   for (int i = 0; i < productsList.length; i++) {
-  //     //print('snoop');
-  //     if (productsList[i].nameOfCategory == name) {
-  //       productsOfCategory.add(productsList[i]);
-  //     }
-  //   }
-  //   print("get category products + $productsOfCategory");
-  //   return productsOfCategory;
-  // }
-
   bool checkUserFavouriteProduct(var prodID) {
-    int index = allUsers.indexWhere((user) => user.userID == currentUser.uid);
-    if (allUsers[index].UserFavouriteProducts.contains(prodID)) {
+    Users user = getCurrentUser();
+    if (user.UserFavouriteProducts.contains(prodID)) {
       return true;
     } else
       return false;
   }
 
-  List<Product> getUserFavouriteProducts(List<Product> productsList){
+  List<Product> getUserFavouriteProducts(List<Product> productsList) {
     FavouriteLists.clear();
-    int index = allUsers.indexWhere((user) => user.userID == currentUser.uid);
-    print(productsList);
-    print('hello fav list');
-
-
+    Users user = getCurrentUser();
     for (int i = 0; i < productsList.length; i++) {
-      for(int j =0; j< allUsers[index].UserFavouriteProducts.length; j++){
-        if ( allUsers[index].UserFavouriteProducts[j]== productsList[i].prodID) {
+      for (int j = 0; j < user.UserFavouriteProducts.length; j++) {
+        if (user.UserFavouriteProducts[j] == productsList[i].prodID) {
           FavouriteLists.add(productsList[i]);
-          print("This is the product list");
-          print(productsList[i]);
-
         }
       }
-      //print('snoop');
-
-
     }
-    notifyListeners();
-    print("Fav list");
-    print(FavouriteLists);
+    //notifyListeners();
     return FavouriteLists;
-    //currentUserFavList;
-
   }
 
   addProductToFavourites(var prodID) {
-    //getUsersfromDB();
+    Users user = getCurrentUser();
 
-    int index = allUsers.indexWhere((user) => user.userID == currentUser.uid);
-    print("current id " + currentUser.uid);
-    print(index);
-    print("The product id is " + prodID);
-    if (!allUsers[index].UserFavouriteProducts.contains(prodID)) {
-      // currentUserFavList.add(prodID);
-      print(currentUserFavList);
-      if (allUsers[index].UserFavouriteProducts.isNotEmpty) {
-        currentUserFavList = allUsers[index].UserFavouriteProducts;
+
+    if (!user.UserFavouriteProducts.contains(prodID)) {
+      if (user.UserFavouriteProducts.isNotEmpty) {
+        currentUserFavList = user.UserFavouriteProducts;
       }
       currentUserFavList.add(prodID);
-      allUsers[index].UserFavouriteProducts = currentUserFavList;
+      user.UserFavouriteProducts = currentUserFavList;
 
-      var userroutine = allUsers[index]
-          .UserRoutines
-          .map((e) => RoutineModel(
-              RoutineName: e.RoutineName,
-              listofproducts: e.listofproducts
-                  .map((p) => RoutineProductsModel(
-                      productname: p.productname,
-                      category: p.category,
-                      days: p.days))
-                  .toList()))
-          .toList();
+      var userroutine = user.UserRoutines.map((e) => RoutineModel(
+          RoutineName: e.RoutineName,
+          listofproducts: e.listofproducts
+              .map((p) => RoutineProductsModel(
+                  productname: p.productname,
+                  category: p.category,
+                  days: p.days))
+              .toList())).toList();
+
+      var scannedProd = user.ScannedProducts.map((e) => ScannedProductModel(
+          productName: e.productName,
+          ingredientList: e.ingredientList
+              .map((p) => IngredientModel(
+                    ingredientName: p.ingredientName,
+                    ingredientCategory: p.ingredientCategory,
+                    ingredientDescription: p.ingredientDescription,
+                    ingredientRating: p.ingredientRating,
+                  ))
+              .toList())).toList();
 
       UserModel updatedUser = UserModel(
-        userID: allUsers[index].userID,
-        UserName: allUsers[index].UserName,
-        UserEmail: allUsers[index].UserEmail,
-        UserRoutines: userroutine,
-        UserFavouriteProducts: allUsers[index].UserFavouriteProducts,
-      );
+          userID: user.userID,
+          UserName: user.UserName,
+          UserEmail: user.UserEmail,
+          UserRoutines: userroutine,
+          UserFavouriteProducts: user.UserFavouriteProducts,
+          ScannedProducts: scannedProd);
 
       updateUserFavouriteProducts(updatedUser);
-
-      //allUsers[index].UserFavouriteProducts.add(prodID);
-      print('firestore id ' + allUsers[index].userID);
-      print('auth id ' + currentUser.uid);
-
-      print("Product has been added to favourites");
-
-      notifyListeners();
     }
   }
 
   Future removeProductFromFavourites(var prodID) async {
-    getUsersfromDB();
-    int index = allUsers.indexWhere((user) => user.userID == currentUser.uid);
 
-    print("The product id is " + prodID);
+    Users user = getCurrentUser();
     currentUserFavList.remove(prodID);
+    user.UserFavouriteProducts = currentUserFavList;
+    var userroutine = user.UserRoutines.map((e) => RoutineModel(
+        RoutineName: e.RoutineName,
+        listofproducts: e.listofproducts
+            .map((p) => RoutineProductsModel(
+                productname: p.productname, category: p.category, days: p.days))
+            .toList())).toList();
 
-    allUsers[index].UserFavouriteProducts = currentUserFavList;
-
-    var userroutine = allUsers[index]
-        .UserRoutines
-        .map((e) => RoutineModel(
-            RoutineName: e.RoutineName,
-            listofproducts: e.listofproducts
-                .map((p) => RoutineProductsModel(
-                    productname: p.productname,
-                    category: p.category,
-                    days: p.days))
-                .toList()))
-        .toList();
-
+    var scannedProd = user.ScannedProducts.map((e) => ScannedProductModel(
+        productName: e.productName,
+        ingredientList: e.ingredientList
+            .map((p) => IngredientModel(
+                  ingredientName: p.ingredientName,
+                  ingredientCategory: p.ingredientCategory,
+                  ingredientDescription: p.ingredientDescription,
+                  ingredientRating: p.ingredientRating,
+                ))
+            .toList())).toList();
     UserModel updatedUser = UserModel(
-      userID: allUsers[index].userID,
-      UserName: allUsers[index].UserName,
-      UserEmail: allUsers[index].UserEmail,
-      UserRoutines: userroutine,
-      UserFavouriteProducts: allUsers[index].UserFavouriteProducts,
-    );
+        userID: user.userID,
+        UserName: user.UserName,
+        UserEmail: user.UserEmail,
+        UserRoutines: userroutine,
+        UserFavouriteProducts: user.UserFavouriteProducts,
+        ScannedProducts: scannedProd);
 
     updateUserFavouriteProducts(updatedUser);
+  }
 
+  storeScannedProduct(ScannedProduct product) {
+    Users user = getCurrentUser();
+
+    ScannedProductlist = user.ScannedProducts;
+    ScannedProductlist.add(product);
+    user.ScannedProducts = ScannedProductlist;
+
+    var userroutine = user.UserRoutines.map((e) => RoutineModel(
+        RoutineName: e.RoutineName,
+        listofproducts: e.listofproducts
+            .map((p) => RoutineProductsModel(
+                productname: p.productname, category: p.category, days: p.days))
+            .toList())).toList();
+
+    var scannedProd = user.ScannedProducts.map((e) => ScannedProductModel(
+        productName: e.productName,
+        ingredientList: e.ingredientList
+            .map((p) => IngredientModel(
+                  ingredientName: p.ingredientName,
+                  ingredientCategory: p.ingredientCategory,
+                  ingredientDescription: p.ingredientDescription,
+                  ingredientRating: p.ingredientRating,
+                ))
+            .toList())).toList();
+
+    UserModel updatedUser = UserModel(
+        userID: user.userID,
+        UserName: user.UserName,
+        UserEmail: user.UserEmail,
+        UserRoutines: userroutine,
+        UserFavouriteProducts: user.UserFavouriteProducts,
+        ScannedProducts: scannedProd);
+
+    updateUserDetails(updatedUser);
+  }
+
+  editProfile(String name) {
+    Users user = getCurrentUser();
+
+    var userroutine = user.UserRoutines.map((e) => RoutineModel(
+        RoutineName: e.RoutineName,
+        listofproducts: e.listofproducts
+            .map((p) => RoutineProductsModel(
+                productname: p.productname, category: p.category, days: p.days))
+            .toList())).toList();
+
+    var scannedProd = user.ScannedProducts.map((e) => ScannedProductModel(
+        productName: e.productName,
+        ingredientList: e.ingredientList
+            .map((p) => IngredientModel(
+                  ingredientName: p.ingredientName,
+                  ingredientCategory: p.ingredientCategory,
+                  ingredientDescription: p.ingredientDescription,
+                  ingredientRating: p.ingredientRating,
+                ))
+            .toList())).toList();
+
+    UserModel updatedUser = UserModel(
+        userID: user.userID,
+        UserName: name,
+        UserEmail: user.UserEmail,
+        UserRoutines: userroutine,
+        UserFavouriteProducts: user.UserFavouriteProducts,
+        ScannedProducts: scannedProd);
+    updateUserDetails(updatedUser);
+    getCurrentUserFromDb();
     notifyListeners();
+
   }
 }

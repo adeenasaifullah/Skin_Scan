@@ -1,11 +1,8 @@
 import 'package:firebase_auth/firebase_auth.dart';
 import 'package:flutter/material.dart';
-import 'package:fluttertoast/fluttertoast.dart';
 import 'package:google_fonts/google_fonts.dart';
 import 'package:skin_scan/main.dart';
-import 'package:skin_scan/services/auth.dart';
 import '../utilities/utility.dart';
-import 'reset_password.dart';
 
 class ForgotPassword extends StatefulWidget {
   const ForgotPassword({Key? key}) : super(key: key);
@@ -16,7 +13,6 @@ class ForgotPassword extends StatefulWidget {
 
 class _ForgotPasswordState extends State<ForgotPassword> {
   final _formKey = GlobalKey<FormState>();
-  // String email= "";
   final bool obscureIcon = false;
 
   final TextEditingController emailController = TextEditingController();
@@ -99,11 +95,8 @@ class _ForgotPasswordState extends State<ForgotPassword> {
                         },
                       );
                     } else {
-                      print("Supple a valid email.");
+                      print("Supply a valid email.");
                     }
-
-                    // Navigator.of(context).push(
-                    //     MaterialPageRoute(builder: (context) => ResetPassword()));
                   },
                 ),
               ],
@@ -113,14 +106,12 @@ class _ForgotPasswordState extends State<ForgotPassword> {
       ),
     );
   }
-  //String message = "";
 
   Future resetPassword() async {
     try {
       await FirebaseAuth.instance
           .sendPasswordResetEmail(email: emailController.text.trim());
     } catch (e) {
-      //Fluttertoast.showToast(msg: e!.message);
       print(e);
       return null;
     }

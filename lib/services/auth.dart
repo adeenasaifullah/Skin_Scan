@@ -3,24 +3,30 @@ import 'package:firebase_auth/firebase_auth.dart';
 import 'package:flutter/material.dart';
 import 'package:fluttertoast/fluttertoast.dart';
 import 'package:google_sign_in/google_sign_in.dart';
-import '../Models/routine_model.dart';
-import '../Models/routine_product_model.dart';
+import 'package:skin_scan/entities/scanned_product_entities.dart';
+import '../models/ingredient_model.dart';
+import '../models/routine_model.dart';
+import '../models/routine_product_model.dart';
 import '../entities/routine_entities.dart';
 import '../entities/user_entities.dart';
-import 'package:skin_scan/Models/users_adeena_model.dart';
+import 'package:skin_scan/models/users_model.dart';
 
+import '../models/scanned_product_model.dart';
 
 class AuthService {
   final FirebaseAuth _auth = FirebaseAuth.instance;
 
   //create user object based on firebase user
   AuthenticateUser? _userFromFirebaseUser(User? user) {
-    return user != null ? AuthenticateUser(userID: user.uid) : null;
+    return user != null
+        ? AuthenticateUser(
+            userID: user.uid,
+            email: user.email!,
+            name: user.displayName ?? "",
+          )
+        : null;
   }
 
-//   Users _userFromUser(User user){
-//   return  user!= null ? Users(userID: user.userID) : null;
-// }
   Stream<AuthenticateUser?> get user {
     return _auth
         .authStateChanges()
@@ -38,7 +44,6 @@ class AuthService {
       switch (e.code) {
         case "invalid-email":
           _buildErrorMessage("Your email address appears to be malformed.");
-
           break;
         case "wrong-password":
           _buildErrorMessage("Your password is wrong.");
@@ -63,47 +68,31 @@ class AuthService {
     }
   }
 
-
-
   //register with email and password
   Future registerWithEmailAndPassword(String email, String password) async {
     try {
       UserCredential result = await _auth.createUserWithEmailAndPassword(
           email: email, password: password);
-      print(email);
-      print(password);
+
       User user = result.user!;
       String authID = user.uid;
 
-      // String name = (user.displayName!);
-      // print(user.displayName);
-      // print(name);
-
-      //DocumentReference documentReferencer = userCollection.doc(uid);
       Routine AMroutine = Routine(RoutineName: "Morning", listofproducts: []);
       Routine PMroutine = Routine(RoutineName: "Night", listofproducts: []);
 
       List<String> favourite_products = [];
-      //favourite_products.add("");
-
       List<Routine> routine_list = [];
       routine_list.add(AMroutine);
       routine_list.add(PMroutine);
-
+      List<ScannedProduct> ScannedProducts = [];
       Users obj = Users(
-          //uid: uid,
-
-          UserName: "Hello",
+          UserName: user.displayName ?? "",
           UserEmail: email,
           UserRoutines: routine_list,
-         UserFavouriteProducts: favourite_products,
-          //UserFavouriteProducts: favourite_products
-          //routine_list.map((e) => e.toJson()).toList();
-          //this.UserRoutines.map((v) => v.toJson()).toList();
-
-          );
+          UserFavouriteProducts: favourite_products,
+          ScannedProducts: ScannedProducts);
       obj.userID = authID;
-            var userroutine = obj.UserRoutines.map((e) => RoutineModel(
+      var userroutine = obj.UserRoutines.map((e) => RoutineModel(
           RoutineName: e.RoutineName,
           listofproducts: e.listofproducts
               .map((p) => RoutineProductsModel(
@@ -111,31 +100,35 @@ class AuthService {
                   category: p.category,
                   days: p.days))
               .toList())).toList();
+
+      var scannedProd = obj.ScannedProducts.map((e) => ScannedProductModel(
+          productName: e.productName,
+          ingredientList: e.ingredientList
+              .map((p) => IngredientModel(
+                    ingredientName: p.ingredientName,
+                    ingredientCategory: p.ingredientCategory,
+                    ingredientDescription: p.ingredientDescription,
+                    ingredientRating: p.ingredientRating,
+                  ))
+              .toList())).toList();
       UserModel databaseuser = UserModel(
           userID: obj.userID,
           UserName: obj.UserName,
           UserEmail: obj.UserEmail,
           UserRoutines: userroutine,
-        UserFavouriteProducts: obj.UserFavouriteProducts,
-
-          );
+          UserFavouriteProducts: obj.UserFavouriteProducts,
+          ScannedProducts: scannedProd);
 
       CollectionReference database =
           FirebaseFirestore.instance.collection('users');
       var test = databaseuser.toJson();
-      print(test);
+
       DocumentReference documentReferencer = database.doc(authID);
       await documentReferencer.set(test).whenComplete(() {
-        print("User data added");
+
       });
-      //DocumentReference docref = await database.add(test);
-
-      //databaseuser.userID = authID;
-
-      //await Database(uid: user.uid).storeUserData(name: user.displayName!, email: user.email!);
       return _userFromFirebaseUser(user);
     } catch (e) {
-      //Fluttertoast.showToast(msg: e!.message);
       print(e);
       return null;
     }
@@ -152,15 +145,8 @@ class AuthService {
         fontSize: 14);
   }
 
-  //sign out
-  Future signOut() async {
-    try {
-      return await _auth.signOut();
-
-    } catch (e) {
-      print(e.toString());
-      return null;
-    }
+  Future<void> signOut() async {
+    await FirebaseAuth.instance.signOut();
   }
 
   //sign in with google
@@ -179,55 +165,57 @@ class AuthService {
       User user = result.user!;
       String authID = user.uid;
 
-      // String name = (user.displayName!);
-      // print(user.displayName);
-      // print(name);
-
       List<String> favourite_products = [];
-      //favourite_products.add("");
-      //DocumentReference documentReferencer = userCollection.doc(uid);
       Routine AMroutine = Routine(RoutineName: "Morning", listofproducts: []);
       Routine PMroutine = Routine(RoutineName: "Night", listofproducts: []);
 
       List<Routine> routine_list = [];
       routine_list.add(AMroutine);
       routine_list.add(PMroutine);
+      List<ScannedProduct> scannedprod_list = [];
 
       Users obj = Users(
-        //uid: uid,
           UserName: account.displayName!,
           UserEmail: account.email,
           UserRoutines: routine_list,
-        UserFavouriteProducts: favourite_products,
-          //UserFavouriteProducts: favourite_products
-        //routine_list.map((e) => e.toJson()).toList();
-        //this.UserRoutines.map((v) => v.toJson()).toList();
-      );
+          UserFavouriteProducts: favourite_products,
+          ScannedProducts: scannedprod_list);
       obj.userID = authID;
       var userroutine = obj.UserRoutines.map((e) => RoutineModel(
           RoutineName: e.RoutineName,
           listofproducts: e.listofproducts
               .map((p) => RoutineProductsModel(
-              productname: p.productname,
-              category: p.category,
-              days: p.days))
+                  productname: p.productname,
+                  category: p.category,
+                  days: p.days))
+              .toList())).toList();
+      var scannedProd = obj.ScannedProducts.map((e) => ScannedProductModel(
+          productName: e.productName,
+          ingredientList: e.ingredientList
+              .map((p) => IngredientModel(
+                    ingredientName: p.ingredientName,
+                    ingredientCategory: p.ingredientCategory,
+                    ingredientDescription: p.ingredientDescription,
+                    ingredientRating: p.ingredientRating,
+                  ))
               .toList())).toList();
       UserModel databaseuser = UserModel(
           userID: obj.userID,
           UserName: obj.UserName,
           UserEmail: obj.UserEmail,
           UserRoutines: userroutine,
-        UserFavouriteProducts: obj.UserFavouriteProducts,
+          UserFavouriteProducts: obj.UserFavouriteProducts,
+          ScannedProducts: scannedProd
           //UserFavouriteProducts: obj.UserFavouriteProducts
           );
 
       CollectionReference database =
-      FirebaseFirestore.instance.collection('users');
+          FirebaseFirestore.instance.collection('users');
       var test = databaseuser.toJson();
-      print(test);
+
       DocumentReference documentReferencer = database.doc(authID);
       await documentReferencer.set(test).whenComplete(() {
-        print("User data added");
+
       });
       return _userFromFirebaseUser(user);
     } catch (e) {
@@ -236,4 +224,3 @@ class AuthService {
     }
   }
 }
-

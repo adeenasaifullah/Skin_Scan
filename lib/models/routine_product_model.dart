@@ -1,29 +1,17 @@
 import 'package:flutter/foundation.dart';
 
 class RoutineProductsModel {
-
   final String productname;
   final String category;
   List<String> days = [];
 
-
-  RoutineProductsModel(
-      {
-        required this.productname,
-        required this.category,
-        required this.days});
-
-
-    //JSON METHOD HERE
-
+  RoutineProductsModel({required this.productname, required this.category, required this.days});
 
   static RoutineProductsModel fromJson(Map<String, dynamic> json) {
     return RoutineProductsModel(
         category: json['Category'],
-        productname: json ['ProductName'],
-      days: List.from(json['Days'])
-
-    );
+        productname: json['ProductName'],
+        days: List.from(json['Days']));
   }
 
   Map<String, dynamic> toJson() {
@@ -33,5 +21,4 @@ class RoutineProductsModel {
     data['Days'] = List.of(this.days);
     return data;
   }
-
 }

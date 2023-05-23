@@ -3,17 +3,14 @@ import 'package:flutter/material.dart';
 import 'package:google_fonts/google_fonts.dart';
 
 Size displaySize(BuildContext context) {
-  //debugPrint('Size = ' + MediaQuery.of(context).size.toString());
   return MediaQuery.of(context).size;
 }
 
 double displayHeight(BuildContext context) {
-  //debugPrint('Height = ' + displaySize(context).height.toString());
   return displaySize(context).height;
 }
 
 double displayWidth(BuildContext context) {
-  //debugPrint('Width = ' + displaySize(context).width.toString());
   return displaySize(context).width;
 }
 
@@ -72,24 +69,6 @@ class ReemKufi_Grey extends StatelessWidget {
     );
   }
 }
-
-// class ReemKufi_OffWhite extends StatelessWidget {
-//   final String textValue;
-//   final double size;
-//   const ReemKufi_OffWhite({Key? key, required this.textValue, required this.size})
-//       : super(key: key);
-//
-//   @override
-//   Widget build(BuildContext context) {
-//     return Text(
-//       textValue,
-//       style: GoogleFonts.reemKufi(
-//         color: const Color(0xFFFFFDF4),
-//         fontSize: size,
-//       ),
-//     );
-//   }
-// }
 
 class ReemKufi_OffWhite_Center extends StatelessWidget {
   final String textValue;
@@ -329,7 +308,6 @@ class Rambla_Green_Italic extends StatelessWidget {
 }
 
 class field extends StatefulWidget {
-  //final bool? obscuredText;
   final String labelText;
   final String hintText;
   final Icon prefixIcon;
@@ -346,12 +324,9 @@ class field extends StatefulWidget {
     required this.hintText,
     required this.prefixIcon,
     this.suffixIcon,
-    //required this.onChanged,
     this.validateInput,
     required this.autoFocus,
     this.onPressed,
-    //this.obscuredText,
-    //this.onPressed
   }) : super(key: key);
 
   @override
@@ -390,14 +365,12 @@ class _fieldState extends State<field> {
           suffixIcon: IconButton(
               icon: Icon(widget.suffixIcon),
               onPressed: () {
-
                 if (_obscured == false) {
                   widget.suffixIcon = Icons.visibility_off;
                 } else {
                   widget.suffixIcon = Icons.visibility;
                 }
                 _obscured = !_obscured;
-
                 setState(() {});
               }),
         ),

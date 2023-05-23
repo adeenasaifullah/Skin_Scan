@@ -10,7 +10,4 @@ class Ingredient {
     required this.ingredientCategory,
     required this.ingredientDescription,
   });
-
-
-
 }
