@@ -9,6 +9,8 @@ import 'package:firebase_image/firebase_image.dart';
 class CategoriesAndSearch extends StatefulWidget {
   const CategoriesAndSearch({Key? key}) : super(key: key);
 
+
+
   @override
   _CategoriesAndSearchState createState() => _CategoriesAndSearchState();
 }
